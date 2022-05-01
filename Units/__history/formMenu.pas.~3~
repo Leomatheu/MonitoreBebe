@@ -1,0 +1,32 @@
+unit formMenu;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TfrmMenu = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Image2: TImage;
+    Panel3: TPanel;
+    sbCadResponsavel: TSpeedButton;
+    Image1: TImage;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmMenu: TfrmMenu;
+
+implementation
+
+{$R *.dfm}
+
+
+
+end.
