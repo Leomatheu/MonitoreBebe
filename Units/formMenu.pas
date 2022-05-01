@@ -49,6 +49,7 @@ type
     Image13: TImage;
     procedure sbSairClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure sbCadResponsavelClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -59,10 +60,18 @@ var
   frmMenu: TfrmMenu;
 
 implementation
+uses
+   formCadResp;
 
 {$R *.dfm}
 
 
+
+procedure TfrmMenu.sbCadResponsavelClick(Sender: TObject);
+begin
+   frmCadResp :=  TfrmCadResp.Create(nil);
+   frmCadResp.ShowModal;
+end;
 
 procedure TfrmMenu.sbSairClick(Sender: TObject);
 begin

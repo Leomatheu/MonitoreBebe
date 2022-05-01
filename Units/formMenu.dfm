@@ -9,13 +9,15 @@ object frmMenu: TfrmMenu
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Height = -16
+  Font.Name = 'Fixedsys'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
+  WindowState = wsMaximized
   StyleElements = []
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object Panel1: TPanel
     Left = 273
     Top = 0
@@ -27,9 +29,6 @@ object frmMenu: TfrmMenu
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitTop = 40
-    ExplicitWidth = 571
-    ExplicitHeight = 575
     object Image1: TImage
       Left = 1
       Top = 1
@@ -39767,7 +39766,7 @@ object frmMenu: TfrmMenu
     ParentBackground = False
     ShowCaption = False
     TabOrder = 1
-    ExplicitTop = 41
+    ExplicitLeft = -5
     object Image2: TImage
       Left = 17
       Top = 10
@@ -41937,6 +41936,7 @@ object frmMenu: TfrmMenu
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
+        OnClick = sbCadResponsavelClick
         ExplicitLeft = 2
         ExplicitTop = 2
       end
