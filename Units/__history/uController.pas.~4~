@@ -1,0 +1,30 @@
+unit uController;
+
+interface
+
+uses
+   uResponsavel, uDao;
+
+  type TController = class
+
+    public
+        procedure pCadResponsavel;
+
+  end;
+
+implementation
+
+{ TController }
+
+procedure TController.pCadResponsavel;
+var
+   Dao : TDataModule1;
+   objResp : TResponsavel;
+begin
+  Dao := TDataModule1.Create(nil);
+
+
+
+end;
+
+end.

@@ -14,7 +14,6 @@ object frmMenu: TfrmMenu
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
-  WindowState = wsMaximized
   StyleElements = []
   PixelsPerInch = 96
   TextHeight = 15
@@ -39766,7 +39765,6 @@ object frmMenu: TfrmMenu
     ParentBackground = False
     ShowCaption = False
     TabOrder = 1
-    ExplicitLeft = -5
     object Image2: TImage
       Left = 17
       Top = 10

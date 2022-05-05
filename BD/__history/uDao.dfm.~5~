@@ -1,0 +1,37 @@
+object DataModule1: TDataModule1
+  OldCreateOrder = False
+  Height = 334
+  Width = 398
+  object Conexao: TFDConnection
+    Params.Strings = (
+      'Database=MonitoreBebe'
+      'User_Name=root'
+      'Password=root'
+      'DriverID=MySQL')
+    Connected = True
+    LoginPrompt = False
+    Transaction = Transaction
+    Left = 48
+    Top = 16
+  end
+  object Query: TFDQuery
+    Connection = Conexao
+    Transaction = Transaction
+    SQL.Strings = (
+      'Select * from TCADRESP;')
+    Left = 152
+    Top = 16
+  end
+  object DriverConexao: TFDPhysMySQLDriverLink
+    VendorLib = 
+      'C:\Users\progvisual33\Documents\Pessoal\Exerc'#237'cios Aula\PZIMexer' +
+      'cicio\DELPHI\MonitoreBebe\MonitoreBebe\Project\libmysql.dll'
+    Left = 208
+    Top = 16
+  end
+  object Transaction: TFDTransaction
+    Connection = Conexao
+    Left = 96
+    Top = 16
+  end
+end

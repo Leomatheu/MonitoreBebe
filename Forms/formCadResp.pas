@@ -34,14 +34,17 @@ type
     edtCidade: TLabeledEdit;
     edtBairro: TLabeledEdit;
     edtEndereco: TLabeledEdit;
-    Panel6: TPanel;
     Panel7: TPanel;
     Panel8: TPanel;
     SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
     SpeedButton4: TSpeedButton;
+    edtDataNasc: TMaskEdit;
+    Label6: TLabel;
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
+
   private
     { Private declarations }
   public
@@ -53,15 +56,18 @@ var
 
 implementation
 uses
-   formEditResp;
+   formEditResp, uController;
 
 {$R *.dfm}
+
+
 
 procedure TfrmCadResp.SpeedButton1Click(Sender: TObject);
 begin
    if (OpenPictureDialog1.Execute) then
       begin
          imgCadResp.Picture.LoadFromFile(OpenPictureDialog1.FileName);
+         imgCadResp.Picture.SaveToFile('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Project\Foto\Foto.Jpeg');
       end;
 end;
 
@@ -69,6 +75,15 @@ procedure TfrmCadResp.SpeedButton2Click(Sender: TObject);
 begin
    frmEditaResp := TfrmEditaResp.Create(nil);
    frmEditaResp.ShowModal;
+end;
+
+procedure TfrmCadResp.SpeedButton4Click(Sender: TObject);
+var
+   controller : TController;
+begin
+  controller := TController.Create;
+  controller.pCadResponsavel;
+
 end;
 
 end.

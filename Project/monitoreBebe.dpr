@@ -6,7 +6,9 @@ uses
   formCadResp in '..\Forms\formCadResp.pas' {frmCadResp},
   formEditResp in '..\Forms\formEditResp.pas' {frmEditaResp},
   uResponsavel in '..\Units\uResponsavel.pas',
-  uController in '..\Units\uController.pas';
+  uController in '..\Units\uController.pas',
+  uDao in '..\BD\uDao.pas' {DataModule1: TDataModule},
+  formMessage in '..\Forms\formMessage.pas' {frmMessage};
 
 {$R *.res}
 
@@ -14,7 +16,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmMenu, frmMenu);
-  Application.CreateForm(TfrmCadResp, frmCadResp);
-  Application.CreateForm(TfrmEditaResp, frmEditaResp);
   Application.Run;
 end.

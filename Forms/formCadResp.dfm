@@ -4,8 +4,8 @@ object frmCadResp: TfrmCadResp
   ActiveControl = edtNome
   BorderStyle = bsDialog
   Caption = 'CADASTRO DE RESPONS'#193'VEIS'
-  ClientHeight = 623
-  ClientWidth = 722
+  ClientHeight = 654
+  ClientWidth = 718
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,8 +19,8 @@ object frmCadResp: TfrmCadResp
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 530
-    Height = 623
+    Width = 526
+    Height = 654
     Align = alClient
     Color = 13828057
     Font.Charset = DEFAULT_CHARSET
@@ -31,6 +31,7 @@ object frmCadResp: TfrmCadResp
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
+    ExplicitTop = -8
     object Label1: TLabel
       Left = 16
       Top = 94
@@ -54,7 +55,7 @@ object frmCadResp: TfrmCadResp
     end
     object Label4: TLabel
       Left = 16
-      Top = 443
+      Top = 506
       Width = 88
       Height = 15
       Caption = 'Observa'#231#245'es'
@@ -66,8 +67,15 @@ object frmCadResp: TfrmCadResp
       Height = 15
       Caption = 'Renda Mensal'
     end
+    object Label6: TLabel
+      Left = 281
+      Top = 94
+      Width = 144
+      Height = 15
+      Caption = 'Data de Nascimento'
+    end
     object edtNome: TLabeledEdit
-      Left = 17
+      Left = 16
       Top = 40
       Width = 489
       Height = 23
@@ -93,14 +101,14 @@ object frmCadResp: TfrmCadResp
       Text = '   .   .   -  '
     end
     object edtEmail: TLabeledEdit
-      Left = 217
-      Top = 109
+      Left = 16
+      Top = 469
       Width = 289
       Height = 23
       EditLabel.Width = 48
       EditLabel.Height = 15
       EditLabel.Caption = 'E-mail'
-      TabOrder = 2
+      TabOrder = 7
     end
     object edtResidencial: TMaskEdit
       Left = 16
@@ -123,13 +131,11 @@ object frmCadResp: TfrmCadResp
       Text = '(  )     -    '
     end
     object mmObservacao: TMemo
-      Left = 17
-      Top = 464
+      Left = 16
+      Top = 524
       Width = 489
-      Height = 129
-      Lines.Strings = (
-        '')
-      TabOrder = 7
+      Height = 102
+      TabOrder = 8
     end
     object edtRendaMensal: TMaskEdit
       Left = 387
@@ -143,7 +149,7 @@ object frmCadResp: TfrmCadResp
     end
     object Panel3: TPanel
       Left = 16
-      Top = 232
+      Top = 224
       Width = 489
       Height = 205
       TabOrder = 6
@@ -189,7 +195,7 @@ object frmCadResp: TfrmCadResp
       end
       object edtEndereco: TLabeledEdit
         Left = 8
-        Top = 144
+        Top = 165
         Width = 458
         Height = 23
         EditLabel.Width = 64
@@ -198,19 +204,31 @@ object frmCadResp: TfrmCadResp
         TabOrder = 4
       end
     end
+    object edtDataNasc: TMaskEdit
+      Left = 281
+      Top = 109
+      Width = 141
+      Height = 23
+      EditMask = '!99/99/0000;1; '
+      MaxLength = 10
+      TabOrder = 2
+      Text = '  /  /    '
+    end
   end
   object Panel1: TPanel
-    Left = 530
+    Left = 526
     Top = 0
     Width = 192
-    Height = 623
+    Height = 654
     Align = alRight
     Color = 13828057
     ParentBackground = False
     TabOrder = 1
+    ExplicitLeft = 532
+    ExplicitTop = -4
     object Panel4: TPanel
-      Left = 24
-      Top = 17
+      Left = 31
+      Top = 18
       Width = 137
       Height = 163
       BorderStyle = bsSingle
@@ -664,11 +682,12 @@ object frmCadResp: TfrmCadResp
           A085D264A9E8B7C6FCF31C305BE37E2A489827767E398E2898AF667E6BA23FA0
           7DF31F4C7F51FAA987FEC47C731CC3FF00623E6BFFD9}
         Stretch = True
+        ExplicitLeft = 9
         ExplicitTop = 4
       end
     end
     object Panel5: TPanel
-      Left = 56
+      Left = 62
       Top = 186
       Width = 73
       Height = 21
@@ -692,14 +711,13 @@ object frmCadResp: TfrmCadResp
         Font.Style = []
         ParentFont = False
         OnClick = SpeedButton1Click
-        ExplicitTop = -16
-        ExplicitWidth = 127
-        ExplicitHeight = 29
+        ExplicitLeft = 24
+        ExplicitWidth = 49
       end
     end
     object Panel6: TPanel
-      Left = 16
-      Top = 563
+      Left = 17
+      Top = 599
       Width = 161
       Height = 30
       Caption = 'Panel6'
@@ -721,15 +739,13 @@ object frmCadResp: TfrmCadResp
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 72
-        ExplicitTop = 8
-        ExplicitWidth = 23
-        ExplicitHeight = 22
+        OnClick = SpeedButton4Click
+        ExplicitTop = 0
       end
     end
     object Panel7: TPanel
-      Left = 16
-      Top = 527
+      Left = 17
+      Top = 563
       Width = 161
       Height = 30
       Color = clRed
@@ -750,15 +766,14 @@ object frmCadResp: TfrmCadResp
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 72
-        ExplicitTop = 8
-        ExplicitWidth = 23
-        ExplicitHeight = 22
+        ExplicitLeft = 48
+        ExplicitTop = 0
+        ExplicitWidth = 112
       end
     end
     object Panel8: TPanel
-      Left = 16
-      Top = 491
+      Left = 17
+      Top = 527
       Width = 161
       Height = 30
       Color = 14869218
@@ -779,10 +794,9 @@ object frmCadResp: TfrmCadResp
         Font.Style = []
         ParentFont = False
         OnClick = SpeedButton2Click
-        ExplicitLeft = 72
-        ExplicitTop = 8
-        ExplicitWidth = 23
-        ExplicitHeight = 22
+        ExplicitLeft = 32
+        ExplicitTop = 2
+        ExplicitWidth = 128
       end
     end
   end

@@ -10,6 +10,7 @@ uses
       idResponsavel : integer;
       nomeResponsavel : String;
       cpfResponsavel : String;
+      emailResponsavel : String;
       dataNascimento : String;
       telefoneResidencia : String;
       telefoneCelular : String;
@@ -27,6 +28,9 @@ uses
 
         procedure setCpfResponsavel(cpfResponsavel:String);
         function getCpfResponsavel:String;
+
+        procedure setEmailResponsavel(emailResponsavel:String);
+        function getEmailResponsavel:String;
 
         procedure setDataNascimento(dataNascimento:String);
         function  getDataNascimento:String;
@@ -57,52 +61,57 @@ implementation
 
 function TResponsavel.getCpfResponsavel: String;
 begin
-  result := cpfResponsavel;
+  result := Self.cpfResponsavel;
 end;
 
-procedure TResponsavel.getDataNascimento(dataNascimento: String);
+function TResponsavel.getDataNascimento;
 begin
-  result := dataNascimento;
+  result := Self.dataNascimento;
+end;
+
+function TResponsavel.getEmailResponsavel: String;
+begin
+  result := self.emailResponsavel;
 end;
 
 function TResponsavel.getEnderecoResponsavel: String;
 begin
-  result := enderecoResponsavel;
+  result := self.enderecoResponsavel;
 end;
 
 function TResponsavel.getFoto: TImage;
 begin
-  result := foto;
+  result := self.foto;
 end;
 
 function TResponsavel.getIdResponsavel: integer;
 begin
-  result := idResponsavel;
+  result := self.idResponsavel;
 end;
 
 function TResponsavel.getNomeResponsavel: String;
 begin
-  result := nomeResponsavel;
+  result := Self.nomeResponsavel;
 end;
 
 function TResponsavel.getObservacoes: String;
 begin
-  result := observacoes;
+  result := Self.observacoes;
 end;
 
 function TResponsavel.getRendaMensal: double;
 begin
-  result := rendaMensal;
+  result := Self.rendaMensal;
 end;
 
 function TResponsavel.getTelefoneCelular: String;
 begin
-  result := telefoneCelular;
+  result := Self.telefoneCelular;
 end;
 
 function TResponsavel.getTelefoneResidencia: String;
 begin
-  result := telefoneResidencia;
+  result := Self.telefoneResidencia;
 end;
 
 procedure TResponsavel.setCpfResponsavel(cpfResponsavel: String);
@@ -114,6 +123,11 @@ end;
 procedure TResponsavel.setDataNascimento(dataNascimento: String);
 begin
   self.dataNascimento := dataNascimento;
+end;
+
+procedure TResponsavel.setEmailResponsavel(emailResponsavel: String);
+begin
+  self.emailResponsavel := emailResponsavel;
 end;
 
 procedure TResponsavel.setEnderecoResponsavel(enderecoResponsavel: String);

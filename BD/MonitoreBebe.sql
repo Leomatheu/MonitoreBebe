@@ -6,13 +6,14 @@ create table TCADRESP(
 idResponsavel int not null auto_increment primary key,
 nomeResponsavel varchar(50),
 cpfResponsavel varchar(15),
+emailResponsavel varchar(50),
 dataNascimento varchar(10),
-telefoneResidencia varchar(12) null,
-telefoneCelular varchar(12) null,
+telefoneResidencia varchar(12),
+telefoneCelular varchar(12),
 rendaMensal float null,
 observacoes varchar(200),
 enderecoResponsavel varchar(150),
-foto mediumblob null
+foto mediumblob
 );
 
 create table TCADCRI(
