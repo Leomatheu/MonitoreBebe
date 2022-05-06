@@ -31,7 +31,6 @@ object frmCadResp: TfrmCadResp
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    ExplicitTop = -8
     object Label1: TLabel
       Left = 16
       Top = 94
@@ -224,8 +223,6 @@ object frmCadResp: TfrmCadResp
     Color = 13828057
     ParentBackground = False
     TabOrder = 1
-    ExplicitLeft = 532
-    ExplicitTop = -4
     object Panel4: TPanel
       Left = 31
       Top = 18

@@ -67,7 +67,7 @@ begin
    if (OpenPictureDialog1.Execute) then
       begin
          imgCadResp.Picture.LoadFromFile(OpenPictureDialog1.FileName);
-         imgCadResp.Picture.SaveToFile('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Project\Foto\Foto.Jpeg');
+         imgCadResp.Picture.SaveToFile('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Foto.Jpeg');
       end;
 end;
 

@@ -1,5 +1,7 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
   Height = 334
   Width = 398
   object Conexao: TFDConnection

@@ -57,7 +57,8 @@ begin
 
   if (Dao.pInsertResponsavel(objResp)) then
      begin
-       frmMessage := TfrmMessage.Create(nil);
+       frmMessage := TfrmMessage.Create(frmCadResp);
+       frmMessage.Visible := false;
        frmMessage.Caption := 'INSERÇÃO DE RESPONSÁVEL REALIZADA';
        frmMessage.pnMessage.Color := $00D2FFD9;
        frmMessage.lbMessage.Caption := 'Inserção de responsável realizada com sucesso !!';
@@ -67,6 +68,7 @@ begin
   else
      begin
        frmMessage := TfrmMessage.Create(nil);
+       frmMessage.Visible := false;
        frmMessage.Caption := 'FALHA NA INSERÇÃO DE RESPONSÁVEL';
        frmMessage.pnMessage.Color := $009F9FFF;
        frmMessage.lbMessage.Caption := 'Falha na inserção de responsável verifique os dados !!';

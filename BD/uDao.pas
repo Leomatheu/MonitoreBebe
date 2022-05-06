@@ -16,6 +16,8 @@ type
     Query: TFDQuery;
     DriverConexao: TFDPhysMySQLDriverLink;
     Transaction: TFDTransaction;
+    procedure DataModuleCreate(Sender: TObject);
+    procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
   public
@@ -31,13 +33,25 @@ implementation
 
 { TDataModule1 }
 
+procedure TDataModule1.DataModuleCreate(Sender: TObject);
+begin
+  Conexao.Connected := true;
+end;
+
+procedure TDataModule1.DataModuleDestroy(Sender: TObject);
+begin
+  Conexao.Connected := false;
+end;
+
 function TDataModule1.pInsertResponsavel(prObjResponsavel : TResponsavel):Boolean;
 var
    query : TFDQuery;
    foto : TStream;
+   data : TDataModule1;
 begin
   query := TFDQuery.Create(nil);
-  query.Connection := DataModule1.Conexao;
+  data := TDataModule1.Create(nil);
+  query.Connection := data.Conexao;
 
   query.SQL.Add('insert into TCADRESP values (0, :nomeResponsavel, :cpfResponsavel, :emailResponsavel, :dataNascimento, :telefoneResidencia, :telefoneCelular, :rendaMensal, :observacoes, :enderecoResponsavel, :foto);');
 
@@ -51,20 +65,20 @@ begin
   query.Params[7].AsString := prObjResponsavel.getObservacoes;
   query.Params[8].AsString := prObjResponsavel.getEnderecoResponsavel;
 
-  foto := TFileStream.Create('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Project\Foto.Jpeg', fmOpenRead);
+  foto := TFileStream.Create('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Foto.Jpeg', fmOpenRead);
 
   query.Params[9].LoadFromStream(foto, ftBlob);
 
   try
      query.ExecSQL;
-     query.Close;
-     query.Free;
      result := true;
   Except
     on e:Exception do
       result := false;
   end;
 
+    query.Close;
+    query.Free;
 
 end;
 

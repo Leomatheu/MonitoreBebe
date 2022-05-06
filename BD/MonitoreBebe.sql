@@ -8,13 +8,15 @@ nomeResponsavel varchar(50),
 cpfResponsavel varchar(15),
 emailResponsavel varchar(50),
 dataNascimento varchar(10),
-telefoneResidencia varchar(12),
-telefoneCelular varchar(12),
+telefoneResidencia varchar(20),
+telefoneCelular varchar(20),
 rendaMensal float null,
 observacoes varchar(200),
 enderecoResponsavel varchar(150),
 foto mediumblob
 );
+
+select * from TCADRESP;
 
 create table TCADCRI(
 idCrianca int not null auto_increment primary key,
