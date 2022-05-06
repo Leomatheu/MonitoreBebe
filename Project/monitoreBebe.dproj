@@ -108,10 +108,6 @@
             <Form>frmCadResp</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\Forms\formEditResp.pas">
-            <Form>frmEditaResp</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="..\Units\uResponsavel.pas"/>
         <DCCReference Include="..\Units\uController.pas"/>
         <DCCReference Include="..\BD\uDao.pas">
@@ -123,6 +119,7 @@
             <Form>frmMessage</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\Forms\formEditResp.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

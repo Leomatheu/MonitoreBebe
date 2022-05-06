@@ -13,15 +13,16 @@ object DataModule1: TDataModule1
       'DriverID=MySQL')
     LoginPrompt = False
     Transaction = Transaction
-    Left = 48
-    Top = 16
+    Left = 32
+    Top = 56
   end
   object Query: TFDQuery
+    Connection = Conexao
     Transaction = Transaction
     SQL.Strings = (
       'Select * from TCADRESP;')
-    Left = 152
-    Top = 16
+    Left = 296
+    Top = 88
   end
   object DriverConexao: TFDPhysMySQLDriverLink
     VendorLib = 
@@ -34,6 +35,11 @@ object DataModule1: TDataModule1
   object Transaction: TFDTransaction
     Connection = Conexao
     Left = 96
+    Top = 16
+  end
+  object Source: TDataSource
+    DataSet = Query
+    Left = 296
     Top = 16
   end
 end

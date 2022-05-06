@@ -56,7 +56,7 @@ var
 
 implementation
 uses
-   formEditResp, uController;
+   uController, formEditResp;
 
 {$R *.dfm}
 
@@ -73,8 +73,11 @@ end;
 
 procedure TfrmCadResp.SpeedButton2Click(Sender: TObject);
 begin
-   frmEditaResp := TfrmEditaResp.Create(nil);
-   frmEditaResp.ShowModal;
+   frmEditResp := TfrmEditResp.Create(nil);
+   frmEditResp.pCarregaDBGrid('select * from monitorebebe.TCADRESP;');
+   frmEditResp.Caption := 'EDIÇÃO DE RESPONSÁVEIS';
+   frmEditResp.Panel2.Color := $00D2FFD9;
+   frmEditResp.ShowModal;
 end;
 
 procedure TfrmCadResp.SpeedButton4Click(Sender: TObject);

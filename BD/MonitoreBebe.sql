@@ -16,7 +16,7 @@ enderecoResponsavel varchar(150),
 foto mediumblob
 );
 
-select * from TCADRESP;
+select * from monitorebebe.TCADRESP;
 
 create table TCADCRI(
 idCrianca int not null auto_increment primary key,

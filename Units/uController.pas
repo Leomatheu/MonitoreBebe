@@ -10,6 +10,7 @@ uses
     public
         procedure pCadResponsavel;
         function fTiraPonto(prText : String):String;
+        procedure pMessage(prCaption : String; prColor : integer; prLabel : String; prFoto : String);
 
   end;
 
@@ -57,24 +58,23 @@ begin
 
   if (Dao.pInsertResponsavel(objResp)) then
      begin
-       frmMessage := TfrmMessage.Create(frmCadResp);
-       frmMessage.Visible := false;
-       frmMessage.Caption := 'INSERÇÃO DE RESPONSÁVEL REALIZADA';
-       frmMessage.pnMessage.Color := $00D2FFD9;
-       frmMessage.lbMessage.Caption := 'Inserção de responsável realizada com sucesso !!';
-       frmMessage.imgMessage.Picture.LoadFromFile('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp');
-       frmMessage.ShowModal;
+        self.pMessage('INSERÇÃO DE RESPONSÁVEL REALIZADA', $00D2FFD9, 'Inserção de responsável realizada com sucesso !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp');
      end
   else
      begin
-       frmMessage := TfrmMessage.Create(nil);
-       frmMessage.Visible := false;
-       frmMessage.Caption := 'FALHA NA INSERÇÃO DE RESPONSÁVEL';
-       frmMessage.pnMessage.Color := $009F9FFF;
-       frmMessage.lbMessage.Caption := 'Falha na inserção de responsável verifique os dados !!';
-       frmMessage.imgMessage.Picture.LoadFromFile('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\negado.bmp');
-       frmMessage.ShowModal;
+       self.pMessage('FALHA NA INSERÇÃO DE RESPONSÁVEL', $009F9FFF, 'Falha na inserção de responsável verifique os dados !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\negado.bmp');
      end;
+end;
+
+procedure TController.pMessage(prCaption : String; prColor : integer; prLabel : String; prFoto : String);
+begin
+  frmMessage := TfrmMessage.Create(frmCadResp);
+  frmMessage.Visible := false;
+  frmMessage.Caption := prCaption;
+  frmMessage.pnMessage.Color := prColor;
+  frmMessage.lbMessage.Caption := prLabel;
+  frmMessage.imgMessage.Picture.LoadFromFile(prFoto);
+  frmMessage.ShowModal;
 end;
 
 end.

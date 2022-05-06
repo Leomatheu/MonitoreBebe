@@ -1,9 +1,10 @@
-object frmEditaResp: TfrmEditaResp
+object frmEditResp: TfrmEditResp
   Left = 0
   Top = 0
-  Caption = 'EDI'#199#195'O DE RESPONS'#193'VEIS'
-  ClientHeight = 461
-  ClientWidth = 537
+  BorderIcons = [biSystemMenu]
+  Caption = 'frmEditResp'
+  ClientHeight = 447
+  ClientWidth = 828
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,13 +17,45 @@ object frmEditaResp: TfrmEditaResp
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 537
-    Height = 461
-    Align = alClient
+    Width = 828
+    Height = 369
+    Align = alTop
+    Caption = 'Panel1'
+    ShowCaption = False
     TabOrder = 0
-    ExplicitLeft = 184
-    ExplicitTop = 232
-    ExplicitWidth = 185
-    ExplicitHeight = 41
+    ExplicitWidth = 505
+    object DBGrid1: TDBGrid
+      Left = 1
+      Top = 1
+      Width = 826
+      Height = 367
+      Align = alClient
+      DataSource = DataModule1.Source
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 368
+    Width = 828
+    Height = 79
+    Align = alBottom
+    Caption = 'Panel2'
+    ShowCaption = False
+    TabOrder = 1
+    ExplicitLeft = -1
+    object btnCarregar: TButton
+      Left = 360
+      Top = 29
+      Width = 97
+      Height = 25
+      Caption = 'Editar'
+      TabOrder = 0
+    end
   end
 end

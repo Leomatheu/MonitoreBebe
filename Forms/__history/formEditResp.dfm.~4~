@@ -1,0 +1,50 @@
+object frmEditaResp: TfrmEditaResp
+  Left = 0
+  Top = 0
+  Caption = 'EDI'#199#195'O DE RESPONS'#193'VEIS'
+  ClientHeight = 431
+  ClientWidth = 627
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 627
+    Height = 431
+    Align = alClient
+    TabOrder = 0
+    ExplicitWidth = 537
+    ExplicitHeight = 461
+    object Panel2: TPanel
+      Left = 1
+      Top = 1
+      Width = 625
+      Height = 336
+      Align = alTop
+      Caption = 'Panel2'
+      ShowCaption = False
+      TabOrder = 0
+      object DBGrid1: TDBGrid
+        Left = 96
+        Top = -1
+        Width = 529
+        Height = 159
+        BorderStyle = bsNone
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+      end
+    end
+  end
+end

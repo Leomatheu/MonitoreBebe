@@ -1,0 +1,34 @@
+unit formEditResp;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TfrmEditResp = class(TForm)
+  private
+    { Private declarations }
+  public
+    procedure pCarregaDBGrid(prSQL : String);
+  end;
+
+var
+  frmEditResp: TfrmEditResp;
+
+implementation
+
+
+{$R *.dfm}
+
+uses uDao;
+
+{ TfrmEditResp }
+
+procedure TfrmEditResp.pCarregaDBGrid(prSQL: String);
+begin
+   DataModule1.Source.DataSet := DataModule1.fRetornaQuery(prSQL);
+end;
+
+end.

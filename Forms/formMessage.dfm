@@ -3,8 +3,8 @@ object frmMessage: TfrmMessage
   Top = 0
   BorderStyle = bsDialog
   Caption = 'frmMessage'
-  ClientHeight = 191
-  ClientWidth = 515
+  ClientHeight = 129
+  ClientWidth = 495
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,29 +19,29 @@ object frmMessage: TfrmMessage
   object pnMessage: TPanel
     Left = 0
     Top = 0
-    Width = 515
-    Height = 191
+    Width = 495
+    Height = 129
     Align = alClient
     Caption = 'pnMessage'
     Color = 10461183
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitTop = 8
-    ExplicitWidth = 505
-    ExplicitHeight = 213
+    ExplicitTop = -8
+    ExplicitWidth = 381
+    ExplicitHeight = 191
     object imgMessage: TImage
       Left = 32
-      Top = 40
+      Top = 14
       Width = 73
       Height = 73
       Stretch = True
     end
     object lbMessage: TLabel
-      Left = 136
-      Top = 56
-      Width = 353
-      Height = 41
+      Left = 128
+      Top = 48
+      Width = 72
+      Height = 15
       Caption = 'lbMessage'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -52,8 +52,8 @@ object frmMessage: TfrmMessage
       Layout = tlCenter
     end
     object btnMessage: TButton
-      Left = 192
-      Top = 136
+      Left = 200
+      Top = 94
       Width = 105
       Height = 25
       Caption = 'OK'

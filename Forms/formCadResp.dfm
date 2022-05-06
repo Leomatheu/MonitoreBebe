@@ -791,9 +791,7 @@ object frmCadResp: TfrmCadResp
         Font.Style = []
         ParentFont = False
         OnClick = SpeedButton2Click
-        ExplicitLeft = 32
         ExplicitTop = 2
-        ExplicitWidth = 128
       end
     end
   end

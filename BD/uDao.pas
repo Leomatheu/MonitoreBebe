@@ -16,12 +16,14 @@ type
     Query: TFDQuery;
     DriverConexao: TFDPhysMySQLDriverLink;
     Transaction: TFDTransaction;
+    Source: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
   public
     function pInsertResponsavel(prObjResponsavel : TResponsavel):Boolean;
+    function fRetornaQuery(prSQL : String) : TFDQuery;
   end;
 
 var
@@ -41,6 +43,17 @@ end;
 procedure TDataModule1.DataModuleDestroy(Sender: TObject);
 begin
   Conexao.Connected := false;
+end;
+
+function TDataModule1.fRetornaQuery(prSQL: String): TFDQuery;
+var
+   data : TDataModule1;
+begin
+   result := TFDQuery.Create(nil);
+   data := TDataModule1.Create(nil);
+   result.Connection := data.Conexao;
+   result.SQL.Add(prSQL);
+   result.Open;
 end;
 
 function TDataModule1.pInsertResponsavel(prObjResponsavel : TResponsavel):Boolean;
