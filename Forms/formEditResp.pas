@@ -13,6 +13,7 @@ type
     DBGrid1: TDBGrid;
     Panel2: TPanel;
     btnCarregar: TButton;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -27,9 +28,19 @@ implementation
 
 {$R *.dfm}
 
-uses uDao;
+uses
+  uDao, formCadResp;
 
 { TfrmEditResp }
+
+procedure TfrmEditResp.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  if not (frmCadResp.edtNome.Text = '') then
+     begin
+       frmCadResp.sbExcluir.Enabled := true;
+       frmCadResp.edtCodigo.Visible := true;
+     end;
+end;
 
 procedure TfrmEditResp.pCarregaDBGrid(prSQL: String);
 var

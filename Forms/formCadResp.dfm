@@ -14,6 +14,7 @@ object frmCadResp: TfrmCadResp
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel2: TPanel
@@ -31,6 +32,7 @@ object frmCadResp: TfrmCadResp
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
+    ExplicitLeft = -6
     object Label1: TLabel
       Left = 16
       Top = 94
@@ -213,6 +215,18 @@ object frmCadResp: TfrmCadResp
       TabOrder = 2
       Text = '  /  /    '
     end
+    object edtCodigo: TLabeledEdit
+      Left = 384
+      Top = 469
+      Width = 121
+      Height = 23
+      EditLabel.Width = 48
+      EditLabel.Height = 15
+      EditLabel.Caption = 'C'#243'digo'
+      Enabled = False
+      TabOrder = 9
+      Visible = False
+    end
   end
   object Panel1: TPanel
     Left = 526
@@ -223,6 +237,7 @@ object frmCadResp: TfrmCadResp
     Color = 13828057
     ParentBackground = False
     TabOrder = 1
+    ExplicitTop = -4
     object Panel4: TPanel
       Left = 31
       Top = 18
@@ -722,7 +737,7 @@ object frmCadResp: TfrmCadResp
       ParentBackground = False
       ShowCaption = False
       TabOrder = 2
-      object SpeedButton4: TSpeedButton
+      object sbSalvar: TSpeedButton
         Left = 1
         Top = 1
         Width = 159
@@ -736,7 +751,7 @@ object frmCadResp: TfrmCadResp
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        OnClick = SpeedButton4Click
+        OnClick = sbSalvarClick
         ExplicitTop = 0
       end
     end
@@ -749,7 +764,7 @@ object frmCadResp: TfrmCadResp
       ParentBackground = False
       ShowCaption = False
       TabOrder = 3
-      object SpeedButton3: TSpeedButton
+      object sbExcluir: TSpeedButton
         Left = 1
         Top = 1
         Width = 159
@@ -763,9 +778,7 @@ object frmCadResp: TfrmCadResp
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 48
-        ExplicitTop = 0
-        ExplicitWidth = 112
+        ExplicitTop = 2
       end
     end
     object Panel8: TPanel
@@ -776,13 +789,13 @@ object frmCadResp: TfrmCadResp
       Color = 14869218
       ParentBackground = False
       TabOrder = 4
-      object SpeedButton2: TSpeedButton
+      object sbConsultar: TSpeedButton
         Left = 1
         Top = 1
         Width = 159
         Height = 28
         Align = alClient
-        Caption = 'Editar'
+        Caption = 'Consultar'
         Flat = True
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -790,7 +803,7 @@ object frmCadResp: TfrmCadResp
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        OnClick = SpeedButton2Click
+        OnClick = sbConsultarClick
         ExplicitTop = 2
       end
     end

@@ -12,6 +12,7 @@ object frmEditResp: TfrmEditResp
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -23,7 +24,6 @@ object frmEditResp: TfrmEditResp
     Caption = 'Panel1'
     ShowCaption = False
     TabOrder = 0
-    ExplicitWidth = 505
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
@@ -49,6 +49,7 @@ object frmEditResp: TfrmEditResp
     ShowCaption = False
     TabOrder = 1
     ExplicitLeft = -1
+    ExplicitTop = 374
     object btnCarregar: TButton
       Left = 360
       Top = 29

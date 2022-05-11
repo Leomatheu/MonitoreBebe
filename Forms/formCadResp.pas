@@ -36,14 +36,16 @@ type
     edtEndereco: TLabeledEdit;
     Panel7: TPanel;
     Panel8: TPanel;
-    SpeedButton2: TSpeedButton;
-    SpeedButton3: TSpeedButton;
-    SpeedButton4: TSpeedButton;
+    sbConsultar: TSpeedButton;
+    sbExcluir: TSpeedButton;
+    sbSalvar: TSpeedButton;
     edtDataNasc: TMaskEdit;
     Label6: TLabel;
+    edtCodigo: TLabeledEdit;
     procedure SpeedButton1Click(Sender: TObject);
-    procedure SpeedButton2Click(Sender: TObject);
-    procedure SpeedButton4Click(Sender: TObject);
+    procedure sbConsultarClick(Sender: TObject);
+    procedure sbSalvarClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
 
   private
     { Private declarations }
@@ -62,6 +64,11 @@ uses
 
 
 
+procedure TfrmCadResp.FormActivate(Sender: TObject);
+begin
+  self.sbExcluir.Enabled := false;
+end;
+
 procedure TfrmCadResp.SpeedButton1Click(Sender: TObject);
 begin
    if (OpenPictureDialog1.Execute) then
@@ -71,7 +78,7 @@ begin
       end;
 end;
 
-procedure TfrmCadResp.SpeedButton2Click(Sender: TObject);
+procedure TfrmCadResp.sbConsultarClick(Sender: TObject);
 begin
    frmEditResp := TfrmEditResp.Create(nil);
    frmEditResp.pCarregaDBGrid('select * from monitorebebe.TCADRESP;');
@@ -80,7 +87,7 @@ begin
    frmEditResp.ShowModal;
 end;
 
-procedure TfrmCadResp.SpeedButton4Click(Sender: TObject);
+procedure TfrmCadResp.sbSalvarClick(Sender: TObject);
 var
    controller : TController;
 begin

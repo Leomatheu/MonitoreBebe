@@ -8,7 +8,7 @@ uses
   uController in '..\Units\uController.pas',
   uDao in '..\BD\uDao.pas' {DataModule1: TDataModule},
   formMessage in '..\Forms\formMessage.pas' {frmMessage},
-  formEditResp in '..\Forms\formEditResp.pas';
+  formEditResp in '..\Forms\formEditResp.pas' {frmEditResp};
 
 {$R *.res}
 
@@ -16,6 +16,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmMenu, frmMenu);
-  Application.CreateForm(TfrmEditResp, frmEditResp);
   Application.Run;
 end.
