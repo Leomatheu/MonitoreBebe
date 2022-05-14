@@ -24,6 +24,7 @@ type
   public
     function pInsertResponsavel(prObjResponsavel : TResponsavel):Boolean;
     function fRetornaQuery(prSQL : String) : TFDQuery;
+    function fRetornoBusca(prSQL : String) : TFDQuery;
   end;
 
 var
@@ -56,6 +57,18 @@ begin
    result.Open;
 end;
 
+function TDataModule1.fRetornoBusca(prSQL: String): TFDQuery;
+var
+  data : TDataModule1;
+begin
+  result := TFDQuery.Create(nil);
+  data := TDataModule1.Create(nil);
+  result.Connection := data.Conexao;
+  result.Close;
+  result.SQL.Add(prSQL);
+  result.Open;
+end;
+
 function TDataModule1.pInsertResponsavel(prObjResponsavel : TResponsavel):Boolean;
 var
    query : TFDQuery;
@@ -66,7 +79,7 @@ begin
   data := TDataModule1.Create(nil);
   query.Connection := data.Conexao;
 
-  query.SQL.Add('insert into TCADRESP values (0, :nomeResponsavel, :cpfResponsavel, :emailResponsavel, :dataNascimento, :telefoneResidencia, :telefoneCelular, :rendaMensal, :observacoes, :enderecoResponsavel, :foto);');
+  query.SQL.Add('insert into TCADRESP values (0, :nomeResponsavel, :cpfResponsavel, :emailResponsavel, :dataNascimento, :telefoneResidencia,'+' :telefoneCelular, :rendaMensal, :observacoes, :cepResponsavel, :estadoResponsavel, :cidadeResponsavel, :bairroResponsavel, :endResponsavel, :foto);');
 
   query.Params[0].AsString := prObjResponsavel.getNomeResponsavel;
   query.Params[1].AsString := prObjResponsavel.getCpfResponsavel;
@@ -76,11 +89,15 @@ begin
   query.Params[5].AsString := prObjResponsavel.getTelefoneCelular;
   query.Params[6].AsFloat := prObjResponsavel.getRendaMensal;
   query.Params[7].AsString := prObjResponsavel.getObservacoes;
-  query.Params[8].AsString := prObjResponsavel.getEnderecoResponsavel;
+  query.Params[8].AsString := prObjResponsavel.getCepResponsavel;
+  query.Params[9].AsString := prObjResponsavel.getEstadoResponsavel;
+  query.Params[10].AsString := prObjResponsavel.getCidadeResponsavel;
+  query.Params[11].AsString := prObjResponsavel.getBairroResponsavel;
+  query.Params[12].AsString := prObjResponsavel.getEndereco;
 
   foto := TFileStream.Create('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Foto.Jpeg', fmOpenRead);
 
-  query.Params[9].LoadFromStream(foto, ftBlob);
+  query.Params[13].LoadFromStream(foto, ftBlob);
 
   try
      query.ExecSQL;

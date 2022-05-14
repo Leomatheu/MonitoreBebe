@@ -4,7 +4,7 @@ object frmEditResp: TfrmEditResp
   BorderIcons = [biSystemMenu]
   Caption = 'frmEditResp'
   ClientHeight = 447
-  ClientWidth = 828
+  ClientWidth = 877
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,18 +18,22 @@ object frmEditResp: TfrmEditResp
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 828
-    Height = 369
-    Align = alTop
+    Width = 877
+    Height = 447
+    Align = alClient
     Caption = 'Panel1'
+    ParentBackground = False
     ShowCaption = False
     TabOrder = 0
+    ExplicitWidth = 828
+    ExplicitHeight = 369
     object DBGrid1: TDBGrid
       Left = 1
-      Top = 1
-      Width = 826
-      Height = 367
-      Align = alClient
+      Top = 72
+      Width = 875
+      Height = 374
+      Align = alBottom
+      BorderStyle = bsNone
       DataSource = DataModule1.Source
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
@@ -37,26 +41,34 @@ object frmEditResp: TfrmEditResp
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      OnCellClick = DBGrid1CellClick
     end
-  end
-  object Panel2: TPanel
-    Left = 0
-    Top = 368
-    Width = 828
-    Height = 79
-    Align = alBottom
-    Caption = 'Panel2'
-    ShowCaption = False
-    TabOrder = 1
-    ExplicitLeft = -1
-    ExplicitTop = 374
-    object btnCarregar: TButton
-      Left = 360
-      Top = 29
-      Width = 97
-      Height = 25
-      Caption = 'Editar'
-      TabOrder = 0
+    object edtBusca: TLabeledEdit
+      Left = 160
+      Top = 24
+      Width = 553
+      Height = 26
+      EditLabel.Width = 128
+      EditLabel.Height = 15
+      EditLabel.BiDiMode = bdRightToLeft
+      EditLabel.Caption = 'Busque pelo nome'
+      EditLabel.Font.Charset = DEFAULT_CHARSET
+      EditLabel.Font.Color = clWindowText
+      EditLabel.Font.Height = -11
+      EditLabel.Font.Name = 'Fixedsys'
+      EditLabel.Font.Style = []
+      EditLabel.ParentBiDiMode = False
+      EditLabel.ParentFont = False
+      EditLabel.Layout = tlBottom
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      LabelPosition = lpLeft
+      ParentFont = False
+      TabOrder = 1
+      OnChange = edtBuscaChange
     end
   end
 end

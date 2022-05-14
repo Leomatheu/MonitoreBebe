@@ -83,8 +83,10 @@ begin
    frmEditResp := TfrmEditResp.Create(nil);
    frmEditResp.pCarregaDBGrid('select * from monitorebebe.TCADRESP;');
    frmEditResp.Caption := 'EDIÇÃO DE RESPONSÁVEIS';
-   frmEditResp.Panel2.Color := $00D2FFD9;
+   frmEditResp.edtBusca.EditLabel.Caption := 'Busque pelo responsável';
+   frmEditResp.Tag := 1;
    frmEditResp.ShowModal;
+   frmEditResp.Panel1.Color := $00D2FFD9;
 end;
 
 procedure TfrmCadResp.sbSalvarClick(Sender: TObject);
@@ -93,7 +95,6 @@ var
 begin
   controller := TController.Create;
   controller.pCadResponsavel;
-
 end;
 
 end.

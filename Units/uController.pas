@@ -55,9 +55,9 @@ begin
   objCrianca.setPesoNascimento(frmCadCrianca.edtPeso.Text);
   objCrianca.setNomePai(frmCadCrianca.edtNomePai.Text);
   objCrianca.setNomeMae(frmCadCrianca.edtNomeMae.Text);
-  objCrianca.setResponsavel1(TResponsavel(frmCadCrianca.cbResp1.Items.Objects).getIdResponsavel);
-  objCrianca.setResponsavel1(TResponsavel(frmCadCrianca.cbResp2.Items.Objects).getIdResponsavel);
-  objCrianca.setObservacoes(frmCadCrianca.mmObservacoes.Lines);
+ //objCrianca.setResponsavel1(TResponsavel(frmCadCrianca.cbResp1.Items.Objects).getIdResponsavel);
+ //objCrianca.setResponsavel1(TResponsavel(frmCadCrianca.cbResp2.Items.Objects).getIdResponsavel);
+  //objCrianca.setObservacoes(frmCadCrianca.mmObservacoes.Lines);
 
 end;
 
@@ -80,8 +80,11 @@ begin
   wValor := Copy(self.fTiraPonto(frmCadResp.edtRendaMensal.Text), 3, Length(frmCadResp.edtRendaMensal.Text));
   objResp.setRendaMensal(StrToFloat(wValor));
   objResp.setObservacoes(frmCadResp.mmObservacao.Lines.Text);
-  wEndCompleto := frmCadResp.edtCEP.Text+','+frmCadResp.edtEstado.Text+','+frmCadResp.edtCidade.Text+','+frmCadResp.edtBairro.Text+','+frmCadResp.edtEndereco.Text;
-  objResp.setEnderecoResponsavel(wEndCompleto);
+  objResp.setCepResponsavel(frmCadResp.edtCEP.Text);
+  objResp.setEstadoResponsavel(frmCadResp.edtEstado.Text);
+  objResp.setCidadeResponsavel(frmCadResp.edtCidade.Text);
+  objResp.setBairroResponsavel(frmCadResp.edtBairro.text);
+  objResp.setEndereco(frmCadResp.edtEndereco.text);
   objResp.setFoto(frmCadResp.imgCadResp);
 
   if (Dao.pInsertResponsavel(objResp)) then

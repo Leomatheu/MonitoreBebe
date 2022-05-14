@@ -15,8 +15,12 @@ uses
       telefoneResidencia : String;
       telefoneCelular : String;
       rendaMensal : double;
-      observacoes : String;
+      cepResponsavel : String;
+      estadoResponsavel : String;
+      cidadeResponsavel : String;
+      bairroResponsavel : String;
       enderecoResponsavel : String;
+      observacoes : String;
       foto : TImage;
 
     public
@@ -44,11 +48,24 @@ uses
         procedure setRendaMensal(rendaMensal:double);
         function getRendaMensal:double;
 
+        procedure setCepResponsavel(cep:String);
+        function  getCepResponsavel:String;
+
+        procedure setEstadoResponsavel(estado:String);
+        function  getEstadoResponsavel:String;
+
+        procedure setCidadeResponsavel(cidade:String);
+        function  getCidadeResponsavel:String;
+
+        procedure setBairroResponsavel(bairro:String);
+        function  getBairroResponsavel:String;
+
+        procedure setEndereco(endereco : String);
+        function  getEndereco:String;
+
         procedure setObservacoes(observacoes:String);
         function getObservacoes:String;
 
-        procedure setEnderecoResponsavel(enderecoResponsavel:String);
-        function getEnderecoResponsavel:String;
 
         procedure setFoto(foto:TImage);
         function getFoto:TImage;
@@ -58,6 +75,21 @@ uses
 implementation
 
 { TResponsavel }
+
+function TResponsavel.getBairroResponsavel: String;
+begin
+  result := self.bairroResponsavel;
+end;
+
+function TResponsavel.getCepResponsavel: String;
+begin
+  result := self.cepResponsavel;
+end;
+
+function TResponsavel.getCidadeResponsavel: String;
+begin
+  result := self.cidadeResponsavel;
+end;
 
 function TResponsavel.getCpfResponsavel: String;
 begin
@@ -74,9 +106,14 @@ begin
   result := self.emailResponsavel;
 end;
 
-function TResponsavel.getEnderecoResponsavel: String;
+function TResponsavel.getEndereco: String;
 begin
   result := self.enderecoResponsavel;
+end;
+
+function TResponsavel.getEstadoResponsavel: String;
+begin
+  result := self.estadoResponsavel;
 end;
 
 function TResponsavel.getFoto: TImage;
@@ -114,6 +151,21 @@ begin
   result := Self.telefoneResidencia;
 end;
 
+procedure TResponsavel.setBairroResponsavel(bairro: String);
+begin
+  self.bairroResponsavel := bairro;
+end;
+
+procedure TResponsavel.setCepResponsavel(cep: String);
+begin
+  self.cepResponsavel := cep;
+end;
+
+procedure TResponsavel.setCidadeResponsavel(cidade: String);
+begin
+  self.cidadeResponsavel := cidade;
+end;
+
 procedure TResponsavel.setCpfResponsavel(cpfResponsavel: String);
 begin
   self.cpfResponsavel := cpfResponsavel;
@@ -130,9 +182,14 @@ begin
   self.emailResponsavel := emailResponsavel;
 end;
 
-procedure TResponsavel.setEnderecoResponsavel(enderecoResponsavel: String);
+procedure TResponsavel.setEndereco(endereco: String);
 begin
-  self.enderecoResponsavel := enderecoResponsavel;
+  self.enderecoResponsavel := endereco;
+end;
+
+procedure TResponsavel.setEstadoResponsavel(estado: String);
+begin
+  self.estadoResponsavel := estado;
 end;
 
 procedure TResponsavel.setFoto(foto: TImage);

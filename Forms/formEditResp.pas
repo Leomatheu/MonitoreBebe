@@ -11,9 +11,10 @@ type
   TfrmEditResp = class(TForm)
     Panel1: TPanel;
     DBGrid1: TDBGrid;
-    Panel2: TPanel;
-    btnCarregar: TButton;
+    edtBusca: TLabeledEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure edtBuscaChange(Sender: TObject);
+    procedure DBGrid1CellClick(Column: TColumn);
   private
     { Private declarations }
   public
@@ -32,6 +33,34 @@ uses
   uDao, formCadResp;
 
 { TfrmEditResp }
+
+procedure TfrmEditResp.DBGrid1CellClick(Column: TColumn);
+begin
+   self.Close;
+   frmCadResp.edtNome.Text := Self.DBGrid1.Fields[1].Value;
+   frmCadResp.edtCPF.Text := self.DBGrid1.Fields[2].Value;
+   frmCadResp.edtEmail.Text := self.DBGrid1.Fields[3].Value;
+   frmCadResp.edtResidencial.Text := self.DBGrid1.Fields[4].Value;
+   frmCadResp.edtCelular.Text := self.DBGrid1.Fields[5].Value;
+   frmCadResp.edtRendaMensal.Text := self.DBGrid1.Fields[6].Value;
+end;
+
+procedure TfrmEditResp.edtBuscaChange(Sender: TObject);
+var
+   data : TDataModule1;
+begin
+  data := TDataModule1.Create(nil);
+
+  case self.Tag of
+    1 :
+    begin
+     data.Source.DataSet := data.fRetornoBusca('select * from monitorebebe.TCADRESP where nomeResponsavel like "'+self.edtBusca.text+'%";');
+    end;
+
+  end;
+
+  data.Free;
+end;
 
 procedure TfrmEditResp.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
