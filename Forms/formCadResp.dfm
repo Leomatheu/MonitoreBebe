@@ -32,7 +32,6 @@ object frmCadResp: TfrmCadResp
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    ExplicitLeft = -6
     object Label1: TLabel
       Left = 16
       Top = 94
@@ -778,7 +777,9 @@ object frmCadResp: TfrmCadResp
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitTop = 2
+        ExplicitLeft = 32
+        ExplicitTop = 3
+        ExplicitWidth = 128
       end
     end
     object Panel8: TPanel
@@ -804,7 +805,9 @@ object frmCadResp: TfrmCadResp
         Font.Style = []
         ParentFont = False
         OnClick = sbConsultarClick
+        ExplicitLeft = 40
         ExplicitTop = 2
+        ExplicitWidth = 120
       end
     end
   end

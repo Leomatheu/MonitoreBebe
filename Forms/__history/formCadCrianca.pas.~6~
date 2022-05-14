@@ -1,0 +1,57 @@
+unit formCadCrianca;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.Imaging.jpeg, Vcl.ExtDlgs, Vcl.Buttons;
+
+type
+  TfrmCadCrianca = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    edtNome: TLabeledEdit;
+    Label1: TLabel;
+    edtDataNasc: TMaskEdit;
+    edtCPF: TMaskEdit;
+    Label2: TLabel;
+    edtHospNasc: TLabeledEdit;
+    Panel3: TPanel;
+    ckMasculino: TCheckBox;
+    ckFeminino: TCheckBox;
+    Label3: TLabel;
+    edtNomePai: TLabeledEdit;
+    edtNomeMae: TLabeledEdit;
+    edtPeso: TMaskEdit;
+    Label4: TLabel;
+    cbResp2: TComboBox;
+    Label5: TLabel;
+    Label6: TLabel;
+    mmObservacoes: TMemo;
+    Label7: TLabel;
+    OpenPictureDialog1: TOpenPictureDialog;
+    Panel4: TPanel;
+    Image1: TImage;
+    cbResp1: TComboBox;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    Panel7: TPanel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    LabeledEdit1: TLabeledEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadCrianca: TfrmCadCrianca;
+
+implementation
+
+{$R *.dfm}
+
+end.

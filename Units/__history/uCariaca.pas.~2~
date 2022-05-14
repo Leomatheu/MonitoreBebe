@@ -1,0 +1,25 @@
+unit uCariaca;
+
+interface
+
+  Type TCrianca = Class
+
+    Private
+       idCrianca : integer;
+       nomeCrianca : String;
+       dataNascimento : String;
+       cpfCrianca : String;
+       observacoes : String;
+       sexo : String;
+       hospNascimento : String;
+       pesoNascimento : String;
+       nomePai : String;
+       nomeMae : String;
+       responsavel1 : integer;
+       responsavel2 : integer;
+
+  End;
+
+implementation
+
+end.

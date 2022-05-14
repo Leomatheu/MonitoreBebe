@@ -3,12 +3,13 @@ unit uController;
 interface
 
 uses
-   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage;
+   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage, uCariaca, formCadCrianca;
 
   type TController = class
 
     public
         procedure pCadResponsavel;
+        procedure pCadCrianca;
         function fTiraPonto(prText : String):String;
         procedure pMessage(prCaption : String; prColor : integer; prLabel : String; prFoto : String);
 
@@ -31,6 +32,33 @@ begin
     end;
 
   Result := prText;
+end;
+
+procedure TController.pCadCrianca;
+var
+   Dao : TDataModule;
+   objCrianca : TCrianca;
+begin
+  Dao := TDataModule.Create(nil);
+  objCrianca := TCrianca.Create;
+
+  objCrianca.setNomeCrianca(frmCadCrianca.edtNome.Text);
+  objCrianca.setCpfCrianca(frmCadCrianca.edtCPF.Text);
+  objCrianca.setDataNascimento(frmCadCrianca.edtDataNasc.Text);
+
+  if (frmCadCrianca.ckMasculino.Checked) then
+     objCrianca.setSexo('Masculino')
+  else
+     objCrianca.setSexo('Feminino');
+
+  objCrianca.setHospNascimento(frmCadCrianca.edtHospNasc.Text);
+  objCrianca.setPesoNascimento(frmCadCrianca.edtPeso.Text);
+  objCrianca.setNomePai(frmCadCrianca.edtNomePai.Text);
+  objCrianca.setNomeMae(frmCadCrianca.edtNomeMae.Text);
+  objCrianca.setResponsavel1(TResponsavel(frmCadCrianca.cbResp1.Items.Objects).getIdResponsavel);
+  objCrianca.setResponsavel1(TResponsavel(frmCadCrianca.cbResp2.Items.Objects).getIdResponsavel);
+  objCrianca.setObservacoes(frmCadCrianca.mmObservacoes.Lines);
+
 end;
 
 procedure TController.pCadResponsavel;
