@@ -81,8 +81,8 @@ begin
   data := TDataModule1.Create(nil);
   query.Connection := data.Conexao;
 
-  query.SQL.Add('update TCADRESP set nomeResponsavel = :nome, cpfResponsavel = :cpf, emailResponsavel = :email, dataNascimento = :nasc, telefoneResidencia = :tel, telefoneCelular = :cel, rendaMensal = :rm, observacoes = :obs,'+
-                'cepResponsavel = :cep, estadoResponsavel = :estado, cidadeResponsavel = :cidade, bairroResponsavel = :bairro, endResponsavel = :end, foto = :foto where idResponsavel = :codigo;');
+  query.SQL.Add('update TCADRESP set nomeResponsavel = :nome, cpfResponsavel = :cpf, emailResponsavel = :email, dataNascimento = :nasc, telefoneResidencia = :tel, telefoneCelular = :cel, rendaMensal = :rm, observacoes, :obs,'+
+                'cepResponsavel = :cep, estadoResponsavel = :estado, cidadeResponsavel = :cidade, bairroResponsavel = :bairro, endResponsavel = :end, foto = :foto;');
 
   query.Params[0].AsString := prObjResponsavel.getNomeResponsavel;
   query.Params[1].AsString := prObjResponsavel.getCpfResponsavel;
@@ -101,7 +101,6 @@ begin
   foto := TFileStream.Create('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Foto.Jpeg', fmOpenRead);
 
   query.Params[13].LoadFromStream(foto, ftBlob);
-  query.Params[14].AsInteger := prObjResponsavel.getIdResponsavel;
 
 
     try

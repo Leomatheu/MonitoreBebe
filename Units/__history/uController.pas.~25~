@@ -96,7 +96,7 @@ begin
      end
   else
      begin
-      objResp.setIdResponsavel(StrToInt(frmCadResp.edtCodigo.Text));
+      objResp.setIdResponsavel(frmCadResp.edtCodigo.Text);
 
       if (Dao.pAlteraResponsavel(objResp)) then
         self.pMessage('ALTERAÇÃO DE RESPONSÁVEL REALIZADA', $00D2FFD9, 'Alteração de responsável realizada com sucesso !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp')

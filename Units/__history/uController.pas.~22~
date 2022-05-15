@@ -87,22 +87,22 @@ begin
   objResp.setEndereco(frmCadResp.edtEndereco.text);
   objResp.setFoto(frmCadResp.imgCadResp);
 
-  if not (frmCadResp.Tag = 1) then
+  if (frmCadResp.Tag = 1) then
      begin
        if (Dao.pInsertResponsavel(objResp)) then
-         self.pMessage('INSERÇÃO DE RESPONSÁVEL REALIZADA', $00D2FFD9, 'Inserção de responsável realizada com sucesso !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp')
+         begin
+           self.pMessage('INSERÇÃO DE RESPONSÁVEL REALIZADA', $00D2FFD9, 'Inserção de responsável realizada com sucesso !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp');
+         end
        else
-         self.pMessage('FALHA NA INSERÇÃO DE RESPONSÁVEL', $009F9FFF, 'Falha na inserção de responsável verifique os dados !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\negado.bmp');
+         begin
+           self.pMessage('FALHA NA INSERÇÃO DE RESPONSÁVEL', $009F9FFF, 'Falha na inserção de responsável verifique os dados !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\negado.bmp');
+         end;
      end
   else
-     begin
-      objResp.setIdResponsavel(StrToInt(frmCadResp.edtCodigo.Text));
+     ShowMessage('Tag = '+ frmCadResp.Tag;
 
-      if (Dao.pAlteraResponsavel(objResp)) then
-        self.pMessage('ALTERAÇÃO DE RESPONSÁVEL REALIZADA', $00D2FFD9, 'Alteração de responsável realizada com sucesso !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp')
-      else
-        self.pMessage('FALHA NA ALTERAÇÃO DE RESPONSÁVEL REALIZADA', $009F9FFF, 'Falaha na alteração de responsável verifique os dados !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\negado.bmp');
-     end;
+
+
 end;
 
 procedure TController.pMessage(prCaption : String; prColor : integer; prLabel : String; prFoto : String);

@@ -14,6 +14,7 @@ type
     edtBusca: TLabeledEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure edtBuscaChange(Sender: TObject);
+    procedure DBGrid1CellClick(Column: TColumn);
   private
     { Private declarations }
   public
@@ -33,20 +34,26 @@ uses
 
 { TfrmEditResp }
 
+procedure TfrmEditResp.DBGrid1CellClick(Column: TColumn);
+begin
+   self.Close;
+   frmCadResp.edtNome.Text := Self.DBGrid1.Fields[1].Value;
+
+end;
+
 procedure TfrmEditResp.edtBuscaChange(Sender: TObject);
 var
    data : TDataModule1;
 begin
   data := TDataModule1.Create(nil);
 
-  with data.Query do
-     begin
-      Close;
-      SQL.Clear;
-      SQL.Add('select * from monitorebebe.TCADRESP where nomeResponsavel like :nomeResponsavel;');
-      Params[0].AsString := '%'+self.edtBusca.Text+'%';
-      Open;
-     end;
+  case self.Tag of
+    1 :
+    begin
+     data.Source.DataSet := data.fRetornoBusca('select * from monitorebebe.TCADRESP where nomeResponsavel like "'+self.edtBusca.text+'%";');
+    end;
+
+  end;
 
   data.Free;
 end;

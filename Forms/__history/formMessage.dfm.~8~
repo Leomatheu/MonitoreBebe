@@ -27,6 +27,9 @@ object frmMessage: TfrmMessage
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
+    ExplicitTop = -8
+    ExplicitWidth = 381
+    ExplicitHeight = 191
     object imgMessage: TImage
       Left = 32
       Top = 14

@@ -12,11 +12,16 @@ telefoneResidencia varchar(20),
 telefoneCelular varchar(20),
 rendaMensal float null,
 observacoes varchar(200),
-enderecoResponsavel varchar(150),
+cepResponsavel varchar(8),
+estadoResponsavel varchar(15),
+cidadeResponsavel varchar(20),
+bairroResponsavel varchar(50),
+endResponsavel varchar(50),
 foto mediumblob
 );
 
 select * from monitorebebe.TCADRESP;
+select * from monitorebebe.TCADRESP where nomeResponsavel like "a%";
 
 create table TCADCRI(
 idCrianca int not null auto_increment primary key,

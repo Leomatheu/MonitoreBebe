@@ -3,14 +3,15 @@ unit uController;
 interface
 
 uses
-   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage;
+   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage, uCariaca, formCadCrianca;
 
   type TController = class
 
     public
         procedure pCadResponsavel;
+        procedure pCadCrianca;
         function fTiraPonto(prText : String):String;
-        procedure pMessage(prCaption, prColor, prLabel, prFoto);
+        procedure pMessage(prCaption : String; prColor : integer; prLabel : String; prFoto : String);
 
   end;
 
@@ -33,6 +34,33 @@ begin
   Result := prText;
 end;
 
+procedure TController.pCadCrianca;
+var
+   Dao : TDataModule;
+   objCrianca : TCrianca;
+begin
+  Dao := TDataModule.Create(nil);
+  objCrianca := TCrianca.Create;
+
+  objCrianca.setNomeCrianca(frmCadCrianca.edtNome.Text);
+  objCrianca.setCpfCrianca(frmCadCrianca.edtCPF.Text);
+  objCrianca.setDataNascimento(frmCadCrianca.edtDataNasc.Text);
+
+  if (frmCadCrianca.ckMasculino.Checked) then
+     objCrianca.setSexo('Masculino')
+  else
+     objCrianca.setSexo('Feminino');
+
+  objCrianca.setHospNascimento(frmCadCrianca.edtHospNasc.Text);
+  objCrianca.setPesoNascimento(frmCadCrianca.edtPeso.Text);
+  objCrianca.setNomePai(frmCadCrianca.edtNomePai.Text);
+  objCrianca.setNomeMae(frmCadCrianca.edtNomeMae.Text);
+ //objCrianca.setResponsavel1(TResponsavel(frmCadCrianca.cbResp1.Items.Objects).getIdResponsavel);
+ //objCrianca.setResponsavel1(TResponsavel(frmCadCrianca.cbResp2.Items.Objects).getIdResponsavel);
+  //objCrianca.setObservacoes(frmCadCrianca.mmObservacoes.Lines);
+
+end;
+
 procedure TController.pCadResponsavel;
 var
    Dao : TDataModule1;
@@ -52,8 +80,11 @@ begin
   wValor := Copy(self.fTiraPonto(frmCadResp.edtRendaMensal.Text), 3, Length(frmCadResp.edtRendaMensal.Text));
   objResp.setRendaMensal(StrToFloat(wValor));
   objResp.setObservacoes(frmCadResp.mmObservacao.Lines.Text);
-  wEndCompleto := frmCadResp.edtCEP.Text+','+frmCadResp.edtEstado.Text+','+frmCadResp.edtCidade.Text+','+frmCadResp.edtBairro.Text+','+frmCadResp.edtEndereco.Text;
-  objResp.setEnderecoResponsavel(wEndCompleto);
+  objResp.setCepResponsavel(frmCadResp.edtCEP.Text);
+  objResp.setEstadoResponsavel(frmCadResp.edtEstado.Text);
+  objResp.setCidadeResponsavel(frmCadResp.edtCidade.Text);
+  objResp.setBairroResponsavel(frmCadResp.edtBairro.text);
+  objResp.setEndereco(frmCadResp.edtEndereco.text);
   objResp.setFoto(frmCadResp.imgCadResp);
 
   if (Dao.pInsertResponsavel(objResp)) then
@@ -66,7 +97,7 @@ begin
      end;
 end;
 
-procedure TController.pMessage(prCaption, prColor, prLabel, prFoto);
+procedure TController.pMessage(prCaption : String; prColor : integer; prLabel : String; prFoto : String);
 begin
   frmMessage := TfrmMessage.Create(frmCadResp);
   frmMessage.Visible := false;

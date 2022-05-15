@@ -75,7 +75,7 @@ begin
   case self.Tag of
     1 :
     begin
-     self.pCarregaDBGrid('select * from monitorebebe.TCADRESP where nomeResponsavel like "'+self.edtBusca.text+'%";');
+     data.Source.DataSet := data.fRetornoBusca('select * from monitorebebe.TCADRESP where nomeResponsavel like "'+self.edtBusca.text+'%";');
     end;
 
   end;

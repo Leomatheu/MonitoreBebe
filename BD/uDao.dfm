@@ -11,6 +11,7 @@ object DataModule1: TDataModule1
       'Password=root'
       'Server=localhost'
       'DriverID=MySQL')
+    Connected = True
     LoginPrompt = False
     Transaction = Transaction
     Left = 32

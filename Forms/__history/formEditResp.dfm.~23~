@@ -25,6 +25,8 @@ object frmEditResp: TfrmEditResp
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
+    ExplicitWidth = 828
+    ExplicitHeight = 369
     object DBGrid1: TDBGrid
       Left = 1
       Top = 72
@@ -45,7 +47,7 @@ object frmEditResp: TfrmEditResp
       Left = 160
       Top = 24
       Width = 553
-      Height = 23
+      Height = 26
       EditLabel.Width = 128
       EditLabel.Height = 15
       EditLabel.BiDiMode = bdRightToLeft
