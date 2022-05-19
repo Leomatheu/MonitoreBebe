@@ -17,6 +17,7 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  DataModule1 := TDataModule1.Create(nil);
   Application.CreateForm(TfrmMenu, frmMenu);
   Application.CreateForm(TfrmCadCrianca, frmCadCrianca);
   Application.Run;

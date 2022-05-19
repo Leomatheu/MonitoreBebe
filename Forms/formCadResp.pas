@@ -46,6 +46,7 @@ type
     procedure sbConsultarClick(Sender: TObject);
     procedure sbSalvarClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure sbExcluirClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -86,6 +87,14 @@ begin
    frmEditResp.edtBusca.EditLabel.Caption := 'Busque pelo responsável';
    frmEditResp.Tag := 1;
    frmEditResp.ShowModal;
+end;
+
+procedure TfrmCadResp.sbExcluirClick(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pExcluiResponsavel;
 end;
 
 procedure TfrmCadResp.sbSalvarClick(Sender: TObject);

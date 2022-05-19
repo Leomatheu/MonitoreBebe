@@ -24,8 +24,8 @@ type
   public
     function pInsertResponsavel(prObjResponsavel : TResponsavel):Boolean;
     function pAlteraResponsavel(prObjResponsavel : TResponsavel):Boolean;
+    function fDeleteResponsavel(prId : integer):Boolean;
     function fRetornaQuery(prSQL : String) : TFDQuery;
-    function fRetornoBusca(prSQL : String) : TFDQuery;
   end;
 
 var
@@ -47,6 +47,24 @@ begin
   Conexao.Connected := false;
 end;
 
+function TDataModule1.fDeleteResponsavel(prId: integer): Boolean;
+begin
+   DataModule1.Query.Create(nil);
+   DataModule1.Conexao.Connected := true;
+   DataModule1.Query.Connection := DataModule1.Conexao;
+
+   DataModule1.Query.SQL.Add('Delete from TCADRESP where idResponsavel = :prId;');
+   DataModule1.Query.Params[0].AsInteger := prId;
+
+   try
+       DataModule1.Query.ExecSQL;
+       result := true;
+   except
+     on e: Exception do 
+       result := false;
+   end;
+end;
+
 function TDataModule1.fRetornaQuery(prSQL: String): TFDQuery;
 var
    data : TDataModule1;
@@ -56,19 +74,6 @@ begin
    result.Connection := data.Conexao;
    result.SQL.Add(prSQL);
    result.Open;
-end;
-
-function TDataModule1.fRetornoBusca(prSQL: String): TFDQuery;
-var
-  data : TDataModule1;
-begin
-  result := TFDQuery.Create(nil);
-  data := TDataModule1.Create(nil);
-  result.Connection := data.Conexao;
-  result.Close;
-  result.SQL.Clear;
-  result.SQL.Add(prSQL);
-  result.Open;
 end;
 
 function TDataModule1.pAlteraResponsavel(prObjResponsavel: TResponsavel): Boolean;

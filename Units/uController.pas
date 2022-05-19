@@ -12,6 +12,8 @@ uses
         procedure pCadCrianca;
         function fTiraPonto(prText : String):String;
         procedure pMessage(prCaption : String; prColor : integer; prLabel : String; prFoto : String);
+        procedure pExcluiResponsavel;
+        procedure pLimpaTelaResp;
 
   end;
 
@@ -99,10 +101,44 @@ begin
       objResp.setIdResponsavel(StrToInt(frmCadResp.edtCodigo.Text));
 
       if (Dao.pAlteraResponsavel(objResp)) then
-        self.pMessage('ALTERAÇÃO DE RESPONSÁVEL REALIZADA', $00D2FFD9, 'Alteração de responsável realizada com sucesso !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp')
+         begin
+           self.pMessage('ALTERAÇÃO DE RESPONSÁVEL REALIZADA', $00D2FFD9, 'Alteração de responsável realizada com sucesso !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp')
+           self.pLimpaTelaResp;
+         end
       else
-        self.pMessage('FALHA NA ALTERAÇÃO DE RESPONSÁVEL REALIZADA', $009F9FFF, 'Falaha na alteração de responsável verifique os dados !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\negado.bmp');
+         begin
+           self.pMessage('FALHA NA ALTERAÇÃO DE RESPONSÁVEL', $009F9FFF, 'Falha na alteração de responsável, verifique os dados !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\negado.bmp');
+           self.pLimpaTelaResp;
+         end;
+
      end;
+end;
+
+procedure TController.pExcluiResponsavel;
+begin
+   if (DataModule1.fDeleteResponsavel(StrToInt(frmCadResp.edtCodigo.Text))) then
+      self.pMessage('RESPONSÁVAL EXCLUÍDO', $00D2FFD9, 'Exclusão de responsável realizada com sucesso !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp')
+   else
+      self.pMessage('FALHA NA EXCLUSÃO DE RESPONSÁVEL', $009F9FFF, 'Falha na exclusão de responsável, verifique os dados !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\negado.bmp');
+end;
+
+procedure TController.pLimpaTelaResp;
+begin
+  frmCadResp.edtNome.Clear;
+  frmCadResp.edtCPF.Clear;
+  frmcadResp.edtEmail.Clear;
+  frmCadResp.edtResidencial.Clear;
+  frmCadResp.edtCelular.Clear;
+  frmCadResp.edtRendaMensal.Clear;
+  frmCadResp.edtCEP.Clear;
+  frmCadResp.edtEstado.Clear;
+  frmCadResp.edtCidade.Clear;
+  frmCadResp.edtBairro.Clear;
+  frmCadResp.edtEndereco.Clear;
+  frmCadResp.edtDataNasc.Clear;
+  frmCadResp.edtCodigo.Clear;
+  frmCadResp.edtCodigo.Visible := false;
+  frmCadResp.mmObservacao.Lines := '';
 end;
 
 procedure TController.pMessage(prCaption : String; prColor : integer; prLabel : String; prFoto : String);

@@ -13,7 +13,6 @@ type
     DBGrid1: TDBGrid;
     edtBusca: TLabeledEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure edtBuscaChange(Sender: TObject);
     procedure DBGrid1CellClick(Column: TColumn);
   private
     { Private declarations }
@@ -66,23 +65,6 @@ begin
 
 end;
 
-procedure TfrmEditResp.edtBuscaChange(Sender: TObject);
-var
-   data : TDataModule1;
-begin
-  data := TDataModule1.Create(nil);
-
-  case self.Tag of
-    1 :
-    begin
-     self.pCarregaDBGrid('select * from monitorebebe.TCADRESP where nomeResponsavel like "'+self.edtBusca.text+'%";');
-    end;
-
-  end;
-
-  data.Free;
-end;
-
 procedure TfrmEditResp.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   if not (frmCadResp.edtNome.Text = '') then
@@ -93,11 +75,9 @@ begin
 end;
 
 procedure TfrmEditResp.pCarregaDBGrid(prSQL: String);
-var
-   dao : TDataModule1;
 begin
-   dao := TDataModule1.Create(nil);
-   dao.Source.DataSet := dao.fRetornaQuery(prSQL);
+
+   DataModule1.Source.DataSet := DataModule1.fRetornaQuery(prSQL);
 end;
 
 end.

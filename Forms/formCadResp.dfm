@@ -236,6 +236,8 @@ object frmCadResp: TfrmCadResp
     Color = 13828057
     ParentBackground = False
     TabOrder = 1
+    ExplicitLeft = 532
+    ExplicitTop = -4
     object Panel4: TPanel
       Left = 31
       Top = 18
@@ -776,6 +778,7 @@ object frmCadResp: TfrmCadResp
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
+        OnClick = sbExcluirClick
         ExplicitLeft = 32
         ExplicitTop = 3
         ExplicitWidth = 128

@@ -11,7 +11,8 @@ object DataModule1: TDataModule1
       'Password=root'
       'Server=localhost'
       'DriverID=MySQL')
-    Connected = True
+    UpdateOptions.AssignedValues = [uvAutoCommitUpdates]
+    UpdateOptions.AutoCommitUpdates = True
     LoginPrompt = False
     Transaction = Transaction
     Left = 32
@@ -19,7 +20,6 @@ object DataModule1: TDataModule1
   end
   object Query: TFDQuery
     Connection = Conexao
-    Transaction = Transaction
     SQL.Strings = (
       'Select * from TCADRESP;')
     Left = 296
