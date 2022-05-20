@@ -66,6 +66,7 @@ object frmEditResp: TfrmEditResp
       LabelPosition = lpLeft
       ParentFont = False
       TabOrder = 1
+      OnChange = edtBuscaChange
     end
   end
 end

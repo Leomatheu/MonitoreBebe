@@ -80,9 +80,12 @@ begin
 end;
 
 procedure TfrmCadResp.sbConsultarClick(Sender: TObject);
+var
+  controller : TController;
 begin
    frmEditResp := TfrmEditResp.Create(nil);
-   frmEditResp.pCarregaDBGrid('select * from monitorebebe.TCADRESP;');
+   controller := TController.Create;
+   controller.pPopulaDBGrid('select * from monitorebebe.TCADRESP;');
    frmEditResp.Caption := 'EDIÇÃO DE RESPONSÁVEIS';
    frmEditResp.edtBusca.EditLabel.Caption := 'Busque pelo responsável';
    frmEditResp.Tag := 1;

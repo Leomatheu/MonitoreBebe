@@ -14,10 +14,11 @@ type
     edtBusca: TLabeledEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure DBGrid1CellClick(Column: TColumn);
+    procedure edtBuscaChange(Sender: TObject);
   private
     { Private declarations }
   public
-    procedure pCarregaDBGrid(prSQL : String);
+
   end;
 
 var
@@ -29,7 +30,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uDao, formCadResp;
+  formCadResp, uController;
 
 { TfrmEditResp }
 
@@ -65,6 +66,15 @@ begin
 
 end;
 
+procedure TfrmEditResp.edtBuscaChange(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pPopulaDBGrid('select * from TCADRESP where nomeResponsavel like %:nome%;');
+
+end;
+
 procedure TfrmEditResp.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   if not (frmCadResp.edtNome.Text = '') then
@@ -74,10 +84,6 @@ begin
      end;
 end;
 
-procedure TfrmEditResp.pCarregaDBGrid(prSQL: String);
-begin
 
-   DataModule1.Source.DataSet := DataModule1.fRetornaQuery(prSQL);
-end;
 
 end.

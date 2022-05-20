@@ -14,6 +14,7 @@ uses
         procedure pMessage(prCaption : String; prColor : integer; prLabel : String; prFoto : String);
         procedure pExcluiResponsavel;
         procedure pLimpaTelaResp;
+        procedure pPopulaDBGrid(prSQL : String);
 
   end;
 
@@ -102,7 +103,7 @@ begin
 
       if (Dao.pAlteraResponsavel(objResp)) then
          begin
-           self.pMessage('ALTERAÇÃO DE RESPONSÁVEL REALIZADA', $00D2FFD9, 'Alteração de responsável realizada com sucesso !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp')
+           self.pMessage('ALTERAÇÃO DE RESPONSÁVEL REALIZADA', $00D2FFD9, 'Alteração de responsável realizada com sucesso !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp');
            self.pLimpaTelaResp;
          end
       else
@@ -138,7 +139,8 @@ begin
   frmCadResp.edtDataNasc.Clear;
   frmCadResp.edtCodigo.Clear;
   frmCadResp.edtCodigo.Visible := false;
-  frmCadResp.mmObservacao.Lines := '';
+  frmCadResp.mmObservacao.Lines.Clear;
+  frmCadResp.imgCadResp.Picture.LoadFromFile('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\fotoPerfil.jpg');
 end;
 
 procedure TController.pMessage(prCaption : String; prColor : integer; prLabel : String; prFoto : String);
@@ -150,6 +152,11 @@ begin
   frmMessage.lbMessage.Caption := prLabel;
   frmMessage.imgMessage.Picture.LoadFromFile(prFoto);
   frmMessage.ShowModal;
+end;
+
+procedure TController.pPopulaDBGrid(prSQL : String);
+begin
+  DataModule1.Source.DataSet := DataModule1.fRetornaQuery(prSQL);
 end;
 
 end.
