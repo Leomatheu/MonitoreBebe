@@ -3,7 +3,8 @@ unit uController;
 interface
 
 uses
-   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage, uCariaca, formCadCrianca;
+   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage, uCrianca,
+   formCadCrianca, Vcl.StdCtrls;
 
   type TController = class
 
@@ -15,8 +16,11 @@ uses
         procedure pExcluiResponsavel;
         procedure pLimpaTelaResp;
         procedure pPopulaDBGrid(prSQL : String);
+        procedure pPopulaComboBox(prComboBox : TComboBox);
 
   end;
+var
+  Controller : TController;
 
 implementation
 
@@ -93,9 +97,16 @@ begin
   if not (frmCadResp.Tag = 1) then
      begin
        if (Dao.pInsertResponsavel(objResp)) then
-         self.pMessage('INSERÇÃO DE RESPONSÁVEL REALIZADA', $00D2FFD9, 'Inserção de responsável realizada com sucesso !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp')
+         begin
+          self.pMessage('INSERÇÃO DE RESPONSÁVEL REALIZADA', $00D2FFD9, 'Inserção de responsável realizada com sucesso !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp');
+          self.pLimpaTelaResp;
+         end
        else
-         self.pMessage('FALHA NA INSERÇÃO DE RESPONSÁVEL', $009F9FFF, 'Falha na inserção de responsável verifique os dados !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\negado.bmp');
+         begin
+          self.pMessage('FALHA NA INSERÇÃO DE RESPONSÁVEL', $009F9FFF, 'Falha na inserção de responsável verifique os dados !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\negado.bmp');
+          self.pLimpaTelaResp;
+         end;
+
      end
   else
      begin
@@ -118,9 +129,16 @@ end;
 procedure TController.pExcluiResponsavel;
 begin
    if (DataModule1.fDeleteResponsavel(StrToInt(frmCadResp.edtCodigo.Text))) then
-      self.pMessage('RESPONSÁVAL EXCLUÍDO', $00D2FFD9, 'Exclusão de responsável realizada com sucesso !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp')
+     begin
+      self.pMessage('RESPONSÁVAL EXCLUÍDO', $00D2FFD9, 'Exclusão de responsável realizada com sucesso !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp');
+      self.pLimpaTelaResp;
+     end
    else
+     begin
       self.pMessage('FALHA NA EXCLUSÃO DE RESPONSÁVEL', $009F9FFF, 'Falha na exclusão de responsável, verifique os dados !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\negado.bmp');
+      self.pLimpaTelaResp;
+     end;
+
 end;
 
 procedure TController.pLimpaTelaResp;
@@ -141,6 +159,7 @@ begin
   frmCadResp.edtCodigo.Visible := false;
   frmCadResp.mmObservacao.Lines.Clear;
   frmCadResp.imgCadResp.Picture.LoadFromFile('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\fotoPerfil.jpg');
+  frmCadResp.sbExcluir.Enabled := false;
 end;
 
 procedure TController.pMessage(prCaption : String; prColor : integer; prLabel : String; prFoto : String);
@@ -152,6 +171,20 @@ begin
   frmMessage.lbMessage.Caption := prLabel;
   frmMessage.imgMessage.Picture.LoadFromFile(prFoto);
   frmMessage.ShowModal;
+end;
+
+procedure TController.pPopulaComboBox(prComboBox: TComboBox);
+var
+  lista : Tlist;
+  i : integer;
+begin
+  lista := TList.Create;
+  lista := DataModule1.fSelectResponsavel;
+
+  for i := 0 to lista.Count -1 do
+     begin
+        prComboBox.AddItem(IntToStr(TResponsavel(lista.Items[i]).getIdResponsavel)+ ' - ' +TResponsavel(lista.Items[i]).getNomeResponsavel, lista[i]);
+     end;
 end;
 
 procedure TController.pPopulaDBGrid(prSQL : String);

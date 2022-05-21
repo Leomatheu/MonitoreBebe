@@ -9,7 +9,7 @@ uses
   uDao in '..\BD\uDao.pas' {DataModule1: TDataModule},
   formMessage in '..\Forms\formMessage.pas' {frmMessage},
   formEditResp in '..\Forms\formEditResp.pas' {frmEditResp},
-  uCariaca in '..\Units\uCariaca.pas',
+  uCrianca in '..\Units\uCrianca.pas',
   formCadCrianca in '..\Forms\formCadCrianca.pas' {frmCadCrianca};
 
 {$R *.res}
@@ -18,6 +18,7 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   DataModule1 := TDataModule1.Create(nil);
+  Controller := TController.Create;
   Application.CreateForm(TfrmMenu, frmMenu);
   Application.CreateForm(TfrmCadCrianca, frmCadCrianca);
   Application.Run;

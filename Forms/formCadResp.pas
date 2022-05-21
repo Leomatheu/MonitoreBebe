@@ -86,6 +86,7 @@ begin
    frmEditResp := TfrmEditResp.Create(nil);
    controller := TController.Create;
    controller.pPopulaDBGrid('select * from monitorebebe.TCADRESP;');
+
    frmEditResp.Caption := 'EDIÇÃO DE RESPONSÁVEIS';
    frmEditResp.edtBusca.EditLabel.Caption := 'Busque pelo responsável';
    frmEditResp.Tag := 1;

@@ -3,7 +3,7 @@ object frmCadCrianca: TfrmCadCrianca
   Top = 0
   BorderStyle = bsDialog
   Caption = 'CADASTRO DE CRIAN'#199'A'
-  ClientHeight = 757
+  ClientHeight = 793
   ClientWidth = 718
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,14 +20,14 @@ object frmCadCrianca: TfrmCadCrianca
     Left = 526
     Top = 0
     Width = 192
-    Height = 757
+    Height = 793
     Align = alRight
     Caption = 'Panel1'
     Color = 16710091
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitLeft = 532
+    ExplicitHeight = 757
     object Panel4: TPanel
       Left = 28
       Top = 21
@@ -606,14 +606,14 @@ object frmCadCrianca: TfrmCadCrianca
     Left = 0
     Top = 0
     Width = 526
-    Height = 757
+    Height = 793
     Align = alClient
     Caption = 'Data Nascimento'
     Color = 16710091
     ParentBackground = False
     ShowCaption = False
     TabOrder = 1
-    ExplicitLeft = -6
+    ExplicitHeight = 757
     object Label1: TLabel
       Left = 304
       Top = 86
@@ -668,7 +668,7 @@ object frmCadCrianca: TfrmCadCrianca
     end
     object Label5: TLabel
       Left = 32
-      Top = 478
+      Top = 472
       Width = 120
       Height = 15
       Caption = '1'#186' Respons'#225'vel '
@@ -680,8 +680,8 @@ object frmCadCrianca: TfrmCadCrianca
       ParentFont = False
     end
     object Label6: TLabel
-      Left = 304
-      Top = 478
+      Left = 32
+      Top = 534
       Width = 112
       Height = 15
       Caption = '2'#186' Respons'#225'vel'
@@ -694,7 +694,7 @@ object frmCadCrianca: TfrmCadCrianca
     end
     object Label7: TLabel
       Left = 32
-      Top = 614
+      Top = 651
       Width = 88
       Height = 15
       Caption = 'Observa'#231#245'es'
@@ -879,9 +879,9 @@ object frmCadCrianca: TfrmCadCrianca
       Text = '  ,    kg'
     end
     object cbResp2: TComboBox
-      Left = 304
-      Top = 496
-      Width = 196
+      Left = 32
+      Top = 552
+      Width = 468
       Height = 23
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -894,7 +894,7 @@ object frmCadCrianca: TfrmCadCrianca
     end
     object mmObservacoes: TMemo
       Left = 32
-      Top = 632
+      Top = 672
       Width = 468
       Height = 102
       Lines.Strings = (
@@ -903,8 +903,8 @@ object frmCadCrianca: TfrmCadCrianca
     end
     object cbResp1: TComboBox
       Left = 32
-      Top = 496
-      Width = 196
+      Top = 489
+      Width = 468
       Height = 23
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -914,10 +914,11 @@ object frmCadCrianca: TfrmCadCrianca
       ParentFont = False
       TabOrder = 10
       Text = 'Selecione...'
+      OnChange = cbResp1Change
     end
     object LabeledEdit1: TLabeledEdit
-      Left = 31
-      Top = 562
+      Left = 32
+      Top = 614
       Width = 121
       Height = 23
       EditLabel.Width = 48

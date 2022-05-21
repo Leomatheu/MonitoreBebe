@@ -20,6 +20,7 @@ endResponsavel varchar(50),
 foto mediumblob
 );
 
+select * from tcadresp where nomeResponsavel like "%res%";
 select * from monitorebebe.TCADRESP;
 select * from monitorebebe.TCADRESP where nomeResponsavel like "a%";
 
@@ -36,6 +37,7 @@ nomePai varchar(50),
 nomeMae varchar(50),
 responsavel1 int,
 responsavel2 int,
+foto mediumblob,
 foreign key  (responsavel1) references TCADRESP(idResponsavel) on delete restrict,
 foreign key (responsavel2) references TCADRESP(idResponsavel) on delete restrict
 );

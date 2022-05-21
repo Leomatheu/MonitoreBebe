@@ -45,6 +45,7 @@ type
     sbFoto: TSpeedButton;
     procedure sbFotoClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure cbResp1Change(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,12 +56,23 @@ var
   frmCadCrianca: TfrmCadCrianca;
 
 implementation
+uses
+   uController, uResponsavel;
 
 {$R *.dfm}
+
+procedure TfrmCadCrianca.cbResp1Change(Sender: TObject);
+begin
+   self.cbResp2.Enabled := true;
+   Controller.pPopulaComboBox(self.cbResp2);
+
+end;
 
 procedure TfrmCadCrianca.FormActivate(Sender: TObject);
 begin
    self.sbExcluir.Enabled := false;
+   self.cbResp2.Enabled := false;
+   Controller.pPopulaComboBox(self.cbResp1);
 end;
 
 procedure TfrmCadCrianca.sbFotoClick(Sender: TObject);

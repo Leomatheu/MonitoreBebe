@@ -12,7 +12,6 @@ type
     Panel1: TPanel;
     DBGrid1: TDBGrid;
     edtBusca: TLabeledEdit;
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure DBGrid1CellClick(Column: TColumn);
     procedure edtBuscaChange(Sender: TObject);
   private
@@ -71,19 +70,10 @@ var
   controller : TController;
 begin
   controller := TController.Create;
-  controller.pPopulaDBGrid('select * from TCADRESP where nomeResponsavel like %:nome%;');
+
+  if (self.tag = 1) then
+     controller.pPopulaDBGrid('select * from TCADRESP where nomeResponsavel like "%'+Self.edtBusca.Text+'%";');
 
 end;
-
-procedure TfrmEditResp.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  if not (frmCadResp.edtNome.Text = '') then
-     begin
-       frmCadResp.sbExcluir.Enabled := true;
-       frmCadResp.edtCodigo.Visible := true;
-     end;
-end;
-
-
 
 end.

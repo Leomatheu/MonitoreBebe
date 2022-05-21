@@ -123,7 +123,7 @@
             <Form>frmEditResp</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\Units\uCariaca.pas"/>
+        <DCCReference Include="..\Units\uCrianca.pas"/>
         <DCCReference Include="..\Forms\formCadCrianca.pas">
             <Form>frmCadCrianca</Form>
             <FormType>dfm</FormType>

@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, uResponsavel;
+  FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls; 
 
 type
   TDataModule1 = class(TDataModule)
@@ -25,6 +25,7 @@ type
     function pInsertResponsavel(prObjResponsavel : TResponsavel):Boolean;
     function pAlteraResponsavel(prObjResponsavel : TResponsavel):Boolean;
     function fDeleteResponsavel(prId : integer):Boolean;
+    function fSelectResponsavel: Tlist;
     function fRetornaQuery(prSQL : String) : TFDQuery;
   end;
 
@@ -32,6 +33,8 @@ var
   DataModule1: TDataModule1;
 
 implementation
+Uses
+   uCrianca;
 
 {$R *.dfm}
 
@@ -74,6 +77,61 @@ begin
    result.Connection := data.Conexao;
    result.SQL.Add(prSQL);
    result.Open;
+end;
+
+function TDataModule1.fSelectResponsavel: Tlist;
+var
+  stream : TStream;
+  foto : TImage;
+  lista : TList;
+  objResp : TResponsavel;
+  query : TFDQuery;
+begin
+  query := Self.Query.Create(nil);
+  Self.Query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add('Select * from TCADRESP;');
+
+  try
+     query.Open;
+     query.First;
+     lista := TList.Create;
+
+     while not (Query.Eof) do
+       begin
+         objResp := TResponsavel.Create;
+
+         objResp.setIdResponsavel(query.Fields[0].AsInteger);
+         objResp.setNomeResponsavel(query.Fields[1].AsString);
+         objResp.setCpfResponsavel(query.Fields[2].AsString);
+         objResp.setEmailResponsavel(query.Fields[3].AsString);
+         objResp.setDataNascimento(query.Fields[4].AsString);
+         objResp.setTelefoneResidencia(query.Fields[5].AsString);
+         objResp.setTelefoneCelular(query.Fields[6].AsString);
+         objResp.setRendaMensal(query.Fields[7].AsFloat);
+         objResp.setCepResponsavel(query.Fields[8].AsString);
+         objResp.setEstadoResponsavel(query.Fields[9].AsString);
+         objResp.setCidadeResponsavel(query.Fields[10].AsString);
+         objResp.setBairroResponsavel(query.Fields[11].AsString);
+         objResp.setEndereco(query.Fields[12].AsString);
+         objResp.setObservacoes(query.Fields[13].AsString);
+         stream := query.CreateBlobStream(query.Fields[14], bmRead);
+         foto := Timage.Create(nil);
+         foto.Picture.LoadFromStream(stream);
+         objResp.setFoto(foto);
+
+         lista.Add(objResp);
+         Query.Next;       
+       end;
+
+     result := lista;
+  Except
+     on e: Exception do 
+       e.ToString;
+  end;
+
+  query.Close;
+  query.Free;
 end;
 
 function TDataModule1.pAlteraResponsavel(prObjResponsavel: TResponsavel): Boolean;
