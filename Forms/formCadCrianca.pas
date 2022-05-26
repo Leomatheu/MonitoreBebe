@@ -46,6 +46,7 @@ type
     procedure sbFotoClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure cbResp1Change(Sender: TObject);
+    procedure sbSalvarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -76,12 +77,24 @@ begin
 end;
 
 procedure TfrmCadCrianca.sbFotoClick(Sender: TObject);
+var
+  controller : TController;
 begin
+  controller := TController.Create;
+
   if (OpenPictureDialog1.Execute) then
      begin
        imgCadCri.Picture.LoadFromFile(OpenPictureDialog1.FileName);
-       imgCadCri.Picture.SaveToFile('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Foto.Jpeg');
+       imgCadCri.Picture.SaveToFile(controller.fRetornaDirFoto);
      end;
+end;
+
+procedure TfrmCadCrianca.sbSalvarClick(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pCadCrianca;
 end;
 
 end.

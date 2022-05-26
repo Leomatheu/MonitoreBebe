@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls; 
+  FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca;
 
 type
   TDataModule1 = class(TDataModule)
@@ -26,15 +26,18 @@ type
     function pAlteraResponsavel(prObjResponsavel : TResponsavel):Boolean;
     function fDeleteResponsavel(prId : integer):Boolean;
     function fSelectResponsavel: Tlist;
+
     function fRetornaQuery(prSQL : String) : TFDQuery;
+
+    function fInsertCrianca(prObjCrianca : TCrianca):Boolean;
   end;
 
 var
   DataModule1: TDataModule1;
 
 implementation
-Uses
-   uCrianca;
+
+
 
 {$R *.dfm}
 
@@ -68,6 +71,43 @@ begin
    end;
 end;
 
+function TDataModule1.fInsertCrianca(prObjCrianca: TCrianca): Boolean;
+var
+   query : TFDQuery;
+   foto : TStream;
+   data : TDataModule1;
+begin
+  query := TFDQuery.Create(nil);
+  data := TDataModule1.Create(nil);
+  query.Connection := data.Conexao;
+
+  query.SQL.Add('insert into TCADCRI values (0, :nome, :dataNasc, :cpf, :observacoes, :sexo, :hospNasc, :pesoNasc, :pai, :mae, :respUm, :respDois, :foto);');
+
+  query.Params[0].AsString := prObjCrianca.getNomeCrianca;
+  query.Params[1].AsString := prObjCrianca.getDataNascimento;
+  query.Params[2].AsString := prObjCrianca.getCpfCrianca;
+  query.Params[3].AsString := prObjCrianca.getObservacoes;
+  query.Params[4].AsString := prObjCrianca.getSexo;
+  query.Params[5].AsString := prObjCrianca.getHospNascimento;
+  query.Params[6].AsString := prObjCrianca.getPesoNascimento;
+  query.Params[7].AsString := prObjCrianca.getNomePai;
+  query.Params[8].AsString := prObjCrianca.getNomeMae;
+  query.Params[9].AsInteger := prObjCrianca.getResponsavel1;
+  query.Params[10].AsInteger := prObjCrianca.getResponsavel2;
+
+  foto := TFileStream.Create('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Foto.Jpeg', fmOpenRead);
+
+  query.Params[11].LoadFromStream(foto, ftBlob);
+
+  try
+     query.ExecSQL;
+     result := true;
+  Except
+     on e: Exception do
+       result := false;
+  end;
+end;
+
 function TDataModule1.fRetornaQuery(prSQL: String): TFDQuery;
 var
    data : TDataModule1;
@@ -87,8 +127,8 @@ var
   objResp : TResponsavel;
   query : TFDQuery;
 begin
-  query := Self.Query.Create(nil);
-  Self.Query.Connection := DataModule1.Conexao;
+  query := TFDQuery.Create(Nil);
+  query.Connection := DataModule1.Conexao;
 
   query.SQL.Add('Select * from TCADRESP;');
 
@@ -167,7 +207,7 @@ begin
   query.Params[14].AsInteger := prObjResponsavel.getIdResponsavel;
 
 
-    try
+  try
      query.ExecSQL;
      result := true;
   Except

@@ -27,7 +27,6 @@ object frmCadCrianca: TfrmCadCrianca
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitHeight = 757
     object Panel4: TPanel
       Left = 28
       Top = 21
@@ -567,10 +566,8 @@ object frmCadCrianca: TfrmCadCrianca
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 72
-        ExplicitTop = 8
-        ExplicitWidth = 23
-        ExplicitHeight = 22
+        OnClick = sbSalvarClick
+        ExplicitTop = 0
       end
     end
     object Panel8: TPanel
@@ -613,7 +610,6 @@ object frmCadCrianca: TfrmCadCrianca
     ParentBackground = False
     ShowCaption = False
     TabOrder = 1
-    ExplicitHeight = 757
     object Label1: TLabel
       Left = 304
       Top = 86
@@ -880,7 +876,7 @@ object frmCadCrianca: TfrmCadCrianca
     end
     object cbResp2: TComboBox
       Left = 32
-      Top = 552
+      Top = 553
       Width = 468
       Height = 23
       Font.Charset = DEFAULT_CHARSET
