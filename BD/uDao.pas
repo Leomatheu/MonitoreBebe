@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca;
+  FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, uAlimentacao;
 
 type
   TDataModule1 = class(TDataModule)
@@ -23,9 +23,11 @@ type
     { Private declarations }
   public
     function pInsertResponsavel(prObjResponsavel : TResponsavel):Boolean;
+    function fInsertAlimentacao(prObjAlimentacao : TAlimentacao) : Boolean;
     function pAlteraResponsavel(prObjResponsavel : TResponsavel):Boolean;
     function fDeleteResponsavel(prId : integer):Boolean;
     function fSelectResponsavel: Tlist;
+
 
     function fRetornaQuery(prSQL : String) : TFDQuery;
 
@@ -157,7 +159,7 @@ begin
          objResp.setObservacoes(query.Fields[13].AsString);
          stream := query.CreateBlobStream(query.Fields[14], bmRead);
          foto := Timage.Create(nil);
-         foto.Picture.LoadFromStream(stream);
+         //foto.Picture.LoadFromStream(stream);
          objResp.setFoto(foto);
 
          lista.Add(objResp);
@@ -217,6 +219,34 @@ begin
 
     query.Close;
     query.Free;
+
+end;
+
+function TDataModule1.fInsertAlimentacao(prObjAlimentacao: TAlimentacao): Boolean;
+var
+    query : TFDQuery;
+    data : TDataModule1;
+begin
+    query := TFDQuery.Create(nil);
+    data := TDataModule1.Create(nil);
+    query.Connection := data.Conexao;
+
+    query.SQL.Add('insert into TCONALIM values (0, :data, :hora, :quantidade, :observacoes, :acompanhante, idCrianca;');
+
+    query.Params[0].AsString :=  prObjAlimentacao.getData;
+    query.Params[1].AsString := prObjAlimentacao.getHora;
+    query.Params[2].AsString := prObjAlimentacao.getQuantidade;
+    query.Params[3].AsString := prObjAlimentacao.getObservacoes;
+    query.Params[4].AsString := prObjAlimentacao.getAcompanhante;
+    query.Params[5].AsInteger := prObjAlimentacao.getIdCrianca;
+
+    try
+      query.ExecSQL;
+      result := true;
+
+    except on E: Exception do
+      result := false;
+    end;
 
 end;
 

@@ -23,7 +23,7 @@ Uses
 
     public
        procedure setIdCrianca(idCrianca : integer);
-       function  getIdCrianca: integer;
+       function  getIdCrianca : integer;
 
        procedure setNomeCrianca(nomeCrianca : String);
        function  getNomeCrianca : string;

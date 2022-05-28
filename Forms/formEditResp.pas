@@ -57,7 +57,7 @@ begin
       frmCadResp.edtEndereco.Text := self.DBGrid1.Fields[13].Value;
       frmCadResp.edtCodigo.Text := self.DBGrid1.Fields[0].Value;
       foto := self.DBGrid1.DataSource.DataSet.CreateBlobStream(self.DBGrid1.Fields[14], bmRead);
-      frmCadResp.imgCadResp.Picture.LoadFromStream(foto);
+      //frmCadResp.imgCadResp.Picture.LoadFromStream(foto);
       frmCadResp.Tag := 1;
     end;
 

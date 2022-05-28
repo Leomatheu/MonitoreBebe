@@ -27,9 +27,8 @@ object DataModule1: TDataModule1
   end
   object DriverConexao: TFDPhysMySQLDriverLink
     VendorLib = 
-      'C:\Users\progvisual33\Documents\Pessoal\Exerc'#237'cios Aula\PZIMexer' +
-      'cicio\DELPHI\MonitoreBebe\MonitoreBebe\Project\Win32\Debug\libmy' +
-      'sql.dll'
+      'C:\Users\jessica.pinto\Documents\GitHub\MonitoreBebe\Project\lib' +
+      'mysql.dll'
     Left = 208
     Top = 16
   end

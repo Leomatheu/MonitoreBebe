@@ -4,8 +4,7 @@ interface
 
 uses
   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage,
-  uCrianca,
-  formCadCrianca, Vcl.StdCtrls, Vcl.Forms;
+  uCrianca, formCadCrianca, Vcl.StdCtrls, Vcl.Forms, formAlimentacao, uAlimentacao;
 
 type
   TController = class
@@ -13,10 +12,10 @@ type
   public
     procedure pCadResponsavel;
     procedure pCadCrianca;
+    procedure pAlimentacao;
     function fTiraPonto(prText: String): String;
     function fRetornaDirFoto: String;
-    procedure pMessage(prCaption: String; prColor: integer; prLabel: String;
-      prFoto: String);
+    procedure pMessage(prCaption: String; prColor: integer; prLabel: String; prFoto: String);
     procedure pExcluiResponsavel;
     procedure pLimpaTelaResp;
     procedure pPopulaDBGrid(prSQL: String);
@@ -56,6 +55,35 @@ begin
   end;
 
   result := prText;
+end;
+
+procedure TController.pAlimentacao;
+var
+    Dao: TDataModule1;
+    objAlimentacao: TAlimentacao;
+begin
+    Dao := DataModule1.Create(nil);
+    objAlimentacao := TAlimentacao.Create;
+
+    objAlimentacao.setData(frmAlimentacao.edtData.Text);
+    objAlimentacao.setHora(frmAlimentacao.edtHora.Text);
+
+    if (frmAlimentacao.rbPouquissimo.Checked) then
+      objAlimentacao.setQuantidade(frmAlimentacao.rbPouquissimo.Caption)
+    else
+        if (frmAlimentacao.rbPouco.Checked) then
+          objAlimentacao.setQuantidade(frmAlimentacao.rbPouco.Caption)
+        else
+          if frmAlimentacao.rbNormal.Checked then
+            objAlimentacao.setQuantidade(frmAlimentacao.rbNormal.Caption)
+          else
+            objAlimentacao.setQuantidade(frmAlimentacao.rbBastante.Caption);
+
+    objAlimentacao.setObservacoes(frmAlimentacao.mmObservacoes.text);
+    objAlimentacao.setAcompanhante(frmAlimentacao.edtAcompanhante.Text);
+    objAlimentacao.setIdCrianca(TCrianca(frmAlimentacao.cbCrianca.Items.Objects[frmAlimentacao.cbCrianca.ItemIndex]).getIdCrianca);
+
+    Dao.fInsertAlimentacao(objAlimentacao);
 end;
 
 procedure TController.pCadCrianca;
