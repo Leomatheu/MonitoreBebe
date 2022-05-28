@@ -8,7 +8,11 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.DataSet,
+<<<<<<< Updated upstream
   FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, uAlimentacao;
+=======
+  FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, Vcl.Forms;
+>>>>>>> Stashed changes
 
 type
   TDataModule1 = class(TDataModule)
@@ -97,7 +101,7 @@ begin
   query.Params[9].AsInteger := prObjCrianca.getResponsavel1;
   query.Params[10].AsInteger := prObjCrianca.getResponsavel2;
 
-  foto := TFileStream.Create('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Foto.Jpeg', fmOpenRead);
+  foto := TFileStream.Create(ExtractFilePath(Application.Exename) + 'Foto.jpg', fmOpenRead);
 
   query.Params[11].LoadFromStream(foto, ftBlob);
 
@@ -203,7 +207,7 @@ begin
   query.Params[11].AsString := prObjResponsavel.getBairroResponsavel;
   query.Params[12].AsString := prObjResponsavel.getEndereco;
 
-  foto := TFileStream.Create('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Foto.Jpeg', fmOpenRead);
+  foto := TFileStream.Create(ExtractFilePath(Application.Exename) + 'Foto.jpg', fmOpenRead);
 
   query.Params[13].LoadFromStream(foto, ftBlob);
   query.Params[14].AsInteger := prObjResponsavel.getIdResponsavel;
@@ -276,7 +280,7 @@ begin
   query.Params[11].AsString := prObjResponsavel.getBairroResponsavel;
   query.Params[12].AsString := prObjResponsavel.getEndereco;
 
-  foto := TFileStream.Create('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Foto.Jpeg', fmOpenRead);
+  foto := TFileStream.Create(ExtractFilePath(Application.Exename) + 'Foto.jpg', fmOpenRead);
 
   query.Params[13].LoadFromStream(foto, ftBlob);
 

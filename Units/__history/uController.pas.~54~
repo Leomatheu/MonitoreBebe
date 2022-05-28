@@ -4,12 +4,8 @@ interface
 
 uses
   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage,
-<<<<<<< Updated upstream
-  uCrianca, formCadCrianca, Vcl.StdCtrls, Vcl.Forms, formAlimentacao, uAlimentacao;
-=======
   uCrianca,
   formCadCrianca, Vcl.StdCtrls, Vcl.Forms;
->>>>>>> Stashed changes
 
 type
   TController = class
@@ -17,21 +13,15 @@ type
   public
     procedure pCadResponsavel;
     procedure pCadCrianca;
-<<<<<<< Updated upstream
-    procedure pAlimentacao;
     function fTiraPonto(prText: String): String;
     function fRetornaDirFoto: String;
     procedure pMessage(prCaption: String; prColor: integer; prLabel: String; prFoto: String);
-=======
-    function fTiraPonto(prText: String): String;
-    function fRetornaDirFoto: String;
-    procedure pMessage(prCaption: String; prColor: integer; prLabel: String;
-      prFoto: String);
->>>>>>> Stashed changes
     procedure pExcluiResponsavel;
     procedure pLimpaTelaResp;
     procedure pPopulaDBGrid(prSQL: String);
     procedure pPopulaComboBox(prComboBox: TComboBox);
+    procedure plimpaTelaCri;
+
 
   end;
 
@@ -69,37 +59,6 @@ begin
   result := prText;
 end;
 
-<<<<<<< Updated upstream
-procedure TController.pAlimentacao;
-var
-    Dao: TDataModule1;
-    objAlimentacao: TAlimentacao;
-begin
-    Dao := DataModule1.Create(nil);
-    objAlimentacao := TAlimentacao.Create;
-
-    objAlimentacao.setData(frmAlimentacao.edtData.Text);
-    objAlimentacao.setHora(frmAlimentacao.edtHora.Text);
-
-    if (frmAlimentacao.rbPouquissimo.Checked) then
-      objAlimentacao.setQuantidade(frmAlimentacao.rbPouquissimo.Caption)
-    else
-        if (frmAlimentacao.rbPouco.Checked) then
-          objAlimentacao.setQuantidade(frmAlimentacao.rbPouco.Caption)
-        else
-          if frmAlimentacao.rbNormal.Checked then
-            objAlimentacao.setQuantidade(frmAlimentacao.rbNormal.Caption)
-          else
-            objAlimentacao.setQuantidade(frmAlimentacao.rbBastante.Caption);
-
-    objAlimentacao.setObservacoes(frmAlimentacao.mmObservacoes.text);
-    objAlimentacao.setAcompanhante(frmAlimentacao.edtAcompanhante.Text);
-    objAlimentacao.setIdCrianca(TCrianca(frmAlimentacao.cbCrianca.Items.Objects[frmAlimentacao.cbCrianca.ItemIndex]).getIdCrianca);
-
-end;
-
-=======
->>>>>>> Stashed changes
 procedure TController.pCadCrianca;
 var
   Dao: TDataModule1;
@@ -122,15 +81,20 @@ begin
   objCrianca.setNomePai(frmCadCrianca.edtNomePai.Text);
   objCrianca.setNomeMae(frmCadCrianca.edtNomeMae.Text);
   objCrianca.setResponsavel1(TResponsavel(frmCadCrianca.cbResp1.Items.Objects[frmCadCrianca.cbResp1.ItemIndex]).getIdResponsavel);
-<<<<<<< Updated upstream
-  objCrianca.setResponsavel1(TResponsavel(frmCadCrianca.cbResp2.Items.Objects[frmCadCrianca.cbResp2.ItemIndex]).getIdResponsavel);
-=======
   objCrianca.setResponsavel2(TResponsavel(frmCadCrianca.cbResp2.Items.Objects[frmCadCrianca.cbResp2.ItemIndex]).getIdResponsavel);
->>>>>>> Stashed changes
   objCrianca.setObservacoes(frmCadCrianca.mmObservacoes.Lines.Text);
   objCrianca.setFoto(frmCadCrianca.imgCadCri);
 
-  Dao.fInsertCrianca(objCrianca);
+  if (Dao.fInsertCrianca(objCrianca)) then
+     begin
+      self.pMessage('INSERÇÃO DE CRIANÇA REALIZADA', $00FEF9CB, 'Inserção de criança realizada com sucesso !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp');
+      self.plimpaTelaCri;
+     end
+  else
+    begin
+      self.pMessage('FALHA NA INSERÇÃO DA CRIANÇA', $009F9FFF, 'Falha na inserção da criança verifique os dados !!',' C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\negado.bmp');
+      self.plimpaTelaCri;
+    end;
 
 end;
 
@@ -206,6 +170,24 @@ begin
     self.pLimpaTelaResp;
   end;
 
+end;
+
+procedure TController.plimpaTelaCri;
+begin
+  frmCadCrianca.edtNome.Clear;
+  frmCadCrianca.edtCPF.Clear;
+  frmCadCrianca.edtDataNasc.Clear;
+  frmCadCrianca.ckMasculino.Checked := false;
+  frmCadCrianca.ckFeminino.Checked := false;
+  frmCadCrianca.edtHospNasc.Clear;
+  frmCadCrianca.edtPeso.Clear;
+  frmCadCrianca.edtNomePai.Clear;
+  frmCadCrianca.edtNomeMae.Clear;
+  frmCadCrianca.cbResp1.Text := '';
+  frmCadCrianca.cbResp2.Text := '';
+  frmCadCrianca.edtCodigo.Clear;
+  frmCadCrianca.mmObservacoes.Lines.Clear;
+  frmCadCrianca.imgCadCri.Picture.LoadFromFile('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\fotoPerfil.jpg');
 end;
 
 procedure TController.pLimpaTelaResp;

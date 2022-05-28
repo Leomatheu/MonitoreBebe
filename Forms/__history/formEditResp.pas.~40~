@@ -12,13 +12,12 @@ type
     Panel1: TPanel;
     DBGrid1: TDBGrid;
     edtBusca: TLabeledEdit;
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure edtBuscaChange(Sender: TObject);
     procedure DBGrid1CellClick(Column: TColumn);
+    procedure edtBuscaChange(Sender: TObject);
   private
     { Private declarations }
   public
-    procedure pCarregaDBGrid(prSQL : String);
+
   end;
 
 var
@@ -30,7 +29,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uDao, formCadResp;
+  formCadResp, uController, formCadCrianca;
 
 { TfrmEditResp }
 
@@ -62,41 +61,29 @@ begin
       frmCadResp.Tag := 1;
     end;
 
+    2:
+    begin
+
+
+
+
+
+
+    end;
+
    end;
 
 end;
 
 procedure TfrmEditResp.edtBuscaChange(Sender: TObject);
 var
-   data : TDataModule1;
+  controller : TController;
 begin
-  data := TDataModule1.Create(nil);
+  controller := TController.Create;
 
-  case self.Tag of
-    1 :
-    begin
-     self.pCarregaDBGrid('select * from monitorebebe.TCADRESP where nomeResponsavel like "'+self.edtBusca.text+'%";');
-    end;
+  if (self.tag = 1) then
+     controller.pPopulaDBGrid('select * from TCADRESP where nomeResponsavel like "%'+Self.edtBusca.Text+'%";');
 
-  end;
-
-  data.Free;
-end;
-
-procedure TfrmEditResp.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  if not (frmCadResp.edtNome.Text = '') then
-     begin
-       frmCadResp.sbExcluir.Enabled := true;
-       frmCadResp.edtCodigo.Visible := true;
-     end;
-end;
-
-procedure TfrmEditResp.pCarregaDBGrid(prSQL: String);
-begin
-   DataModule1.Conexao.Connected := false;
-   DataModule1.Conexao.Connected := true;
-   DataModule1.Source.DataSet := DataModule1.fRetornaQuery(prSQL);
 end;
 
 end.

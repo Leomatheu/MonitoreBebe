@@ -2,9 +2,9 @@ object frmCadCrianca: TfrmCadCrianca
   Left = 0
   Top = 0
   BorderStyle = bsDialog
-  Caption = 'frmCadCrianca'
-  ClientHeight = 704
-  ClientWidth = 737
+  Caption = 'CADASTRO DE CRIAN'#199'A'
+  ClientHeight = 793
+  ClientWidth = 718
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,28 +12,29 @@ object frmCadCrianca: TfrmCadCrianca
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
+  OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
-    Left = 551
+    Left = 526
     Top = 0
-    Width = 186
-    Height = 704
+    Width = 192
+    Height = 793
     Align = alRight
     Caption = 'Panel1'
     Color = 16710091
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitLeft = 568
     object Panel4: TPanel
-      Left = 31
-      Top = 18
+      Left = 28
+      Top = 21
       Width = 137
       Height = 163
       Caption = 'Panel4'
       TabOrder = 0
-      object Image1: TImage
+      object imgCadCri: TImage
         Left = 1
         Top = 1
         Width = 135
@@ -479,25 +480,136 @@ object frmCadCrianca: TfrmCadCrianca
           A085D264A9E8B7C6FCF31C305BE37E2A489827767E398E2898AF667E6BA23FA0
           7DF31F4C7F51FAA987FEC47C731CC3FF00623E6BFFD9}
         Stretch = True
-        ExplicitLeft = 48
-        ExplicitTop = 22
-        ExplicitWidth = 57
-        ExplicitHeight = 105
+        ExplicitLeft = -7
+        ExplicitTop = 33
+      end
+    end
+    object Panel5: TPanel
+      Left = 14
+      Top = 636
+      Width = 159
+      Height = 28
+      Caption = 'Panel5'
+      Color = 14869218
+      ParentBackground = False
+      TabOrder = 1
+      object sbConsultar: TSpeedButton
+        Left = 1
+        Top = 1
+        Width = 157
+        Height = 26
+        Align = alClient
+        Caption = 'Consultar'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Fixedsys'
+        Font.Style = []
+        ParentFont = False
+        ExplicitLeft = 88
+        ExplicitTop = 6
+        ExplicitWidth = 23
+        ExplicitHeight = 22
+      end
+    end
+    object Panel6: TPanel
+      Left = 14
+      Top = 672
+      Width = 159
+      Height = 28
+      Caption = 'Panel5'
+      Color = clRed
+      ParentBackground = False
+      ShowCaption = False
+      TabOrder = 2
+      object sbExcluir: TSpeedButton
+        Left = 1
+        Top = 1
+        Width = 157
+        Height = 26
+        Align = alClient
+        Caption = 'Excluir'
+        Flat = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Fixedsys'
+        Font.Style = []
+        ParentFont = False
+        ExplicitLeft = 72
+        ExplicitTop = 6
+        ExplicitWidth = 23
+        ExplicitHeight = 22
+      end
+    end
+    object Panel7: TPanel
+      Left = 14
+      Top = 706
+      Width = 159
+      Height = 28
+      Caption = 'Panel5'
+      Color = 317753
+      ParentBackground = False
+      ShowCaption = False
+      TabOrder = 3
+      object sbSalvar: TSpeedButton
+        Left = 1
+        Top = 1
+        Width = 157
+        Height = 26
+        Align = alClient
+        Caption = 'Salvar'
+        Flat = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Fixedsys'
+        Font.Style = []
+        ParentFont = False
+        OnClick = sbSalvarClick
+        ExplicitTop = 0
+      end
+    end
+    object Panel8: TPanel
+      Left = 61
+      Top = 190
+      Width = 73
+      Height = 21
+      Caption = 'Panel8'
+      Color = 14869218
+      ParentBackground = False
+      ShowCaption = False
+      TabOrder = 4
+      object sbFoto: TSpeedButton
+        Left = 1
+        Top = 1
+        Width = 71
+        Height = 19
+        Align = alClient
+        Caption = 'Foto'
+        Flat = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Fixedsys'
+        Font.Style = []
+        ParentFont = False
+        OnClick = sbFotoClick
+        ExplicitTop = 0
       end
     end
   end
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 551
-    Height = 704
+    Width = 526
+    Height = 793
     Align = alClient
     Caption = 'Data Nascimento'
     Color = 16710091
     ParentBackground = False
     ShowCaption = False
     TabOrder = 1
-    ExplicitWidth = 576
     object Label1: TLabel
       Left = 304
       Top = 86
@@ -552,7 +664,7 @@ object frmCadCrianca: TfrmCadCrianca
     end
     object Label5: TLabel
       Left = 32
-      Top = 478
+      Top = 472
       Width = 120
       Height = 15
       Caption = '1'#186' Respons'#225'vel '
@@ -564,8 +676,8 @@ object frmCadCrianca: TfrmCadCrianca
       ParentFont = False
     end
     object Label6: TLabel
-      Left = 298
-      Top = 478
+      Left = 32
+      Top = 534
       Width = 112
       Height = 15
       Caption = '2'#186' Respons'#225'vel'
@@ -578,7 +690,7 @@ object frmCadCrianca: TfrmCadCrianca
     end
     object Label7: TLabel
       Left = 32
-      Top = 539
+      Top = 651
       Width = 88
       Height = 15
       Caption = 'Observa'#231#245'es'
@@ -592,7 +704,7 @@ object frmCadCrianca: TfrmCadCrianca
     object edtNome: TLabeledEdit
       Left = 32
       Top = 40
-      Width = 497
+      Width = 468
       Height = 23
       EditLabel.Width = 96
       EditLabel.Height = 15
@@ -668,8 +780,8 @@ object frmCadCrianca: TfrmCadCrianca
     object Panel3: TPanel
       Left = 32
       Top = 168
-      Width = 497
-      Height = 81
+      Width = 468
+      Height = 83
       Caption = 'Panel3'
       ShowCaption = False
       TabOrder = 4
@@ -688,7 +800,7 @@ object frmCadCrianca: TfrmCadCrianca
         TabOrder = 0
       end
       object ckFeminino: TCheckBox
-        Left = 344
+        Left = 319
         Top = 32
         Width = 97
         Height = 17
@@ -705,7 +817,7 @@ object frmCadCrianca: TfrmCadCrianca
     object edtNomePai: TLabeledEdit
       Left = 32
       Top = 357
-      Width = 497
+      Width = 468
       Height = 23
       EditLabel.Width = 88
       EditLabel.Height = 15
@@ -727,7 +839,7 @@ object frmCadCrianca: TfrmCadCrianca
     object edtNomeMae: TLabeledEdit
       Left = 32
       Top = 427
-      Width = 497
+      Width = 468
       Height = 23
       EditLabel.Width = 88
       EditLabel.Height = 15
@@ -762,10 +874,10 @@ object frmCadCrianca: TfrmCadCrianca
       TabOrder = 7
       Text = '  ,    kg'
     end
-    object ComboBox1: TComboBox
+    object cbResp2: TComboBox
       Left = 32
-      Top = 496
-      Width = 231
+      Top = 553
+      Width = 468
       Height = 23
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -776,10 +888,19 @@ object frmCadCrianca: TfrmCadCrianca
       TabOrder = 8
       Text = 'Selecione...'
     end
-    object cbResp2: TComboBox
-      Left = 298
-      Top = 496
-      Width = 231
+    object mmObservacoes: TMemo
+      Left = 32
+      Top = 672
+      Width = 468
+      Height = 102
+      Lines.Strings = (
+        '')
+      TabOrder = 9
+    end
+    object cbResp1: TComboBox
+      Left = 32
+      Top = 489
+      Width = 468
       Height = 23
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -787,21 +908,36 @@ object frmCadCrianca: TfrmCadCrianca
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 9
-      Text = 'Selecione...'
-    end
-    object mmObservacoes: TMemo
-      Left = 32
-      Top = 557
-      Width = 497
-      Height = 121
-      Lines.Strings = (
-        '')
       TabOrder = 10
+      Text = 'Selecione...'
+      OnChange = cbResp1Change
+    end
+    object edtCodigo: TLabeledEdit
+      Left = 32
+      Top = 614
+      Width = 121
+      Height = 23
+      EditLabel.Width = 48
+      EditLabel.Height = 15
+      EditLabel.Caption = 'C'#243'digo'
+      EditLabel.Font.Charset = ANSI_CHARSET
+      EditLabel.Font.Color = clWindowText
+      EditLabel.Font.Height = -13
+      EditLabel.Font.Name = 'Fixedsys'
+      EditLabel.Font.Style = []
+      EditLabel.ParentFont = False
+      Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 11
     end
   end
   object OpenPictureDialog1: TOpenPictureDialog
-    Left = 696
-    Top = 664
+    Left = 640
+    Top = 80
   end
 end

@@ -20,6 +20,9 @@ type
     procedure pLimpaTelaResp;
     procedure pPopulaDBGrid(prSQL: String);
     procedure pPopulaComboBox(prComboBox: TComboBox);
+    procedure plimpaTelaCri;
+    procedure pSetaItemIndex(combox : TComboBox; index : integer; obj : TObject);
+
 
   end;
 
@@ -57,6 +60,7 @@ begin
   result := prText;
 end;
 
+<<<<<<< Updated upstream
 procedure TController.pAlimentacao;
 var
     Dao: TDataModule1;
@@ -86,6 +90,9 @@ begin
     Dao.fInsertAlimentacao(objAlimentacao);
 end;
 
+=======
+{Processos utilizados pela criança}
+>>>>>>> Stashed changes
 procedure TController.pCadCrianca;
 var
   Dao: TDataModule1;
@@ -108,14 +115,24 @@ begin
   objCrianca.setNomePai(frmCadCrianca.edtNomePai.Text);
   objCrianca.setNomeMae(frmCadCrianca.edtNomeMae.Text);
   objCrianca.setResponsavel1(TResponsavel(frmCadCrianca.cbResp1.Items.Objects[frmCadCrianca.cbResp1.ItemIndex]).getIdResponsavel);
-  objCrianca.setResponsavel1(TResponsavel(frmCadCrianca.cbResp2.Items.Objects[frmCadCrianca.cbResp2.ItemIndex]).getIdResponsavel);
+  objCrianca.setResponsavel2(TResponsavel(frmCadCrianca.cbResp2.Items.Objects[frmCadCrianca.cbResp2.ItemIndex]).getIdResponsavel);
   objCrianca.setObservacoes(frmCadCrianca.mmObservacoes.Lines.Text);
   objCrianca.setFoto(frmCadCrianca.imgCadCri);
 
-  Dao.fInsertCrianca(objCrianca);
+  if (Dao.fInsertCrianca(objCrianca)) then
+     begin
+      self.pMessage('INSERÇÃO DE CRIANÇA REALIZADA', $00FEF9CB, 'Inserção de criança realizada com sucesso !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp');
+      self.plimpaTelaCri;
+     end
+  else
+    begin
+      self.pMessage('FALHA NA INSERÇÃO DA CRIANÇA', $009F9FFF, 'Falha na inserção da criança verifique os dados !!',' C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\negado.bmp');
+      self.plimpaTelaCri;
+    end;
 
 end;
 
+{Processos utilizados pela pessoa}
 procedure TController.pCadResponsavel;
 var
   Dao: TDataModule1;
@@ -190,6 +207,24 @@ begin
 
 end;
 
+procedure TController.plimpaTelaCri;
+begin
+  frmCadCrianca.edtNome.Clear;
+  frmCadCrianca.edtCPF.Clear;
+  frmCadCrianca.edtDataNasc.Clear;
+  frmCadCrianca.ckMasculino.Checked := false;
+  frmCadCrianca.ckFeminino.Checked := false;
+  frmCadCrianca.edtHospNasc.Clear;
+  frmCadCrianca.edtPeso.Clear;
+  frmCadCrianca.edtNomePai.Clear;
+  frmCadCrianca.edtNomeMae.Clear;
+  frmCadCrianca.cbResp1.Text := '';
+  frmCadCrianca.cbResp2.Text := '';
+  frmCadCrianca.edtCodigo.Clear;
+  frmCadCrianca.mmObservacoes.Lines.Clear;
+  frmCadCrianca.imgCadCri.Picture.LoadFromFile('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\fotoPerfil.jpg');
+end;
+
 procedure TController.pLimpaTelaResp;
 begin
   frmCadResp.edtNome.Clear;
@@ -242,6 +277,14 @@ end;
 procedure TController.pPopulaDBGrid(prSQL: String);
 begin
   DataModule1.Source.DataSet := DataModule1.fRetornaQuery(prSQL);
+end;
+
+procedure TController.pSetaItemIndex(combox : TComboBox; index : integer; obj : TObject);
+var
+   i : integer;
+begin
+  for i := 0 to combox.GetCount do
+
 end;
 
 end.

@@ -8,15 +8,7 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.DataSet,
-<<<<<<< Updated upstream
   FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca;
-=======
-<<<<<<< Updated upstream:BD/__history/uDao.pas.~38~
-  FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, uAlimentacao;
-=======
-  FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca;
->>>>>>> Stashed changes:BD/__history/uDao.pas.~37~
->>>>>>> Stashed changes
 
 type
   TDataModule1 = class(TDataModule)
@@ -31,21 +23,10 @@ type
     { Private declarations }
   public
     function pInsertResponsavel(prObjResponsavel : TResponsavel):Boolean;
-<<<<<<< Updated upstream
-=======
-    function pInsertAlimentacao(prObjAlimentacao : TAlimentacao) : Boolean;
->>>>>>> Stashed changes
     function pAlteraResponsavel(prObjResponsavel : TResponsavel):Boolean;
     function fDeleteResponsavel(prId : integer):Boolean;
     function fSelectResponsavel: Tlist;
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream:BD/__history/uDao.pas.~38~
-
-=======
->>>>>>> Stashed changes:BD/__history/uDao.pas.~37~
->>>>>>> Stashed changes
     function fRetornaQuery(prSQL : String) : TFDQuery;
 
     function fInsertCrianca(prObjCrianca : TCrianca):Boolean;
@@ -176,15 +157,7 @@ begin
          objResp.setObservacoes(query.Fields[13].AsString);
          stream := query.CreateBlobStream(query.Fields[14], bmRead);
          foto := Timage.Create(nil);
-<<<<<<< Updated upstream
          foto.Picture.LoadFromStream(stream);
-=======
-<<<<<<< Updated upstream:BD/__history/uDao.pas.~38~
-         //foto.Picture.LoadFromStream(stream);
-=======
-         foto.Picture.LoadFromStream(stream);
->>>>>>> Stashed changes:BD/__history/uDao.pas.~37~
->>>>>>> Stashed changes
          objResp.setFoto(foto);
 
          lista.Add(objResp);
@@ -247,37 +220,6 @@ begin
 
 end;
 
-<<<<<<< Updated upstream
-=======
-function TDataModule1.pInsertAlimentacao(prObjAlimentacao: TAlimentacao): Boolean;
-var
-    query : TFDQuery;
-    data : TDataModule1;
-begin
-    query := TFDQuery.Create(nil);
-    data := TDataModule1.Create(nil);
-    query.Connection := data.Conexao;
-
-    query.SQL.Add('insert into TCONALIM values (0, :data, :hora, :quantidade, :observacoes, :acompanhante, idCrianca;');
-
-    query.Params[0].AsString :=  prObjAlimentacao.getData;
-    query.Params[1].AsString := prObjAlimentacao.getHora;
-    query.Params[2].AsString := prObjAlimentacao.getQuantidade;
-    query.Params[3].AsString := prObjAlimentacao.getObservacoes;
-    query.Params[4].AsString := prObjAlimentacao.getAcompanhante;
-    query.Params[5].AsInteger := prObjAlimentacao.getIdCrianca;
-
-    try
-      query.ExecSQL;
-      result := true;
-
-    except on E: Exception do
-      result := false;
-    end;
-
-end;
-
->>>>>>> Stashed changes
 function TDataModule1.pInsertResponsavel(prObjResponsavel : TResponsavel):Boolean;
 var
    query : TFDQuery;

@@ -12,13 +12,12 @@ type
     Panel1: TPanel;
     DBGrid1: TDBGrid;
     edtBusca: TLabeledEdit;
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure edtBuscaChange(Sender: TObject);
     procedure DBGrid1CellClick(Column: TColumn);
+    procedure edtBuscaChange(Sender: TObject);
   private
     { Private declarations }
   public
-    procedure pCarregaDBGrid(prSQL : String);
+
   end;
 
 var
@@ -30,14 +29,16 @@ implementation
 {$R *.dfm}
 
 uses
-  uDao, formCadResp;
+  formCadResp, uController, formCadCrianca;
 
 { TfrmEditResp }
 
 procedure TfrmEditResp.DBGrid1CellClick(Column: TColumn);
 var
   foto : TStream;
+  controller : TController;
 begin
+   controller := TController.Create;
    self.Close;
 
    case self.Tag of
@@ -62,44 +63,51 @@ begin
       frmCadResp.Tag := 1;
     end;
 
-   end;
+    2:
+    begin
+      frmCadCrianca.edtNome.Text := self.DBGrid1.Fields[1].Value;
+      frmCadCrianca.edtDataNasc.Text := self.DBGrid1.Fields[2].Value;
+      frmCadCrianca.edtCPF.Text := self.DBGrid1.Fields[3].Value;
+      frmCadCrianca.mmObservacoes.Lines.Text := self.DBGrid1.Fields[4].Value;
+
+      if (self.DBGrid1.Fields[5].Value = 'Masculino') then
+         frmCadCrianca.ckMasculino.Checked := true
+      else
+        frmCadCrianca.ckFeminino.Checked := true;
+
+      frmCadCrianca.edtHospNasc.Text := self.DBGrid1.Fields[6].Value;
+      frmCadCrianca.edtPeso.Text := self.DBGrid1.Fields[7].Value;
+      frmCadCrianca.edtNomePai.Text := self.DBGrid1.Fields[8].Value;
+      frmCadCrianca.edtNomeMae.Text := self.DBGrid1.Fields[9].Value;
+      frmCadCrianca.cbResp2.Enabled := true;
+      controller.pPopulaComboBox(frmCadCrianca.cbResp2);
+      controller.pSetaItemIndex(frmCadCrianca.cbResp1, self.DBGrid1.Fields[10].value);
+
+
+    end;
+
+
+
+
+
+
+
+    end;
 
 end;
 
 procedure TfrmEditResp.edtBuscaChange(Sender: TObject);
 var
-   data : TDataModule1;
+  controller : TController;
 begin
-  data := TDataModule1.Create(nil);
+  controller := TController.Create;
 
-  case self.Tag of
-    1 :
-    begin
-     self.pCarregaDBGrid('select * from monitorebebe.TCADRESP where nomeResponsavel like "'+self.edtBusca.text+'%";');
-    end;
+  if (self.tag = 1) then
+     controller.pPopulaDBGrid('select * from TCADRESP where nomeResponsavel like "%'+Self.edtBusca.Text+'%";');
 
-  end;
+  if (self.tag = 2) then
+     controller.pPopulaDBGrid('select * from TCADCRI where nomeCrianca like "%'+Self.edtBusca.Text+'%";');
 
-  data.Free;
-end;
-
-procedure TfrmEditResp.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  if not (frmCadResp.edtNome.Text = '') then
-     begin
-       frmCadResp.sbExcluir.Enabled := true;
-       frmCadResp.edtCodigo.Visible := true;
-     end;
-end;
-
-procedure TfrmEditResp.pCarregaDBGrid(prSQL: String);
-//var
-   //dao : TDataModule1;
-begin
-   //dao := TDataModule1.Create(nil);
-   DataModule1.Conexao.Connected := false;
-   DataModule1.Conexao.Connected := true;
-   DataModule1.Source.DataSet := DataModule1.fRetornaQuery(prSQL);
 end;
 
 end.

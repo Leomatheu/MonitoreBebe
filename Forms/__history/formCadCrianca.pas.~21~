@@ -45,7 +45,8 @@ type
     sbFoto: TSpeedButton;
     procedure sbFotoClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
-    procedure pPopulaCombox;
+    procedure cbResp1Change(Sender: TObject);
+    procedure sbSalvarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -61,34 +62,39 @@ uses
 
 {$R *.dfm}
 
+procedure TfrmCadCrianca.cbResp1Change(Sender: TObject);
+begin
+   self.cbResp2.Enabled := true;
+   Controller.pPopulaComboBox(self.cbResp2);
+
+end;
+
 procedure TfrmCadCrianca.FormActivate(Sender: TObject);
 begin
    self.sbExcluir.Enabled := false;
-end;
-
-procedure TfrmCadCrianca.pPopulaCombox;
-var
-  lista : Tlist;
-  i : integer;
-begin
-  lista := TList.Create;
-  lista := controller.fBuscaListaResp;
-
-  for i := 0 to lista.Count -1 do
-     begin
-       self.cbResp1.AddItem(IntToStr(TResponsavel(lista.Items[i]).getIdResponsavel) + ' - ' +TResponsavel(lista.Items[i]).getNomeResponsavel);
-     end;
-
-
+   self.cbResp2.Enabled := false;
+   Controller.pPopulaComboBox(self.cbResp1);
 end;
 
 procedure TfrmCadCrianca.sbFotoClick(Sender: TObject);
+var
+  controller : TController;
 begin
+  controller := TController.Create;
+
   if (OpenPictureDialog1.Execute) then
      begin
        imgCadCri.Picture.LoadFromFile(OpenPictureDialog1.FileName);
-       imgCadCri.Picture.SaveToFile('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Foto.Jpeg');
+       imgCadCri.Picture.SaveToFile(controller.fRetornaDirFoto);
      end;
+end;
+
+procedure TfrmCadCrianca.sbSalvarClick(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pCadCrianca;
 end;
 
 end.

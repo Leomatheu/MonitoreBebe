@@ -40,13 +40,14 @@ type
     sbConsultar: TSpeedButton;
     sbExcluir: TSpeedButton;
     sbSalvar: TSpeedButton;
-    LabeledEdit1: TLabeledEdit;
+    edtCodigo: TLabeledEdit;
     Panel8: TPanel;
     sbFoto: TSpeedButton;
     procedure sbFotoClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure cbResp1Change(Sender: TObject);
     procedure sbSalvarClick(Sender: TObject);
+    procedure sbConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -58,7 +59,7 @@ var
 
 implementation
 uses
-   uController, uResponsavel;
+   uController, uResponsavel, formEditResp;
 
 {$R *.dfm}
 
@@ -74,6 +75,18 @@ begin
    self.sbExcluir.Enabled := false;
    self.cbResp2.Enabled := false;
    Controller.pPopulaComboBox(self.cbResp1);
+end;
+
+procedure TfrmCadCrianca.sbConsultarClick(Sender: TObject);
+begin
+  frmEditResp := TfrmEditResp.Create(nil);
+  controller := TController.Create;
+  controller.pPopulaDBGrid('select * from monitorebebe.TCADCRI;');
+
+  frmEditResp.Caption := 'EDIÇÃO DE CRIANÇAS';
+  frmEditResp.edtBusca.EditLabel.Caption := 'Busque pela criança';
+  frmEditResp.Tag := 2;
+  frmEditResp.ShowModal;
 end;
 
 procedure TfrmCadCrianca.sbFotoClick(Sender: TObject);

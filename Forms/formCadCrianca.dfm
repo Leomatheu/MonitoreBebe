@@ -506,6 +506,7 @@ object frmCadCrianca: TfrmCadCrianca
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
+        OnClick = sbConsultarClick
         ExplicitLeft = 88
         ExplicitTop = 6
         ExplicitWidth = 23
@@ -899,7 +900,7 @@ object frmCadCrianca: TfrmCadCrianca
     end
     object cbResp1: TComboBox
       Left = 32
-      Top = 489
+      Top = 490
       Width = 468
       Height = 23
       Font.Charset = DEFAULT_CHARSET
@@ -912,7 +913,7 @@ object frmCadCrianca: TfrmCadCrianca
       Text = 'Selecione...'
       OnChange = cbResp1Change
     end
-    object LabeledEdit1: TLabeledEdit
+    object edtCodigo: TLabeledEdit
       Left = 32
       Top = 614
       Width = 121

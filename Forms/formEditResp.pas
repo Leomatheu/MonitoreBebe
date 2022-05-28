@@ -29,14 +29,16 @@ implementation
 {$R *.dfm}
 
 uses
-  formCadResp, uController;
+  formCadResp, uController, formCadCrianca;
 
 { TfrmEditResp }
 
 procedure TfrmEditResp.DBGrid1CellClick(Column: TColumn);
 var
   foto : TStream;
+  controller : TController;
 begin
+   controller := TController.Create;
    self.Close;
 
    case self.Tag of
@@ -61,7 +63,37 @@ begin
       frmCadResp.Tag := 1;
     end;
 
-   end;
+    2:
+    begin
+      frmCadCrianca.edtNome.Text := self.DBGrid1.Fields[1].Value;
+      frmCadCrianca.edtDataNasc.Text := self.DBGrid1.Fields[2].Value;
+      frmCadCrianca.edtCPF.Text := self.DBGrid1.Fields[3].Value;
+      frmCadCrianca.mmObservacoes.Lines.Text := self.DBGrid1.Fields[4].Value;
+
+      if (self.DBGrid1.Fields[5].Value = 'Masculino') then
+         frmCadCrianca.ckMasculino.Checked := true
+      else
+        frmCadCrianca.ckFeminino.Checked := true;
+
+      frmCadCrianca.edtHospNasc.Text := self.DBGrid1.Fields[6].Value;
+      frmCadCrianca.edtPeso.Text := self.DBGrid1.Fields[7].Value;
+      frmCadCrianca.edtNomePai.Text := self.DBGrid1.Fields[8].Value;
+      frmCadCrianca.edtNomeMae.Text := self.DBGrid1.Fields[9].Value;
+      frmCadCrianca.cbResp2.Enabled := true;
+      controller.pPopulaComboBox(frmCadCrianca.cbResp2);
+      frmCadCrianca.cbResp1.Text := self.DBGrid1.Fields[0].Value + ' - ' + self.DBGrid1.Fields[1].Value;
+
+
+
+    end;
+
+
+
+
+
+
+
+    end;
 
 end;
 
@@ -73,6 +105,9 @@ begin
 
   if (self.tag = 1) then
      controller.pPopulaDBGrid('select * from TCADRESP where nomeResponsavel like "%'+Self.edtBusca.Text+'%";');
+
+  if (self.tag = 2) then
+     controller.pPopulaDBGrid('select * from TCADCRI where nomeCrianca like "%'+Self.edtBusca.Text+'%";');
 
 end;
 
