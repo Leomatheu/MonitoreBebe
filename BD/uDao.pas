@@ -9,7 +9,11 @@ uses
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.DataSet,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, uAlimentacao;
+=======
+  FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, Vcl.Forms;
+>>>>>>> Stashed changes
 =======
   FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, Vcl.Forms;
 >>>>>>> Stashed changes

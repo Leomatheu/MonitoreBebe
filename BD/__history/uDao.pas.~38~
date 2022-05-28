@@ -9,7 +9,11 @@ uses
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.DataSet,
 <<<<<<< Updated upstream:BD/__history/uDao.pas.~38~
+<<<<<<< Updated upstream:BD/__history/uDao.pas.~38~
   FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, uAlimentacao;
+=======
+  FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca;
+>>>>>>> Stashed changes:BD/__history/uDao.pas.~37~
 =======
   FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca;
 >>>>>>> Stashed changes:BD/__history/uDao.pas.~37~
@@ -33,7 +37,10 @@ type
     function fSelectResponsavel: Tlist;
 
 <<<<<<< Updated upstream:BD/__history/uDao.pas.~38~
+<<<<<<< Updated upstream:BD/__history/uDao.pas.~38~
 
+=======
+>>>>>>> Stashed changes:BD/__history/uDao.pas.~37~
 =======
 >>>>>>> Stashed changes:BD/__history/uDao.pas.~37~
     function fRetornaQuery(prSQL : String) : TFDQuery;
@@ -167,7 +174,11 @@ begin
          stream := query.CreateBlobStream(query.Fields[14], bmRead);
          foto := Timage.Create(nil);
 <<<<<<< Updated upstream:BD/__history/uDao.pas.~38~
+<<<<<<< Updated upstream:BD/__history/uDao.pas.~38~
          //foto.Picture.LoadFromStream(stream);
+=======
+         foto.Picture.LoadFromStream(stream);
+>>>>>>> Stashed changes:BD/__history/uDao.pas.~37~
 =======
          foto.Picture.LoadFromStream(stream);
 >>>>>>> Stashed changes:BD/__history/uDao.pas.~37~

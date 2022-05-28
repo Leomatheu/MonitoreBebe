@@ -9,10 +9,20 @@ uses
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.DataSet,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca;
 =======
+=======
+<<<<<<< Updated upstream:BD/__history/uDao.pas.~38~
+>>>>>>> Stashed changes
 <<<<<<< Updated upstream:BD/__history/uDao.pas.~38~
   FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, uAlimentacao;
+=======
+  FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca;
+>>>>>>> Stashed changes:BD/__history/uDao.pas.~37~
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 =======
   FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca;
 >>>>>>> Stashed changes:BD/__history/uDao.pas.~37~
@@ -32,6 +42,10 @@ type
   public
     function pInsertResponsavel(prObjResponsavel : TResponsavel):Boolean;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+    function pInsertAlimentacao(prObjAlimentacao : TAlimentacao) : Boolean;
+>>>>>>> Stashed changes
 =======
     function pInsertAlimentacao(prObjAlimentacao : TAlimentacao) : Boolean;
 >>>>>>> Stashed changes
@@ -40,9 +54,18 @@ type
     function fSelectResponsavel: Tlist;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
 =======
 <<<<<<< Updated upstream:BD/__history/uDao.pas.~38~
+>>>>>>> Stashed changes
+<<<<<<< Updated upstream:BD/__history/uDao.pas.~38~
 
+=======
+>>>>>>> Stashed changes:BD/__history/uDao.pas.~37~
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 =======
 >>>>>>> Stashed changes:BD/__history/uDao.pas.~37~
 >>>>>>> Stashed changes
@@ -177,10 +200,20 @@ begin
          stream := query.CreateBlobStream(query.Fields[14], bmRead);
          foto := Timage.Create(nil);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
          foto.Picture.LoadFromStream(stream);
 =======
+=======
+<<<<<<< Updated upstream:BD/__history/uDao.pas.~38~
+>>>>>>> Stashed changes
 <<<<<<< Updated upstream:BD/__history/uDao.pas.~38~
          //foto.Picture.LoadFromStream(stream);
+=======
+         foto.Picture.LoadFromStream(stream);
+>>>>>>> Stashed changes:BD/__history/uDao.pas.~37~
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 =======
          foto.Picture.LoadFromStream(stream);
 >>>>>>> Stashed changes:BD/__history/uDao.pas.~37~
@@ -248,7 +281,10 @@ begin
 end;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 function TDataModule1.pInsertAlimentacao(prObjAlimentacao: TAlimentacao): Boolean;
 var
     query : TFDQuery;
@@ -277,6 +313,9 @@ begin
 
 end;
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 function TDataModule1.pInsertResponsavel(prObjResponsavel : TResponsavel):Boolean;
 var

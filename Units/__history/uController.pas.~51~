@@ -5,7 +5,12 @@ interface
 uses
   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   uCrianca, formCadCrianca, Vcl.StdCtrls, Vcl.Forms, formAlimentacao, uAlimentacao;
+=======
+  uCrianca,
+  formCadCrianca, Vcl.StdCtrls, Vcl.Forms;
+>>>>>>> Stashed changes
 =======
   uCrianca,
   formCadCrianca, Vcl.StdCtrls, Vcl.Forms;
@@ -18,15 +23,21 @@ type
     procedure pCadResponsavel;
     procedure pCadCrianca;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     procedure pAlimentacao;
     function fTiraPonto(prText: String): String;
     function fRetornaDirFoto: String;
     procedure pMessage(prCaption: String; prColor: integer; prLabel: String; prFoto: String);
 =======
+=======
+>>>>>>> Stashed changes
     function fTiraPonto(prText: String): String;
     function fRetornaDirFoto: String;
     procedure pMessage(prCaption: String; prColor: integer; prLabel: String;
       prFoto: String);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     procedure pExcluiResponsavel;
     procedure pLimpaTelaResp;
@@ -70,6 +81,7 @@ begin
 end;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 procedure TController.pAlimentacao;
 var
     Dao: TDataModule1;
@@ -100,6 +112,8 @@ end;
 
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 procedure TController.pCadCrianca;
 var
   Dao: TDataModule1;
@@ -123,7 +137,11 @@ begin
   objCrianca.setNomeMae(frmCadCrianca.edtNomeMae.Text);
   objCrianca.setResponsavel1(TResponsavel(frmCadCrianca.cbResp1.Items.Objects[frmCadCrianca.cbResp1.ItemIndex]).getIdResponsavel);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   objCrianca.setResponsavel1(TResponsavel(frmCadCrianca.cbResp2.Items.Objects[frmCadCrianca.cbResp2.ItemIndex]).getIdResponsavel);
+=======
+  objCrianca.setResponsavel2(TResponsavel(frmCadCrianca.cbResp2.Items.Objects[frmCadCrianca.cbResp2.ItemIndex]).getIdResponsavel);
+>>>>>>> Stashed changes
 =======
   objCrianca.setResponsavel2(TResponsavel(frmCadCrianca.cbResp2.Items.Objects[frmCadCrianca.cbResp2.ItemIndex]).getIdResponsavel);
 >>>>>>> Stashed changes

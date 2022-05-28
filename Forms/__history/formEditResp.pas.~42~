@@ -79,9 +79,21 @@ begin
       frmCadCrianca.edtPeso.Text := self.DBGrid1.Fields[7].Value;
       frmCadCrianca.edtNomePai.Text := self.DBGrid1.Fields[8].Value;
       frmCadCrianca.edtNomeMae.Text := self.DBGrid1.Fields[9].Value;
+<<<<<<< Updated upstream
       frmCadCrianca.cbResp2.Enabled := true;
       controller.pPopulaComboBox(frmCadCrianca.cbResp2);
       controller.pSetaItemIndex(frmCadCrianca.cbResp1, self.DBGrid1.Fields[10].value);
+=======
+<<<<<<< Updated upstream:Forms/__history/formEditResp.pas.~41~
+
+      controller.pPopulaComboBox(frmCadCrianca.cbResp1);
+      controller.pPopulaComboBox(frmCadCrianca.cbResp2);
+=======
+      frmCadCrianca.cbResp2.Enabled := true;
+      controller.pPopulaComboBox(frmCadCrianca.cbResp2);
+      controller.pSetaItemIndex(frmCadCrianca.cbResp1, self.DBGrid1.Fields[10].value);
+>>>>>>> Stashed changes:Forms/__history/formEditResp.pas.~42~
+>>>>>>> Stashed changes
 
 
     end;

@@ -61,6 +61,7 @@ begin
 end;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 procedure TController.pAlimentacao;
 var
     Dao: TDataModule1;
@@ -90,6 +91,9 @@ begin
     Dao.fInsertAlimentacao(objAlimentacao);
 end;
 
+=======
+{Processos utilizados pela criança}
+>>>>>>> Stashed changes
 =======
 {Processos utilizados pela criança}
 >>>>>>> Stashed changes
