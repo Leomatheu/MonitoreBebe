@@ -31,6 +31,8 @@ type
     sbExcluir: TSpeedButton;
     sbConsultar: TSpeedButton;
     edtCodigo: TEdit;
+    procedure FormActivate(Sender: TObject);
+    procedure sbSalvarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -41,7 +43,25 @@ var
   frmAlimentacao: TfrmAlimentacao;
 
 implementation
+uses
+  uController;
 
 {$R *.dfm}
+
+procedure TfrmAlimentacao.FormActivate(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pPopulaComboBox(self.cbCrianca, 2);
+end;
+
+procedure TfrmAlimentacao.sbSalvarClick(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pCadAlimentacao;
+end;
 
 end.

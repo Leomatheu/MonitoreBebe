@@ -45,9 +45,9 @@ type
     sbFoto: TSpeedButton;
     procedure sbFotoClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
-    procedure cbResp1Change(Sender: TObject);
     procedure sbSalvarClick(Sender: TObject);
     procedure sbConsultarClick(Sender: TObject);
+    procedure sbExcluirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -63,18 +63,12 @@ uses
 
 {$R *.dfm}
 
-procedure TfrmCadCrianca.cbResp1Change(Sender: TObject);
-begin
-   self.cbResp2.Enabled := true;
-   Controller.pPopulaComboBox(self.cbResp2);
-
-end;
-
 procedure TfrmCadCrianca.FormActivate(Sender: TObject);
 begin
    self.sbExcluir.Enabled := false;
-   self.cbResp2.Enabled := false;
-   Controller.pPopulaComboBox(self.cbResp1);
+   self.edtNome.SetFocus;
+   Controller.pPopulaComboBox(self.cbResp2, 1);
+   Controller.pPopulaComboBox(self.cbResp1, 1);
 end;
 
 procedure TfrmCadCrianca.sbConsultarClick(Sender: TObject);
@@ -87,6 +81,17 @@ begin
   frmEditResp.edtBusca.EditLabel.Caption := 'Busque pela criança';
   frmEditResp.Tag := 2;
   frmEditResp.ShowModal;
+
+  if (self.edtNome.Text <> '') then
+     self.sbExcluir.Enabled := true;
+end;
+
+procedure TfrmCadCrianca.sbExcluirClick(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pExcluiCrianca;
 end;
 
 procedure TfrmCadCrianca.sbFotoClick(Sender: TObject);

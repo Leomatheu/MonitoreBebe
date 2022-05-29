@@ -95,6 +95,9 @@ begin
   frmEditResp.edtBusca.EditLabel.Caption := 'Busque pelo responsável';
   frmEditResp.Tag := 1;
   frmEditResp.ShowModal;
+
+  if (self.edtNome.Text <> '') then
+     self.sbExcluir.Enabled := true;
 end;
 
 procedure TfrmCadResp.sbExcluirClick(Sender: TObject);

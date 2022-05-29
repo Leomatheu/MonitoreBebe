@@ -8,15 +8,8 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.DataSet,
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, uAlimentacao;
-=======
-  FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, Vcl.Forms;
->>>>>>> Stashed changes
-=======
-  FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, Vcl.Forms;
->>>>>>> Stashed changes
+  FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, uAlimentacao, Vcl.Forms;
+
 
 type
   TDataModule1 = class(TDataModule)
@@ -34,12 +27,13 @@ type
     function fInsertAlimentacao(prObjAlimentacao : TAlimentacao) : Boolean;
     function pAlteraResponsavel(prObjResponsavel : TResponsavel):Boolean;
     function fDeleteResponsavel(prId : integer):Boolean;
+    function fDeleteCrianca(prId : integer):Boolean;
     function fSelectResponsavel: Tlist;
-
-
+    function fSelectCrianca: Tlist;
+    function fSelectDadoEspecifico(prSQL : String; prParametro : integer): String;
     function fRetornaQuery(prSQL : String) : TFDQuery;
-
     function fInsertCrianca(prObjCrianca : TCrianca):Boolean;
+    function fAlteraCrianca(prObjCrianca : TCrianca):Boolean;
   end;
 
 var
@@ -63,6 +57,65 @@ begin
   Conexao.Connected := false;
 end;
 
+function TDataModule1.fAlteraCrianca(prObjCrianca: TCrianca): Boolean;
+var
+   query : TFDQuery;
+   foto : TStream;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add('update tcadcri set nomeCrianca = :nome, dataNascimento = :data, cpfCrianca = :cpf,'+ 'observacoes = :obs, sexo = :sexo, hospNascimento = :hosp, pesoNascimento = :peso, nomePai = :pai, nomeMae = :mae, responsavel1 = :resp1, responsavel2 = :resp2, foto = :foto where idCrianca = :cod;');
+
+  query.Params[0].AsString := prObjCrianca.getNomeCrianca;
+  query.Params[1].AsString := prObjCrianca.getDataNascimento;
+  query.Params[2].asString := prObjCrianca.getCpfCrianca;
+  query.Params[3].AsString := prObjCrianca.getObservacoes;
+  query.Params[4].AsString := prObjCrianca.getSexo;
+  query.Params[5].AsString := prObjCrianca.getHospNascimento;
+  query.Params[6].AsString := prObjCrianca.getPesoNascimento;
+  query.Params[7].AsString := prObjCrianca.getNomePai;
+  query.Params[8].AsString := prObjCrianca.getNomeMae;
+  query.Params[9].AsInteger := prObjCrianca.getResponsavel1;
+  query.Params[10].AsInteger := prObjCrianca.getResponsavel2;
+
+  foto := TFileStream.Create(ExtractFilePath(Application.Exename) + 'Foto.jpg', fmOpenRead);
+  query.Params[11].LoadFromStream(foto, ftBlob);
+  query.Params[12].AsInteger := prObjCrianca.getIdCrianca;
+
+  try
+     query.ExecSQL;
+     result := true;
+  except
+    on e:Exception do
+      result := false;
+  end;
+
+end;
+
+function TDataModule1.fDeleteCrianca(prId: integer): Boolean;
+var
+  query : TFDQuery;
+begin
+   query := TFDQuery.Create(nil);
+   query.Connection := DataModule1.Conexao;
+
+   query.SQL.Add('Delete from TCADCRI where idCrianca = :prId;');
+   query.Params[0].AsInteger := prId;
+
+   try
+    query.ExecSQL;
+    result := true;
+   except
+    on e: Exception do
+      result := false;
+   end;
+
+   query.Close;
+   query.Free;
+
+end;
+
 function TDataModule1.fDeleteResponsavel(prId: integer): Boolean;
 begin
    DataModule1.Query.Create(nil);
@@ -73,12 +126,16 @@ begin
    DataModule1.Query.Params[0].AsInteger := prId;
 
    try
-       DataModule1.Query.ExecSQL;
-       result := true;
+    DataModule1.Query.ExecSQL;
+    result := true;
    except
-     on e: Exception do 
-       result := false;
+    on e: Exception do
+      result := false;
    end;
+
+   query.Close;
+   query.Free;
+
 end;
 
 function TDataModule1.fInsertCrianca(prObjCrianca: TCrianca): Boolean;
@@ -116,6 +173,9 @@ begin
      on e: Exception do
        result := false;
   end;
+
+  query.Close;
+  query.Free;
 end;
 
 function TDataModule1.fRetornaQuery(prSQL: String): TFDQuery;
@@ -127,6 +187,83 @@ begin
    result.Connection := data.Conexao;
    result.SQL.Add(prSQL);
    result.Open;
+end;
+
+function TDataModule1.fSelectCrianca: Tlist;
+var
+  query : TFDQuery;
+  objCri : TCrianca;
+  foto : TImage;
+  stream : TStream;
+  lista : Tlist;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add('select * from TCADCRI;');
+
+  try
+    query.Open;
+    query.First;
+    lista := TList.Create;
+
+    while not query.Eof do
+       begin
+        objCri := TCrianca.Create;
+
+        objCri.setIdCrianca(query.Fields[0].AsInteger);
+        objCri.setNomeCrianca(query.Fields[1].AsString);
+        objCri.setDataNascimento(query.Fields[2].AsString);
+        objCri.setCpfCrianca(query.Fields[3].AsString);
+        objCri.setObservacoes(query.Fields[4].AsString);
+        objCri.setSexo(query.Fields[5].AsString);
+        objCri.setHospNascimento(query.Fields[6].AsString);
+        objCri.setPesoNascimento(query.Fields[7].AsString);
+        objCri.setNomePai(query.Fields[8].AsString);
+        objCri.setNomeMae(query.Fields[9].AsString);
+        objCri.setResponsavel1(query.Fields[10].AsInteger);
+        objCri.setResponsavel2(query.Fields[11].AsInteger);
+        stream := query.CreateBlobStream(query.Fields[12], bmRead);
+        foto := Timage.Create(nil);
+        foto.Picture.LoadFromStream(stream);
+        objCri.setFoto(foto);
+
+        lista.Add(objCri);
+        query.Next;
+       end;
+
+       result := lista;
+  except
+      on e: Exception do
+       e.ToString;
+  end;
+
+  query.Close;
+  query.Free;
+
+end;
+
+function TDataModule1.fSelectDadoEspecifico(prSQL : String; prParametro : integer): String;
+var
+  query : TFDQuery;
+  nome : String;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add(prSQL);
+  query.Params[0].AsInteger := prParametro;
+
+  try
+    query.Open;
+    result := query.Fields[0].AsString;
+  except
+      on e: Exception do
+       e.ToString;
+  end;
+
+  query.Close;
+  query.Free;
 end;
 
 function TDataModule1.fSelectResponsavel: Tlist;
@@ -167,7 +304,7 @@ begin
          objResp.setObservacoes(query.Fields[13].AsString);
          stream := query.CreateBlobStream(query.Fields[14], bmRead);
          foto := Timage.Create(nil);
-         //foto.Picture.LoadFromStream(stream);
+         foto.Picture.LoadFromStream(stream);
          objResp.setFoto(foto);
 
          lista.Add(objResp);
@@ -176,7 +313,7 @@ begin
 
      result := lista;
   Except
-     on e: Exception do 
+     on e: Exception do
        e.ToString;
   end;
 
@@ -232,14 +369,14 @@ end;
 
 function TDataModule1.fInsertAlimentacao(prObjAlimentacao: TAlimentacao): Boolean;
 var
-    query : TFDQuery;
-    data : TDataModule1;
+  query : TFDQuery;
+  data : TDataModule1;
 begin
     query := TFDQuery.Create(nil);
     data := TDataModule1.Create(nil);
     query.Connection := data.Conexao;
 
-    query.SQL.Add('insert into TCONALIM values (0, :data, :hora, :quantidade, :observacoes, :acompanhante, idCrianca;');
+    query.SQL.Add('insert into TCONALIM values (0, :data, :hora, :quantidade, :observacoes, :acompanhante, :idCrianca);');
 
     query.Params[0].AsString :=  prObjAlimentacao.getData;
     query.Params[1].AsString := prObjAlimentacao.getHora;
@@ -255,6 +392,9 @@ begin
     except on E: Exception do
       result := false;
     end;
+
+   query.Close;
+   query.Free;
 
 end;
 

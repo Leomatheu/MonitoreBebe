@@ -29,7 +29,7 @@ implementation
 {$R *.dfm}
 
 uses
-  formCadResp, uController, formCadCrianca;
+  formCadResp, uController, formCadCrianca, uDao;
 
 { TfrmEditResp }
 
@@ -37,6 +37,7 @@ procedure TfrmEditResp.DBGrid1CellClick(Column: TColumn);
 var
   foto : TStream;
   controller : TController;
+  Dao : TDataModule1;
 begin
    controller := TController.Create;
    self.Close;
@@ -59,12 +60,13 @@ begin
       frmCadResp.edtEndereco.Text := self.DBGrid1.Fields[13].Value;
       frmCadResp.edtCodigo.Text := self.DBGrid1.Fields[0].Value;
       foto := self.DBGrid1.DataSource.DataSet.CreateBlobStream(self.DBGrid1.Fields[14], bmRead);
-      //frmCadResp.imgCadResp.Picture.LoadFromStream(foto);
+      frmCadResp.imgCadResp.Picture.LoadFromStream(foto);
       frmCadResp.Tag := 1;
     end;
 
     2:
     begin
+      Dao := TDataModule1.Create(nil);
       frmCadCrianca.edtNome.Text := self.DBGrid1.Fields[1].Value;
       frmCadCrianca.edtDataNasc.Text := self.DBGrid1.Fields[2].Value;
       frmCadCrianca.edtCPF.Text := self.DBGrid1.Fields[3].Value;
@@ -79,12 +81,10 @@ begin
       frmCadCrianca.edtPeso.Text := self.DBGrid1.Fields[7].Value;
       frmCadCrianca.edtNomePai.Text := self.DBGrid1.Fields[8].Value;
       frmCadCrianca.edtNomeMae.Text := self.DBGrid1.Fields[9].Value;
-      frmCadCrianca.cbResp2.Enabled := true;
-      controller.pPopulaComboBox(frmCadCrianca.cbResp2);
-      frmCadCrianca.cbResp1.Text := self.DBGrid1.Fields[0].Value + ' - ' + self.DBGrid1.Fields[1].Value;
-
-
-
+      frmCadCrianca.cbResp1.AddItem(IntToStr(self.DBGrid1.Fields[10].Value) + ' - ' + Dao.fSelectDadoEspecifico('select nomeResponsavel from tcadresp where idResponsavel = :id;', self.DBGrid1.Fields[10].Value), frmCadCrianca.cbResp1);
+      frmCadCrianca.cbResp2.AddItem(IntToStr(self.DBGrid1.Fields[11].Value) + ' - ' + Dao.fSelectDadoEspecifico('select nomeResponsavel from tcadresp where idResponsavel = :id;', self.DBGrid1.Fields[11].Value), frmCadCrianca.cbResp2);
+      frmCadCrianca.edtCodigo.Text := self.DBGrid1.Fields[0].Value;
+      frmCadCrianca.Tag := 1;
     end;
 
 

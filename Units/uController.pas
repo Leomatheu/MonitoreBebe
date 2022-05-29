@@ -11,17 +11,19 @@ type
 
   public
     procedure pCadResponsavel;
+    procedure pExcluiResponsavel;
     procedure pCadCrianca;
-    procedure pAlimentacao;
+    procedure pExcluiCrianca;
+    procedure pCadAlimentacao;
     function fTiraPonto(prText: String): String;
     function fRetornaDirFoto: String;
     procedure pMessage(prCaption: String; prColor: integer; prLabel: String; prFoto: String);
-    procedure pExcluiResponsavel;
-    procedure pLimpaTelaResp;
     procedure pPopulaDBGrid(prSQL: String);
-    procedure pPopulaComboBox(prComboBox: TComboBox);
+    procedure pPopulaComboBox(prComboBox: TComboBox; prTela : integer);
     procedure plimpaTelaCri;
-    procedure pSetaItemIndex(combox : TComboBox; index : integer; obj : TObject);
+    procedure pLimpaTelaResp;
+    procedure pLimpaTelaAlim;
+
 
 
   end;
@@ -60,9 +62,7 @@ begin
   result := prText;
 end;
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-procedure TController.pAlimentacao;
+procedure TController.pCadAlimentacao;
 var
     Dao: TDataModule1;
     objAlimentacao: TAlimentacao;
@@ -84,19 +84,23 @@ begin
           else
             objAlimentacao.setQuantidade(frmAlimentacao.rbBastante.Caption);
 
-    objAlimentacao.setObservacoes(frmAlimentacao.mmObservacoes.text);
+    objAlimentacao.setObservacoes(frmAlimentacao.mmObservacoes.Lines.text);
     objAlimentacao.setAcompanhante(frmAlimentacao.edtAcompanhante.Text);
     objAlimentacao.setIdCrianca(TCrianca(frmAlimentacao.cbCrianca.Items.Objects[frmAlimentacao.cbCrianca.ItemIndex]).getIdCrianca);
 
-    Dao.fInsertAlimentacao(objAlimentacao);
+    if (Dao.fInsertAlimentacao(objAlimentacao)) then
+       begin
+        self.pMessage('INSERÇÃO DE ALIMENTAÇÃO REALIZADA', $00FFDFFF, 'Inserção de alimentação realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+        self.pLimpaTelaAlim;
+       end
+    else
+       begin
+        self.pMessage('FALHA NA INSERÇÃO DE ALIMENTAÇÃO', $009F9FFF, 'Falha na inserção de alimentação verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+        self.pLimpaTelaAlim;
+       end;
 end;
 
-=======
 {Processos utilizados pela criança}
->>>>>>> Stashed changes
-=======
-{Processos utilizados pela criança}
->>>>>>> Stashed changes
 procedure TController.pCadCrianca;
 var
   Dao: TDataModule1;
@@ -123,20 +127,37 @@ begin
   objCrianca.setObservacoes(frmCadCrianca.mmObservacoes.Lines.Text);
   objCrianca.setFoto(frmCadCrianca.imgCadCri);
 
-  if (Dao.fInsertCrianca(objCrianca)) then
+  if not (frmCadCrianca.Tag = 1) then
      begin
-      self.pMessage('INSERÇÃO DE CRIANÇA REALIZADA', $00FEF9CB, 'Inserção de criança realizada com sucesso !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp');
-      self.plimpaTelaCri;
+       if (Dao.fInsertCrianca(objCrianca)) then
+         begin
+           self.pMessage('INSERÇÃO DA CRIANÇA REALIZADA', $00FEF9CB, 'Inserção de criança realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+           self.plimpaTelaCri;
+         end
+       else
+         begin
+           self.pMessage('FALHA NA INSERÇÃO DA CRIANÇA', $009F9FFF, 'Falha na inserção da criança verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+           self.plimpaTelaCri;
+         end;
      end
   else
-    begin
-      self.pMessage('FALHA NA INSERÇÃO DA CRIANÇA', $009F9FFF, 'Falha na inserção da criança verifique os dados !!',' C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\negado.bmp');
-      self.plimpaTelaCri;
-    end;
+     begin
+       objCrianca.setIdCrianca(StrToInt(frmCadCrianca.edtCodigo.Text));
+       if (Dao.fAlteraCrianca(objCrianca)) then
+         begin
+           self.pMessage('ALTERAÇÃO DA CRIANÇA REALIZADA', $00FEF9CB, 'alteração da criança realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+           self.plimpaTelaCri;
+         end
+       else
+         begin
+           self.pMessage('FALHA NA ALTERAÇÃO DA CRIANÇA', $009F9FFF, 'Falha na alteração da criança verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+           self.plimpaTelaCri;
+         end;
+     end;
 
 end;
 
-{Processos utilizados pela pessoa}
+{Processos utilizados pelo responsável}
 procedure TController.pCadResponsavel;
 var
   Dao: TDataModule1;
@@ -168,12 +189,12 @@ begin
   begin
     if (Dao.pInsertResponsavel(objResp)) then
     begin
-      self.pMessage('INSERÇÃO DE RESPONSÁVEL REALIZADA', $00D2FFD9, 'Inserção de responsável realizada com sucesso !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp');
+      self.pMessage('INSERÇÃO DE RESPONSÁVEL REALIZADA', $00D2FFD9, 'Inserção de responsável realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
       self.pLimpaTelaResp;
     end
     else
     begin
-      self.pMessage('FALHA NA INSERÇÃO DE RESPONSÁVEL', $009F9FFF, 'Falha na inserção de responsável verifique os dados !!',' C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\negado.bmp');
+      self.pMessage('FALHA NA INSERÇÃO DE RESPONSÁVEL', $009F9FFF, 'Falha na inserção de responsável verifique os dados !!',ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
       self.pLimpaTelaResp;
     end;
 
@@ -184,31 +205,63 @@ begin
 
     if (Dao.pAlteraResponsavel(objResp)) then
     begin
-      self.pMessage('ALTERAÇÃO DE RESPONSÁVEL REALIZADA', $00D2FFD9, 'Alteração de responsável realizada com sucesso !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp');
+      self.pMessage('ALTERAÇÃO DE RESPONSÁVEL REALIZADA', $00D2FFD9, 'Alteração de responsável realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
       self.pLimpaTelaResp;
     end
     else
     begin
-      self.pMessage('FALHA NA ALTERAÇÃO DE RESPONSÁVEL', $009F9FFF, 'Falha na alteração de responsável, verifique os dados !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\negado.bmp');
+      self.pMessage('FALHA NA ALTERAÇÃO DE RESPONSÁVEL', $009F9FFF, 'Falha na alteração de responsável, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
       self.pLimpaTelaResp;
     end;
 
   end;
 end;
 
+procedure TController.pExcluiCrianca;
+var
+  Dao : TDataModule1;
+begin
+  Dao := TDataModule1.Create(nil);
+
+  if (Dao.fDeleteCrianca(StrToInt(frmCadCrianca.edtCodigo.Text))) then
+     begin
+       self.pMessage('CRIANÇA EXCLUÍDA', $00D2FFD9, 'Exclusão de criança realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+       self.plimpaTelaCri;
+     end
+  else
+     begin
+       self.pMessage('FALHA NA EXCLUSÃO DA CRIANÇA', $009F9FFF, 'Falha na exclusão da criança, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+       self.plimpaTelaCri;
+     end;
+end;
+
 procedure TController.pExcluiResponsavel;
 begin
   if (DataModule1.fDeleteResponsavel(StrToInt(frmCadResp.edtCodigo.Text))) then
   begin
-    self.pMessage('RESPONSÁVAL EXCLUÍDO', $00D2FFD9, 'Exclusão de responsável realizada com sucesso !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\salvo.bmp');
+    self.pMessage('RESPONSÁVAL EXCLUÍDO', $00D2FFD9, 'Exclusão de responsável realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
     self.pLimpaTelaResp;
   end
   else
   begin
-    self.pMessage('FALHA NA EXCLUSÃO DE RESPONSÁVEL', $009F9FFF, 'Falha na exclusão de responsável, verifique os dados !!', 'C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\negado.bmp');
+    self.pMessage('FALHA NA EXCLUSÃO DE RESPONSÁVEL', $009F9FFF, 'Falha na exclusão de responsável, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
     self.pLimpaTelaResp;
   end;
 
+end;
+
+procedure TController.pLimpaTelaAlim;
+begin
+   frmAlimentacao.edtAcompanhante.Clear;
+   frmAlimentacao.edtData.Clear;
+   frmAlimentacao.edtHora.Clear;
+   frmAlimentacao.mmObservacoes.Lines.Clear;
+   frmAlimentacao.cbCrianca.Text := 'Selecione...';
+   frmAlimentacao.rbPouquissimo.Checked := false;
+   frmAlimentacao.rbPouco.Checked := false;
+   frmAlimentacao.rbNormal.Checked := false;
+   frmAlimentacao.rbBastante.Checked := false;
+   frmAlimentacao.edtAcompanhante.SetFocus;
 end;
 
 procedure TController.plimpaTelaCri;
@@ -222,11 +275,11 @@ begin
   frmCadCrianca.edtPeso.Clear;
   frmCadCrianca.edtNomePai.Clear;
   frmCadCrianca.edtNomeMae.Clear;
-  frmCadCrianca.cbResp1.Text := '';
-  frmCadCrianca.cbResp2.Text := '';
+  frmCadCrianca.cbResp1.Text := 'Selecione...';
+  frmCadCrianca.cbResp2.Text := 'Selecione...';
   frmCadCrianca.edtCodigo.Clear;
   frmCadCrianca.mmObservacoes.Lines.Clear;
-  frmCadCrianca.imgCadCri.Picture.LoadFromFile('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\fotoPerfil.jpg');
+  frmCadCrianca.imgCadCri.Picture.LoadFromFile(ExtractFilePath(Application.Exename) + 'Images\fotoPerfil.jpg');
 end;
 
 procedure TController.pLimpaTelaResp;
@@ -247,7 +300,7 @@ begin
   frmCadResp.edtCodigo.Visible := false;
   frmCadResp.mmObservacao.Lines.Clear;
   frmCadResp.imgCadResp.Picture.LoadFromFile
-    ('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\MonitoreBebe\Images\fotoPerfil.jpg');
+    (ExtractFilePath(Application.Exename) + 'Images\fotoPerfil.jpg');
   frmCadResp.sbExcluir.Enabled := false;
 end;
 
@@ -263,32 +316,40 @@ begin
   frmMessage.ShowModal;
 end;
 
-procedure TController.pPopulaComboBox(prComboBox: TComboBox);
+procedure TController.pPopulaComboBox(prComboBox: TComboBox; prTela : integer);
 var
   lista: Tlist;
   i: integer;
 begin
   lista := Tlist.Create;
-  lista := DataModule1.fSelectResponsavel;
+  prComboBox.Clear;
 
-  for i := 0 to lista.Count - 1 do
-  begin
-    prComboBox.AddItem(IntToStr(TResponsavel(lista.Items[i]).getIdResponsavel) +
-      ' - ' + TResponsavel(lista.Items[i]).getNomeResponsavel, lista[i]);
+  case prTela of
+  1:
+    begin
+      lista := DataModule1.fSelectResponsavel;
+      for i := 0 to lista.Count - 1 do
+        begin
+          prComboBox.AddItem(IntToStr(TResponsavel(lista.Items[i]).getIdResponsavel) +
+            ' - ' + TResponsavel(lista.Items[i]).getNomeResponsavel, lista[i]);
+        end;
+    end;
+  2:
+    begin
+      lista := DataModule1.fSelectCrianca;
+      for i := 0 to lista.Count -1 do
+        begin
+          prComboBox.AddItem(IntToStr(TCrianca(lista.Items[i]).getIdCrianca) +
+          ' - ' + TCrianca(lista.Items[i]).getNomeCrianca, lista[i]);
+        end;
+    end;
   end;
+
 end;
 
 procedure TController.pPopulaDBGrid(prSQL: String);
 begin
   DataModule1.Source.DataSet := DataModule1.fRetornaQuery(prSQL);
-end;
-
-procedure TController.pSetaItemIndex(combox : TComboBox; index : integer; obj : TObject);
-var
-   i : integer;
-begin
-  for i := 0 to combox.GetCount do
-
 end;
 
 end.

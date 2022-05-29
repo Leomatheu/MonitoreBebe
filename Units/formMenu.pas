@@ -51,6 +51,7 @@ type
     procedure SpeedButton1Click(Sender: TObject);
     procedure sbCadResponsavelClick(Sender: TObject);
     procedure sbCadCriancaClick(Sender: TObject);
+    procedure sbCadAlimentacaoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -62,11 +63,17 @@ var
 
 implementation
 uses
-   formCadResp, formCadCrianca;
+   formCadResp, formCadCrianca, formAlimentacao;
 
 {$R *.dfm}
 
 
+
+procedure TfrmMenu.sbCadAlimentacaoClick(Sender: TObject);
+begin
+  frmAlimentacao := TfrmAlimentacao.Create(nil);
+  frmAlimentacao.ShowModal;
+end;
 
 procedure TfrmMenu.sbCadCriancaClick(Sender: TObject);
 begin
