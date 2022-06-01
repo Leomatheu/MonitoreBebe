@@ -64,10 +64,8 @@ end;
 
 procedure TController.pCadAlimentacao;
 var
-    Dao: TDataModule1;
     objAlimentacao: TAlimentacao;
 begin
-    Dao := DataModule1.Create(nil);
     objAlimentacao := TAlimentacao.Create;
 
     objAlimentacao.setData(frmAlimentacao.edtData.Text);
@@ -88,7 +86,7 @@ begin
     objAlimentacao.setAcompanhante(frmAlimentacao.edtAcompanhante.Text);
     objAlimentacao.setIdCrianca(TCrianca(frmAlimentacao.cbCrianca.Items.Objects[frmAlimentacao.cbCrianca.ItemIndex]).getIdCrianca);
 
-    if (Dao.fInsertAlimentacao(objAlimentacao)) then
+    if (DataModule1.fInsertAlimentacao(objAlimentacao)) then
        begin
         self.pMessage('INSERÇÃO DE ALIMENTAÇÃO REALIZADA', $00FFDFFF, 'Inserção de alimentação realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
         self.pLimpaTelaAlim;
