@@ -29,7 +29,7 @@ implementation
 {$R *.dfm}
 
 uses
-  formCadResp, uController, formCadCrianca, uDao;
+  formCadResp, formCadCrianca, formAlimentacao, uDao, uController;
 
 { TfrmEditResp }
 
@@ -87,6 +87,29 @@ begin
       frmCadCrianca.Tag := 1;
     end;
 
+    3:
+    begin
+      frmAlimentacao.edtAcompanhante.Text := self.DBGrid1.fields[2].Value;
+      frmAlimentacao.edtData.Text := self.DBGrid1.fields[3].Value;
+      frmAlimentacao.edtHora.Text := self.DBGrid1.Fields[4].Value;
+
+      if (self.DBGrid1.Fields[5].Value = 'Bastante') then
+          frmAlimentacao.rbBastante.Checked := true
+      else
+        if (self.DBGrid1.Fields[5].Value = 'Normal') then
+            frmAlimentacao.rbNormal.Checked := true
+        else
+           if (self.DBGrid1.Fields[5].Value = 'Pouco') then
+               frmAlimentacao.rbPouco.Checked := true
+           else
+              frmAlimentacao.rbPouquissimo.Checked := true;
+
+      frmAlimentacao.cbCrianca.Text := IntToStr(self.DBGrid1.Fields[0].Value)+' - '+self.DBGrid1.fields[1].Value;
+      frmAlimentacao.edtCodigo.Text := self.DBGrid1.Fields[7].Value;
+      frmAlimentacao.mmObservacoes.lines.Text := self.DBGrid1.Fields[6].Value;
+      frmAlimentacao.sbSalvar.Enabled := false;
+      controller.pCamposAlimEnabled;
+    end;
 
 
 
@@ -108,6 +131,7 @@ begin
 
   if (self.tag = 2) then
      controller.pPopulaDBGrid('select * from TCADCRI where nomeCrianca like "%'+Self.edtBusca.Text+'%";');
+
 
 end;
 

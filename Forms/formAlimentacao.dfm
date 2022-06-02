@@ -37,7 +37,6 @@ object frmAlimentacao: TfrmAlimentacao
     Color = 16769023
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = -6
     object Label1: TLabel
       Left = 25
       Top = 28
@@ -353,12 +352,12 @@ object frmAlimentacao: TfrmAlimentacao
     object edtData: TMaskEdit
       Left = 25
       Top = 104
-      Width = 88
+      Width = 86
       Height = 21
-      EditMask = '!99/99/00;1; '
-      MaxLength = 8
+      EditMask = '!99/99/0000;1; '
+      MaxLength = 10
       TabOrder = 1
-      Text = '  /  /  '
+      Text = '  /  /    '
     end
     object edtHora: TMaskEdit
       Left = 313
@@ -465,7 +464,6 @@ object frmAlimentacao: TfrmAlimentacao
     Color = 16769023
     ParentBackground = False
     TabOrder = 1
-    ExplicitTop = -6
     object Panel1: TPanel
       Left = 27
       Top = 27
@@ -656,9 +654,8 @@ object frmAlimentacao: TfrmAlimentacao
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 72
+        OnClick = sbConsultarClick
         ExplicitTop = 2
-        ExplicitWidth = 86
       end
     end
   end

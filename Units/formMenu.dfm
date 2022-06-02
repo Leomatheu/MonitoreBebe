@@ -39750,8 +39750,8 @@ object frmMenu: TfrmMenu
         F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6
         0000}
       Stretch = True
+      ExplicitLeft = 0
       ExplicitTop = 2
-      ExplicitHeight = 584
     end
   end
   object pnBotoes: TPanel
@@ -42022,10 +42022,7 @@ object frmMenu: TfrmMenu
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 88
-        ExplicitTop = 8
-        ExplicitWidth = 23
-        ExplicitHeight = 22
+        ExplicitTop = 0
       end
     end
     object Panel6: TPanel

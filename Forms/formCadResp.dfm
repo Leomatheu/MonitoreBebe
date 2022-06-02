@@ -805,9 +805,7 @@ object frmCadResp: TfrmCadResp
         Font.Style = []
         ParentFont = False
         OnClick = sbConsultarClick
-        ExplicitLeft = 40
         ExplicitTop = 2
-        ExplicitWidth = 120
       end
     end
   end
