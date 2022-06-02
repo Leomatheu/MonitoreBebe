@@ -29,7 +29,11 @@ implementation
 {$R *.dfm}
 
 uses
+<<<<<<<< HEAD:Forms/__history/formEditResp.pas.~52~
   formCadResp, uController, formCadCrianca, uDao;
+========
+  formCadResp, formCadCrianca, formAlimentacao, uDao, uController;
+>>>>>>>> main:Forms/__history/formEditResp.pas.~54~
 
 { TfrmEditResp }
 
@@ -85,8 +89,16 @@ begin
       frmCadCrianca.cbResp2.AddItem(IntToStr(self.DBGrid1.Fields[11].Value) + ' - ' + Dao.fSelectDadoEspecifico('select nomeResponsavel from tcadresp where idResponsavel = :id;', self.DBGrid1.Fields[11].Value), frmCadCrianca.cbResp2);
       frmCadCrianca.edtCodigo.Text := self.DBGrid1.Fields[0].Value;
       frmCadCrianca.Tag := 1;
+<<<<<<<< HEAD:Forms/__history/formEditResp.pas.~52~
+========
     end;
 
+    3:
+    begin
+
+
+>>>>>>>> main:Forms/__history/formEditResp.pas.~54~
+    end;
 
 
 
@@ -108,6 +120,7 @@ begin
 
   if (self.tag = 2) then
      controller.pPopulaDBGrid('select * from TCADCRI where nomeCrianca like "%'+Self.edtBusca.Text+'%";');
+
 
 end;
 

@@ -33,6 +33,7 @@ type
     edtCodigo: TEdit;
     procedure FormActivate(Sender: TObject);
     procedure sbSalvarClick(Sender: TObject);
+    procedure sbConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,7 +45,7 @@ var
 
 implementation
 uses
-  uController;
+  uController, formEditResp;
 
 {$R *.dfm}
 
@@ -54,6 +55,25 @@ var
 begin
   controller := TController.Create;
   controller.pPopulaComboBox(self.cbCrianca, 2);
+end;
+
+procedure TfrmAlimentacao.sbConsultarClick(Sender: TObject);
+var
+  controller : TController;
+begin
+  frmEditResp := TfrmEditResp.Create(nil);
+  controller := TController.Create;
+  controller.pPopulaDBGrid('select tconalim.idCrianca,tcadcri.nomeCrianca,tconalim.acompanhante,tconalim.dataRefeicao,tconalim.hora,tconalim.quantidade,tconalim.observacoes,'+
+                            'tconalim.idControle from tconalim,tcadcri where tconalim.idCrianca=tcadcri.idCrianca order by tcadcri.nomeCrianca;');
+
+
+  frmEditResp.Caption := 'CONSULTA DE ALIMENTAÇÕES ';
+  frmEditResp.edtBusca.Visible := false;
+  frmEditResp.Tag := 3;
+  frmEditResp.ShowModal;
+
+  if (self.edtAcompanhante.Text <> '') then
+     self.sbExcluir.Enabled := true;
 end;
 
 procedure TfrmAlimentacao.sbSalvarClick(Sender: TObject);
