@@ -37,7 +37,6 @@ object frmAlimentacao: TfrmAlimentacao
     Color = 16769023
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = -6
     object Label1: TLabel
       Left = 25
       Top = 28
@@ -465,7 +464,6 @@ object frmAlimentacao: TfrmAlimentacao
     Color = 16769023
     ParentBackground = False
     TabOrder = 1
-    ExplicitTop = -6
     object Panel1: TPanel
       Left = 27
       Top = 27

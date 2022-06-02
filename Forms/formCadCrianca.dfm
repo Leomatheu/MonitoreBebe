@@ -2,7 +2,7 @@ object frmCadCrianca: TfrmCadCrianca
   Left = 0
   Top = 0
   BorderStyle = bsDialog
-  Caption = 'CADASTRO DE CRIAN'#199'A'
+  Caption = 'CADASTRO DE CRIAN'#199'AS'
   ClientHeight = 701
   ClientWidth = 718
   Color = clBtnFace

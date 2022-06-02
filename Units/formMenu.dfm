@@ -42053,6 +42053,7 @@ object frmMenu: TfrmMenu
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
+        OnClick = sbCadConsultorioClick
         ExplicitLeft = 88
         ExplicitTop = 0
         ExplicitWidth = 23

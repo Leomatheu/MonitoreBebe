@@ -225,7 +225,7 @@ begin
         objCri.setResponsavel2(query.Fields[11].AsInteger);
         stream := query.CreateBlobStream(query.Fields[12], bmRead);
         foto := Timage.Create(nil);
-        foto.Picture.LoadFromStream(stream);
+        //foto.Picture.LoadFromStream(stream);
         objCri.setFoto(foto);
 
         lista.Add(objCri);
@@ -304,7 +304,7 @@ begin
          objResp.setObservacoes(query.Fields[13].AsString);
          stream := query.CreateBlobStream(query.Fields[14], bmRead);
          foto := Timage.Create(nil);
-         foto.Picture.LoadFromStream(stream);
+         //foto.Picture.LoadFromStream(stream);
          objResp.setFoto(foto);
 
          lista.Add(objResp);

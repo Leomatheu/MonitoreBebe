@@ -1,0 +1,37 @@
+unit formConsultorio;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Mask, Vcl.StdCtrls;
+
+type
+  TfrmConsultorio = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    edtNomeConsultorio: TLabeledEdit;
+    Panel3: TPanel;
+    edtCEP: TLabeledEdit;
+    edtEstado: TLabeledEdit;
+    edtCidade: TLabeledEdit;
+    edtBairro: TLabeledEdit;
+    edtEndereco: TLabeledEdit;
+    Label1: TLabel;
+    MaskEdit1: TMaskEdit;
+    edtEmail: TLabeledEdit;
+    edtCodigo: TLabeledEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmConsultorio: TfrmConsultorio;
+
+implementation
+
+{$R *.dfm}
+
+end.

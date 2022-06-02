@@ -750,7 +750,9 @@ object frmCadResp: TfrmCadResp
         Font.Style = []
         ParentFont = False
         OnClick = sbSalvarClick
+        ExplicitLeft = 8
         ExplicitTop = 0
+        ExplicitWidth = 152
       end
     end
     object Panel7: TPanel
