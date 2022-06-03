@@ -108,7 +108,7 @@ begin
       frmAlimentacao.edtCodigo.Text := self.DBGrid1.Fields[7].Value;
       frmAlimentacao.mmObservacoes.lines.Text := self.DBGrid1.Fields[6].Value;
       frmAlimentacao.sbSalvar.Enabled := false;
-      controller.pCamposAlimEnabled;
+      controller.pCamposAlimEnabled(false);
     end;
 
 

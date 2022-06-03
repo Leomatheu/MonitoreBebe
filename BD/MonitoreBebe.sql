@@ -20,9 +20,10 @@ endResponsavel varchar(50),
 foto mediumblob
 );
 
-select * from tcadresp where nomeResponsavel like "%res%";
-select * from monitorebebe.TCADRESP;
+select nomeResponsavel from tcadresp where idResponsavel = 1;
+select * from monitorebebe.TCADCRI;
 select * from monitorebebe.TCADRESP where nomeResponsavel like "a%";
+update tcadcri set nomeCrianca = 'zezinho' where idCrianca = 2;
 
 create table TCADCRI(
 idCrianca int not null auto_increment primary key,
@@ -42,9 +43,14 @@ foreign key  (responsavel1) references TCADRESP(idResponsavel) on delete restric
 foreign key (responsavel2) references TCADRESP(idResponsavel) on delete restrict
 );
 
+select tconalim.idCrianca as 'Código Criança', tcadcri.nomeCrianca, tconalim.acompanhante, tconalim.dataRefeicao, tconalim.hora, tconalim.quantidade, tconalim.observacoes, tconalim.idControle from tconalim, tcadcri
+where tconalim.idCrianca = tcadcri.idCrianca order by tcadcri.nomeCrianca; 
+
+select * from tconalim;
+
 create table TCONALIM(
 idControle int not null auto_increment primary key,
-data varchar(10),
+dataRefeicao varchar(10),
 hora varchar(8),
 quantidade varchar(15),
 observacoes varchar(200),
@@ -64,13 +70,12 @@ email varchar(15)
 create table TCADMED(
 idMedico int not null auto_increment primary key,
 nomeMedico varchar(50),
-idade int,
 telefone varchar(15),
 email varchar(50),
 especialidade varchar(50),
 crm varchar(10),
 idConsultorio int,
-foreign key (idConsultorio) references TCADCON(idConsultorio) on delete restrict
+foreign key (idConsultorio) references TCADCON(idConsultorio)
 );
 
 create table TCONSULTA(

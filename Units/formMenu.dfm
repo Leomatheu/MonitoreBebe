@@ -42083,7 +42083,7 @@ object frmMenu: TfrmMenu
         Font.Style = []
         ParentFont = False
         ExplicitLeft = 2
-        ExplicitTop = 0
+        ExplicitTop = 2
       end
     end
     object Panel8: TPanel

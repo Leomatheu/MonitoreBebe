@@ -15,6 +15,7 @@ type
     procedure pCadCrianca;
     procedure pExcluiCrianca;
     procedure pCadAlimentacao;
+    procedure pExcluiAlimentacao;
     function fTiraPonto(prText: String): String;
     function fRetornaDirFoto: String;
     procedure pMessage(prCaption: String; prColor: integer; prLabel: String; prFoto: String);
@@ -23,7 +24,7 @@ type
     procedure plimpaTelaCri;
     procedure pLimpaTelaResp;
     procedure pLimpaTelaAlim;
-    procedure pCamposAlimEnabled;
+    procedure pCamposAlimEnabled(prEnabled : boolean);
 
 
 
@@ -216,17 +217,32 @@ begin
   end;
 end;
 
-procedure TController.pCamposAlimEnabled;
+procedure TController.pCamposAlimEnabled(prEnabled : boolean);
 begin
-  frmAlimentacao.edtAcompanhante.Enabled := false;
-  frmAlimentacao.edtData.Enabled := false;
-  frmAlimentacao.edtHora.Enabled := false;
-  frmAlimentacao.rbPouquissimo.Enabled := false;
-  frmAlimentacao.rbPouco.Enabled := false;
-  frmAlimentacao.rbNormal.Enabled := false;
-  frmAlimentacao.rbBastante.Enabled := false;
-  frmAlimentacao.cbCrianca.Enabled := false;
-  frmAlimentacao.mmObservacoes.Enabled := false;
+  frmAlimentacao.edtAcompanhante.Enabled := prEnabled;
+  frmAlimentacao.edtData.Enabled := prEnabled;
+  frmAlimentacao.edtHora.Enabled := prEnabled;
+  frmAlimentacao.rbPouquissimo.Enabled := prEnabled;
+  frmAlimentacao.rbPouco.Enabled := prEnabled;
+  frmAlimentacao.rbNormal.Enabled := prEnabled;
+  frmAlimentacao.rbBastante.Enabled := prEnabled;
+  frmAlimentacao.cbCrianca.Enabled := prEnabled;
+  frmAlimentacao.mmObservacoes.Enabled := prEnabled;
+end;
+
+procedure TController.pExcluiAlimentacao;
+begin
+  if (DataModule1.fDeleteAlimentacao(StrToInt(frmAlimentacao.edtCodigo.Text))) then
+     begin
+       self.pMessage('ALIMENTAÇÃO EXCLUÍDA', $00FFDFFF, 'Exclusão de alimentação realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+       self.pCamposAlimEnabled(true);
+       self.pLimpaTelaAlim;
+     end
+  else
+    begin
+       self.pMessage('FALHA NA EXCLUSÃO DA ALIMENTAÇÃO', $009F9FFF, 'Falha na exclusão da alimentação, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+       self.pLimpaTelaAlim;
+    end;
 end;
 
 procedure TController.pExcluiCrianca;
@@ -274,6 +290,7 @@ begin
    frmAlimentacao.rbNormal.Checked := false;
    frmAlimentacao.rbBastante.Checked := false;
    frmAlimentacao.edtAcompanhante.SetFocus;
+   frmAlimentacao.edtCodigo.Clear;
 end;
 
 procedure TController.plimpaTelaCri;

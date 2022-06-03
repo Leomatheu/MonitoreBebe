@@ -28,6 +28,7 @@ type
     function pAlteraResponsavel(prObjResponsavel : TResponsavel):Boolean;
     function fDeleteResponsavel(prId : integer):Boolean;
     function fDeleteCrianca(prId : integer):Boolean;
+    function fDeleteAlimentacao(prId : integer):Boolean;
     function fSelectResponsavel: Tlist;
     function fSelectCrianca: Tlist;
     function fSelectDadoEspecifico(prSQL : String; prParametro : integer): String;
@@ -92,6 +93,28 @@ begin
       result := false;
   end;
 
+end;
+
+function TDataModule1.fDeleteAlimentacao(prId: integer): Boolean;
+var
+  query : TFDQuery;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add('Delete from TCONALIM where idControle = :prId;');
+  query.Params[0].AsInteger := prId;
+
+  try
+    query.ExecSQL;
+    result := true;
+  except
+     on e: Exception do
+       result := false;
+  end;
+
+  query.Close;
+  query.free;
 end;
 
 function TDataModule1.fDeleteCrianca(prId: integer): Boolean;

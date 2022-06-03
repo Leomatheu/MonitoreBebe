@@ -34,6 +34,7 @@ type
     procedure FormActivate(Sender: TObject);
     procedure sbSalvarClick(Sender: TObject);
     procedure sbConsultarClick(Sender: TObject);
+    procedure sbExcluirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,6 +56,7 @@ var
 begin
   controller := TController.Create;
   controller.pPopulaComboBox(self.cbCrianca, 2);
+  self.sbExcluir.Enabled := false;
 end;
 
 procedure TfrmAlimentacao.sbConsultarClick(Sender: TObject);
@@ -74,6 +76,14 @@ begin
 
   if (self.edtAcompanhante.Text <> '') then
      self.sbExcluir.Enabled := true;
+end;
+
+procedure TfrmAlimentacao.sbExcluirClick(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pExcluiAlimentacao;
 end;
 
 procedure TfrmAlimentacao.sbSalvarClick(Sender: TObject);

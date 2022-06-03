@@ -12,7 +12,8 @@ uses
   uCrianca in '..\Units\uCrianca.pas',
   formCadCrianca in '..\Forms\formCadCrianca.pas' {frmCadCrianca},
   formAlimentacao in '..\Forms\formAlimentacao.pas' {frmAlimentacao},
-  uAlimentacao in '..\Units\uAlimentacao.pas';
+  uAlimentacao in '..\Units\uAlimentacao.pas',
+  formConsultorio in '..\Forms\formConsultorio.pas' {frmConsultorio};
 
 {$R *.res}
 
@@ -24,5 +25,6 @@ begin
   Application.CreateForm(TfrmMenu, frmMenu);
   Application.CreateForm(TfrmCadCrianca, frmCadCrianca);
   Application.CreateForm(TfrmAlimentacao, frmAlimentacao);
+  Application.CreateForm(TfrmConsultorio, frmConsultorio);
   Application.Run;
 end.
