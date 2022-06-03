@@ -352,12 +352,12 @@ object frmAlimentacao: TfrmAlimentacao
     object edtData: TMaskEdit
       Left = 25
       Top = 104
-      Width = 88
+      Width = 86
       Height = 21
-      EditMask = '!99/99/00;1; '
-      MaxLength = 8
+      EditMask = '!99/99/0000;1; '
+      MaxLength = 10
       TabOrder = 1
-      Text = '  /  /  '
+      Text = '  /  /    '
     end
     object edtHora: TMaskEdit
       Left = 313
@@ -654,9 +654,8 @@ object frmAlimentacao: TfrmAlimentacao
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 72
+        OnClick = sbConsultarClick
         ExplicitTop = 2
-        ExplicitWidth = 86
       end
     end
   end

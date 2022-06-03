@@ -23,6 +23,7 @@ type
     procedure plimpaTelaCri;
     procedure pLimpaTelaResp;
     procedure pLimpaTelaAlim;
+    procedure pCamposAlimEnabled;
 
 
 
@@ -213,6 +214,19 @@ begin
     end;
 
   end;
+end;
+
+procedure TController.pCamposAlimEnabled;
+begin
+  frmAlimentacao.edtAcompanhante.Enabled := false;
+  frmAlimentacao.edtData.Enabled := false;
+  frmAlimentacao.edtHora.Enabled := false;
+  frmAlimentacao.rbPouquissimo.Enabled := false;
+  frmAlimentacao.rbPouco.Enabled := false;
+  frmAlimentacao.rbNormal.Enabled := false;
+  frmAlimentacao.rbBastante.Enabled := false;
+  frmAlimentacao.cbCrianca.Enabled := false;
+  frmAlimentacao.mmObservacoes.Enabled := false;
 end;
 
 procedure TController.pExcluiCrianca;
