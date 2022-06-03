@@ -13,7 +13,8 @@ uses
   formCadCrianca in '..\Forms\formCadCrianca.pas' {frmCadCrianca},
   formAlimentacao in '..\Forms\formAlimentacao.pas' {frmAlimentacao},
   uAlimentacao in '..\Units\uAlimentacao.pas',
-  formConsultorio in '..\Forms\formConsultorio.pas' {frmConsultorio};
+  formConsultorio in '..\Forms\formConsultorio.pas' {frmConsultorio},
+  uConsultorio in '..\Units\uConsultorio.pas';
 
 {$R *.res}
 

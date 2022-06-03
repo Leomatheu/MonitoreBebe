@@ -30,6 +30,7 @@ type
     sbExcluir: TSpeedButton;
     Panel7: TPanel;
     sbConsultar: TSpeedButton;
+    procedure sbSalvarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,7 +41,18 @@ var
   frmConsultorio: TfrmConsultorio;
 
 implementation
+uses
+  uController;
 
 {$R *.dfm}
+
+
+procedure TfrmConsultorio.sbSalvarClick(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pCadConsultorio;
+end;
 
 end.

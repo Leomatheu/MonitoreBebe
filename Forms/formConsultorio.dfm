@@ -23,12 +23,11 @@ object frmConsultorio: TfrmConsultorio
     Color = 12895487
     ParentBackground = False
     TabOrder = 0
-    ExplicitHeight = 434
     object Label1: TLabel
       Left = 32
       Top = 393
       Width = 112
-      Height = 16
+      Height = 15
       Caption = 'Tel. Comercial'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -63,7 +62,7 @@ object frmConsultorio: TfrmConsultorio
       Left = 32
       Top = 415
       Width = 175
-      Height = 23
+      Height = 22
       EditMask = '!\(99\)0000-0000;1; '
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -111,6 +110,7 @@ object frmConsultorio: TfrmConsultorio
       EditLabel.Font.Name = 'Fixedsys'
       EditLabel.Font.Style = []
       EditLabel.ParentFont = False
+      Enabled = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
@@ -246,7 +246,6 @@ object frmConsultorio: TfrmConsultorio
     Color = 12895487
     ParentBackground = False
     TabOrder = 1
-    ExplicitHeight = 472
     object Panel4: TPanel
       Left = 27
       Top = 22
@@ -444,6 +443,7 @@ object frmConsultorio: TfrmConsultorio
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
+        OnClick = sbSalvarClick
         ExplicitLeft = 32
         ExplicitWidth = 125
       end
