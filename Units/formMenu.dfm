@@ -42082,7 +42082,7 @@ object frmMenu: TfrmMenu
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 2
+        OnClick = sbCadMedicoClick
         ExplicitTop = 2
       end
     end

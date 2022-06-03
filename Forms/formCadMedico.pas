@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.Buttons;
 
 type
   TfrmCadMedico = class(TForm)
@@ -18,6 +19,15 @@ type
     edtEspecialidade: TLabeledEdit;
     Label2: TLabel;
     ComboBox1: TComboBox;
+    Panel4: TPanel;
+    Image1: TImage;
+    LabeledEdit3: TLabeledEdit;
+    Panel7: TPanel;
+    sbConsultar: TSpeedButton;
+    Panel6: TPanel;
+    sbExcluir: TSpeedButton;
+    Panel5: TPanel;
+    sbSalvar: TSpeedButton;
   private
     { Private declarations }
   public

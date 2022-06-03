@@ -23,12 +23,11 @@ object frmConsultorio: TfrmConsultorio
     Color = 12895487
     ParentBackground = False
     TabOrder = 0
-    ExplicitHeight = 434
     object Label1: TLabel
       Left = 32
       Top = 393
       Width = 112
-      Height = 16
+      Height = 15
       Caption = 'Tel. Comercial'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -63,7 +62,7 @@ object frmConsultorio: TfrmConsultorio
       Left = 32
       Top = 415
       Width = 175
-      Height = 23
+      Height = 22
       EditMask = '!\(99\)0000-0000;1; '
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -246,7 +245,6 @@ object frmConsultorio: TfrmConsultorio
     Color = 12895487
     ParentBackground = False
     TabOrder = 1
-    ExplicitHeight = 472
     object Panel4: TPanel
       Left = 27
       Top = 22
@@ -254,11 +252,10 @@ object frmConsultorio: TfrmConsultorio
       Height = 147
       TabOrder = 0
       object Image1: TImage
-        Left = 1
-        Top = 1
-        Width = 135
-        Height = 145
-        Align = alClient
+        Left = 16
+        Top = 24
+        Width = 105
+        Height = 105
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000000400000
           00400806000000AA6971DE0000000970485973000012740000127401DE661F78
@@ -416,10 +413,6 @@ object frmConsultorio: TfrmConsultorio
           D4F3931F8FAC940FF8AD5F7F00A86D016AFBFA03406D0B50DBD71F006A5B80DA
           BE7EF700FE07F0E5B0B93FBD34CB0000000049454E44AE426082}
         Stretch = True
-        ExplicitLeft = 16
-        ExplicitTop = 24
-        ExplicitWidth = 105
-        ExplicitHeight = 105
       end
     end
     object Panel5: TPanel
@@ -444,8 +437,9 @@ object frmConsultorio: TfrmConsultorio
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 32
-        ExplicitWidth = 125
+        ExplicitLeft = 64
+        ExplicitTop = -1
+        ExplicitWidth = 94
       end
     end
     object Panel6: TPanel
@@ -471,9 +465,8 @@ object frmConsultorio: TfrmConsultorio
         Font.Style = []
         ParentFont = False
         ExplicitLeft = 72
-        ExplicitTop = 0
-        ExplicitWidth = 23
-        ExplicitHeight = 22
+        ExplicitTop = 2
+        ExplicitWidth = 86
       end
     end
     object Panel7: TPanel
@@ -499,7 +492,7 @@ object frmConsultorio: TfrmConsultorio
         Font.Style = []
         ParentFont = False
         ExplicitLeft = 64
-        ExplicitTop = 0
+        ExplicitTop = 6
         ExplicitWidth = 23
         ExplicitHeight = 22
       end

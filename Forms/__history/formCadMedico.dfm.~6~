@@ -1,0 +1,151 @@
+object frmCadMedico: TfrmCadMedico
+  Left = 0
+  Top = 0
+  BorderStyle = bsDialog
+  Caption = 'CADASTRO DE M'#201'DICOS'
+  ClientHeight = 485
+  ClientWidth = 617
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  FormStyle = fsMDIForm
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 432
+    Top = 0
+    Width = 185
+    Height = 485
+    Align = alRight
+    Caption = 'Panel1'
+    Color = 16752029
+    ParentBackground = False
+    ShowCaption = False
+    TabOrder = 0
+  end
+  object edtNome: TPanel
+    Left = 0
+    Top = 0
+    Width = 432
+    Height = 485
+    Align = alClient
+    Caption = 'edtNome'
+    Color = 16752029
+    ParentBackground = False
+    ShowCaption = False
+    TabOrder = 1
+    ExplicitLeft = -6
+    object Label1: TLabel
+      Left = 16
+      Top = 144
+      Width = 64
+      Height = 15
+      Caption = 'Telefone'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 224
+      Top = 207
+      Width = 88
+      Height = 15
+      Caption = 'Consult'#243'rio'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+    end
+    object LabeledEdit1: TLabeledEdit
+      Left = 16
+      Top = 40
+      Width = 385
+      Height = 21
+      EditLabel.Width = 32
+      EditLabel.Height = 15
+      EditLabel.Caption = 'Nome'
+      EditLabel.Font.Charset = ANSI_CHARSET
+      EditLabel.Font.Color = clWindowText
+      EditLabel.Font.Height = -11
+      EditLabel.Font.Name = 'Fixedsys'
+      EditLabel.Font.Style = []
+      EditLabel.ParentFont = False
+      TabOrder = 0
+    end
+    object edtEmail: TLabeledEdit
+      Left = 16
+      Top = 96
+      Width = 385
+      Height = 21
+      EditLabel.Width = 48
+      EditLabel.Height = 15
+      EditLabel.Caption = 'E-mail'
+      EditLabel.Font.Charset = DEFAULT_CHARSET
+      EditLabel.Font.Color = clWindowText
+      EditLabel.Font.Height = -11
+      EditLabel.Font.Name = 'Fixedsys'
+      EditLabel.Font.Style = []
+      EditLabel.ParentFont = False
+      TabOrder = 1
+    end
+    object edtTelefone: TMaskEdit
+      Left = 16
+      Top = 162
+      Width = 178
+      Height = 21
+      EditMask = '!\(999\)0000-0000;1; '
+      MaxLength = 14
+      TabOrder = 2
+      Text = '(   )    -    '
+    end
+    object LabeledEdit2: TLabeledEdit
+      Left = 224
+      Top = 162
+      Width = 177
+      Height = 21
+      EditLabel.Width = 24
+      EditLabel.Height = 15
+      EditLabel.Caption = 'CRM'
+      EditLabel.Font.Charset = DEFAULT_CHARSET
+      EditLabel.Font.Color = clWindowText
+      EditLabel.Font.Height = -11
+      EditLabel.Font.Name = 'Fixedsys'
+      EditLabel.Font.Style = []
+      EditLabel.ParentFont = False
+      TabOrder = 3
+    end
+    object edtEspecialidade: TLabeledEdit
+      Left = 17
+      Top = 225
+      Width = 177
+      Height = 21
+      EditLabel.Width = 104
+      EditLabel.Height = 15
+      EditLabel.Caption = 'Especialidade'
+      EditLabel.Font.Charset = DEFAULT_CHARSET
+      EditLabel.Font.Color = clWindowText
+      EditLabel.Font.Height = -11
+      EditLabel.Font.Name = 'Fixedsys'
+      EditLabel.Font.Style = []
+      EditLabel.ParentFont = False
+      TabOrder = 4
+    end
+    object ComboBox1: TComboBox
+      Left = 224
+      Top = 225
+      Width = 177
+      Height = 21
+      TabOrder = 5
+      Text = 'ComboBox1'
+    end
+  end
+end
