@@ -14,14 +14,9 @@ uses
   formAlimentacao in '..\Forms\formAlimentacao.pas' {frmAlimentacao},
   uAlimentacao in '..\Units\uAlimentacao.pas',
   formConsultorio in '..\Forms\formConsultorio.pas' {frmConsultorio},
-<<<<<<< HEAD
+  uConsultorio in '..\Units\uConsultorio.pas',
   formCadMedico in '..\Forms\formCadMedico.pas' {frmCadMedico},
   uMedico in '..\Units\uMedico.pas';
-=======
-  uConsultorio in '..\Units\uConsultorio.pas';
->>>>>>> Consultorio
-
-{$R *.res}
 
 begin
   Application.Initialize;
@@ -32,9 +27,9 @@ begin
   Application.CreateForm(TfrmCadCrianca, frmCadCrianca);
   Application.CreateForm(TfrmAlimentacao, frmAlimentacao);
   Application.CreateForm(TfrmConsultorio, frmConsultorio);
-<<<<<<< HEAD
   Application.CreateForm(TfrmCadMedico, frmCadMedico);
-=======
->>>>>>> Consultorio
+  Application.CreateForm(TfrmCadMedico, frmCadMedico);
   Application.Run;
+
+
 end.

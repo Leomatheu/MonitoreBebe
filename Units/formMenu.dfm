@@ -39750,7 +39750,6 @@ object frmMenu: TfrmMenu
         F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6
         0000}
       Stretch = True
-      ExplicitLeft = 0
       ExplicitTop = 2
     end
   end

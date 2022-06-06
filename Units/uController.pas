@@ -15,11 +15,8 @@ type
     procedure pCadCrianca;
     procedure pExcluiCrianca;
     procedure pCadAlimentacao;
-<<<<<<< HEAD
     procedure pExcluiAlimentacao;
-=======
     procedure pCadConsultorio;
->>>>>>> Consultorio
     function fTiraPonto(prText: String): String;
     function fRetornaDirFoto: String;
     procedure pMessage(prCaption: String; prColor: integer; prLabel: String; prFoto: String);
@@ -28,15 +25,8 @@ type
     procedure plimpaTelaCri;
     procedure pLimpaTelaResp;
     procedure pLimpaTelaAlim;
-<<<<<<< HEAD
     procedure pCamposAlimEnabled(prEnabled : boolean);
-=======
     procedure pLimpaTelaCon;
-    procedure pCamposAlimEnabled;
->>>>>>> Consultorio
-
-
-
 
   end;
 
