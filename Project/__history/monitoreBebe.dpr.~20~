@@ -24,5 +24,12 @@ begin
   DataModule1 := TDataModule1.Create(nil);
   Controller := TController.Create;
   Application.CreateForm(TfrmMenu, frmMenu);
+  Application.CreateForm(TfrmCadCrianca, frmCadCrianca);
+  Application.CreateForm(TfrmAlimentacao, frmAlimentacao);
+  Application.CreateForm(TfrmConsultorio, frmConsultorio);
+  Application.CreateForm(TfrmCadMedico, frmCadMedico);
+  Application.CreateForm(TfrmCadMedico, frmCadMedico);
   Application.Run;
+
+
 end.
