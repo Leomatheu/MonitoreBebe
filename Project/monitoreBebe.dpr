@@ -13,10 +13,10 @@ uses
   formCadCrianca in '..\Forms\formCadCrianca.pas' {frmCadCrianca},
   formAlimentacao in '..\Forms\formAlimentacao.pas' {frmAlimentacao},
   uAlimentacao in '..\Units\uAlimentacao.pas',
-  formConsultorio in '..\Forms\formConsultorio.pas' {frmConsultorio},
   uConsultorio in '..\Units\uConsultorio.pas',
   formCadMedico in '..\Forms\formCadMedico.pas' {frmCadMedico},
-  uMedico in '..\Units\uMedico.pas';
+  uMedico in '..\Units\uMedico.pas',
+  formConsultorio in '..\Forms\formConsultorio.pas' {frmConsultorio};
 
 begin
   Application.Initialize;
@@ -24,5 +24,6 @@ begin
   DataModule1 := TDataModule1.Create(nil);
   Controller := TController.Create;
   Application.CreateForm(TfrmMenu, frmMenu);
+  Application.CreateForm(TfrmConsultorio, frmConsultorio);
   Application.Run;
 end.

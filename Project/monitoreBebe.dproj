@@ -133,16 +133,16 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\uAlimentacao.pas"/>
-        <DCCReference Include="..\Forms\formConsultorio.pas">
-            <Form>frmConsultorio</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="..\Units\uConsultorio.pas"/>
         <DCCReference Include="..\Forms\formCadMedico.pas">
             <Form>frmCadMedico</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\uMedico.pas"/>
+        <DCCReference Include="..\Forms\formConsultorio.pas">
+            <Form>frmConsultorio</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
