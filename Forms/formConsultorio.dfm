@@ -110,6 +110,7 @@ object frmConsultorio: TfrmConsultorio
       EditLabel.Font.Name = 'Fixedsys'
       EditLabel.Font.Style = []
       EditLabel.ParentFont = False
+      Enabled = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
@@ -437,9 +438,15 @@ object frmConsultorio: TfrmConsultorio
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
+<<<<<<< HEAD
         ExplicitLeft = 64
         ExplicitTop = -1
         ExplicitWidth = 94
+=======
+        OnClick = sbSalvarClick
+        ExplicitLeft = 32
+        ExplicitWidth = 125
+>>>>>>> Consultorio
       end
     end
     object Panel6: TPanel

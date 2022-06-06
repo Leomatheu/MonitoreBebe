@@ -4,7 +4,7 @@ interface
 
 uses
   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage,
-  uCrianca, formCadCrianca, Vcl.StdCtrls, Vcl.Forms, formAlimentacao, uAlimentacao;
+  uCrianca, formCadCrianca, Vcl.StdCtrls, Vcl.Forms, formAlimentacao, uAlimentacao, uConsultorio, formConsultorio;
 
 type
   TController = class
@@ -15,7 +15,11 @@ type
     procedure pCadCrianca;
     procedure pExcluiCrianca;
     procedure pCadAlimentacao;
+<<<<<<< HEAD
     procedure pExcluiAlimentacao;
+=======
+    procedure pCadConsultorio;
+>>>>>>> Consultorio
     function fTiraPonto(prText: String): String;
     function fRetornaDirFoto: String;
     procedure pMessage(prCaption: String; prColor: integer; prLabel: String; prFoto: String);
@@ -24,7 +28,13 @@ type
     procedure plimpaTelaCri;
     procedure pLimpaTelaResp;
     procedure pLimpaTelaAlim;
+<<<<<<< HEAD
     procedure pCamposAlimEnabled;
+=======
+    procedure pLimpaTelaCon;
+    procedure pCamposAlimEnabled;
+
+>>>>>>> Consultorio
 
 
 
@@ -101,6 +111,23 @@ begin
 end;
 
 {Processos utilizados pela criança}
+procedure TController.pCadConsultorio;
+var
+  objConsultorio : TConsultorio;
+begin
+  objConsultorio.Create;
+
+  objConsultorio.setNomeConsultorio(frmConsultorio.edtNomeConsultorio.Text);
+  objConsultorio.setCep(frmConsultorio.edtCEP.Text);
+  objConsultorio.setEstado(frmConsultorio.edtEstado.Text);
+  objConsultorio.setCidade(frmConsultorio.edtCidade.Text);
+  objConsultorio.setBairro(frmConsultorio.edtBairro.Text);
+  obJConsultorio.setEndereco(frmConsultorio.edtEndereco.Text);
+
+  DataModule1.fInsertConsultorio()
+
+end;
+
 procedure TController.pCadCrianca;
 var
   Dao: TDataModule1;
@@ -230,6 +257,7 @@ begin
   frmAlimentacao.mmObservacoes.Enabled := false;
 end;
 
+<<<<<<< HEAD
 procedure TController.pExcluiAlimentacao;
 begin
   if (DataModule1.fDeleteAlimentacao(StrToInt(frmAlimentacao.edtCodigo.Text))) then
@@ -239,6 +267,8 @@ begin
 
 end;
 
+=======
+>>>>>>> Consultorio
 procedure TController.pExcluiCrianca;
 var
   Dao : TDataModule1;
@@ -286,6 +316,25 @@ begin
    frmAlimentacao.edtAcompanhante.SetFocus;
 end;
 
+<<<<<<< HEAD
+=======
+
+
+procedure TController.pLimpaTelaCon;
+begin
+   frmConsultorio.edtNomeConsultorio.Clear;
+   frmConsultorio.edtTelefone.Clear;
+   frmConsultorio.edtEmail.Clear;
+   frmConsultorio.edtCodigo.Clear;
+   frmConsultorio.edtCEP.Clear;
+   frmConsultorio.edtEstado.Clear;
+   frmConsultorio.edtCidade.Clear;
+   frmConsultorio.edtBairro.Clear;
+   frmConsultorio.edtEndereco.Clear;
+   frmConsultorio.edtNomeConsultorio.SetFocus;
+end;
+
+>>>>>>> Consultorio
 procedure TController.plimpaTelaCri;
 begin
   frmCadCrianca.edtNome.Clear;

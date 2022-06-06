@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, uAlimentacao, Vcl.Forms;
+  FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, uAlimentacao, Vcl.Forms, uConsultorio;
 
 
 type
@@ -35,6 +35,7 @@ type
     function fRetornaQuery(prSQL : String) : TFDQuery;
     function fInsertCrianca(prObjCrianca : TCrianca):Boolean;
     function fAlteraCrianca(prObjCrianca : TCrianca):Boolean;
+    function fInsertConsultorio(prObjCon : TConsultorio):Boolean;
   end;
 
 var
@@ -419,6 +420,37 @@ begin
 
    query.Close;
    query.Free;
+
+end;
+
+function TDataModule1.fInsertConsultorio(prObjCon: TConsultorio): Boolean;
+var
+  query : TFDQuery;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add('insert into TCADCON values (0, :nomeConsultorio, :telefone, :email, :cepConsultorio, :estadoConsultorio, :cidadeConsultorio, :bairroConsultorio, :enderecoConsultorio);');
+
+  query.Params[0].AsString := prObjCon.getNomeConsultorio;
+  query.Params[1].AsString := prObjCon.getTelefone;
+  query.Params[2].AsString := prObjCon.getEmail;
+  query.Params[3].AsString := prObjCon.getCep;
+  query.Params[4].AsString := prObjCon.getEstado;
+  query.Params[5].AsString := prObjCon.getCidade;
+  query.Params[6].AsString := prObjCon.getBairro;
+  query.Params[7].AsString := prObjCon.getEndereco;
+
+  try
+    query.ExecSQL;
+    result := true;
+
+  except on E: Exception do
+    result := false;
+  end;
+
+  query.Close;
+  query.Free;
 
 end;
 

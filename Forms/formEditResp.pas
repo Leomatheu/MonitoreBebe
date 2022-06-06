@@ -29,7 +29,7 @@ implementation
 {$R *.dfm}
 
 uses
-  formCadResp, formCadCrianca, formAlimentacao, uDao, uController;
+  formCadResp, formCadCrianca, formAlimentacao, uDao, uController, formConsultorio;
 
 { TfrmEditResp }
 
@@ -111,12 +111,21 @@ begin
       controller.pCamposAlimEnabled(false);
     end;
 
+    4:
+    begin
+      frmConsultorio.edtCodigo.Text := self.DBGrid1.Fields[0].Value;
+      frmConsultorio.edtNomeConsultorio.Text := self.DBGrid1.Fields[1].Value;
+      frmConsultorio.edtTelefone.Text := self.DBGrid1.Fields[2].Value;
+      frmConsultorio.edtEmail.Text := self.DBGrid1.Fields[3].Value;
+      frmConsultorio.edtCEP.Text := self.DBGrid1.Fields[4].Value;
+      frmConsultorio.edtEstado.Text := self.DBGrid1.Fields[5].Value;
+      frmConsultorio.edtCidade.Text := self.DBGrid1.Fields[6].Value;
+      frmConsultorio.edtBairro.Text := self.DBGrid1.Fields[7].Value;
+      frmConsultorio.edtEndereco.Text := self.DBGrid1.Fields[8].Value;
 
-
-
-
-
+      frmConsultorio.sbSalvar.Enabled := false;
     end;
+   end;
 
 end;
 

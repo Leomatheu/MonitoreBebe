@@ -4,7 +4,7 @@ interface
 
 uses
   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage,
-  uCrianca, formCadCrianca, Vcl.StdCtrls, Vcl.Forms, formAlimentacao, uAlimentacao;
+  uCrianca, formCadCrianca, Vcl.StdCtrls, Vcl.Forms, formAlimentacao, uAlimentacao, uConsultorio, formConsultorio;
 
 type
   TController = class
@@ -15,7 +15,11 @@ type
     procedure pCadCrianca;
     procedure pExcluiCrianca;
     procedure pCadAlimentacao;
+<<<<<<< HEAD
     procedure pExcluiAlimentacao;
+=======
+    procedure pCadConsultorio;
+>>>>>>> Consultorio
     function fTiraPonto(prText: String): String;
     function fRetornaDirFoto: String;
     procedure pMessage(prCaption: String; prColor: integer; prLabel: String; prFoto: String);
@@ -24,7 +28,13 @@ type
     procedure plimpaTelaCri;
     procedure pLimpaTelaResp;
     procedure pLimpaTelaAlim;
+<<<<<<< HEAD
     procedure pCamposAlimEnabled(prEnabled : boolean);
+=======
+    procedure pLimpaTelaCon;
+    procedure pCamposAlimEnabled;
+>>>>>>> Consultorio
+
 
 
 
@@ -101,6 +111,37 @@ begin
 end;
 
 {Processos utilizados pela criança}
+procedure TController.pCadConsultorio;
+var
+  objConsultorio : TConsultorio;
+begin
+  objConsultorio := TConsultorio.Create;
+
+  objConsultorio.setNomeConsultorio(frmConsultorio.edtNomeConsultorio.Text);
+  objConsultorio.setTelefone(frmConsultorio.edtTelefone.Text);
+  objConsultorio.setEmail(frmConsultorio.edtEmail.Text);
+  objConsultorio.setCep(frmConsultorio.edtCEP.Text);
+  objConsultorio.setEstado(frmConsultorio.edtEstado.Text);
+  objConsultorio.setCidade(frmConsultorio.edtCidade.Text);
+  objConsultorio.setBairro(frmConsultorio.edtBairro.Text);
+  obJConsultorio.setEndereco(frmConsultorio.edtEndereco.Text);
+
+   if not (frmConsultorio.Tag = 1) then
+     begin
+       if (DataModule1.fInsertConsultorio(objConsultorio)) then
+         begin
+           self.pMessage('INSERÇÃO DO CONSULTÓRIO REALIZADA', $00C4C4FF, 'Inserção de consultório realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+           self.pLimpaTelaCon;
+         end
+       else
+         begin
+           self.pMessage('FALHA NA INSERÇÃO DO CONSULTÓRIO', $009F9FFF, 'Falha na inserção do consultório verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+           self.pLimpaTelaCon;
+         end;
+     end
+
+end;
+
 procedure TController.pCadCrianca;
 var
   Dao: TDataModule1;
@@ -291,6 +332,22 @@ begin
    frmAlimentacao.rbBastante.Checked := false;
    frmAlimentacao.edtAcompanhante.SetFocus;
    frmAlimentacao.edtCodigo.Clear;
+end;
+
+
+
+procedure TController.pLimpaTelaCon;
+begin
+   frmConsultorio.edtNomeConsultorio.Clear;
+   frmConsultorio.edtTelefone.Clear;
+   frmConsultorio.edtEmail.Clear;
+   frmConsultorio.edtCodigo.Clear;
+   frmConsultorio.edtCEP.Clear;
+   frmConsultorio.edtEstado.Clear;
+   frmConsultorio.edtCidade.Clear;
+   frmConsultorio.edtBairro.Clear;
+   frmConsultorio.edtEndereco.Clear;
+   frmConsultorio.edtNomeConsultorio.SetFocus;
 end;
 
 procedure TController.plimpaTelaCri;

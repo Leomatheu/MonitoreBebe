@@ -8,7 +8,11 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.DataSet,
+<<<<<<< HEAD
   FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, uAlimentacao, Vcl.Forms;
+=======
+  FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, uAlimentacao, Vcl.Forms, uConsultorio;
+>>>>>>> Consultorio
 
 
 type
@@ -34,6 +38,10 @@ type
     function fRetornaQuery(prSQL : String) : TFDQuery;
     function fInsertCrianca(prObjCrianca : TCrianca):Boolean;
     function fAlteraCrianca(prObjCrianca : TCrianca):Boolean;
+<<<<<<< HEAD
+=======
+    function fInsertConsultorio(prObjCon : TConsultorio):Boolean;
+>>>>>>> Consultorio
   end;
 
 var
@@ -226,7 +234,7 @@ begin
         objCri.setResponsavel2(query.Fields[11].AsInteger);
         stream := query.CreateBlobStream(query.Fields[12], bmRead);
         foto := Timage.Create(nil);
-        foto.Picture.LoadFromStream(stream);
+        //foto.Picture.LoadFromStream(stream);
         objCri.setFoto(foto);
 
         lista.Add(objCri);
@@ -305,7 +313,7 @@ begin
          objResp.setObservacoes(query.Fields[13].AsString);
          stream := query.CreateBlobStream(query.Fields[14], bmRead);
          foto := Timage.Create(nil);
-         foto.Picture.LoadFromStream(stream);
+         //foto.Picture.LoadFromStream(stream);
          objResp.setFoto(foto);
 
          lista.Add(objResp);
@@ -397,6 +405,39 @@ begin
    query.Close;
    query.Free;
 
+<<<<<<< HEAD
+=======
+<<<<<<<< HEAD:BD/__history/uDao.pas.~59~
+========
+end;
+
+function TDataModule1.fInsertConsultorio(prObjCon: TConsultorio): Boolean;
+var
+  query : TFDQuery;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add('insert into TCADCON values (0, :nomeConsultorio, :endereco, :telefone, :email);');
+
+  query.Params[0].AsString := prObjCon.setNomeConsultorio;
+  query.Params[1].AsString := prObjCon.setEndereco;
+  query.Params[2].AsString := prObjCon.setTelefone;
+  query.Params[3].AsString := prObjCon.setEmail;
+
+  try
+    query.ExecSQL;
+    result := true;
+
+  except on E: Exception do
+    result := false;
+  end;
+
+  query.Close;
+  query.Free;
+
+>>>>>>>> Consultorio:BD/__history/uDao.pas.~60~
+>>>>>>> Consultorio
 end;
 
 function TDataModule1.pInsertResponsavel(prObjResponsavel : TResponsavel):Boolean;

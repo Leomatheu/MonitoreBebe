@@ -1,0 +1,87 @@
+unit uConsultorio;
+
+interface
+
+  Type TConsultorio = class
+
+    Private
+      idConsultorio : integer;
+      nomeConsultorio : String;
+      endereco : String;
+      telefone : String;
+      email : String;
+
+
+      public
+        procedure setIdConsultorio(idConsultorio : integer);
+        function getIdConsultorio : integer;
+
+        procedure setNomeConsultorio(nomeConsultorio : String);
+        function getNomeConsultorio : String;
+
+        procedure setEndereco(endereco : String);
+        function getEndereco : String;
+
+        procedure setTelefone(telefone : String);
+        function getTelefone : String;
+
+        procedure setEmail(email : String);
+        function getEmail : String;
+
+  end;
+
+implementation
+
+{ TConsultorio }
+
+function TConsultorio.getEmail: String;
+begin
+  result := email;
+end;
+
+function TConsultorio.getEndereco: String;
+begin
+  result := endereco;
+end;
+
+function TConsultorio.getIdConsultorio: integer;
+begin
+  result := idConsultorio;
+end;
+
+function TConsultorio.getNomeConsultorio: String;
+begin
+  result := nomeConsultorio;
+end;
+
+function TConsultorio.getTelefone: String;
+begin
+  result := telefone;
+end;
+
+procedure TConsultorio.setEmail(email: String);
+begin
+  self.email := email;
+end;
+
+procedure TConsultorio.setEndereco(endereco: String);
+begin
+  self.endereco := endereco;
+end;
+
+procedure TConsultorio.setIdConsultorio(idConsultorio: integer);
+begin
+  self.idConsultorio := idConsultorio;
+end;
+
+procedure TConsultorio.setNomeConsultorio(nomeConsultorio: String);
+begin
+  self.nomeConsultorio := nomeConsultorio;
+end;
+
+procedure TConsultorio.setTelefone(telefone: String);
+begin
+  self.telefone := telefone;
+end;
+
+end.
