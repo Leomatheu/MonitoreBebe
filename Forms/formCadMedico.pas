@@ -11,23 +11,27 @@ type
   TfrmCadMedico = class(TForm)
     Panel1: TPanel;
     edtNome: TPanel;
-    LabeledEdit1: TLabeledEdit;
     edtEmail: TLabeledEdit;
     Label1: TLabel;
     edtTelefone: TMaskEdit;
-    LabeledEdit2: TLabeledEdit;
+    edtCRM: TLabeledEdit;
     edtEspecialidade: TLabeledEdit;
     Label2: TLabel;
-    ComboBox1: TComboBox;
+    cbConsultorio: TComboBox;
     Panel4: TPanel;
     Image1: TImage;
-    LabeledEdit3: TLabeledEdit;
+    edtCodigo: TLabeledEdit;
     Panel7: TPanel;
     sbConsultar: TSpeedButton;
     Panel6: TPanel;
     sbExcluir: TSpeedButton;
     Panel5: TPanel;
     sbSalvar: TSpeedButton;
+    EditNome: TLabeledEdit;
+    procedure sbSalvarClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure sbConsultarClick(Sender: TObject);
+    procedure sbExcluirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -38,7 +42,50 @@ var
   frmCadMedico: TfrmCadMedico;
 
 implementation
+   uses
+     uController, formEditResp;
 
 {$R *.dfm}
+
+procedure TfrmCadMedico.FormActivate(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pPopulaComboBox(self.cbConsultorio, 3);
+  self.sbExcluir.Enabled := false;
+  self.EditNome.SetFocus;
+end;
+
+procedure TfrmCadMedico.sbConsultarClick(Sender: TObject);
+begin
+  frmEditResp := TfrmEditResp.Create(nil);
+  controller := TController.Create;
+  controller.pPopulaDBGrid('select * from TCADMED');
+
+
+  frmEditResp.Caption := 'CONSULTA DE MÉDICOS ';
+  frmEditResp.Tag := 5;
+  frmEditResp.ShowModal;
+
+  if (self.EditNome.Text <> '') then
+     self.sbExcluir.Enabled := true;
+end;
+
+procedure TfrmCadMedico.sbExcluirClick(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pExcluiMedico;
+end;
+
+procedure TfrmCadMedico.sbSalvarClick(Sender: TObject);
+var
+   controller : TController;
+begin
+  controller := TController.Create;
+  controller.pCadMedico;
+end;
 
 end.

@@ -31,6 +31,9 @@ type
     Panel7: TPanel;
     sbConsultar: TSpeedButton;
     procedure sbSalvarClick(Sender: TObject);
+    procedure sbConsultarClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure sbExcluirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -42,10 +45,38 @@ var
 
 implementation
 uses
-  uController;
+  uController, formEditResp;
 
 {$R *.dfm}
 
+
+procedure TfrmConsultorio.FormActivate(Sender: TObject);
+begin
+  self.sbExcluir.Enabled := false;
+end;
+
+procedure TfrmConsultorio.sbConsultarClick(Sender: TObject);
+begin
+  frmEditResp := TfrmEditResp.Create(nil);
+  controller := TController.Create;
+  controller.pPopulaDBGrid('select * from TCADCON');
+
+
+  frmEditResp.Caption := 'CONSULTA DE CONSULTÓRIOS ';
+  frmEditResp.Tag := 4;
+  frmEditResp.ShowModal;
+
+  if (self.edtNomeConsultorio.Text <> '') then
+     self.sbExcluir.Enabled := true;
+end;
+
+procedure TfrmConsultorio.sbExcluirClick(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pExcluiConsultorio;
+end;
 
 procedure TfrmConsultorio.sbSalvarClick(Sender: TObject);
 var

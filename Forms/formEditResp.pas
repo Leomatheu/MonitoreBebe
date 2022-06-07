@@ -29,7 +29,7 @@ implementation
 {$R *.dfm}
 
 uses
-  formCadResp, formCadCrianca, formAlimentacao, uDao, uController, formConsultorio;
+  formCadResp, formCadCrianca, formAlimentacao, uDao, uController, formConsultorio, formCadMedico;
 
 { TfrmEditResp }
 
@@ -60,7 +60,7 @@ begin
       frmCadResp.edtEndereco.Text := self.DBGrid1.Fields[13].Value;
       frmCadResp.edtCodigo.Text := self.DBGrid1.Fields[0].Value;
       foto := self.DBGrid1.DataSource.DataSet.CreateBlobStream(self.DBGrid1.Fields[14], bmRead);
-      //frmCadResp.imgCadResp.Picture.LoadFromStream(foto);
+      frmCadResp.imgCadResp.Picture.LoadFromStream(foto);
       frmCadResp.Tag := 1;
     end;
 
@@ -122,8 +122,23 @@ begin
       frmConsultorio.edtCidade.Text := self.DBGrid1.Fields[6].Value;
       frmConsultorio.edtBairro.Text := self.DBGrid1.Fields[7].Value;
       frmConsultorio.edtEndereco.Text := self.DBGrid1.Fields[8].Value;
-
       frmConsultorio.sbSalvar.Enabled := false;
+      frmConsultorio.sbExcluir.Enabled := true;
+
+      controller.pCamposConsultorioEnabled(false);
+    end;
+
+    5:
+    begin
+      frmCadMedico.edtCodigo.Text := self.DBGrid1.Fields[0].Value;
+      frmCadMedico.EditNome.Text := self.DBGrid1.Fields[1].Value;
+      frmCadMedico.edtTelefone.Text := self.DBGrid1.Fields[2].Value;
+      frmCadMedico.edtEmail.Text := self.DBGrid1.Fields[3].Value;
+      frmCadMedico.edtEspecialidade.Text := self.DBGrid1.Fields[4].Value;
+      frmCadMedico.edtCRM.Text := self.DBGrid1.fields[5].Value;
+      frmCadMedico.cbConsultorio.Text := IntToStr(self.DBGrid1.Fields[0].Value)+' - '+self.DBGrid1.Fields[1].Value;
+      frmCadMedico.Tag := 1;
+      frmCadMedico.sbExcluir.Enabled := true;
     end;
    end;
 
@@ -141,7 +156,11 @@ begin
   if (self.tag = 2) then
      controller.pPopulaDBGrid('select * from TCADCRI where nomeCrianca like "%'+Self.edtBusca.Text+'%";');
 
+  if (self.Tag = 4) then
+     controller.pPopulaDBGrid('select * from TCADCON where nomeConsultorio like "%'+Self.edtBusca.Text+'%";');
 
+  if (self.tag = 5) then
+     controller.pPopulaDBGrid('select * from TCADMED where nomeMedico like "%'+Self.edtBusca.Text+'%";');
 end;
 
 end.

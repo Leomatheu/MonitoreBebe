@@ -5,7 +5,7 @@ interface
 uses
   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage,
   uCrianca, formCadCrianca, Vcl.StdCtrls, Vcl.Forms, formAlimentacao, uAlimentacao,
-  uConsultorio, formConsultorio;
+  uConsultorio, formConsultorio, formCadMedico, uMedico;
 
 type
   TController = class
@@ -17,7 +17,10 @@ type
     procedure pExcluiCrianca;
     procedure pCadAlimentacao;
     procedure pExcluiAlimentacao;
+    procedure pExcluiMedico;
+    procedure pExcluiConsultorio;
     procedure pCadConsultorio;
+    procedure pCadMedico;
     function fTiraPonto(prText: String): String;
     function fRetornaDirFoto: String;
     procedure pMessage(prCaption: String; prColor: integer; prLabel: String; prFoto: String);
@@ -26,8 +29,11 @@ type
     procedure plimpaTelaCri;
     procedure pLimpaTelaResp;
     procedure pLimpaTelaAlim;
-    procedure pCamposAlimEnabled(prEnabled : boolean);
     procedure pLimpaTelaCon;
+    procedure pLimpaTelaMed;
+    procedure pCamposAlimEnabled(prEnabled : boolean);
+    procedure pCamposConsultorioEnabled(prEnabled : Boolean);
+
 
   end;
 
@@ -189,12 +195,53 @@ begin
 
 end;
 
+procedure TController.pCadMedico;
+var
+  objMedico : TMedico;
+begin
+  objMedico := TMedico.Create;
+
+  objMedico.setNome(frmCadMedico.EditNome.Text);
+  objMedico.setTelefone(frmCadMedico.edtTelefone.Text);
+  objMedico.setEmail(frmCadMedico.edtEmail.Text);
+  objMedico.setEspecialidade(frmCadMedico.edtEspecialidade.Text);
+  objMedico.setCrm(frmCadMedico.edtCRM.Text);
+  objMedico.setIdConsultorio(TConsultorio(frmCadMedico.cbConsultorio.Items.Objects[frmCadMedico.cbConsultorio.ItemIndex]).getIdConsultorio);
+
+  if not (frmCadMedico.Tag = 1) then
+     begin
+       if (DataModule1.fInsertMedico(objMedico)) then
+         begin
+            self.pMessage('INSERÇÃO DE MÉDICO REALIZADA', $00FF9D9D, 'Inserção de médico realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+            self.pLimpaTelaMed;
+         end
+       else
+         begin
+           self.pMessage('FALHA NA INSERÇÃO DE MÉDICO', $009F9FFF, 'Falha na inserção de médico verifique os dados !!',ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+           self.pLimpaTelaMed;
+         end;
+     end
+  else
+     begin
+       objMedico.setIdmedico(StrToInt(frmCadMedico.edtCodigo.Text));
+       if (DataModule1.fAlteraMedico(objMedico)) then
+         begin
+            self.pMessage('ALTERAÇÃO DE MÉDICO REALIZADA', $00FF9D9D, 'Alteração de médico realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+            self.pLimpaTelaMed;
+         end
+       else
+         begin
+           self.pMessage('FALHA NA ALTERAÇÃO DE MÉDICO', $009F9FFF, 'Falha na alteração de médico verifique os dados !!',ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+           self.pLimpaTelaMed;
+         end;
+     end;
+end;
+
 {Processos utilizados pelo responsável}
 procedure TController.pCadResponsavel;
 var
   Dao: TDataModule1;
   objResp: TResponsavel;
-  wEndCompleto: String;
   wValor: String;
 begin
   Dao := TDataModule1.Create(nil);
@@ -262,6 +309,18 @@ begin
   frmAlimentacao.mmObservacoes.Enabled := prEnabled;
 end;
 
+procedure TController.pCamposConsultorioEnabled(prEnabled: Boolean);
+begin
+  frmConsultorio.edtNomeConsultorio.Enabled := prEnabled;
+  frmConsultorio.edtCEP.Enabled := prEnabled;
+  frmConsultorio.edtEstado.Enabled := prEnabled;
+  frmConsultorio.edtCidade.Enabled := prEnabled;
+  frmConsultorio.edtBairro.Enabled := prEnabled;
+  frmConsultorio.edtEndereco.Enabled := prEnabled;
+  frmConsultorio.edtEmail.Enabled := prEnabled;
+  frmConsultorio.edtTelefone.Enabled := prEnabled;
+end;
+
 procedure TController.pExcluiAlimentacao;
 begin
   if (DataModule1.fDeleteAlimentacao(StrToInt(frmAlimentacao.edtCodigo.Text))) then
@@ -275,6 +334,22 @@ begin
        self.pMessage('FALHA NA EXCLUSÃO DA ALIMENTAÇÃO', $009F9FFF, 'Falha na exclusão da alimentação, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
        self.pLimpaTelaAlim;
     end;
+end;
+
+procedure TController.pExcluiConsultorio;
+begin
+  if (DataModule1.fDeleteConsultorio(StrToInt(frmConsultorio.edtCodigo.Text))) then
+     begin
+       self.pMessage('CONSULTÓRIO EXCLUÍDO', $00C4C4FF, 'Exclusão de consultório realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+       self.pCamposConsultorioEnabled(true);
+       self.pLimpaTelaCon;
+       frmConsultorio.sbSalvar.Enabled := true;
+     end
+  else
+     begin
+       self.pMessage('FALHA NA EXCLUSÃO DO CONSULTÓRIO', $009F9FFF, 'Falha na exclusão do consultório, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+       self.pLimpaTelaCon
+     end;
 end;
 
 procedure TController.pExcluiCrianca;
@@ -292,6 +367,20 @@ begin
      begin
        self.pMessage('FALHA NA EXCLUSÃO DA CRIANÇA', $009F9FFF, 'Falha na exclusão da criança, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
        self.plimpaTelaCri;
+     end;
+end;
+
+procedure TController.pExcluiMedico;
+begin
+  if (DataModule1.fDeleteMedico(StrToInt(frmCadMedico.edtCodigo.Text))) then
+     begin
+       self.pMessage('MÉDICO EXCLUÍDO', $00FF9D9D, 'Exclusão de médico realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+       self.pLimpaTelaMed;
+     end
+  else
+     begin
+       self.pMessage('FALHA NA EXCLUSÃO DE MÉDICO', $009F9FFF, 'Falha na exclusão de médico, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+       self.pLimpaTelaMed;
      end;
 end;
 
@@ -359,6 +448,18 @@ begin
   frmCadCrianca.imgCadCri.Picture.LoadFromFile(ExtractFilePath(Application.Exename) + 'Images\fotoPerfil.jpg');
 end;
 
+procedure TController.pLimpaTelaMed;
+begin
+  frmCadMedico.EditNome.Clear;
+  frmCadMedico.edtEmail.Clear;
+  frmCadMedico.edtTelefone.Clear;
+  frmCadMedico.edtCRM.Clear;
+  frmCadMedico.edtCodigo.Clear;
+  frmCadMedico.cbConsultorio.Text := 'Selecione...';
+  frmCadMedico.edtEspecialidade.Clear;
+  frmCadMedico.sbExcluir.Enabled := false;
+end;
+
 procedure TController.pLimpaTelaResp;
 begin
   frmCadResp.edtNome.Clear;
@@ -420,6 +521,16 @@ begin
           ' - ' + TCrianca(lista.Items[i]).getNomeCrianca, lista[i]);
         end;
     end;
+  3:
+    begin
+      lista := DataModule1.fSelectConsultorio;
+      for i := 0 to lista.Count -1 do
+        begin
+          prComboBox.AddItem(IntToStr(TConsultorio(lista.Items[i]).getIdConsultorio) +
+          ' - ' + TConsultorio(lista.Items[i]).getNomeConsultorio, lista[i]);
+        end;
+    end;
+
   end;
 
 end;

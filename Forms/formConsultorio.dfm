@@ -12,6 +12,7 @@ object frmConsultorio: TfrmConsultorio
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -23,6 +24,7 @@ object frmConsultorio: TfrmConsultorio
     Color = 12895487
     ParentBackground = False
     TabOrder = 0
+    ExplicitLeft = -7
     object Label1: TLabel
       Left = 32
       Top = 393
@@ -124,6 +126,8 @@ object frmConsultorio: TfrmConsultorio
       Top = 96
       Width = 425
       Height = 209
+      Color = 12895487
+      ParentBackground = False
       TabOrder = 4
       object edtCEP: TLabeledEdit
         Left = 16
@@ -438,11 +442,9 @@ object frmConsultorio: TfrmConsultorio
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 64
-        ExplicitTop = -1
-        ExplicitWidth = 94
         OnClick = sbSalvarClick
         ExplicitLeft = 32
+        ExplicitTop = -1
         ExplicitWidth = 125
       end
     end
@@ -468,9 +470,8 @@ object frmConsultorio: TfrmConsultorio
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 72
+        OnClick = sbExcluirClick
         ExplicitTop = 2
-        ExplicitWidth = 86
       end
     end
     object Panel7: TPanel
@@ -495,10 +496,8 @@ object frmConsultorio: TfrmConsultorio
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 64
-        ExplicitTop = 6
-        ExplicitWidth = 23
-        ExplicitHeight = 22
+        OnClick = sbConsultarClick
+        ExplicitTop = 2
       end
     end
   end

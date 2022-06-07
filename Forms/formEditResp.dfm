@@ -4,7 +4,7 @@ object frmEditResp: TfrmEditResp
   BorderIcons = [biSystemMenu]
   Caption = 'frmEditResp'
   ClientHeight = 447
-  ClientWidth = 877
+  ClientWidth = 1015
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,7 +17,7 @@ object frmEditResp: TfrmEditResp
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 877
+    Width = 1015
     Height = 447
     Align = alClient
     Caption = 'Panel1'
@@ -27,7 +27,7 @@ object frmEditResp: TfrmEditResp
     object DBGrid1: TDBGrid
       Left = 1
       Top = 72
-      Width = 875
+      Width = 1013
       Height = 374
       Align = alBottom
       BorderStyle = bsNone
