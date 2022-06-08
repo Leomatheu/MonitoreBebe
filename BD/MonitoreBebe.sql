@@ -49,7 +49,6 @@ idCrianca int,
 foreign key (idCrianca) references TCADCRI(idCrianca) on delete restrict
 );
 
-select * from TCADCON;
 create table TCADCON(
 idConsultorio int not null auto_increment primary key,
 nomeConsultorio varchar(70),
@@ -59,10 +58,9 @@ cidade varchar(50),
 bairro varchar(50),
 endereco varchar(70),
 telefone varchar(50),
-email varchar(15)
+email varchar(50)
 );
 
-select * from TCADMED;
 create table TCADMED(
 idMedico int not null auto_increment primary key,
 nomeMedico varchar(50),
@@ -105,6 +103,34 @@ responsavel varchar(50),
 idCrianca int,
 foreign key (idCrianca) references TCADCRI(idCrianca) on delete restrict
 );
+
+create table TCONVACI(
+idVacina int not null auto_increment primary key,
+dataVacina varchar(10),
+horaVacina varchar(5),
+nomeVacina varchar(100),
+localVacina varchar(100),
+nomeProfissional varchar(100),
+responsavel varchar(100),
+proximaAplicacao varchar(10)
+);
+
+create table TCONCONSULTA(
+idConsulta int not null auto_increment primary key,
+dataConsulta varchar(10),
+horaConsulta varchar(5),
+motivoConsulta varchar(100),
+acompanhante varchar(100),
+descricaoExame varchar(200),
+dataRetorno varchar(10),
+valorConsulta float,
+observacoes varchar(200),
+idMedico int,
+idConsultorio int,
+foreign key (idMedico) references TCADMED(idMedico),
+foreign key (idConsultorio) references TCADCON(idConsultorio)
+);
+
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';

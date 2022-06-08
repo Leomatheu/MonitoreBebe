@@ -14,9 +14,9 @@ uses
   formAlimentacao in '..\Forms\formAlimentacao.pas' {frmAlimentacao},
   uAlimentacao in '..\Units\uAlimentacao.pas',
   uConsultorio in '..\Units\uConsultorio.pas',
-  formCadMedico in '..\Forms\formCadMedico.pas' {frmCadMedico},
   uMedico in '..\Units\uMedico.pas',
-  formConsultorio in '..\Forms\formConsultorio.pas' {frmConsultorio};
+  formConsultorio in '..\Forms\formConsultorio.pas' {frmConsultorio},
+  formCadMedico in '..\Forms\formCadMedico.pas' {frmCadMedico};
 
 begin
   Application.Initialize;
@@ -25,5 +25,6 @@ begin
   Controller := TController.Create;
   Application.CreateForm(TfrmMenu, frmMenu);
   Application.CreateForm(TfrmConsultorio, frmConsultorio);
+  Application.CreateForm(TfrmCadMedico, frmCadMedico);
   Application.Run;
 end.

@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2022/06/06 09:57:24.518,=C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Units\uConsultorio.pas</Transaction>
-    <Transaction>2022/06/06 10:05:19.760,=C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Forms\formCadMedico.pas</Transaction>
-    <Transaction>2022/06/06 10:05:51.444,=C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Units\uMedico.pas</Transaction>
-    <Transaction>2022/06/06 10:25:03.279,C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Forms\formConsultorio.pas=</Transaction>
-    <Transaction>2022/06/06 10:25:28.014,=C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Forms\formConsultorio.pas</Transaction>
-    <Transaction>2022/06/06 10:26:07.618,C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Forms\formConsultorio.pas=</Transaction>
-    <Transaction>2022/06/06 10:31:37.111,=C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Forms\formConsultorio.pas</Transaction>
+	<Transactions>
+    <Transaction>2022/06/06 09:57:24.000.518,=C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Units\uConsultorio.pas</Transaction>
+    <Transaction>2022/06/06 10:05:19.000.760,=C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Forms\formCadMedico.pas</Transaction>
+    <Transaction>2022/06/06 10:05:51.000.444,=C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Units\uMedico.pas</Transaction>
+    <Transaction>2022/06/06 10:25:03.000.279,C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Forms\formConsultorio.pas=</Transaction>
+    <Transaction>2022/06/06 10:25:28.000.014,=C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Forms\formConsultorio.pas</Transaction>
+    <Transaction>2022/06/06 10:26:07.000.618,C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Forms\formConsultorio.pas=</Transaction>
+    <Transaction>2022/06/06 10:31:37.000.111,=C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Forms\formConsultorio.pas</Transaction>
   </Transactions>
 </BorlandProject>
