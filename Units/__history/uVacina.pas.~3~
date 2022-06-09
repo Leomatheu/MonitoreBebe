@@ -1,0 +1,29 @@
+unit uVacina;
+
+interface
+  uses
+    Vcl.ExtCtrls;
+
+
+  Type TVacina = class
+
+    private
+       idVacina : integer;
+       dataVacina : String;
+       horaVacina : String;
+       nomeVacina : String;
+       localVacina : String;
+       nomeProfissional : String;
+       responsavel : String;
+       proximaAplicacao : String;
+
+    public
+
+
+
+
+  end;
+
+implementation
+
+end.

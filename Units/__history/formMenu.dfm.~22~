@@ -42021,7 +42021,8 @@ object frmMenu: TfrmMenu
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitTop = 0
+        ExplicitLeft = 2
+        ExplicitTop = 2
       end
     end
     object Panel6: TPanel
@@ -42110,7 +42111,6 @@ object frmMenu: TfrmMenu
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        OnClick = sbControleConsultasClick
         ExplicitTop = 2
       end
     end

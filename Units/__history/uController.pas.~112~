@@ -5,12 +5,13 @@ interface
 uses
   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage,
   uCrianca, formCadCrianca, Vcl.StdCtrls, Vcl.Forms, formAlimentacao, uAlimentacao,
-  uConsultorio, formConsultorio, formCadMedico, uMedico;
+  uConsultorio, formConsultorio, formCadMedico, uMedico, uVacina, formContVacina;
 
 type
   TController = class
 
   public
+    procedure pCadVacina;
     procedure pCadResponsavel;
     procedure pExcluiResponsavel;
     procedure pCadCrianca;
@@ -296,6 +297,16 @@ begin
   end;
 end;
 
+procedure TController.pCadVacina;
+var
+  objVacina : TVacina;
+begin
+  objVacina := TVacina.Create;
+
+  objVacina.setDataVacina(frmContVacina.ed)
+
+end;
+
 procedure TController.pCamposAlimEnabled(prEnabled : boolean);
 begin
   frmAlimentacao.edtAcompanhante.Enabled := prEnabled;
@@ -341,8 +352,9 @@ begin
   if (DataModule1.fDeleteConsultorio(StrToInt(frmConsultorio.edtCodigo.Text))) then
      begin
        self.pMessage('CONSULTÓRIO EXCLUÍDO', $00C4C4FF, 'Exclusão de consultório realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
-       self.pLimpaTelaCon;
        self.pCamposConsultorioEnabled(true);
+       self.pLimpaTelaCon;
+       frmConsultorio.sbSalvar.Enabled := true;
      end
   else
      begin

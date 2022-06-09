@@ -101,7 +101,7 @@ quantidade int,
 valorUnitario double,
 responsavel varchar(50),
 idCrianca int,
-foreign key (idCrianca) references TCADCRI(idCrianca) on delete restrict
+foreign key (idCrianca) references TCADCRI(idCrianca)
 );
 
 create table TCONVACI(
@@ -112,23 +112,9 @@ nomeVacina varchar(100),
 localVacina varchar(100),
 nomeProfissional varchar(100),
 responsavel varchar(100),
-proximaAplicacao varchar(10)
-);
-
-create table TCONCONSULTA(
-idConsulta int not null auto_increment primary key,
-dataConsulta varchar(10),
-horaConsulta varchar(5),
-motivoConsulta varchar(100),
-acompanhante varchar(100),
-descricaoExame varchar(200),
-dataRetorno varchar(10),
-valorConsulta float,
-observacoes varchar(200),
-idMedico int,
-idConsultorio int,
-foreign key (idMedico) references TCADMED(idMedico),
-foreign key (idConsultorio) references TCADCON(idConsultorio)
+proximaAplicacao varchar(10),
+idCrianca int,
+foreign key (idCrianca) references TCADCRI(idCrianca)
 );
 
 

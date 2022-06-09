@@ -5,18 +5,21 @@ interface
 uses
   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage,
   uCrianca, formCadCrianca, Vcl.StdCtrls, Vcl.Forms, formAlimentacao, uAlimentacao,
-  uConsultorio, formConsultorio, formCadMedico, uMedico;
+  uConsultorio, formConsultorio, formCadMedico, uMedico, uVacina, formContVacina;
 
 type
   TController = class
 
   public
+    procedure pCadVacina;
     procedure pCadResponsavel;
     procedure pExcluiResponsavel;
     procedure pCadCrianca;
     procedure pExcluiCrianca;
     procedure pCadAlimentacao;
     procedure pExcluiAlimentacao;
+    procedure pExcluiMedico;
+    procedure pExcluiConsultorio;
     procedure pCadConsultorio;
     procedure pCadMedico;
     function fTiraPonto(prText: String): String;
@@ -30,6 +33,7 @@ type
     procedure pLimpaTelaCon;
     procedure pLimpaTelaMed;
     procedure pCamposAlimEnabled(prEnabled : boolean);
+    procedure pCamposConsultorioEnabled(prEnabled : Boolean);
 
 
   end;
@@ -293,6 +297,16 @@ begin
   end;
 end;
 
+procedure TController.pCadVacina;
+var
+  objVacina : TVacina;
+begin
+  objVacina := TVacina.Create;
+
+  objVacina.setDataVacina(frmContVacina.ed)
+
+end;
+
 procedure TController.pCamposAlimEnabled(prEnabled : boolean);
 begin
   frmAlimentacao.edtAcompanhante.Enabled := prEnabled;
@@ -304,6 +318,18 @@ begin
   frmAlimentacao.rbBastante.Enabled := prEnabled;
   frmAlimentacao.cbCrianca.Enabled := prEnabled;
   frmAlimentacao.mmObservacoes.Enabled := prEnabled;
+end;
+
+procedure TController.pCamposConsultorioEnabled(prEnabled: Boolean);
+begin
+  frmConsultorio.edtNomeConsultorio.Enabled := prEnabled;
+  frmConsultorio.edtCEP.Enabled := prEnabled;
+  frmConsultorio.edtEstado.Enabled := prEnabled;
+  frmConsultorio.edtCidade.Enabled := prEnabled;
+  frmConsultorio.edtBairro.Enabled := prEnabled;
+  frmConsultorio.edtEndereco.Enabled := prEnabled;
+  frmConsultorio.edtEmail.Enabled := prEnabled;
+  frmConsultorio.edtTelefone.Enabled := prEnabled;
 end;
 
 procedure TController.pExcluiAlimentacao;
@@ -321,6 +347,22 @@ begin
     end;
 end;
 
+procedure TController.pExcluiConsultorio;
+begin
+  if (DataModule1.fDeleteConsultorio(StrToInt(frmConsultorio.edtCodigo.Text))) then
+     begin
+       self.pMessage('CONSULTÓRIO EXCLUÍDO', $00C4C4FF, 'Exclusão de consultório realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+       self.pCamposConsultorioEnabled(true);
+       self.pLimpaTelaCon;
+       frmConsultorio.sbSalvar.Enabled := true;
+     end
+  else
+     begin
+       self.pMessage('FALHA NA EXCLUSÃO DO CONSULTÓRIO', $009F9FFF, 'Falha na exclusão do consultório, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+       self.pLimpaTelaCon
+     end;
+end;
+
 procedure TController.pExcluiCrianca;
 var
   Dao : TDataModule1;
@@ -336,6 +378,20 @@ begin
      begin
        self.pMessage('FALHA NA EXCLUSÃO DA CRIANÇA', $009F9FFF, 'Falha na exclusão da criança, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
        self.plimpaTelaCri;
+     end;
+end;
+
+procedure TController.pExcluiMedico;
+begin
+  if (DataModule1.fDeleteMedico(StrToInt(frmCadMedico.edtCodigo.Text))) then
+     begin
+       self.pMessage('MÉDICO EXCLUÍDO', $00FF9D9D, 'Exclusão de médico realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+       self.pLimpaTelaMed;
+     end
+  else
+     begin
+       self.pMessage('FALHA NA EXCLUSÃO DE MÉDICO', $009F9FFF, 'Falha na exclusão de médico, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+       self.pLimpaTelaMed;
      end;
 end;
 

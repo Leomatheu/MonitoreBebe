@@ -14,6 +14,7 @@ object frmCadMedico: TfrmCadMedico
   FormStyle = fsMDIForm
   OldCreateOrder = False
   Position = poScreenCenter
+  OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -27,7 +28,6 @@ object frmCadMedico: TfrmCadMedico
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitLeft = 438
     ExplicitTop = -1
     object Panel4: TPanel
       Left = 27
@@ -646,7 +646,8 @@ object frmCadMedico: TfrmCadMedico
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFF}
         Stretch = True
-        ExplicitHeight = 136
+        ExplicitTop = 40
+        ExplicitHeight = 105
       end
     end
     object Panel7: TPanel
@@ -658,11 +659,10 @@ object frmCadMedico: TfrmCadMedico
       ParentBackground = False
       TabOrder = 1
       object sbConsultar: TSpeedButton
-        Left = 1
-        Top = 1
-        Width = 154
+        Left = 32
+        Top = 2
+        Width = 123
         Height = 26
-        Align = alClient
         Caption = 'Consultar'
         Flat = True
         Font.Charset = ANSI_CHARSET
@@ -671,7 +671,7 @@ object frmCadMedico: TfrmCadMedico
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitTop = 2
+        OnClick = sbConsultarClick
       end
     end
     object Panel6: TPanel
@@ -683,11 +683,10 @@ object frmCadMedico: TfrmCadMedico
       ParentBackground = False
       TabOrder = 2
       object sbExcluir: TSpeedButton
-        Left = 1
-        Top = 1
-        Width = 157
+        Left = 56
+        Top = 0
+        Width = 102
         Height = 26
-        Align = alClient
         Caption = 'Excluir'
         Flat = True
         Font.Charset = ANSI_CHARSET
@@ -696,9 +695,7 @@ object frmCadMedico: TfrmCadMedico
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 72
-        ExplicitTop = 2
-        ExplicitWidth = 86
+        OnClick = sbExcluirClick
       end
     end
     object Panel5: TPanel
@@ -710,11 +707,10 @@ object frmCadMedico: TfrmCadMedico
       ParentBackground = False
       TabOrder = 3
       object sbSalvar: TSpeedButton
-        Left = 1
-        Top = 1
-        Width = 157
+        Left = 48
+        Top = 0
+        Width = 110
         Height = 26
-        Align = alClient
         Caption = 'Salvar'
         Flat = True
         Font.Charset = ANSI_CHARSET
@@ -724,7 +720,6 @@ object frmCadMedico: TfrmCadMedico
         Font.Style = []
         ParentFont = False
         OnClick = sbSalvarClick
-        ExplicitTop = 0
       end
     end
   end
@@ -765,24 +760,8 @@ object frmCadMedico: TfrmCadMedico
       Font.Style = []
       ParentFont = False
     end
-    object LabeledEdit1: TLabeledEdit
-      Left = 16
-      Top = 39
-      Width = 385
-      Height = 21
-      EditLabel.Width = 32
-      EditLabel.Height = 15
-      EditLabel.Caption = 'Nome'
-      EditLabel.Font.Charset = ANSI_CHARSET
-      EditLabel.Font.Color = clWindowText
-      EditLabel.Font.Height = -11
-      EditLabel.Font.Name = 'Fixedsys'
-      EditLabel.Font.Style = []
-      EditLabel.ParentFont = False
-      TabOrder = 0
-    end
     object edtEmail: TLabeledEdit
-      Left = 16
+      Left = 17
       Top = 110
       Width = 385
       Height = 21
@@ -804,7 +783,7 @@ object frmCadMedico: TfrmCadMedico
       Height = 21
       EditMask = '!\(999\)0000-0000;1; '
       MaxLength = 14
-      TabOrder = 2
+      TabOrder = 5
       Text = '(   )    -    '
     end
     object edtCRM: TLabeledEdit
@@ -821,7 +800,7 @@ object frmCadMedico: TfrmCadMedico
       EditLabel.Font.Name = 'Fixedsys'
       EditLabel.Font.Style = []
       EditLabel.ParentFont = False
-      TabOrder = 3
+      TabOrder = 4
     end
     object edtEspecialidade: TLabeledEdit
       Left = 17
@@ -837,9 +816,9 @@ object frmCadMedico: TfrmCadMedico
       EditLabel.Font.Name = 'Fixedsys'
       EditLabel.Font.Style = []
       EditLabel.ParentFont = False
-      TabOrder = 4
+      TabOrder = 3
     end
-    object ComboBox1: TComboBox
+    object cbConsultorio: TComboBox
       Left = 16
       Top = 187
       Width = 385
@@ -850,7 +829,7 @@ object frmCadMedico: TfrmCadMedico
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 5
+      TabOrder = 2
       Text = 'Selecione...'
     end
     object edtCodigo: TLabeledEdit
@@ -875,6 +854,22 @@ object frmCadMedico: TfrmCadMedico
       Font.Style = []
       ParentFont = False
       TabOrder = 6
+    end
+    object EditNome: TLabeledEdit
+      Left = 17
+      Top = 40
+      Width = 384
+      Height = 21
+      EditLabel.Width = 32
+      EditLabel.Height = 15
+      EditLabel.Caption = 'Nome'
+      EditLabel.Font.Charset = DEFAULT_CHARSET
+      EditLabel.Font.Color = clWindowText
+      EditLabel.Font.Height = -11
+      EditLabel.Font.Name = 'Fixedsys'
+      EditLabel.Font.Style = []
+      EditLabel.ParentFont = False
+      TabOrder = 0
     end
   end
 end
