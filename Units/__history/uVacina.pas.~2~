@@ -1,0 +1,19 @@
+unit uVacina;
+
+interface
+  uses
+    Vcl.ExtCtrls;
+
+
+  Type TVacina = class
+
+    private
+
+
+
+
+  end;
+
+implementation
+
+end.

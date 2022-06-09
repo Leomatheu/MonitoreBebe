@@ -16,7 +16,9 @@ uses
   uConsultorio in '..\Units\uConsultorio.pas',
   uMedico in '..\Units\uMedico.pas',
   formConsultorio in '..\Forms\formConsultorio.pas' {frmConsultorio},
-  formCadMedico in '..\Forms\formCadMedico.pas' {frmCadMedico};
+  formCadMedico in '..\Forms\formCadMedico.pas' {frmCadMedico},
+  uVacina in '..\Units\uVacina.pas',
+  formContVacina in '..\Forms\formContVacina.pas' {frmContVacina};
 
 begin
   Application.Initialize;
@@ -24,7 +26,6 @@ begin
   DataModule1 := TDataModule1.Create(nil);
   Controller := TController.Create;
   Application.CreateForm(TfrmMenu, frmMenu);
-  Application.CreateForm(TfrmConsultorio, frmConsultorio);
-  Application.CreateForm(TfrmCadMedico, frmCadMedico);
+  Application.CreateForm(TfrmContVacina, frmContVacina);
   Application.Run;
 end.

@@ -5,12 +5,13 @@ interface
 uses
   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage,
   uCrianca, formCadCrianca, Vcl.StdCtrls, Vcl.Forms, formAlimentacao, uAlimentacao,
-  uConsultorio, formConsultorio, formCadMedico, uMedico;
+  uConsultorio, formConsultorio, formCadMedico, uMedico, uVacina, formContVacina;
 
 type
   TController = class
 
   public
+    procedure pCadVacina;
     procedure pCadResponsavel;
     procedure pExcluiResponsavel;
     procedure pCadCrianca;
@@ -294,6 +295,34 @@ begin
     end;
 
   end;
+end;
+
+procedure TController.pCadVacina;
+var
+  objVacina : TVacina;
+begin
+  objVacina := TVacina.Create;
+
+  objVacina.setDataVacina(frmContVacina.edtData.Text);
+  objVacina.setHoraVacina(frmContVacina.edtHora.Text);
+  objVacina.setNomeVacina(frmContVacina.edtNomeVacina.Text);
+
+  if (frmContVacina.rbPostoSaude.Checked = true) then
+     objVacina.setLocalVacina(frmContVacina.rbPostoSaude.Caption +' '+frmContVacina.edtComplemento.Text)
+  else
+     if (frmContVacina.rbHospital.Checked = true) then
+        objVacina.setLocalVacina(frmContVacina.rbHospital.Caption +' '+frmContVacina.edtComplemento.Text)
+     else
+       if (frmContVacina.rbConsultorio.Checked = true) then
+          objVacina.setLocalVacina(frmContVacina.rbConsultorio.Caption +' '+frmContVacina.edtComplemento.Text)
+       else
+          objVacina.setLocalVacina(frmContVacina.rbOutros.Caption +' '+frmContVacina.edtComplemento.Text);
+
+  objVacina.setNomeProfissional(frmContVacina.edtNomeProfissional.Text);
+  objVacina.setResponsavel(frmContVacina.edtAcompanhante.Text);
+  objVacina.setProximaAplicacao(frmContVacina.edtProximaData.Text);
+  objVacina.setIdCrianca(TCrianca(frmContVacina.cbCrianca.Items.Objects[frmContVacina.cbCrianca.ItemIndex]).getIdCrianca);
+
 end;
 
 procedure TController.pCamposAlimEnabled(prEnabled : boolean);

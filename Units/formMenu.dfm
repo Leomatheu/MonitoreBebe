@@ -42021,6 +42021,7 @@ object frmMenu: TfrmMenu
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
+        OnClick = sbControleVacinaClick
         ExplicitTop = 0
       end
     end

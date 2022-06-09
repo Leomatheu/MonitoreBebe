@@ -28,6 +28,8 @@ object frmCadMedico: TfrmCadMedico
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
+    ExplicitLeft = 438
+    ExplicitTop = -1
     object Panel4: TPanel
       Left = 27
       Top = 22
@@ -645,11 +647,12 @@ object frmCadMedico: TfrmCadMedico
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFF}
         Stretch = True
-        ExplicitHeight = 136
+        ExplicitTop = 40
+        ExplicitHeight = 105
       end
     end
     object Panel7: TPanel
-      Left = 16
+      Left = 18
       Top = 274
       Width = 156
       Height = 28
@@ -671,7 +674,9 @@ object frmCadMedico: TfrmCadMedico
         Font.Style = []
         ParentFont = False
         OnClick = sbConsultarClick
+        ExplicitLeft = 32
         ExplicitTop = 2
+        ExplicitWidth = 123
       end
     end
     object Panel6: TPanel
@@ -697,9 +702,9 @@ object frmCadMedico: TfrmCadMedico
         Font.Style = []
         ParentFont = False
         OnClick = sbExcluirClick
-        ExplicitLeft = 72
-        ExplicitTop = 2
-        ExplicitWidth = 86
+        ExplicitLeft = 56
+        ExplicitTop = 0
+        ExplicitWidth = 102
       end
     end
     object Panel5: TPanel
@@ -725,7 +730,9 @@ object frmCadMedico: TfrmCadMedico
         Font.Style = []
         ParentFont = False
         OnClick = sbSalvarClick
-        ExplicitTop = 0
+        ExplicitLeft = 48
+        ExplicitTop = -1
+        ExplicitWidth = 110
       end
     end
   end
