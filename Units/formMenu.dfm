@@ -42110,6 +42110,7 @@ object frmMenu: TfrmMenu
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
+        OnClick = sbControleConsultasClick
         ExplicitTop = 2
       end
     end

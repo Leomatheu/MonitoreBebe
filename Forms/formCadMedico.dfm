@@ -671,7 +671,9 @@ object frmCadMedico: TfrmCadMedico
         Font.Style = []
         ParentFont = False
         OnClick = sbConsultarClick
+        ExplicitLeft = 16
         ExplicitTop = 2
+        ExplicitWidth = 139
       end
     end
     object Panel6: TPanel
@@ -725,7 +727,9 @@ object frmCadMedico: TfrmCadMedico
         Font.Style = []
         ParentFont = False
         OnClick = sbSalvarClick
+        ExplicitLeft = 24
         ExplicitTop = 0
+        ExplicitWidth = 134
       end
     end
   end

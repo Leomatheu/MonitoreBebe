@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, uAlimentacao,
-  Vcl.Forms, uConsultorio, uMedico;
+  Vcl.Forms, uConsultorio, uMedico, uConsulta;
 
 
 type
@@ -29,6 +29,7 @@ type
     function pAlteraResponsavel(prObjResponsavel : TResponsavel):Boolean;
     function fAlteraMedico(prObjMedico : TMedico):Boolean;
     function fInsertMedico(prObjMedico : TMedico):Boolean;
+    function fInsertConsulta(prObjConsulta : TConsulta):Boolean;
     function fDeleteResponsavel(prId : integer):Boolean;
     function fDeleteCrianca(prId : integer):Boolean;
     function fDeleteMedico(prId : integer):Boolean;
@@ -38,6 +39,7 @@ type
     function fSelectCrianca : Tlist;
     function fSelectConsultorio : TList;
     function fSelectDadoEspecifico(prSQL : String; prParametro : integer): String;
+    function fSelectMedico : TList;
     function fRetornaQuery(prSQL : String) : TFDQuery;
     function fInsertCrianca(prObjCrianca : TCrianca):Boolean;
     function fAlteraCrianca(prObjCrianca : TCrianca):Boolean;
@@ -419,6 +421,50 @@ begin
   query.Free;
 end;
 
+function TDataModule1.fSelectMedico: TList;
+var
+  query : TFDQuery;
+  lista : TList;
+  objMedico : TMedico;
+
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add('Select * from TCADMED;');
+
+  try
+    query.Open;
+    query.first;
+    lista := TList.Create;
+
+    while not (query.Eof) do
+      begin
+        objMedico := TMedico.Create;
+
+        objMedico.setIdmedico(query.fields[0].AsInteger);
+        objMedico.setNome(query.fields[1].AsString);
+        objMedico.setTelefone(query.fields[2].AsString);
+        objMedico.setEmail(query.fields[3].AsString);
+        objMedico.setEspecialidade(query.fields[4].AsString);
+        objMedico.setCrm(query.fields[5].AsString);
+        objMedico.setIdConsultorio(query.fields[6].AsInteger);
+
+        lista.Add(objMedico);
+        query.Next;
+      end;
+
+      result := lista;
+
+  except on E: Exception do
+    e.ToString;
+  end;
+
+  query.Close;
+  query.Free;
+
+end;
+
 function TDataModule1.fSelectResponsavel: Tlist;
 var
   stream : TStream;
@@ -576,6 +622,40 @@ begin
 
    query.Close;
    query.Free;
+
+end;
+
+function TDataModule1.fInsertConsulta(prObjConsulta: TConsulta): Boolean;
+var
+  query : TFDQuery;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add('insert into TCONSULTA values (0, :dataConsulta, :hora, :motivo, :acompanhante, :descExame, :proximaConsulta, :valor, :observacoes, :idMedico, :idConsultorio, :idCrianca;');
+
+  query.Params[0].AsString := prObjConsulta.getDataConsulta;
+  query.Params[1].AsString := prObjConsulta.getHora;
+  query.Params[2].AsString := prObjConsulta.getMotivo;
+  query.Params[3].AsString := prObjConsulta.getAcompanhante;
+  query.Params[4].AsString := prObjConsulta.getDescExame;
+  query.Params[5].AsString := prObjConsulta.getProximaConsulta;
+  query.Params[6].AsString := prObjConsulta.getValor;
+  query.Params[7].AsString := prObjConsulta.getObservacoes;
+  query.Params[8].AsInteger := prObjConsulta.getIdMedico;
+  query.Params[9].AsInteger := prObjConsulta.getIdConsultorio;
+  query.Params[10].AsInteger := prObjConsulta.getIdCrianca;
+
+  try
+    query.ExecSQL;
+    result := true;
+
+  except on E: Exception do
+    result := false;
+  end;
+
+  query.Close;
+  query.Free;
 
 end;
 
