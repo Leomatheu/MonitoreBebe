@@ -5,7 +5,7 @@ interface
 uses
   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage,
   uCrianca, formCadCrianca, Vcl.StdCtrls, Vcl.Forms, formAlimentacao, uAlimentacao,
-  uConsultorio, formConsultorio, formCadMedico, uMedico, uVacina, formContVacina;
+  uConsultorio, formConsultorio, formCadMedico, uMedico, uVacina, formContVacina, formConsulta, uConsulta;
 
 type
   TController = class
@@ -20,8 +20,10 @@ type
     procedure pExcluiAlimentacao;
     procedure pExcluiMedico;
     procedure pExcluiConsultorio;
+    procedure pExcluiConsulta;
     procedure pCadConsultorio;
     procedure pCadMedico;
+    procedure pCadConsulta;
     function fTiraPonto(prText: String): String;
     function fRetornaDirFoto: String;
     procedure pMessage(prCaption: String; prColor: integer; prLabel: String; prFoto: String);
@@ -32,6 +34,7 @@ type
     procedure pLimpaTelaAlim;
     procedure pLimpaTelaCon;
     procedure pLimpaTelaMed;
+    procedure pLimpaTelaConsulta;
     procedure pCamposAlimEnabled(prEnabled : boolean);
     procedure pCamposConsultorioEnabled(prEnabled : Boolean);
 
@@ -109,6 +112,37 @@ begin
 end;
 
 {Processos utilizados pela criança}
+procedure TController.pCadConsulta;
+var
+  objConsulta : TConsulta;
+begin
+  objConsulta := TConsulta.Create;
+
+  objConsulta.setAcompanhante(frmConsulta.edtAcompanhante.Text);
+  objConsulta.setDataConsulta(frmConsulta.edtData.Text);
+  objConsulta.setHora(frmConsulta.edtHora.Text);
+  objConsulta.setMotivo(frmConsulta.edtMotivo.Text);
+  objConsulta.setDescExame(frmConsulta.mmExames.Text);
+  objConsulta.setProximaConsulta(frmConsulta.edtProximaConsulta.Text);
+  objConsulta.setValor(StrToFloat(fTiraPonto(copy(frmConsulta.edtValor.Text, 3, Length(frmConsulta.edtValor.Text)))));
+  objConsulta.setObservacoes(frmConsulta.mmObservacoes.Text);
+  objConsulta.setIdCrianca(TCrianca(frmConsulta.cbCrianca.Items.Objects[frmConsulta.cbCrianca.ItemIndex]).getIdCrianca);
+  objConsulta.setIdMedico(TMedico(frmConsulta.cbMedico.Items.Objects[frmConsulta.cbMedico.ItemIndex]).getIdMedico);
+  obJConsulta.setIdConsultorio(TConsultorio(frmConsulta.cbConsultorio.Items.Objects[frmConsulta.cbConsultorio.ItemIndex]).getIdConsultorio);
+
+  if (DataModule1.fInsertConsulta(objConsulta)) then
+    begin
+      self.pMessage('INSERÇÃO DE CONSULTA REALIZADA', $00FFDFFF, 'Inserção de consulta realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+      self.pLimpaTelaConsulta;
+    end
+  else
+    begin
+      self.pMessage('FALHA NA INSERÇÃO DE CONSULTA', $009F9FFF, 'Falha na inserção de consulta verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+      self.pLimpaTelaConsulta;
+    end;
+
+end;
+
 procedure TController.pCadConsultorio;
 var
   objConsultorio : TConsultorio;
@@ -365,6 +399,20 @@ begin
     end;
 end;
 
+procedure TController.pExcluiConsulta;
+begin
+  if (DataModule1.fDeleteConsulta(StrToInt(frmConsulta.edtCodigo.Text))) then
+  begin
+    self.pMessage('CONSULTA EXCLUÍDA', $00D2FFD9, 'Exclusão de consulta realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+    self.pLimpaTelaConsulta;
+  end
+  else
+  begin
+    self.pMessage('FALHA NA EXCLUSÃO DE CONSULTA', $009F9FFF, 'Falha na exclusão de consulta, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+    self.pLimpaTelaConsulta;
+  end;
+end;
+
 procedure TController.pExcluiConsultorio;
 begin
   if (DataModule1.fDeleteConsultorio(StrToInt(frmConsultorio.edtCodigo.Text))) then
@@ -457,6 +505,22 @@ begin
    frmConsultorio.edtBairro.Clear;
    frmConsultorio.edtEndereco.Clear;
    frmConsultorio.edtNomeConsultorio.SetFocus;
+end;
+
+procedure TController.pLimpaTelaConsulta;
+begin
+  frmConsulta.edtAcompanhante.Clear;
+  frmConsulta.edtData.Clear;
+  frmConsulta.edtHora.Clear;
+  frmConsulta.edtMotivo.Clear;
+  frmConsulta.edtValor.Clear;
+  frmConsulta.mmExames.Clear;
+  frmConsulta.mmObservacoes.Clear;
+  frmConsulta.cbCrianca.Text := 'Selecione...';
+  frmConsulta.cbMedico.Text := 'Selecione...';
+  frmConsulta.cbConsultorio.Text := 'Selecione...';
+  frmConsulta.edtProximaConsulta.Clear;
+  frmConsulta.edtAcompanhante.SetFocus;
 end;
 
 procedure TController.plimpaTelaCri;
@@ -558,6 +622,15 @@ begin
           prComboBox.AddItem(IntToStr(TConsultorio(lista.Items[i]).getIdConsultorio) +
           ' - ' + TConsultorio(lista.Items[i]).getNomeConsultorio, lista[i]);
         end;
+    end;
+
+  4:
+    begin
+      lista := DataModule1.fSelectMedico;
+      for i := 0 to lista.Count -1  do
+          begin
+            prComboBox.AddItem(IntToStr(TMedico(lista.Items[i]).getIdMedico) + ' - ' + TMedico(lista.Items[i]).getNome, lista[i]);
+          end;
     end;
 
   end;

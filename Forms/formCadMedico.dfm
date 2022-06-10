@@ -28,8 +28,6 @@ object frmCadMedico: TfrmCadMedico
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitLeft = 438
-    ExplicitTop = -1
     object Panel4: TPanel
       Left = 27
       Top = 22
@@ -792,12 +790,18 @@ object frmCadMedico: TfrmCadMedico
     object edtTelefone: TMaskEdit
       Left = 16
       Top = 344
-      Width = 178
-      Height = 21
-      EditMask = '!\(999\)0000-0000;1; '
-      MaxLength = 14
+      Width = 174
+      Height = 22
+      EditMask = '!\(99\)0000-0000;1; '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      MaxLength = 13
+      ParentFont = False
       TabOrder = 5
-      Text = '(   )    -    '
+      Text = '(  )    -    '
     end
     object edtCRM: TLabeledEdit
       Left = 224

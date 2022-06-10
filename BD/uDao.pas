@@ -35,6 +35,7 @@ type
     function fDeleteMedico(prId : integer):Boolean;
     function fDeleteAlimentacao(prId : integer):Boolean;
     function fDeleteConsultorio(prId : integer):Boolean;
+    function fDeleteConsulta(prId : integer):Boolean;
     function fSelectResponsavel : Tlist;
     function fSelectCrianca : Tlist;
     function fSelectConsultorio : TList;
@@ -156,6 +157,29 @@ begin
 
   query.Close;
   query.free;
+end;
+
+function TDataModule1.fDeleteConsulta(prId: integer): Boolean;
+var
+  query : TFDQuery;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add('Delet from TCONSULTA where idConsulta = :prId;');
+  query.Params[0].AsInteger := prId;
+
+  try
+    query.ExecSQL;
+    result := true;
+  except
+     on e: Exception do
+       result := false;
+  end;
+
+  query.Close;
+  query.free;
+
 end;
 
 function TDataModule1.fDeleteConsultorio(prId: integer): Boolean;
@@ -381,7 +405,7 @@ begin
         objCri.setResponsavel2(query.Fields[11].AsInteger);
         stream := query.CreateBlobStream(query.Fields[12], bmRead);
         foto := Timage.Create(nil);
-        foto.Picture.LoadFromStream(stream);
+        //foto.Picture.LoadFromStream(stream);
         objCri.setFoto(foto);
 
         lista.Add(objCri);
@@ -503,7 +527,7 @@ begin
          objResp.setObservacoes(query.Fields[13].AsString);
          stream := query.CreateBlobStream(query.Fields[14], bmRead);
          foto := Timage.Create(nil);
-         foto.Picture.LoadFromStream(stream);
+         //foto.Picture.LoadFromStream(stream);
          objResp.setFoto(foto);
 
          lista.Add(objResp);
@@ -632,7 +656,7 @@ begin
   query := TFDQuery.Create(nil);
   query.Connection := DataModule1.Conexao;
 
-  query.SQL.Add('insert into TCONSULTA values (0, :dataConsulta, :hora, :motivo, :acompanhante, :descExame, :proximaConsulta, :valor, :observacoes, :idMedico, :idConsultorio, :idCrianca;');
+  query.SQL.Add('insert into TCONSULTA values (0, :dataConsulta, :hora, :motivo, :acompanhante, :descExame, :proximaConsulta, :valor, :observacoes, :idMedico, :idConsultorio, :idCrianca);');
 
   query.Params[0].AsString := prObjConsulta.getDataConsulta;
   query.Params[1].AsString := prObjConsulta.getHora;

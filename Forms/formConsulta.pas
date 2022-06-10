@@ -39,6 +39,9 @@ type
     Panel5: TPanel;
     sbSalvar: TSpeedButton;
     edtCodigo: TLabeledEdit;
+    procedure FormActivate(Sender: TObject);
+    procedure sbSalvarClick(Sender: TObject);
+    procedure sbExcluirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,7 +52,26 @@ var
   frmConsulta: TfrmConsulta;
 
 implementation
+uses
+  uController;
 
 {$R *.dfm}
+
+procedure TfrmConsulta.FormActivate(Sender: TObject);
+begin
+  Controller.pPopulaComboBox(self.cbCrianca, 2);
+  Controller.pPopulaComboBox(self.cbConsultorio, 3);
+  Controller.pPopulaComboBox(self.cbMedico, 4);
+end;
+
+procedure TfrmConsulta.sbExcluirClick(Sender: TObject);
+begin
+  Controller.pExcluiConsulta;
+end;
+
+procedure TfrmConsulta.sbSalvarClick(Sender: TObject);
+begin
+  Controller.pCadConsulta;
+end;
 
 end.

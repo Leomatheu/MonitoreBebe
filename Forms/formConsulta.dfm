@@ -13,6 +13,7 @@ object frmConsulta: TfrmConsulta
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
   object tPanel2: TPanel
@@ -26,7 +27,6 @@ object frmConsulta: TfrmConsulta
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitLeft = 609
     object Image1: TImage
       Left = 37
       Top = 40
@@ -951,6 +951,7 @@ object frmConsulta: TfrmConsulta
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
+        OnClick = sbExcluirClick
         ExplicitLeft = 72
         ExplicitTop = 2
         ExplicitWidth = 86
@@ -978,6 +979,7 @@ object frmConsulta: TfrmConsulta
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
+        OnClick = sbSalvarClick
         ExplicitLeft = 24
         ExplicitTop = 0
         ExplicitWidth = 134
@@ -995,8 +997,6 @@ object frmConsulta: TfrmConsulta
     ParentBackground = False
     ShowCaption = False
     TabOrder = 1
-    ExplicitLeft = -1
-    ExplicitHeight = 552
     object Label1: TLabel
       Left = 40
       Top = 163
