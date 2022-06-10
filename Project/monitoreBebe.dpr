@@ -18,7 +18,9 @@ uses
   formConsultorio in '..\Forms\formConsultorio.pas' {frmConsultorio},
   formCadMedico in '..\Forms\formCadMedico.pas' {frmCadMedico},
   uVacina in '..\Units\uVacina.pas',
-  formContVacina in '..\Forms\formContVacina.pas' {frmContVacina};
+  formContVacina in '..\Forms\formContVacina.pas' {frmContVacina},
+  formConsulta in '..\Forms\formConsulta.pas' {frmConsulta},
+  uConsulta in '..\Units\uConsulta.pas';
 
 begin
   Application.Initialize;
@@ -27,5 +29,6 @@ begin
   Controller := TController.Create;
   Application.CreateForm(TfrmMenu, frmMenu);
   Application.CreateForm(TfrmContVacina, frmContVacina);
+  Application.CreateForm(TfrmConsulta, frmConsulta);
   Application.Run;
 end.

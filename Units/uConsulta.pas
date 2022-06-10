@@ -40,8 +40,8 @@ interface
         procedure setProximaConsulta(proximaConsulta : String);
         function getProximaConsulta : String;
 
-        procedure setValor(valor : String);
-        function getValor : String;
+        procedure setValor(valor : Double);
+        function getValor : Double;
 
         procedure setObservacoes(observacoes : String);
         function getObservacoes : String;
@@ -117,7 +117,7 @@ begin
   result := proximaConsulta;
 end;
 
-function TConsulta.getValor: String;
+function TConsulta.getValor: Double;
 begin
   result := valor;
 end;
@@ -177,7 +177,7 @@ begin
   self.proximaConsulta := proximaConsulta;
 end;
 
-procedure TConsulta.setValor(valor: String);
+procedure TConsulta.setValor(valor: double);
 begin
   self.valor := valor;
 end;

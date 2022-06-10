@@ -42112,7 +42112,7 @@ object frmMenu: TfrmMenu
         Font.Style = []
         ParentFont = False
         OnClick = sbControleConsultasClick
-        ExplicitTop = 2
+        ExplicitTop = 0
       end
     end
     object Panel9: TPanel

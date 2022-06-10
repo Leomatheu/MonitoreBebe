@@ -640,7 +640,7 @@ begin
   query.Params[3].AsString := prObjConsulta.getAcompanhante;
   query.Params[4].AsString := prObjConsulta.getDescExame;
   query.Params[5].AsString := prObjConsulta.getProximaConsulta;
-  query.Params[6].AsString := prObjConsulta.getValor;
+  query.Params[6].AsFloat := prObjConsulta.getValor;
   query.Params[7].AsString := prObjConsulta.getObservacoes;
   query.Params[8].AsInteger := prObjConsulta.getIdMedico;
   query.Params[9].AsInteger := prObjConsulta.getIdConsultorio;
