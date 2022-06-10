@@ -860,18 +860,18 @@ object frmCadCrianca: TfrmCadCrianca
     object edtPeso: TMaskEdit
       Left = 376
       Top = 243
-      Width = 103
+      Width = 101
       Height = 23
-      EditMask = '!00,000 kg;1; '
+      EditMask = '!0,000 kg;1; '
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'Fixedsys'
       Font.Style = []
-      MaxLength = 9
+      MaxLength = 8
       ParentFont = False
       TabOrder = 5
-      Text = '  ,    kg'
+      Text = ' ,    kg'
     end
     object cbResp2: TComboBox
       Left = 32
