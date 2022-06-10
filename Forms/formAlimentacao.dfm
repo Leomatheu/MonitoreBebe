@@ -37,7 +37,6 @@ object frmAlimentacao: TfrmAlimentacao
     Color = 16769023
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = -6
     object Label1: TLabel
       Left = 25
       Top = 28
@@ -82,7 +81,7 @@ object frmAlimentacao: TfrmAlimentacao
       Top = 156
       Width = 152
       Height = 15
-      Caption = 'Quantidade ingerida'
+      Caption = 'Quantidade Ingerida'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -12

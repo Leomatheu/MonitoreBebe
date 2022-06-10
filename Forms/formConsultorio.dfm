@@ -1,9 +1,10 @@
 object frmConsultorio: TfrmConsultorio
   Left = 0
   Top = 0
+  BorderStyle = bsDialog
   Caption = 'CADASTRO DE CONSULT'#211'RIOS'
-  ClientHeight = 464
-  ClientWidth = 688
+  ClientHeight = 474
+  ClientWidth = 698
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,12 +20,12 @@ object frmConsultorio: TfrmConsultorio
     Left = 0
     Top = 0
     Width = 497
-    Height = 464
+    Height = 474
     Align = alLeft
     Color = 12895487
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = -7
+    ExplicitHeight = 464
     object Label1: TLabel
       Left = 32
       Top = 393
@@ -244,8 +245,8 @@ object frmConsultorio: TfrmConsultorio
   object Panel2: TPanel
     Left = 496
     Top = 0
-    Width = 192
-    Height = 464
+    Width = 202
+    Height = 474
     Align = alRight
     Color = 12895487
     ParentBackground = False
@@ -497,7 +498,7 @@ object frmConsultorio: TfrmConsultorio
         Font.Style = []
         ParentFont = False
         OnClick = sbConsultarClick
-        ExplicitTop = 2
+        ExplicitLeft = 2
       end
     end
   end
