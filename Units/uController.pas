@@ -16,12 +16,13 @@ type
     procedure pExcluiResponsavel;
     procedure pCadCrianca;
     procedure pExcluiCrianca;
+    procedure pExcluiVacina;
     procedure pCadAlimentacao;
+    procedure pCadConsultorio;
+    procedure pCadMedico;
     procedure pExcluiAlimentacao;
     procedure pExcluiMedico;
     procedure pExcluiConsultorio;
-    procedure pCadConsultorio;
-    procedure pCadMedico;
     function fTiraPonto(prText: String): String;
     function fRetornaDirFoto: String;
     procedure pMessage(prCaption: String; prColor: integer; prLabel: String; prFoto: String);
@@ -32,6 +33,7 @@ type
     procedure pLimpaTelaAlim;
     procedure pLimpaTelaCon;
     procedure pLimpaTelaMed;
+    procedure pLimpaTelaVac;
     procedure pCamposAlimEnabled(prEnabled : boolean);
     procedure pCamposConsultorioEnabled(prEnabled : Boolean);
 
@@ -323,6 +325,17 @@ begin
   objVacina.setProximaAplicacao(frmContVacina.edtProximaData.Text);
   objVacina.setIdCrianca(TCrianca(frmContVacina.cbCrianca.Items.Objects[frmContVacina.cbCrianca.ItemIndex]).getIdCrianca);
 
+  if (DataModule1.fInsertVacina(objVacina)) then
+     begin
+       self.pMessage('CADASTRO DE VACINA REALIZADA', $0080FFFF, 'Cadastro de vacina realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+       self.pLimpaTelaVac;
+     end
+  else
+     begin
+       self.pMessage('FALHA NO CADASTRO DE VACINA', $009F9FFF, 'Falha no cadastro de vacina, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+       self.pLimpaTelaVac; 
+     end;
+
 end;
 
 procedure TController.pCamposAlimEnabled(prEnabled : boolean);
@@ -428,6 +441,20 @@ begin
 
 end;
 
+procedure TController.pExcluiVacina;
+begin
+  if (DataModule1.fDeleteVacina(StrToInt(frmContVacina.edtCodigo.Text))) then
+     begin
+       self.pMessage('VACINA EXCLUÍDA', $0080FFFF, 'Exclusão de vacina realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+       self.pLimpaTelaVac;
+     end
+  else
+     begin
+       self.pMessage('FALHA NA EXCLUSÃO DE VACINA', $009F9FFF, 'Falha na exclusão de vacina, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+       self.pLimpaTelaVac;
+     end;
+end;
+
 procedure TController.pLimpaTelaAlim;
 begin
    frmAlimentacao.edtAcompanhante.Clear;
@@ -509,6 +536,23 @@ begin
   frmCadResp.imgCadResp.Picture.LoadFromFile
     (ExtractFilePath(Application.Exename) + 'Images\fotoPerfil.jpg');
   frmCadResp.sbExcluir.Enabled := false;
+end;
+
+procedure TController.pLimpaTelaVac;
+begin
+  frmContVacina.edtData.Clear;
+  frmContVacina.edtHora.Clear;
+  frmContVacina.edtNomeVacina.Clear;
+  frmContVacina.edtComplemento.Clear;
+  frmContVacina.edtNomeProfissional.Clear;
+  frmContVacina.edtCodigo.Clear;
+  frmContVacina.edtProximaData.Clear;
+  frmContVacina.edtAcompanhante.Clear;
+  frmContVacina.cbCrianca.Text := 'Selecione...';
+  frmContVacina.rbPostoSaude.Checked := false;
+  frmContVacina.rbConsultorio.Checked := false;
+  frmContVacina.rbOutros.Checked := false;
+  frmContVacina.rbHospital.Checked := false;
 end;
 
 procedure TController.pMessage(prCaption: String; prColor: integer;

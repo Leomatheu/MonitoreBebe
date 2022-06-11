@@ -1,3 +1,7 @@
+select * from tcadcri;
+
+
+
 drop database if exists MonitoreBebe;
 create database if not exists MonitoreBebe;
 use MonitoreBebe;
@@ -117,6 +121,7 @@ idCrianca int,
 foreign key (idCrianca) references TCADCRI(idCrianca)
 );
 
+select * from tconvaci;
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';

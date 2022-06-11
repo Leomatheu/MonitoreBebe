@@ -17,5 +17,40 @@
     <Transaction>2022/06/08 21:16:10.000.792,=C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Forms\formContVacina.pas</Transaction>
     <Transaction>2022/06/10 18:52:05.994,=C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Forms\formConsulta.pas</Transaction>
     <Transaction>2022/06/10 18:52:47.669,=C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Units\uConsulta.pas</Transaction>
-  </Transactions>
+  </Transactions>  <ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="..\..\MonitoreBebe"/>
+    <File Path="..\BD"/>
+    <File Path="..\BD\uDao.pas"/>
+    <File Path="..\BD\uDao.dfm"/>
+    <File Path="..\Forms"/>
+    <File Path="..\Forms\formAlimentacao.pas"/>
+    <File Path="..\Forms\formAlimentacao.dfm"/>
+    <File Path="..\Forms\formCadCrianca.pas"/>
+    <File Path="..\Forms\formCadCrianca.dfm"/>
+    <File Path="..\Forms\formCadMedico.pas"/>
+    <File Path="..\Forms\formCadMedico.dfm"/>
+    <File Path="..\Forms\formCadResp.pas"/>
+    <File Path="..\Forms\formCadResp.dfm"/>
+    <File Path="..\Forms\formConsulta.pas"/>
+    <File Path="..\Forms\formConsulta.dfm"/>
+    <File Path="..\Forms\formConsultorio.pas"/>
+    <File Path="..\Forms\formConsultorio.dfm"/>
+    <File Path="..\Forms\formContVacina.pas"/>
+    <File Path="..\Forms\formContVacina.dfm"/>
+    <File Path="..\Forms\formEditResp.pas"/>
+    <File Path="..\Forms\formEditResp.dfm"/>
+    <File Path="..\Forms\formMessage.pas"/>
+    <File Path="..\Forms\formMessage.dfm"/>
+    <File Path="..\Units"/>
+    <File Path="..\Units\formMenu.pas"/>
+    <File Path="..\Units\formMenu.dfm"/>
+    <File Path="..\Units\uAlimentacao.pas"/>
+    <File Path="..\Units\uConsulta.pas"/>
+    <File Path="..\Units\uConsultorio.pas"/>
+    <File Path="..\Units\uController.pas"/>
+    <File Path="..\Units\uCrianca.pas"/>
+    <File Path="..\Units\uMedico.pas"/>
+    <File Path="..\Units\uResponsavel.pas"/>
+    <File Path="..\Units\uVacina.pas"/>
+  </ProjectSortOrder>
 </BorlandProject>

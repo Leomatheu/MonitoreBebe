@@ -12,7 +12,8 @@ object frmContVacina: TfrmContVacina
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poDesigned
+  Position = poDesktopCenter
+  OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -666,9 +667,8 @@ object frmContVacina: TfrmContVacina
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 64
+        OnClick = sbSalvarClick
         ExplicitTop = 0
-        ExplicitWidth = 94
       end
     end
     object Panel6: TPanel
@@ -720,6 +720,7 @@ object frmContVacina: TfrmContVacina
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
+        OnClick = sbConsultarClick
         ExplicitLeft = 41
         ExplicitTop = 3
         ExplicitWidth = 154
@@ -737,6 +738,7 @@ object frmContVacina: TfrmContVacina
     ParentBackground = False
     ShowCaption = False
     TabOrder = 1
+    ExplicitLeft = -6
     object Label1: TLabel
       Left = 56
       Top = 39
@@ -795,6 +797,19 @@ object frmContVacina: TfrmContVacina
       Width = 56
       Height = 15
       Caption = 'Crian'#231'a'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label6: TLabel
+      Left = 56
+      Top = 547
+      Width = 80
+      Height = 15
+      Caption = 'Nome Local'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -908,10 +923,9 @@ object frmContVacina: TfrmContVacina
     end
     object edtComplemento: TEdit
       Left = 56
-      Top = 565
+      Top = 568
       Width = 417
       Height = 21
-      Enabled = False
       TabOrder = 7
     end
     object edtNomeProfissional: TLabeledEdit
@@ -981,7 +995,7 @@ object frmContVacina: TfrmContVacina
     end
     object cbCrianca: TComboBox
       Left = 56
-      Top = 214
+      Top = 216
       Width = 417
       Height = 23
       Font.Charset = DEFAULT_CHARSET

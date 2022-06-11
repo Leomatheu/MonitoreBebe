@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, uAlimentacao,
-  Vcl.Forms, uConsultorio, uMedico, uConsulta;
+  Vcl.Forms, uConsultorio, uMedico, uConsulta, uVacina;
 
 
 type
@@ -26,24 +26,33 @@ type
   public
     function pInsertResponsavel(prObjResponsavel : TResponsavel):Boolean;
     function fInsertAlimentacao(prObjAlimentacao : TAlimentacao):Boolean;
-    function pAlteraResponsavel(prObjResponsavel : TResponsavel):Boolean;
-    function fAlteraMedico(prObjMedico : TMedico):Boolean;
     function fInsertMedico(prObjMedico : TMedico):Boolean;
     function fInsertConsulta(prObjConsulta : TConsulta):Boolean;
+    function fInsertCrianca(prObjCrianca : TCrianca):Boolean;
+    function fInsertConsultorio(prObjCon : TConsultorio):Boolean;
+    function fInsertVacina(prObjVacina : TVacina):Boolean;
+
+    function fAlteraMedico(prObjMedico : TMedico):Boolean;
+    function fAlteraCrianca(prObjCrianca : TCrianca):Boolean;
+    function pAlteraResponsavel(prObjResponsavel : TResponsavel):Boolean;
+
     function fDeleteResponsavel(prId : integer):Boolean;
     function fDeleteCrianca(prId : integer):Boolean;
     function fDeleteMedico(prId : integer):Boolean;
     function fDeleteAlimentacao(prId : integer):Boolean;
     function fDeleteConsultorio(prId : integer):Boolean;
+    function fDeleteVacina(prId : integer):Boolean;
+
     function fSelectResponsavel : Tlist;
     function fSelectCrianca : Tlist;
     function fSelectConsultorio : TList;
     function fSelectDadoEspecifico(prSQL : String; prParametro : integer): String;
     function fSelectMedico : TList;
+
     function fRetornaQuery(prSQL : String) : TFDQuery;
-    function fInsertCrianca(prObjCrianca : TCrianca):Boolean;
-    function fAlteraCrianca(prObjCrianca : TCrianca):Boolean;
-    function fInsertConsultorio(prObjCon : TConsultorio):Boolean;
+
+
+
   end;
 
 var
@@ -246,6 +255,28 @@ begin
    query.Close;
    query.Free;
 
+end;
+
+function TDataModule1.fDeleteVacina(prId: integer): Boolean;
+var
+  query :TFDQuery;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add('Delete from TCONVACI where idVacina = :prId;');
+  query.Params[0].AsInteger := prId;
+
+  try
+    query.ExecSQL;
+    result := true;
+  Except
+    on e:Exception do
+      result := false;
+  end;
+
+  query.Close;
+  query.Free;
 end;
 
 function TDataModule1.fInsertCrianca(prObjCrianca: TCrianca): Boolean;
@@ -592,6 +623,37 @@ begin
 
   query.Close;
   query.Free;
+end;
+
+function TDataModule1.fInsertVacina(prObjVacina: TVacina): Boolean;
+var
+  query : TFDQuery;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add('insert into TCONVACI values(0, :dataVacina, :horaVacina, :nomeVacina, :localVacina, :nomeProfissional, :responsavel, :proximaAplicacao, :idCrianca);');
+
+  query.Params[0].AsString := prObjVacina.getDataVacina;
+  query.Params[1].AsString := prObjVacina.getHoraVacina;
+  query.Params[2].AsString := prObjVacina.getNomeVacina;
+  query.Params[3].AsString := prObjVacina.getLocalVacina;
+  query.Params[4].AsString := prObjVacina.getNomeProfissional;
+  query.Params[5].AsString := prObjVacina.getResponsavel;
+  query.Params[6].AsString := prObjVacina.getProximaAplicacao;
+  query.Params[7].AsInteger := prObjVacina.getIdCrianca;
+
+  try
+     query.ExecSQL;
+     result := true;
+  Except
+     on e:Exception do
+       result := false;
+  end;
+
+  query.Close;
+  query.Free;
+
 end;
 
 function TDataModule1.fInsertAlimentacao(prObjAlimentacao: TAlimentacao): Boolean;

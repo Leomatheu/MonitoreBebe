@@ -29,7 +29,8 @@ implementation
 {$R *.dfm}
 
 uses
-  formCadResp, formCadCrianca, formAlimentacao, uDao, uController, formConsultorio, formCadMedico;
+  formCadResp, formCadCrianca, formAlimentacao, uDao, uController, formConsultorio,
+  formCadMedico, formContVacina;
 
 { TfrmEditResp }
 
@@ -139,6 +140,15 @@ begin
       frmCadMedico.cbConsultorio.Text := IntToStr(self.DBGrid1.Fields[0].Value)+' - '+self.DBGrid1.Fields[1].Value;
       frmCadMedico.Tag := 1;
       frmCadMedico.sbExcluir.Enabled := true;
+    end;
+
+    6:
+    begin
+      frmContVacina.edtCodigo.Text := self.DBGrid1.Fields[0].Value;
+      frmContVacina.edtData.Text := self.DBGrid1.Fields[1].Value;
+      frmContVacina.edtHora.Text := self.DBGrid1.Fields[2].Value;
+      frmContVacina.edtNomeVacina.Text := self.DBGrid1.Fields[3].Value;
+
     end;
    end;
 
