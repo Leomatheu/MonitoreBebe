@@ -13,6 +13,7 @@ interface
        horaVacina : String;
        nomeVacina : String;
        localVacina : String;
+       descLocal : String;
        nomeProfissional : String;
        responsavel : String;
        proximaAplicacao : String;
@@ -33,6 +34,9 @@ interface
 
         procedure setLocalVacina(LocalVacina : String);
         function getLocalVacina : String;
+
+        procedure setDescLocal(DescVacina : String);
+        function getDescVacina : String;
 
         procedure setNomeProfissional(NomeProfissional : String);
         function getNomeProfissional : String;
@@ -55,6 +59,11 @@ implementation
 function TVacina.getDataVacina: String;
 begin
   result := self.dataVacina;
+end;
+
+function TVacina.getDescVacina: String;
+begin
+  result := self.descLocal;
 end;
 
 function TVacina.getHoraVacina: String;
@@ -100,6 +109,11 @@ end;
 procedure TVacina.setDataVacina(DataVacina: String);
 begin
   self.dataVacina := DataVacina;
+end;
+
+procedure TVacina.setDescLocal(DescVacina: String);
+begin
+  self.descLocal := DescVacina;
 end;
 
 procedure TVacina.setHoraVacina(HoraVacina: String);
