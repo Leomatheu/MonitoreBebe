@@ -29,8 +29,7 @@ implementation
 {$R *.dfm}
 
 uses
-  formCadResp, formCadCrianca, formAlimentacao, uDao, uController, formConsultorio, formCadMedico,
-  formContVacina;
+  formCadResp, formCadCrianca, formAlimentacao, uDao, uController, formConsultorio, formCadMedico;
 
 { TfrmEditResp }
 
@@ -141,33 +140,6 @@ begin
       frmCadMedico.Tag := 1;
       frmCadMedico.sbExcluir.Enabled := true;
     end;
-
-    6:
-    begin
-      frmContVacina.edtCodigo.Text := self.DBGrid1.Fields[0].Value;
-      frmContVacina.edtData.Text := self.DBGrid1.Fields[1].Value;
-      frmContVacina.edtHora.Text := self.DBGrid1.Fields[2].Value;
-      frmContVacina.edtNomeVacina.Text := self.DBGrid1.Fields[3].Value;
-
-      if (self.DBGrid1.Fields[4].Value = 'Posto de Saúde') then
-         frmContVacina.rbPostoSaude.Checked := true
-      else
-         if (self.DBGrid1.Fields[4].Value = 'Hospital') then
-            frmContVacina.rbHospital.Checked := true
-         else
-           if (self.DBGrid1.Fields[4].Value = 'Consultório') then
-              frmContVacina.rbConsultorio.Checked := true
-           else
-             frmContVacina.rbOutros.Checked := true;
-
-      frmContVacina.edtComplemento.Text := self.DBGrid1.Fields[5].Value;
-      frmContVacina.edtNomeProfissional.Text := self.DBGrid1.Fields[6].Value;
-      frmContVacina.edtAcompanhante.Text := self.DBGrid1.Fields[7].Value;
-      frmContVacina.edtProximaData.Text := self.DBGrid1.Fields[8].Value;
-      frmContVacina.cbCrianca.Text := IntToStr(self.DBGrid1.Fields[9].Value)+' - '+DataModule1.fSelectDadoEspecifico('select tcadcri.nomeCrianca from tcadcri where idCrianca = :pr;', self.DBGrid1.Fields[9].Value);
-      frmContVacina.sbExcluir.Enabled := true;
-      frmContVacina.sbSalvar.Enabled := false;
-    end;
    end;
 
 end;
@@ -189,9 +161,6 @@ begin
 
   if (self.tag = 5) then
      controller.pPopulaDBGrid('select * from TCADMED where nomeMedico like "%'+Self.edtBusca.Text+'%";');
-
-  if (self.Tag = 6) then
-     controller.pPopulaDBGrid('select * from TCONVACI where nomeVacina like "%'+self.edtBusca.Text+'%";');
 end;
 
 end.

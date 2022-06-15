@@ -21,7 +21,6 @@ type
     procedure pExcluiMedico;
     procedure pExcluiConsultorio;
     procedure pExcluiConsulta;
-    procedure pExcluiVacina;
     procedure pCadConsultorio;
     procedure pCadMedico;
     procedure pCadConsulta;
@@ -487,21 +486,6 @@ begin
     self.pLimpaTelaResp;
   end;
 
-end;
-
-procedure TController.pExcluiVacina;
-begin
-  if (DataModule1.fDeleteVacina(StrToInt(frmContVacina.edtCodigo.Text))) then
-     begin
-       self.pMessage('VACINA EXCLUÍDA', $0080FFFF, 'Exclusão de vacina realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
-       self.pLimpaTelaVac;
-       frmContVacina.sbSalvar.Enabled := true;
-     end
-  else
-     begin
-       self.pMessage('FALHA NA EXCLUSÃO DE VACINA', $009F9FFF, 'Falha na exclusão de vacina, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
-       self.pLimpaTelaVac;
-     end;
 end;
 
 procedure TController.pLimpaTelaAlim;

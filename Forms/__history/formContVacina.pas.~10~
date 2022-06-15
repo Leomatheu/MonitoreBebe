@@ -40,7 +40,6 @@ type
     procedure sbSalvarClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure sbConsultarClick(Sender: TObject);
-    procedure sbExcluirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -74,20 +73,11 @@ begin
 
 
   frmEditResp.Caption := 'CONSULTA DE VACINAS ';
-  frmEditResp.edtBusca.EditLabel.Caption := 'Busque pela vacina';  
-  frmEditResp.Tag := 6;
+  frmEditResp.Tag := 4;
   frmEditResp.ShowModal;
 
   if (self.edtData.Text <> '') then
     self.sbExcluir.Enabled := true;
-end;
-
-procedure TfrmContVacina.sbExcluirClick(Sender: TObject);
-var
-  controller : TController;
-begin
-  controller := TController.Create;
-  controller.pExcluiVacina;
 end;
 
 procedure TfrmContVacina.sbSalvarClick(Sender: TObject);

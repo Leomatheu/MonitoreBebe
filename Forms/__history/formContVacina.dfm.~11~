@@ -12,8 +12,7 @@ object frmContVacina: TfrmContVacina
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poDesktopCenter
-  OnActivate = FormActivate
+  Position = poDesigned
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -27,7 +26,6 @@ object frmContVacina: TfrmContVacina
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitLeft = 526
     object Panel4: TPanel
       Left = 43
       Top = 39
@@ -695,7 +693,6 @@ object frmContVacina: TfrmContVacina
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        OnClick = sbExcluirClick
         ExplicitLeft = 64
         ExplicitTop = 2
         ExplicitWidth = 94
@@ -723,8 +720,9 @@ object frmContVacina: TfrmContVacina
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        OnClick = sbConsultarClick
-        ExplicitTop = 2
+        ExplicitLeft = 41
+        ExplicitTop = 3
+        ExplicitWidth = 154
       end
     end
   end
@@ -739,7 +737,6 @@ object frmContVacina: TfrmContVacina
     ParentBackground = False
     ShowCaption = False
     TabOrder = 1
-    ExplicitLeft = -6
     object Label1: TLabel
       Left = 56
       Top = 39
@@ -841,7 +838,7 @@ object frmContVacina: TfrmContVacina
       Left = 56
       Top = 352
       Width = 417
-      Height = 23
+      Height = 21
       EditLabel.Width = 88
       EditLabel.Height = 15
       EditLabel.Caption = 'Nome Vacina'
@@ -851,13 +848,7 @@ object frmContVacina: TfrmContVacina
       EditLabel.Font.Name = 'Fixedsys'
       EditLabel.Font.Style = []
       EditLabel.ParentFont = False
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Fixedsys'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 5
+      TabOrder = 2
     end
     object rbPostoSaude: TRadioButton
       Left = 56
@@ -871,7 +862,7 @@ object frmContVacina: TfrmContVacina
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 6
+      TabOrder = 3
     end
     object rbConsultorio: TRadioButton
       Left = 56
@@ -885,7 +876,7 @@ object frmContVacina: TfrmContVacina
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 8
+      TabOrder = 4
     end
     object rbOutros: TRadioButton
       Left = 312
@@ -899,7 +890,7 @@ object frmContVacina: TfrmContVacina
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 9
+      TabOrder = 5
     end
     object rbHospital: TRadioButton
       Left = 312
@@ -913,26 +904,21 @@ object frmContVacina: TfrmContVacina
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 7
+      TabOrder = 6
     end
     object edtComplemento: TEdit
       Left = 56
-      Top = 564
+      Top = 565
       Width = 417
-      Height = 23
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Fixedsys'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 10
+      Height = 21
+      Enabled = False
+      TabOrder = 7
     end
     object edtNomeProfissional: TLabeledEdit
       Left = 56
-      Top = 637
+      Top = 638
       Width = 417
-      Height = 23
+      Height = 21
       EditLabel.Width = 136
       EditLabel.Height = 15
       EditLabel.Caption = 'Nome Profissional'
@@ -942,19 +928,13 @@ object frmContVacina: TfrmContVacina
       EditLabel.Font.Name = 'Fixedsys'
       EditLabel.Font.Style = []
       EditLabel.ParentFont = False
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Fixedsys'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 11
+      TabOrder = 8
     end
     object edtCodigo: TLabeledEdit
       Left = 56
       Top = 280
       Width = 97
-      Height = 23
+      Height = 21
       EditLabel.Width = 48
       EditLabel.Height = 15
       EditLabel.Caption = 'C'#243'digo'
@@ -965,13 +945,7 @@ object frmContVacina: TfrmContVacina
       EditLabel.Font.Style = []
       EditLabel.ParentFont = False
       Enabled = False
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Fixedsys'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 12
+      TabOrder = 9
     end
     object edtProximaData: TMaskEdit
       Left = 376
@@ -986,14 +960,14 @@ object frmContVacina: TfrmContVacina
       Font.Style = []
       MaxLength = 10
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 10
       Text = '  /  /    '
     end
     object edtAcompanhante: TLabeledEdit
       Left = 56
       Top = 136
       Width = 417
-      Height = 23
+      Height = 21
       EditLabel.Width = 96
       EditLabel.Height = 15
       EditLabel.Caption = 'Acompanhante'
@@ -1003,13 +977,7 @@ object frmContVacina: TfrmContVacina
       EditLabel.Font.Name = 'Fixedsys'
       EditLabel.Font.Style = []
       EditLabel.ParentFont = False
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Fixedsys'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 3
+      TabOrder = 11
     end
     object cbCrianca: TComboBox
       Left = 56
@@ -1022,7 +990,7 @@ object frmContVacina: TfrmContVacina
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 12
       Text = 'Selecione...'
     end
   end

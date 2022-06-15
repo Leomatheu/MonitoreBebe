@@ -33,7 +33,6 @@ type
     function fDeleteResponsavel(prId : integer):Boolean;
     function fDeleteCrianca(prId : integer):Boolean;
     function fDeleteMedico(prId : integer):Boolean;
-    function fDeleteVacina(prId : integer):Boolean;
     function fDeleteAlimentacao(prId : integer):Boolean;
     function fDeleteConsultorio(prId : integer):Boolean;
     function fDeleteConsulta(prId : integer):Boolean;
@@ -272,28 +271,6 @@ begin
    query.Close;
    query.Free;
 
-end;
-
-function TDataModule1.fDeleteVacina(prId: integer): Boolean;
-var
-  query : TFDQuery;
-begin
-  query := TFDQuery.Create(nil);
-  query.Connection := DataModule1.Conexao;
-
-  query.SQL.Add('Delete from TCONVACI where idVacina = :prId;');
-  query.Params[0].AsInteger := prId;
-
-  try
-    query.ExecSQL;
-    Result := true;
-  except
-    on e: Exception do
-       result := false;
-  end;
-
-  query.Close;
-  query.Free;
 end;
 
 function TDataModule1.fInsertCrianca(prObjCrianca: TCrianca): Boolean;
@@ -668,9 +645,6 @@ begin
     on e: Exception do
       result := false;
   end;
-
-  query.Close;
-  query.Free;
 end;
 
 function TDataModule1.fInsertAlimentacao(prObjAlimentacao: TAlimentacao): Boolean;

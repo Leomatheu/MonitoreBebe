@@ -165,8 +165,6 @@ begin
       frmContVacina.edtAcompanhante.Text := self.DBGrid1.Fields[7].Value;
       frmContVacina.edtProximaData.Text := self.DBGrid1.Fields[8].Value;
       frmContVacina.cbCrianca.Text := IntToStr(self.DBGrid1.Fields[9].Value)+' - '+DataModule1.fSelectDadoEspecifico('select tcadcri.nomeCrianca from tcadcri where idCrianca = :pr;', self.DBGrid1.Fields[9].Value);
-      frmContVacina.sbExcluir.Enabled := true;
-      frmContVacina.sbSalvar.Enabled := false;
     end;
    end;
 
@@ -189,9 +187,6 @@ begin
 
   if (self.tag = 5) then
      controller.pPopulaDBGrid('select * from TCADMED where nomeMedico like "%'+Self.edtBusca.Text+'%";');
-
-  if (self.Tag = 6) then
-     controller.pPopulaDBGrid('select * from TCONVACI where nomeVacina like "%'+self.edtBusca.Text+'%";');
 end;
 
 end.
