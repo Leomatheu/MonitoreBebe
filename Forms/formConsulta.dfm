@@ -924,9 +924,9 @@ object frmConsulta: TfrmConsulta
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 8
+        ExplicitLeft = 40
         ExplicitTop = 2
-        ExplicitWidth = 139
+        ExplicitWidth = 118
       end
     end
     object Panel6: TPanel
@@ -1306,6 +1306,7 @@ object frmConsulta: TfrmConsulta
       EditLabel.Font.Name = 'Fixedsys'
       EditLabel.Font.Style = []
       EditLabel.ParentFont = False
+      Enabled = False
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -12

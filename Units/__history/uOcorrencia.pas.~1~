@@ -1,0 +1,12 @@
+unit uOcorrencia;
+
+interface
+  type TOcorrencia = class
+
+    private
+
+  end;
+
+implementation
+
+end.
