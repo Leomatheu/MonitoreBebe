@@ -1,0 +1,112 @@
+object frmCrescimento: TfrmCrescimento
+  Left = 0
+  Top = 0
+  Caption = 'CONTROLE DE CRESCIMENTO'
+  ClientHeight = 624
+  ClientWidth = 643
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 440
+    Top = 0
+    Width = 203
+    Height = 624
+    Align = alRight
+    Caption = 'Panel1'
+    Color = 16764134
+    ParentBackground = False
+    ShowCaption = False
+    TabOrder = 0
+    ExplicitHeight = 585
+    object Panel7: TPanel
+      Left = 21
+      Top = 497
+      Width = 157
+      Height = 28
+      Color = 14869218
+      ParentBackground = False
+      TabOrder = 0
+      object sbConsultar: TSpeedButton
+        Left = 40
+        Top = 2
+        Width = 118
+        Height = 26
+        Caption = 'Consultar'
+        Flat = True
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Fixedsys'
+        Font.Style = []
+        ParentFont = False
+      end
+    end
+    object Panel6: TPanel
+      Left = 21
+      Top = 531
+      Width = 159
+      Height = 28
+      Color = clRed
+      ParentBackground = False
+      TabOrder = 1
+      object sbExcluir: TSpeedButton
+        Left = 72
+        Top = 2
+        Width = 86
+        Height = 26
+        Caption = 'Excluir'
+        Flat = True
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Fixedsys'
+        Font.Style = []
+        ParentFont = False
+      end
+    end
+    object Panel5: TPanel
+      Left = 21
+      Top = 565
+      Width = 159
+      Height = 28
+      Color = 317753
+      ParentBackground = False
+      TabOrder = 2
+      object sbSalvar: TSpeedButton
+        Left = 24
+        Top = -8
+        Width = 134
+        Height = 26
+        Caption = 'Salvar'
+        Flat = True
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Fixedsys'
+        Font.Style = []
+        ParentFont = False
+      end
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 442
+    Height = 624
+    Align = alLeft
+    Caption = 'Panel2'
+    Color = 16764134
+    ParentBackground = False
+    ShowCaption = False
+    TabOrder = 1
+    ExplicitHeight = 585
+  end
+end

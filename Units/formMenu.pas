@@ -38,9 +38,6 @@ type
     Panel10: TPanel;
     sbCadOcorrecias: TSpeedButton;
     Image10: TImage;
-    Panel11: TPanel;
-    sbAgendamento: TSpeedButton;
-    Image11: TImage;
     Panel14: TPanel;
     sbControleCrescimento: TSpeedButton;
     Image12: TImage;
@@ -56,6 +53,8 @@ type
     procedure sbCadMedicoClick(Sender: TObject);
     procedure sbControleVacinaClick(Sender: TObject);
     procedure sbControleConsultasClick(Sender: TObject);
+    procedure sbCadOcorreciasClick(Sender: TObject);
+    procedure sbControleCrescimentoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -68,7 +67,7 @@ var
 implementation
 uses
    formCadResp, formCadCrianca, formAlimentacao, formConsultorio, formCadMedico, formContVacina,
-   formConsulta;
+   formConsulta, formOcorrencia, formCrescimento;
 
 {$R *.dfm}
 
@@ -98,6 +97,12 @@ begin
   frmCadMedico.ShowModal;
 end;
 
+procedure TfrmMenu.sbCadOcorreciasClick(Sender: TObject);
+begin
+  frmOcorrencia := TfrmOcorrencia.Create(nil);
+  frmOcorrencia.ShowModal;
+end;
+
 procedure TfrmMenu.sbCadResponsavelClick(Sender: TObject);
 begin
    frmCadResp :=  TfrmCadResp.Create(nil);
@@ -109,6 +114,12 @@ begin
   frmConsulta := TfrmConsulta.Create(nil);
   frmConsulta.ShowModal;
 end;
+
+procedure TfrmMenu.sbControleCrescimentoClick(Sender: TObject);
+begin
+  frmCrescimento := TFrmCrescimento.Create(nil);
+  frmCrescimento.ShowModal;
+                                end;
 
 procedure TfrmMenu.sbControleVacinaClick(Sender: TObject);
 begin

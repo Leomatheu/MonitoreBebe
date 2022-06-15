@@ -1,0 +1,24 @@
+unit uOcorrencia;
+
+interface
+  type TOcorrencia = class
+
+    Private
+      idOcorrencia : integer;
+      responsavel : String;
+      dataOcorrencia : String;
+      horaOcorrencia : String;
+      ocorrencia : String;
+      descMedicacao : String;
+      quantidade : String;
+      horaMedicacao : String;
+      idCrianca : integer;
+
+    Public
+
+
+  end;
+
+implementation
+
+end.

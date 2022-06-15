@@ -35,11 +35,10 @@ object frmCadCrianca: TfrmCadCrianca
       Caption = 'Panel4'
       TabOrder = 0
       object imgCadCri: TImage
-        Left = 1
-        Top = 1
+        Left = -7
+        Top = 33
         Width = 135
         Height = 161
-        Align = alClient
         Picture.Data = {
           0A544A504547496D616765A7360000FFD8FFE1008E4578696600004D4D002A00
           0000080005011A0005000000010000004A011B00050000000100000052012800
@@ -480,8 +479,6 @@ object frmCadCrianca: TfrmCadCrianca
           A085D264A9E8B7C6FCF31C305BE37E2A489827767E398E2898AF667E6BA23FA0
           7DF31F4C7F51FAA987FEC47C731CC3FF00623E6BFFD9}
         Stretch = True
-        ExplicitLeft = -7
-        ExplicitTop = 33
       end
     end
     object Panel5: TPanel

@@ -1,0 +1,395 @@
+object frmOcorrencia: TfrmOcorrencia
+  Left = 0
+  Top = 0
+  Caption = 'CADASTRO DE OCORR'#202'NCIA'
+  ClientHeight = 651
+  ClientWidth = 635
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 441
+    Height = 651
+    Align = alLeft
+    Color = 14211307
+    ParentBackground = False
+    TabOrder = 0
+    ExplicitLeft = 6
+    object Label3: TLabel
+      Left = 24
+      Top = 101
+      Width = 56
+      Height = 15
+      Caption = 'Crian'#231'a'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label1: TLabel
+      Left = 24
+      Top = 166
+      Width = 32
+      Height = 15
+      Caption = 'Data'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 313
+      Top = 166
+      Width = 32
+      Height = 15
+      Caption = 'Hora'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label6: TLabel
+      Left = 24
+      Top = 243
+      Width = 80
+      Height = 15
+      Caption = 'Ocorr'#234'ncia'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 24
+      Top = 363
+      Width = 120
+      Height = 15
+      Caption = 'Tomou Medica'#231#227'o'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label5: TLabel
+      Left = 24
+      Top = 519
+      Width = 112
+      Height = 15
+      Caption = 'Hora Medica'#231#227'o'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+    end
+    object edtAcompanhante: TLabeledEdit
+      Left = 24
+      Top = 48
+      Width = 385
+      Height = 23
+      EditLabel.Width = 96
+      EditLabel.Height = 15
+      EditLabel.Caption = 'Acompanhante'
+      EditLabel.Font.Charset = ANSI_CHARSET
+      EditLabel.Font.Color = clWindowText
+      EditLabel.Font.Height = -12
+      EditLabel.Font.Name = 'Fixedsys'
+      EditLabel.Font.Style = []
+      EditLabel.ParentFont = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+    end
+    object cbCrianca: TComboBox
+      Left = 24
+      Top = 118
+      Width = 385
+      Height = 23
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Text = 'Selecione...'
+    end
+    object edtData: TMaskEdit
+      Left = 24
+      Top = 182
+      Width = 119
+      Height = 23
+      EditMask = '!99/99/0000;1; '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      MaxLength = 10
+      ParentFont = False
+      TabOrder = 2
+      Text = '  /  /    '
+    end
+    object edtHora: TMaskEdit
+      Left = 313
+      Top = 182
+      Width = 96
+      Height = 23
+      EditMask = '!90:00;1; '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      MaxLength = 5
+      ParentFont = False
+      TabOrder = 3
+      Text = '  :  '
+    end
+    object mmOcorrencia: TMemo
+      Left = 24
+      Top = 260
+      Width = 385
+      Height = 71
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      Lines.Strings = (
+        '')
+      ParentFont = False
+      TabOrder = 4
+    end
+    object ckSim: TCheckBox
+      Left = 24
+      Top = 382
+      Width = 97
+      Height = 17
+      Caption = 'Sim'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 5
+    end
+    object ckNao: TCheckBox
+      Left = 168
+      Top = 382
+      Width = 97
+      Height = 17
+      Caption = 'N'#227'o'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 6
+    end
+    object edtQuantidade: TLabeledEdit
+      Left = 216
+      Top = 536
+      Width = 193
+      Height = 23
+      EditLabel.Width = 152
+      EditLabel.Height = 15
+      EditLabel.Caption = 'Quantidade Medicada'
+      EditLabel.Font.Charset = ANSI_CHARSET
+      EditLabel.Font.Color = clWindowText
+      EditLabel.Font.Height = -12
+      EditLabel.Font.Name = 'Fixedsys'
+      EditLabel.Font.Style = []
+      EditLabel.ParentFont = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 7
+    end
+    object edtHoraMedicacao: TMaskEdit
+      Left = 24
+      Top = 536
+      Width = 112
+      Height = 23
+      EditMask = '!90:00;1; '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      MaxLength = 5
+      ParentFont = False
+      TabOrder = 8
+      Text = '  :  '
+    end
+    object edtDescricao: TLabeledEdit
+      Left = 22
+      Top = 457
+      Width = 387
+      Height = 23
+      EditLabel.Width = 168
+      EditLabel.Height = 15
+      EditLabel.Caption = 'Descri'#231#227'o Medicamento'
+      EditLabel.Font.Charset = ANSI_CHARSET
+      EditLabel.Font.Color = clWindowText
+      EditLabel.Font.Height = -12
+      EditLabel.Font.Name = 'Fixedsys'
+      EditLabel.Font.Style = []
+      EditLabel.ParentFont = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 9
+    end
+    object edtCodigo: TLabeledEdit
+      Left = 24
+      Top = 613
+      Width = 114
+      Height = 23
+      EditLabel.Width = 48
+      EditLabel.Height = 15
+      EditLabel.Caption = 'C'#243'digo'
+      EditLabel.Font.Charset = ANSI_CHARSET
+      EditLabel.Font.Color = clWindowText
+      EditLabel.Font.Height = -12
+      EditLabel.Font.Name = 'Fixedsys'
+      EditLabel.Font.Style = []
+      EditLabel.ParentFont = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 10
+    end
+  end
+  object Panel2: TPanel
+    Left = 432
+    Top = 0
+    Width = 203
+    Height = 651
+    Align = alRight
+    Color = 14211307
+    ParentBackground = False
+    TabOrder = 1
+    ExplicitHeight = 506
+    object Image1: TImage
+      Left = 32
+      Top = 24
+      Width = 137
+      Height = 121
+    end
+    object Panel7: TPanel
+      Left = 23
+      Top = 539
+      Width = 159
+      Height = 28
+      Color = 14869218
+      ParentBackground = False
+      TabOrder = 0
+      object sbConsultar: TSpeedButton
+        Left = 1
+        Top = 1
+        Width = 157
+        Height = 26
+        Align = alClient
+        Caption = 'Consultar'
+        Flat = True
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Fixedsys'
+        Font.Style = []
+        ParentFont = False
+        ExplicitLeft = 31
+        ExplicitWidth = 106
+      end
+    end
+    object Panel6: TPanel
+      Left = 23
+      Top = 574
+      Width = 159
+      Height = 28
+      Color = clRed
+      ParentBackground = False
+      TabOrder = 1
+      object sbExcluir: TSpeedButton
+        Left = 1
+        Top = 1
+        Width = 157
+        Height = 26
+        Align = alClient
+        Caption = 'Excluir'
+        Flat = True
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Fixedsys'
+        Font.Style = []
+        ParentFont = False
+        ExplicitLeft = 40
+        ExplicitTop = -1
+        ExplicitWidth = 86
+      end
+    end
+    object Panel5: TPanel
+      Left = 23
+      Top = 608
+      Width = 159
+      Height = 28
+      Color = 317753
+      ParentBackground = False
+      TabOrder = 2
+      object sbSalvar: TSpeedButton
+        Left = 1
+        Top = 1
+        Width = 157
+        Height = 26
+        Align = alClient
+        Caption = 'Salvar'
+        Flat = True
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Fixedsys'
+        Font.Style = []
+        ParentFont = False
+        ExplicitLeft = 26
+        ExplicitTop = 8
+        ExplicitWidth = 111
+      end
+    end
+  end
+end

@@ -1,9 +1,10 @@
 object frmAlimentacao: TfrmAlimentacao
   Left = 0
   Top = 0
+  BorderStyle = bsDialog
   Caption = 'CONTROLE DE ALIMENTA'#199#195'O'
-  ClientHeight = 689
-  ClientWidth = 635
+  ClientHeight = 699
+  ClientWidth = 645
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -31,10 +32,11 @@ object frmAlimentacao: TfrmAlimentacao
   object TPanel
     Left = 0
     Top = 0
-    Width = 440
-    Height = 689
+    Width = 450
+    Height = 699
     Align = alClient
     Color = 16769023
+    Enabled = False
     ParentBackground = False
     TabOrder = 0
     object Label1: TLabel
@@ -456,10 +458,10 @@ object frmAlimentacao: TfrmAlimentacao
     end
   end
   object TPanel
-    Left = 440
+    Left = 450
     Top = 0
     Width = 195
-    Height = 689
+    Height = 699
     Align = alRight
     Color = 16769023
     ParentBackground = False
