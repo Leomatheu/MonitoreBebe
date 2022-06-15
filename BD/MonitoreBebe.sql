@@ -110,13 +110,13 @@ dataVacina varchar(10),
 horaVacina varchar(5),
 nomeVacina varchar(100),
 localVacina varchar(100),
+descLocal varchar(50),
 nomeProfissional varchar(100),
 responsavel varchar(100),
 proximaAplicacao varchar(10),
 idCrianca int,
 foreign key (idCrianca) references TCADCRI(idCrianca)
 );
-
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
