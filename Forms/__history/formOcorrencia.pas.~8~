@@ -1,0 +1,95 @@
+unit formOcorrencia;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, Vcl.ExtCtrls,
+  Vcl.Buttons;
+
+type
+  TfrmOcorrencia = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel7: TPanel;
+    sbConsultar: TSpeedButton;
+    Panel6: TPanel;
+    sbExcluir: TSpeedButton;
+    Panel5: TPanel;
+    sbSalvar: TSpeedButton;
+    Image1: TImage;
+    edtAcompanhante: TLabeledEdit;
+    cbCrianca: TComboBox;
+    Label3: TLabel;
+    edtData: TMaskEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    edtHora: TMaskEdit;
+    Label6: TLabel;
+    mmOcorrencia: TMemo;
+    ckSim: TCheckBox;
+    Label4: TLabel;
+    ckNao: TCheckBox;
+    edtQuantidade: TLabeledEdit;
+    Label5: TLabel;
+    edtHoraMedicacao: TMaskEdit;
+    edtDescricao: TLabeledEdit;
+    edtCodigo: TLabeledEdit;
+    procedure FormActivate(Sender: TObject);
+    procedure ckNaoClick(Sender: TObject);
+    procedure sbSalvarClick(Sender: TObject);
+    procedure sbConsultarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmOcorrencia: TfrmOcorrencia;
+
+implementation
+uses
+  uController, formEditResp;
+
+{$R *.dfm}
+
+procedure TfrmOcorrencia.ckNaoClick(Sender: TObject);
+begin
+  self.edtDescricao.Enabled := false;
+  self.edtHoraMedicacao.Enabled := false;
+  self.edtQuantidade.Enabled := false;
+  self.Label5.Enabled := false;
+end;
+
+procedure TfrmOcorrencia.FormActivate(Sender: TObject);
+begin
+  Controller.pPopulaComboBox(self.cbCrianca, 2);
+end;
+
+procedure TfrmOcorrencia.sbConsultarClick(Sender: TObject);
+begin
+  Controller.pLimpaTelaOcocrrecia;
+  frmEditResp := TfrmEditResp.Create(nil);
+  controller := TController.Create;
+  controller.pPopulaDBGrid('select * from TOCORRENCIA');
+
+
+  frmEditResp.Caption := 'CONSULTA DE OCORRÊNCIAS ';
+  frmEditResp.edtBusca.EditLabel.Caption := 'Busque pela data';
+  frmEditResp.Tag := 7;
+  frmEditResp.ShowModal;
+
+  if (self.edtAcompanhante.Text <> '') then
+    self.sbExcluir.Enabled := true;
+end;
+
+procedure TfrmOcorrencia.sbSalvarClick(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pCadOcorrencia;
+end;
+
+end.

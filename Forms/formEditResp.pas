@@ -30,7 +30,7 @@ implementation
 
 uses
   formCadResp, formCadCrianca, formAlimentacao, uDao, uController, formConsultorio, formCadMedico,
-  formContVacina;
+  formContVacina, formOcorrencia, formCrescimento;
 
 { TfrmEditResp }
 
@@ -61,7 +61,7 @@ begin
       frmCadResp.edtEndereco.Text := self.DBGrid1.Fields[13].Value;
       frmCadResp.edtCodigo.Text := self.DBGrid1.Fields[0].Value;
       foto := self.DBGrid1.DataSource.DataSet.CreateBlobStream(self.DBGrid1.Fields[14], bmRead);
-      //frmCadResp.imgCadResp.Picture.LoadFromStream(foto);
+      frmCadResp.imgCadResp.Picture.LoadFromStream(foto);
       frmCadResp.Tag := 1;
     end;
 
@@ -167,6 +167,35 @@ begin
       frmContVacina.cbCrianca.Text := IntToStr(self.DBGrid1.Fields[9].Value)+' - '+DataModule1.fSelectDadoEspecifico('select tcadcri.nomeCrianca from tcadcri where idCrianca = :pr;', self.DBGrid1.Fields[9].Value);
       frmContVacina.sbExcluir.Enabled := true;
       frmContVacina.sbSalvar.Enabled := false;
+    end;
+
+    7:
+    begin
+      frmOcorrencia.edtCodigo.Text := self.DBGrid1.Fields[0].Value;
+      frmOcorrencia.edtAcompanhante.Text := self.DBGrid1.Fields[1].Value;
+      frmOcorrencia.edtData.Text := self.DBGrid1.Fields[2].Value;
+      frmOcorrencia.edtHora.Text := self.DBGrid1.Fields[3].Value;
+      frmOcorrencia.cbCrianca.Text := IntToStr(self.DBGrid1.Fields[9].Value)+' - '+DataModule1.fSelectDadoEspecifico('select tcadcri.nomeCrianca from tcadcri where idCrianca = :pr;', self.DBGrid1.Fields[9].Value);
+      frmOcorrencia.mmOcorrencia.Lines.Text := self.DBGrid1.fields[4].Value;
+
+      if (self.DBGrid1.Fields[5].Value = 'Sim') then
+         begin
+           frmOcorrencia.ckSim.Checked := true;
+           frmOcorrencia.edtDescricao.Text := self.DBGrid1.Fields[6].Value;
+           frmOcorrencia.edtQuantidade.Text := self.DBGrid1.Fields[7].Value;
+           frmOcorrencia.edtHoraMedicacao.Text := self.DBGrid1.Fields[8].Value;
+         end
+      else
+         frmOcorrencia.ckNao.Checked := true;
+
+      frmOcorrencia.Tag := 1;
+      frmOcorrencia.sbExcluir.Enabled := true;
+    end;
+
+    8:
+    begin
+    //
+
     end;
    end;
 

@@ -5,7 +5,7 @@ object frmMenu: TfrmMenu
   BorderStyle = bsDialog
   Caption = 'MENU PRINCIPAL'
   ClientHeight = 531
-  ClientWidth = 838
+  ClientWidth = 845
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,7 +20,7 @@ object frmMenu: TfrmMenu
   object Panel1: TPanel
     Left = 273
     Top = 0
-    Width = 565
+    Width = 572
     Height = 531
     Align = alClient
     Caption = 'Panel1'
@@ -28,11 +28,11 @@ object frmMenu: TfrmMenu
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitHeight = 574
+    ExplicitWidth = 565
     object Image1: TImage
       Left = 1
       Top = 1
-      Width = 563
+      Width = 570
       Height = 529
       Align = alClient
       Picture.Data = {
@@ -39752,6 +39752,7 @@ object frmMenu: TfrmMenu
         0000}
       Stretch = True
       ExplicitTop = 2
+      ExplicitWidth = 563
       ExplicitHeight = 572
     end
   end
@@ -39766,7 +39767,6 @@ object frmMenu: TfrmMenu
     ParentBackground = False
     ShowCaption = False
     TabOrder = 1
-    ExplicitHeight = 574
     object Image2: TImage
       Left = 17
       Top = 10
