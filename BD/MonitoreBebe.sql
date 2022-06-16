@@ -117,6 +117,33 @@ proximaAplicacao varchar(10),
 idCrianca int,
 foreign key (idCrianca) references TCADCRI(idCrianca)
 );
+       
+create table TOCORRENCIA(
+idOcorrencia int not null auto_increment primary key,
+responsavel varchar(100),
+dataOcorrencia varchar(10),
+horaOcorrencia varchar(5),
+ocorrencia varchar(100),
+tomouMedicacao varchar(4),
+descMedicacao varchar(100),
+quantidade varchar(10),
+horaMedicacao varchar(5),
+idCrianca int,
+foreign key (idCrianca) references TCADCRI(idCrianca)
+);
+
+create table TCRESCIMENTO(
+idCrescimento int not null auto_increment primary key,
+dataCrescimento varchar(10),
+peso varchar(10),
+altura varchar(10),
+imc varchar(15),
+circCabeca varchar(10),
+circBarriga varchar(10),
+idCrianca int,
+observacoes varchar(200),
+foreign key (idCrianca) references TCADCRI(idCrianca) on delete restrict
+);
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';

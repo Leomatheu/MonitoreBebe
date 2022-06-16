@@ -9,7 +9,8 @@ uses
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, uAlimentacao,
-  Vcl.Forms, uConsultorio, uMedico, uConsulta, formContVacina, uVacina;
+  Vcl.Forms, uConsultorio, uMedico, uConsulta, formContVacina, uVacina,
+  uOcorrencia, formOcorrencia, uCrescimento, formCrescimento;
 
 
 type
@@ -24,29 +25,33 @@ type
   private
     { Private declarations }
   public
+    {Funções de inserção de registros}
     function pInsertResponsavel(prObjResponsavel : TResponsavel):Boolean;
     function fInsertAlimentacao(prObjAlimentacao : TAlimentacao):Boolean;
-    function pAlteraResponsavel(prObjResponsavel : TResponsavel):Boolean;
-    function fAlteraMedico(prObjMedico : TMedico):Boolean;
     function fInsertMedico(prObjMedico : TMedico):Boolean;
     function fInsertConsulta(prObjConsulta : TConsulta):Boolean;
-    function fDeleteResponsavel(prId : integer):Boolean;
-    function fDeleteCrianca(prId : integer):Boolean;
-    function fDeleteMedico(prId : integer):Boolean;
-    function fDeleteVacina(prId : integer):Boolean;
-    function fDeleteAlimentacao(prId : integer):Boolean;
-    function fDeleteConsultorio(prId : integer):Boolean;
-    function fDeleteConsulta(prId : integer):Boolean;
+    function fInsertCrianca(prObjCrianca : TCrianca):Boolean;
+    function fInsertConsultorio(prObjCon : TConsultorio):Boolean;
+    function fInsertVacina(prObjVacina : TVacina):Boolean;
+    function fInsertOcorrecia(prObjOcorrencia : TOcorrencia):Boolean;
+    function fInsertCrescimento(prObjCrescimento : TCrescimento):Boolean;
+
+    {Funções de update de registros}
+    function pAlteraResponsavel(prObjResponsavel : TResponsavel):Boolean;
+    function fAlteraMedico(prObjMedico : TMedico):Boolean;
+    function fAlteraCrianca(prObjCrianca : TCrianca):Boolean;
+    function fAlteraOcorrencia(prObjOcorrencia : TOcorrencia):Boolean;
+
+    {Função de delete de registros}
+    function fDelete(prSQL : String; prId : integer):Boolean;
+
+    {Funções de seleção de registros}
+    function fSelectMedico : TList;
     function fSelectResponsavel : Tlist;
     function fSelectCrianca : Tlist;
     function fSelectConsultorio : TList;
     function fSelectDadoEspecifico(prSQL : String; prParametro : integer): String;
-    function fSelectMedico : TList;
     function fRetornaQuery(prSQL : String) : TFDQuery;
-    function fInsertCrianca(prObjCrianca : TCrianca):Boolean;
-    function fAlteraCrianca(prObjCrianca : TCrianca):Boolean;
-    function fInsertConsultorio(prObjCon : TConsultorio):Boolean;
-    function fInsertVacina(prObjVacina : TVacina):Boolean;
   end;
 
 var
@@ -69,6 +74,53 @@ end;
 procedure TDataModule1.DataModuleDestroy(Sender: TObject);
 begin
   Conexao.Connected := false;
+end;
+
+{Funções de update de registros}
+function TDataModule1.pAlteraResponsavel(prObjResponsavel: TResponsavel): Boolean;
+var
+   query : TFDQuery;
+   foto : TStream;
+   data : TDataModule1;
+begin
+  query := TFDQuery.Create(nil);
+  data := TDataModule1.Create(nil);
+  query.Connection := data.Conexao;
+
+  query.SQL.Add('update TCADRESP set nomeResponsavel = :nome, cpfResponsavel = :cpf, emailResponsavel = :email, dataNascimento = :nasc, telefoneResidencia = :tel, telefoneCelular = :cel, rendaMensal = :rm, observacoes = :obs,'+
+                'cepResponsavel = :cep, estadoResponsavel = :estado, cidadeResponsavel = :cidade, bairroResponsavel = :bairro, endResponsavel = :end, foto = :foto where idResponsavel = :codigo;');
+
+  query.Params[0].AsString := prObjResponsavel.getNomeResponsavel;
+  query.Params[1].AsString := prObjResponsavel.getCpfResponsavel;
+  query.Params[2].AsString := prObjResponsavel.getEmailResponsavel;
+  query.Params[3].AsString := prObjResponsavel.getDataNascimento;
+  query.Params[4].AsString := prObjResponsavel.getTelefoneResidencia;
+  query.Params[5].AsString := prObjResponsavel.getTelefoneCelular;
+  query.Params[6].AsFloat := prObjResponsavel.getRendaMensal;
+  query.Params[7].AsString := prObjResponsavel.getObservacoes;
+  query.Params[8].AsString := prObjResponsavel.getCepResponsavel;
+  query.Params[9].AsString := prObjResponsavel.getEstadoResponsavel;
+  query.Params[10].AsString := prObjResponsavel.getCidadeResponsavel;
+  query.Params[11].AsString := prObjResponsavel.getBairroResponsavel;
+  query.Params[12].AsString := prObjResponsavel.getEndereco;
+
+  foto := TFileStream.Create(ExtractFilePath(Application.Exename) + 'Foto.jpg', fmOpenRead);
+
+  query.Params[13].LoadFromStream(foto, ftBlob);
+  query.Params[14].AsInteger := prObjResponsavel.getIdResponsavel;
+
+
+  try
+     query.ExecSQL;
+     result := true;
+  Except
+    on e:Exception do
+      result := false;
+  end;
+
+    query.Close;
+    query.Free;
+
 end;
 
 function TDataModule1.fAlteraCrianca(prObjCrianca: TCrianca): Boolean;
@@ -139,203 +191,58 @@ begin
   query.Free;
 end;
 
-function TDataModule1.fDeleteAlimentacao(prId: integer): Boolean;
+function TDataModule1.fAlteraOcorrencia(prObjOcorrencia: TOcorrencia): Boolean;
 var
   query : TFDQuery;
 begin
   query := TFDQuery.Create(nil);
   query.Connection := DataModule1.Conexao;
 
-  query.SQL.Add('Delete from TCONALIM where idControle = :prId;');
+  query.SQL.Add('update TOCORRENCIA set responsavel=:resp, dataOcorrencia=:dtOco, horaOcorrencia=:hrOco, ocorrencia=:Oco, tomouMedicacao=:tMedi, descMedicacao=:desc, quantidade=:qtd, horaMedicacao=:hrMed, idCrianca=:idCri where idOcorrencia = :idOco;');
+  query.Params[0].AsString := prObjOcorrencia.getResponsavel;
+  query.Params[1].AsString := prObjOcorrencia.getDataOcorrencia;
+  query.Params[2].AsString := prObjOcorrencia.getHoraOcorrencia;
+  query.Params[3].AsString := prObjOcorrencia.getOcorrencia;
+  query.Params[4].AsString := prObjOcorrencia.getTomouMedicacao;
+  query.Params[5].AsString := prObjOcorrencia.getDescMedicacao;
+  query.Params[6].AsString := prObjOcorrencia.getQuantidade;
+  query.Params[7].AsString := prObjOcorrencia.getHoraMedicacao;
+  query.Params[8].AsInteger := prObjOcorrencia.getidCrianca;
+  query.Params[9].AsInteger := prObjOcorrencia.getIdOcorrencia;
+
+  try
+    query.ExecSQL;
+    result := true;
+  Except
+    on e:Exception do
+      result := false;
+  end;
+
+  query.Close;
+  query.Free;
+end;
+
+{Função de deleção de registros}
+function TDataModule1.fDelete(prSQL: String; prId: integer): Boolean;
+var
+  query : TFDQuery;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add(prSQL);
   query.Params[0].AsInteger := prId;
 
   try
     query.ExecSQL;
     result := true;
-  except
-     on e: Exception do
-       result := false;
-  end;
-
-  query.Close;
-  query.free;
-end;
-
-function TDataModule1.fDeleteConsulta(prId: integer): Boolean;
-var
-  query : TFDQuery;
-begin
-  query := TFDQuery.Create(nil);
-  query.Connection := DataModule1.Conexao;
-
-  query.SQL.Add('Delet from TCONSULTA where idConsulta = :prId;');
-  query.Params[0].AsInteger := prId;
-
-  try
-    query.ExecSQL;
-    result := true;
-  except
-     on e: Exception do
-       result := false;
-  end;
-
-  query.Close;
-  query.free;
-
-end;
-
-function TDataModule1.fDeleteConsultorio(prId: integer): Boolean;
-var
-  query : TFDQuery;
-begin
-  query := TFDQuery.Create(nil);
-  query.Connection := DataModule1.Conexao;
-
-  query.SQL.Add('Delete from TCADCON where idConsultorio = :prId;');
-  query.Params[0].AsInteger := prId;
-
-  try
-     query.ExecSQL;
-     result := true;
   except
      on e:Exception do
-      result := false;
+       result:= false;
   end;
-
-  query.Close;
-  query.Free;
 end;
 
-function TDataModule1.fDeleteCrianca(prId: integer): Boolean;
-var
-  query : TFDQuery;
-begin
-   query := TFDQuery.Create(nil);
-   query.Connection := DataModule1.Conexao;
-
-   query.SQL.Add('Delete from TCADCRI where idCrianca = :prId;');
-   query.Params[0].AsInteger := prId;
-
-   try
-    query.ExecSQL;
-    result := true;
-   except
-    on e: Exception do
-      result := false;
-   end;
-
-   query.Close;
-   query.Free;
-
-end;
-
-function TDataModule1.fDeleteMedico(prId: integer): Boolean;
-var
-  query : TFDQuery;
-begin
-  query := TFDQuery.Create(nil);
-  query.Connection := DataModule1.Conexao;
-
-  query.SQL.Add('Delete from TCADMED where idMedico = :idMedico;');
-
-  query.Params[0].AsInteger := prId;
-
-  try
-     query.ExecSQL;
-     result := true;
-  except
-    on e:Exception do
-       result := false;
-  end;
-
-  query.Close;
-  query.free;
-end;
-
-function TDataModule1.fDeleteResponsavel(prId: integer): Boolean;
-begin
-   DataModule1.Query.Create(nil);
-   DataModule1.Conexao.Connected := true;
-   DataModule1.Query.Connection := DataModule1.Conexao;
-
-   DataModule1.Query.SQL.Add('Delete from TCADRESP where idResponsavel = :prId;');
-   DataModule1.Query.Params[0].AsInteger := prId;
-
-   try
-    DataModule1.Query.ExecSQL;
-    result := true;
-   except
-    on e: Exception do
-      result := false;
-   end;
-
-   query.Close;
-   query.Free;
-
-end;
-
-function TDataModule1.fDeleteVacina(prId: integer): Boolean;
-var
-  query : TFDQuery;
-begin
-  query := TFDQuery.Create(nil);
-  query.Connection := DataModule1.Conexao;
-
-  query.SQL.Add('Delete from TCONVACI where idVacina = :prId;');
-  query.Params[0].AsInteger := prId;
-
-  try
-    query.ExecSQL;
-    Result := true;
-  except
-    on e: Exception do
-       result := false;
-  end;
-
-  query.Close;
-  query.Free;
-end;
-
-function TDataModule1.fInsertCrianca(prObjCrianca: TCrianca): Boolean;
-var
-   query : TFDQuery;
-   foto : TStream;
-   data : TDataModule1;
-begin
-  query := TFDQuery.Create(nil);
-  data := TDataModule1.Create(nil);
-  query.Connection := data.Conexao;
-
-  query.SQL.Add('insert into TCADCRI values (0, :nome, :dataNasc, :cpf, :observacoes, :sexo, :hospNasc, :pesoNasc, :pai, :mae, :respUm, :respDois, :foto);');
-
-  query.Params[0].AsString := prObjCrianca.getNomeCrianca;
-  query.Params[1].AsString := prObjCrianca.getDataNascimento;
-  query.Params[2].AsString := prObjCrianca.getCpfCrianca;
-  query.Params[3].AsString := prObjCrianca.getObservacoes;
-  query.Params[4].AsString := prObjCrianca.getSexo;
-  query.Params[5].AsString := prObjCrianca.getHospNascimento;
-  query.Params[6].AsString := prObjCrianca.getPesoNascimento;
-  query.Params[7].AsString := prObjCrianca.getNomePai;
-  query.Params[8].AsString := prObjCrianca.getNomeMae;
-  query.Params[9].AsInteger := prObjCrianca.getResponsavel1;
-  query.Params[10].AsInteger := prObjCrianca.getResponsavel2;
-
-  foto := TFileStream.Create(ExtractFilePath(Application.Exename) + 'Foto.jpg', fmOpenRead);
-
-  query.Params[11].LoadFromStream(foto, ftBlob);
-
-  try
-     query.ExecSQL;
-     result := true;
-  Except
-     on e: Exception do
-       result := false;
-  end;
-
-  query.Close;
-  query.Free;
-end;
-
+{Funções de seleção de registros}
 function TDataModule1.fRetornaQuery(prSQL: String): TFDQuery;
 var
    data : TDataModule1;
@@ -510,7 +417,6 @@ begin
 
   query.Close;
   query.Free;
-
 end;
 
 function TDataModule1.fSelectResponsavel: Tlist;
@@ -551,7 +457,7 @@ begin
          objResp.setObservacoes(query.Fields[13].AsString);
          stream := query.CreateBlobStream(query.Fields[14], bmRead);
          foto := Timage.Create(nil);
-         //foto.Picture.LoadFromStream(stream);
+         foto.Picture.LoadFromStream(stream);
          objResp.setFoto(foto);
 
          lista.Add(objResp);
@@ -568,7 +474,37 @@ begin
   query.Free;
 end;
 
-function TDataModule1.pAlteraResponsavel(prObjResponsavel: TResponsavel): Boolean;
+{Funções de inserção de registros}
+function TDataModule1.fInsertCrescimento(prObjCrescimento: TCrescimento): Boolean;
+var
+  query : TFDQuery;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add('insert into TCRESCIMENTO values(0, :dataCrescimento, :peso, :altura, :imc, :circCabeca, :circBarriga, :idCrianca, :observacoes);');
+  query.Params[0].AsString := prObjCrescimento.getDataCrescimento;
+  query.Params[1].AsString := prObjCrescimento.getPeso;
+  query.Params[2].AsString := prObjCrescimento.getAltura;
+  query.Params[3].AsString := prObjCrescimento.getImc;
+  query.Params[4].AsString := prObjCrescimento.getCircCabeca;
+  query.Params[5].AsString := prObjCrescimento.getCircBarriga;
+  query.Params[6].AsInteger := prObjCrescimento.getIdCrianca;
+  query.Params[7].AsString := prObjCrescimento.getObservacoes;
+
+  try
+     query.ExecSQL;
+     result := true;
+  Except
+     on e:Exception do
+       result := false;
+  end;
+
+  query.Close;
+  query.Free;
+end;
+
+function TDataModule1.fInsertCrianca(prObjCrianca: TCrianca): Boolean;
 var
    query : TFDQuery;
    foto : TStream;
@@ -578,40 +514,34 @@ begin
   data := TDataModule1.Create(nil);
   query.Connection := data.Conexao;
 
-  query.SQL.Add('update TCADRESP set nomeResponsavel = :nome, cpfResponsavel = :cpf, emailResponsavel = :email, dataNascimento = :nasc, telefoneResidencia = :tel, telefoneCelular = :cel, rendaMensal = :rm, observacoes = :obs,'+
-                'cepResponsavel = :cep, estadoResponsavel = :estado, cidadeResponsavel = :cidade, bairroResponsavel = :bairro, endResponsavel = :end, foto = :foto where idResponsavel = :codigo;');
+  query.SQL.Add('insert into TCADCRI values (0, :nome, :dataNasc, :cpf, :observacoes, :sexo, :hospNasc, :pesoNasc, :pai, :mae, :respUm, :respDois, :foto);');
 
-  query.Params[0].AsString := prObjResponsavel.getNomeResponsavel;
-  query.Params[1].AsString := prObjResponsavel.getCpfResponsavel;
-  query.Params[2].AsString := prObjResponsavel.getEmailResponsavel;
-  query.Params[3].AsString := prObjResponsavel.getDataNascimento;
-  query.Params[4].AsString := prObjResponsavel.getTelefoneResidencia;
-  query.Params[5].AsString := prObjResponsavel.getTelefoneCelular;
-  query.Params[6].AsFloat := prObjResponsavel.getRendaMensal;
-  query.Params[7].AsString := prObjResponsavel.getObservacoes;
-  query.Params[8].AsString := prObjResponsavel.getCepResponsavel;
-  query.Params[9].AsString := prObjResponsavel.getEstadoResponsavel;
-  query.Params[10].AsString := prObjResponsavel.getCidadeResponsavel;
-  query.Params[11].AsString := prObjResponsavel.getBairroResponsavel;
-  query.Params[12].AsString := prObjResponsavel.getEndereco;
+  query.Params[0].AsString := prObjCrianca.getNomeCrianca;
+  query.Params[1].AsString := prObjCrianca.getDataNascimento;
+  query.Params[2].AsString := prObjCrianca.getCpfCrianca;
+  query.Params[3].AsString := prObjCrianca.getObservacoes;
+  query.Params[4].AsString := prObjCrianca.getSexo;
+  query.Params[5].AsString := prObjCrianca.getHospNascimento;
+  query.Params[6].AsString := prObjCrianca.getPesoNascimento;
+  query.Params[7].AsString := prObjCrianca.getNomePai;
+  query.Params[8].AsString := prObjCrianca.getNomeMae;
+  query.Params[9].AsInteger := prObjCrianca.getResponsavel1;
+  query.Params[10].AsInteger := prObjCrianca.getResponsavel2;
 
   foto := TFileStream.Create(ExtractFilePath(Application.Exename) + 'Foto.jpg', fmOpenRead);
 
-  query.Params[13].LoadFromStream(foto, ftBlob);
-  query.Params[14].AsInteger := prObjResponsavel.getIdResponsavel;
-
+  query.Params[11].LoadFromStream(foto, ftBlob);
 
   try
      query.ExecSQL;
      result := true;
   Except
-    on e:Exception do
-      result := false;
+     on e: Exception do
+       result := false;
   end;
 
-    query.Close;
-    query.Free;
-
+  query.Close;
+  query.Free;
 end;
 
 function TDataModule1.fInsertMedico(prObjMedico: TMedico): Boolean;
@@ -635,6 +565,36 @@ begin
     result := true;
   except
     on e:Exception do
+      result := false;
+  end;
+
+  query.Close;
+  query.Free;
+end;
+
+function TDataModule1.fInsertOcorrecia(prObjOcorrencia: TOcorrencia): Boolean;
+var
+  query : TFDQuery;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add('insert into TOCORRENCIA values(0, :responsavel, :dataOcorrencia, :horaOcorrencia, :ocorrencia, :tomouMedicacao, :descMedicacao, :quantidade, :horaMedicacao, :idCrianca);');
+  query.Params[0].AsString := prObjOcorrencia.getResponsavel;
+  query.Params[1].AsString := prObjOcorrencia.getDataOcorrencia;
+  query.Params[2].AsString := prObjOcorrencia.getHoraOcorrencia;
+  query.Params[3].AsString := prObjOcorrencia.getOcorrencia;
+  query.Params[4].AsString := prObjOcorrencia.getTomouMedicacao;
+  query.Params[5].AsString := prObjOcorrencia.getDescMedicacao;
+  query.Params[6].AsString := prObjOcorrencia.getQuantidade;
+  query.Params[7].AsString := prObjOcorrencia.getHoraMedicacao;
+  query.Params[8].AsInteger := prObjOcorrencia.getidCrianca;
+
+  try
+    query.ExecSQL;
+    result := true;
+  except
+    on e: Exception do
       result := false;
   end;
 

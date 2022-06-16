@@ -35,6 +35,9 @@ type
     Label7: TLabel;
     Panel4: TPanel;
     imgCadCri: TImage;
+    procedure FormActivate(Sender: TObject);
+    procedure sbSalvarClick(Sender: TObject);
+    procedure sbConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -45,7 +48,45 @@ var
   frmCrescimento: TfrmCrescimento;
 
 implementation
+uses
+  uController, formEditResp;
 
 {$R *.dfm}
+
+procedure TfrmCrescimento.FormActivate(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pPopulaComboBox(self.cbCrianca, 2);
+
+  self.sbExcluir.Enabled := false;
+end;
+
+procedure TfrmCrescimento.sbConsultarClick(Sender: TObject);
+begin
+  frmEditResp := TfrmEditResp.Create(nil);
+  controller := TController.Create;
+  controller.pPopulaDBGrid('select * from TCRESCIMENTO');
+
+  frmEditResp.Panel1.Color := $00FFCCE6;
+  frmEditResp.DBGrid1.Color := $00FFCCE6;
+  frmEditResp.Caption := 'CONSULTA DE ACOMPANHAMENTO DE CRESCIMENTO ';
+  frmEditResp.edtBusca.Visible := false;
+  frmEditResp.DBGrid1.Align :=  alClient;
+  //frmEditResp.Tag := 7;
+  frmEditResp.ShowModal;
+
+  if (self.edtData.Text <> '') then
+    self.sbExcluir.Enabled := true;
+end;
+
+procedure TfrmCrescimento.sbSalvarClick(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pCadContCrescimento;
+end;
 
 end.

@@ -9,6 +9,7 @@ interface
       dataOcorrencia : String;
       horaOcorrencia : String;
       ocorrencia : String;
+      tomouMedicao : String;
       descMedicacao : String;
       quantidade : String;
       horaMedicacao : String;
@@ -29,6 +30,9 @@ interface
 
       procedure setOcorrencia(ocorrencia : String);
       function getOcorrencia : String;
+
+      procedure setTomouMedicacao(tomouMedicacao : String);
+      function getTomouMedicacao : String;
 
       procedure setDescMedicacao(descMedicacao : String);
       function getDescMedicacao : String;
@@ -96,6 +100,11 @@ begin
   result := responsavel;
 end;
 
+function TOcorrencia.getTomouMedicacao: String;
+begin
+  result := self.tomouMedicao;
+end;
+
 procedure TOcorrencia.setDataOcorrencia(dataOcorrencia: String);
 begin
   self.dataOcorrencia := dataOcorrencia;
@@ -139,6 +148,11 @@ end;
 procedure TOcorrencia.setResponsavel(responsavel: String);
 begin
   self.responsavel := responsavel;
+end;
+
+procedure TOcorrencia.setTomouMedicacao(tomouMedicacao: String);
+begin
+  self.tomouMedicao := tomouMedicacao;
 end;
 
 end.

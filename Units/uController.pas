@@ -5,28 +5,39 @@ interface
 uses
   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage,
   uCrianca, formCadCrianca, Vcl.StdCtrls, Vcl.Forms, formAlimentacao, uAlimentacao,
-  uConsultorio, formConsultorio, formCadMedico, uMedico, uVacina, formContVacina, formConsulta, uConsulta;
+  uConsultorio, formConsultorio, formCadMedico, uMedico, uVacina, formContVacina, formConsulta,
+  uConsulta, uOcorrencia, formOcorrencia, uCrescimento, formCrescimento;
 
 type
   TController = class
 
   public
+    {procedures de cadastro}
     procedure pCadVacina;
+    procedure pCadOcorrencia;
     procedure pCadResponsavel;
-    procedure pExcluiResponsavel;
     procedure pCadCrianca;
-    procedure pExcluiCrianca;
     procedure pCadAlimentacao;
+    procedure pCadConsultorio;
+    procedure pCadMedico;
+    procedure pCadConsulta;
+    procedure pCadContCrescimento;
+
+    {procedure de exclusão}
+    procedure pExcluiResponsavel;
+    procedure pExcluiOcorrencia;
+    procedure pExcluiCrianca;
     procedure pExcluiAlimentacao;
     procedure pExcluiMedico;
     procedure pExcluiConsultorio;
     procedure pExcluiConsulta;
     procedure pExcluiVacina;
-    procedure pCadConsultorio;
-    procedure pCadMedico;
-    procedure pCadConsulta;
+
+    {funções para tirar '.' de valores float e para retornar diretório onde se salva foto de cadastros}
     function fTiraPonto(prText: String): String;
     function fRetornaDirFoto: String;
+
+    {procedure de mensagem geral, popula DBGrid e combobox, limpa telas e torna campo enabled}
     procedure pMessage(prCaption: String; prColor: integer; prLabel: String; prFoto: String);
     procedure pPopulaDBGrid(prSQL: String);
     procedure pPopulaComboBox(prComboBox: TComboBox; prTela : integer);
@@ -36,11 +47,11 @@ type
     procedure pLimpaTelaCon;
     procedure pLimpaTelaMed;
     procedure pLimpaTelaVac;
+    procedure pLimpaTelaOcocrrecia;
     procedure pLimpaTelaConsulta;
+    procedure pLimpaTelaCrescimento;
     procedure pCamposAlimEnabled(prEnabled : boolean);
     procedure pCamposConsultorioEnabled(prEnabled : Boolean);
-
-
   end;
 
 var
@@ -77,6 +88,7 @@ begin
   result := prText;
 end;
 
+{procedures de cadastro/inserção de registros}
 procedure TController.pCadAlimentacao;
 var
     objAlimentacao: TAlimentacao;
@@ -113,7 +125,6 @@ begin
        end;
 end;
 
-{Processos utilizados pela criança}
 procedure TController.pCadConsulta;
 var
   objConsulta : TConsulta;
@@ -174,6 +185,33 @@ begin
          end;
      end
 
+end;
+
+procedure TController.pCadContCrescimento;
+var
+  objCrescimento : TCrescimento;
+begin
+  objCrescimento := TCrescimento.Create;
+
+  objCrescimento.setIdCrianca(TCrianca(frmCrescimento.cbCrianca.Items.Objects[frmCrescimento.cbCrianca.ItemIndex]).getIdCrianca);
+  objCrescimento.setDataCrescimento(frmCrescimento.edtData.Text);
+  objCrescimento.setPeso(frmCrescimento.edtPeso.Text);
+  objCrescimento.setAltura(frmCrescimento.edtAltura.Text);
+  objCrescimento.setImc(frmCrescimento.edtImc.Text);
+  objCrescimento.setCircCabeca(frmCrescimento.edtCircCabeca.Text);
+  objCrescimento.setCircBarriga(frmCrescimento.edtCircBarriga.Text);
+  objCrescimento.setObservacoes(frmCrescimento.mmObservacoes.Lines.Text);
+
+  if (DataModule1.fInsertCrescimento(objCrescimento)) then
+     begin
+      self.pMessage('INSERÇÃO DE DADOS DE CRESCIMENTO REALIZADA', $00FFCCE6, 'Inserção realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+      self.pLimpaTelaCrescimento;
+     end
+  else
+     begin
+      self.pMessage('FALHA NA INSERÇÃO DOS DADOS DE CRESCIMENTO', $009F9FFF, 'Falha na inserção, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+      self.pLimpaTelaCrescimento;
+     end;
 end;
 
 procedure TController.pCadCrianca;
@@ -274,7 +312,57 @@ begin
      end;
 end;
 
-{Processos utilizados pelo responsável}
+procedure TController.pCadOcorrencia;
+var
+  objOcorrencia : TOcorrencia;
+begin
+  objOcorrencia := TOcorrencia.Create;
+
+  objOcorrencia.setResponsavel(frmOcorrencia.edtAcompanhante.Text);
+  objOcorrencia.setDataOcorrencia(frmOcorrencia.edtData.Text);
+  objOcorrencia.setHoraOcorrencia(frmOcorrencia.edtHora.Text);
+  objOcorrencia.setOcorrencia(frmOcorrencia.mmOcorrencia.Lines.Text);
+
+  if (frmOcorrencia.ckSim.Checked = true) then
+     objOcorrencia.setTomouMedicacao(frmOcorrencia.ckSim.Caption)
+  else
+     objOcorrencia.setTomouMedicacao(frmOcorrencia.ckNao.Caption);
+
+  objOcorrencia.setDescMedicacao(frmOcorrencia.edtDescricao.Text);
+  objOcorrencia.setHoraMedicacao(frmOcorrencia.edtHoraMedicacao.Text);
+  objOcorrencia.setQuantidade(frmOcorrencia.edtQuantidade.Text);
+  objOcorrencia.setIdCrianca(TCrianca(frmOcorrencia.cbCrianca.Items.Objects[frmOcorrencia.cbCrianca.ItemIndex]).getIdCrianca);
+
+  if not (frmOcorrencia.Tag = 1) then
+      begin
+        if (DataModule1.fInsertOcorrecia(objOcorrencia)) then
+           begin
+            self.pMessage('INSERÇÃO DE OCORRÊNCIA REALIZADA', $00D8D8EB, 'Inserção de ocorrência realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+            self.pLimpaTelaOcocrrecia;
+           end
+        else
+           begin
+             self.pMessage('FALHA NA INSERÇÃO DE OCORRÊNCIA', $009F9FFF, 'Falha na inserção de ocorrência verifique os dados !!',ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+             self.pLimpaTelaOcocrrecia;
+           end;
+      end
+  else
+     begin
+       objOcorrencia.setIdOcorrencia(StrToInt(frmOcorrencia.edtCodigo.Text));
+       if DataModule1.fAlteraOcorrencia(objOcorrencia) then
+         begin
+          self.pMessage('ALTERAÇÃO DE OCORRÊNCIA REALIZADA', $00D8D8EB, 'Alteração de ocorrência realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+          self.pLimpaTelaOcocrrecia;
+         end
+       else
+         begin
+           self.pMessage('FALHA NA ALTERAÇÃO DE OCORRÊNCIA', $009F9FFF, 'Falha na alteração de ocorrência verifique os dados !!',ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+           self.pLimpaTelaOcocrrecia;
+         end;
+
+     end;
+end;
+
 procedure TController.pCadResponsavel;
 var
   Dao: TDataModule1;
@@ -372,6 +460,7 @@ begin
      end;
 end;
 
+{procedures para tornar os campo enabled em casos que não há edição de registro}
 procedure TController.pCamposAlimEnabled(prEnabled : boolean);
 begin
   frmAlimentacao.edtAcompanhante.Enabled := prEnabled;
@@ -397,9 +486,10 @@ begin
   frmConsultorio.edtTelefone.Enabled := prEnabled;
 end;
 
+{procedures de exlusão de registros}
 procedure TController.pExcluiAlimentacao;
 begin
-  if (DataModule1.fDeleteAlimentacao(StrToInt(frmAlimentacao.edtCodigo.Text))) then
+  if (DataModule1.fDelete('Delete from TCONALIM where idControle = :prId;', StrToInt(frmAlimentacao.edtCodigo.Text))) then
      begin
        self.pMessage('ALIMENTAÇÃO EXCLUÍDA', $00FFDFFF, 'Exclusão de alimentação realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
        self.pCamposAlimEnabled(true);
@@ -414,7 +504,7 @@ end;
 
 procedure TController.pExcluiConsulta;
 begin
-  if (DataModule1.fDeleteConsulta(StrToInt(frmConsulta.edtCodigo.Text))) then
+  if (DataModule1.fDelete('Delet from TCONSULTA where idConsulta = :prId;', StrToInt(frmConsulta.edtCodigo.Text))) then
   begin
     self.pMessage('CONSULTA EXCLUÍDA', $00D2FFD9, 'Exclusão de consulta realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
     self.pLimpaTelaConsulta;
@@ -428,7 +518,7 @@ end;
 
 procedure TController.pExcluiConsultorio;
 begin
-  if (DataModule1.fDeleteConsultorio(StrToInt(frmConsultorio.edtCodigo.Text))) then
+  if (DataModule1.fDelete('Delete from TCADCON where idConsultorio = :prId;', StrToInt(frmConsultorio.edtCodigo.Text))) then
      begin
        self.pMessage('CONSULTÓRIO EXCLUÍDO', $00C4C4FF, 'Exclusão de consultório realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
        self.pCamposConsultorioEnabled(true);
@@ -443,12 +533,8 @@ begin
 end;
 
 procedure TController.pExcluiCrianca;
-var
-  Dao : TDataModule1;
 begin
-  Dao := TDataModule1.Create(nil);
-
-  if (Dao.fDeleteCrianca(StrToInt(frmCadCrianca.edtCodigo.Text))) then
+  if (DataModule1.fDelete('Delete from TCADCRI where idCrianca = :prId;', StrToInt(frmCadCrianca.edtCodigo.Text))) then
      begin
        self.pMessage('CRIANÇA EXCLUÍDA', $00D2FFD9, 'Exclusão de criança realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
        self.plimpaTelaCri;
@@ -462,7 +548,7 @@ end;
 
 procedure TController.pExcluiMedico;
 begin
-  if (DataModule1.fDeleteMedico(StrToInt(frmCadMedico.edtCodigo.Text))) then
+  if (DataModule1.fDelete('Delete from TCADMED where idMedico = :idMedico;', StrToInt(frmCadMedico.edtCodigo.Text))) then
      begin
        self.pMessage('MÉDICO EXCLUÍDO', $00FF9D9D, 'Exclusão de médico realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
        self.pLimpaTelaMed;
@@ -474,11 +560,25 @@ begin
      end;
 end;
 
+procedure TController.pExcluiOcorrencia;
+begin
+   if (DataModule1.fDelete('Delete from TOCORRENCIA where idOcorrencia = :prId;', StrToInt(frmOcorrencia.edtCodigo.Text)))  then
+     begin
+       self.pMessage('OCORRÊNCIA EXCLUÍDA', $00D8D8EB, 'Exclusão de ocorrência realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+       self.pLimpaTelaOcocrrecia;
+     end
+   else
+     begin
+       self.pMessage('FALHA NA EXCLUSÃO DE OCORRÊNCIA', $009F9FFF, 'Falha na exclusão de ocorrência, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+       self.pLimpaTelaOcocrrecia;
+     end;
+end;
+
 procedure TController.pExcluiResponsavel;
 begin
-  if (DataModule1.fDeleteResponsavel(StrToInt(frmCadResp.edtCodigo.Text))) then
+  if (DataModule1.fDelete('Delete from TCADRESP where idResponsavel = :prId;', StrToInt(frmCadResp.edtCodigo.Text))) then
   begin
-    self.pMessage('RESPONSÁVAL EXCLUÍDO', $00D2FFD9, 'Exclusão de responsável realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+    self.pMessage('RESPONSÁVEL EXCLUÍDO', $00D2FFD9, 'Exclusão de responsável realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
     self.pLimpaTelaResp;
   end
   else
@@ -491,7 +591,7 @@ end;
 
 procedure TController.pExcluiVacina;
 begin
-  if (DataModule1.fDeleteVacina(StrToInt(frmContVacina.edtCodigo.Text))) then
+  if (DataModule1.fDelete('Delete from TCONVACI where idVacina = :prId;', StrToInt(frmContVacina.edtCodigo.Text))) then
      begin
        self.pMessage('VACINA EXCLUÍDA', $0080FFFF, 'Exclusão de vacina realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
        self.pLimpaTelaVac;
@@ -504,6 +604,7 @@ begin
      end;
 end;
 
+{procedures para limpar os campos do formulário após inserção ou exclusão}
 procedure TController.pLimpaTelaAlim;
 begin
    frmAlimentacao.edtAcompanhante.Clear;
@@ -518,8 +619,6 @@ begin
    frmAlimentacao.edtAcompanhante.SetFocus;
    frmAlimentacao.edtCodigo.Clear;
 end;
-
-
 
 procedure TController.pLimpaTelaCon;
 begin
@@ -551,6 +650,19 @@ begin
   frmConsulta.edtAcompanhante.SetFocus;
 end;
 
+procedure TController.pLimpaTelaCrescimento;
+begin
+  frmCrescimento.cbCrianca.Text := 'Selecione...';
+  frmCrescimento.edtData.Clear;
+  frmCrescimento.edtPeso.Clear;
+  frmCrescimento.edtAltura.Clear;
+  frmCrescimento.edtImc.Clear;
+  frmCrescimento.edtCodigo.Clear;
+  frmCrescimento.edtCircCabeca.Clear;
+  frmCrescimento.edtCircBarriga.Clear;
+  frmCrescimento.mmObservacoes.Lines.Clear;
+end;
+
 procedure TController.plimpaTelaCri;
 begin
   frmCadCrianca.edtNome.Clear;
@@ -579,6 +691,31 @@ begin
   frmCadMedico.cbConsultorio.Text := 'Selecione...';
   frmCadMedico.edtEspecialidade.Clear;
   frmCadMedico.sbExcluir.Enabled := false;
+end;
+
+procedure TController.pLimpaTelaOcocrrecia;
+begin
+  frmOcorrencia.edtAcompanhante.Clear;
+  frmOcorrencia.edtData.Clear;
+  frmOcorrencia.edtHora.Clear;
+  frmOcorrencia.edtQuantidade.Clear;
+  frmOcorrencia.edtHoraMedicacao.Clear;
+  frmOcorrencia.mmOcorrencia.Lines.Clear;
+  frmOcorrencia.edtDescricao.Clear;
+  frmOcorrencia.cbCrianca.text := 'Selecione...';
+  frmOcorrencia.ckSim.Checked := false;
+  frmOcorrencia.ckNao.Checked := false;
+  frmOcorrencia.edtCodigo.Clear;
+
+  if (frmOcorrencia.edtDescricao.Enabled = false) then
+     begin
+       frmOcorrencia.edtDescricao.Enabled := true;
+       frmOcorrencia.edtHoraMedicacao.Enabled := true;
+       frmOcorrencia.edtQuantidade.Enabled := true;
+       frmOcorrencia.Label5.Enabled := true;
+     end;
+
+  frmOcorrencia.edtAcompanhante.SetFocus;
 end;
 
 procedure TController.pLimpaTelaResp;
@@ -620,6 +757,7 @@ begin
   frmContVacina.rbHospital.Checked := false;
 end;
 
+{procedure criada para alimentar o formulário de mensagem geral usado no cadastro, edição e exclusão de registros}
 procedure TController.pMessage(prCaption: String; prColor: integer;
   prLabel: String; prFoto: String);
 begin
@@ -632,6 +770,7 @@ begin
   frmMessage.ShowModal;
 end;
 
+{procedure para popular combobox}
 procedure TController.pPopulaComboBox(prComboBox: TComboBox; prTela : integer);
 var
   lista: Tlist;
@@ -682,6 +821,7 @@ begin
 
 end;
 
+{procedure para popular DBgrid}
 procedure TController.pPopulaDBGrid(prSQL: String);
 begin
   DataModule1.Source.DataSet := DataModule1.fRetornaQuery(prSQL);
