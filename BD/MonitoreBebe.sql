@@ -131,7 +131,7 @@ horaMedicacao varchar(5),
 idCrianca int,
 foreign key (idCrianca) references TCADCRI(idCrianca)
 );
-
+      
 create table TCRESCIMENTO(
 idCrescimento int not null auto_increment primary key,
 dataCrescimento varchar(10),
@@ -142,7 +142,7 @@ circCabeca varchar(10),
 circBarriga varchar(10),
 idCrianca int,
 observacoes varchar(200),
-foreign key (idCrianca) references TCADCRI(idCrianca) on delete restrict
+foreign key (idCrianca) references TCADCRI(idCrianca)
 );
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
