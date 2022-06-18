@@ -13,6 +13,7 @@ object DataModule1: TDataModule1
       'DriverID=MySQL')
     UpdateOptions.AssignedValues = [uvAutoCommitUpdates]
     UpdateOptions.AutoCommitUpdates = True
+    Connected = True
     LoginPrompt = False
     Transaction = Transaction
     Left = 32

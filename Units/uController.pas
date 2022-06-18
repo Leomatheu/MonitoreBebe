@@ -32,6 +32,7 @@ type
     procedure pExcluiConsultorio;
     procedure pExcluiConsulta;
     procedure pExcluiVacina;
+    procedure pExcluiCrescimento;
 
     {funções para tirar '.' de valores float e para retornar diretório onde se salva foto de cadastros}
     function fTiraPonto(prText: String): String;
@@ -529,6 +530,20 @@ begin
      begin
        self.pMessage('FALHA NA EXCLUSÃO DO CONSULTÓRIO', $009F9FFF, 'Falha na exclusão do consultório, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
        self.pLimpaTelaCon
+     end;
+end;
+
+procedure TController.pExcluiCrescimento;
+begin
+  if (DataModule1.fDelete('Delete from TCRESCIMENTO where idCrescimento = :prId;', StrToInt(frmCrescimento.edtCodigo.Text))) then
+     begin
+       self.pMessage('DADOS DE CRESCIMENTO EXCLUÍDO', $00FFCCE6, 'Exclusão de dados realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+       self.pLimpaTelaCrescimento;
+     end
+  else
+     begin
+       self.pMessage('FALHA NA EXCLUSÃO DOS DADOS', $009F9FFF, 'Falha na exclusão dos dados, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+       self.pLimpaTelaCrescimento;
      end;
 end;
 

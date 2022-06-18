@@ -27,7 +27,6 @@ object frmCrescimento: TfrmCrescimento
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitLeft = 448
     object Panel7: TPanel
       Left = 23
       Top = 535
@@ -78,6 +77,7 @@ object frmCrescimento: TfrmCrescimento
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
+        OnClick = sbExcluirClick
         ExplicitLeft = 40
         ExplicitTop = 0
         ExplicitWidth = 86
@@ -293,7 +293,6 @@ object frmCrescimento: TfrmCrescimento
     ParentBackground = False
     ShowCaption = False
     TabOrder = 1
-    ExplicitLeft = -6
     object Label3: TLabel
       Left = 32
       Top = 33

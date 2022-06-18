@@ -26,7 +26,6 @@ object frmOcorrencia: TfrmOcorrencia
     Color = 14211307
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = -5
     object Label3: TLabel
       Left = 24
       Top = 101
@@ -311,7 +310,6 @@ object frmOcorrencia: TfrmOcorrencia
     Color = 14211307
     ParentBackground = False
     TabOrder = 1
-    ExplicitLeft = 447
     object Image1: TImage
       Left = 32
       Top = 24

@@ -28,7 +28,6 @@ object frmMenu: TfrmMenu
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitWidth = 565
     object Image1: TImage
       Left = 1
       Top = 1
@@ -39751,9 +39750,8 @@ object frmMenu: TfrmMenu
         F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6
         0000}
       Stretch = True
+      ExplicitLeft = 0
       ExplicitTop = 2
-      ExplicitWidth = 563
-      ExplicitHeight = 572
     end
   end
   object pnBotoes: TPanel

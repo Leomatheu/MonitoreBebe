@@ -20,7 +20,11 @@ uses
   uVacina in '..\Units\uVacina.pas',
   formContVacina in '..\Forms\formContVacina.pas' {frmContVacina},
   formConsulta in '..\Forms\formConsulta.pas' {frmConsulta},
-  uConsulta in '..\Units\uConsulta.pas';
+  uConsulta in '..\Units\uConsulta.pas',
+  formCrescimento in '..\Forms\formCrescimento.pas' {frmCrescimento},
+  formOcorrencia in '..\Forms\formOcorrencia.pas' {frmOcorrencia},
+  uCrescimento in '..\Units\uCrescimento.pas',
+  uOcorrencia in '..\Units\uOcorrencia.pas';
 
 begin
   Application.Initialize;
@@ -28,7 +32,5 @@ begin
   DataModule1 := TDataModule1.Create(nil);
   Controller := TController.Create;
   Application.CreateForm(TfrmMenu, frmMenu);
-  Application.CreateForm(TfrmContVacina, frmContVacina);
-  Application.CreateForm(TfrmConsulta, frmConsulta);
   Application.Run;
 end.

@@ -38,6 +38,7 @@ type
     procedure FormActivate(Sender: TObject);
     procedure sbSalvarClick(Sender: TObject);
     procedure sbConsultarClick(Sender: TObject);
+    procedure sbExcluirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -70,15 +71,35 @@ begin
   controller.pPopulaDBGrid('select * from TCRESCIMENTO');
 
   frmEditResp.Panel1.Color := $00FFCCE6;
-  frmEditResp.DBGrid1.Color := $00FFCCE6;
+  frmEditResp.DBGrid1.Font.Color := clBlack;
   frmEditResp.Caption := 'CONSULTA DE ACOMPANHAMENTO DE CRESCIMENTO ';
   frmEditResp.edtBusca.Visible := false;
   frmEditResp.DBGrid1.Align :=  alClient;
-  //frmEditResp.Tag := 7;
+  frmEditResp.Tag := 8;
+
+  if (Odd(frmEditResp.DBGrid1.DataSource.DataSet.RecNo)) then
+     frmEditResp.DBGrid1.Canvas.Brush.Color := $00FFCCE6
+  else
+     frmEditResp.DBGrid1.Canvas.Brush.Color := clWhite;
+
   frmEditResp.ShowModal;
 
   if (self.edtData.Text <> '') then
-    self.sbExcluir.Enabled := true;
+     begin
+       self.sbExcluir.Enabled := true;
+       self.sbSalvar.Enabled := false;
+     end;
+
+end;
+
+procedure TfrmCrescimento.sbExcluirClick(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pExcluiCrescimento;
+  self.sbSalvar.Enabled := true;
+  self.cbCrianca.SetFocus;
 end;
 
 procedure TfrmCrescimento.sbSalvarClick(Sender: TObject);

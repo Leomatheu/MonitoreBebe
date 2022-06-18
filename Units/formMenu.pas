@@ -119,7 +119,7 @@ procedure TfrmMenu.sbControleCrescimentoClick(Sender: TObject);
 begin
   frmCrescimento := TFrmCrescimento.Create(nil);
   frmCrescimento.ShowModal;
-                                end;
+end;
 
 procedure TfrmMenu.sbControleVacinaClick(Sender: TObject);
 begin

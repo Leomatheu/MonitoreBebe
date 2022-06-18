@@ -20,6 +20,9 @@ type
 
   end;
 
+type
+    TDBGridPadrao = class(TCustomGrid);
+
 var
   frmEditResp: TfrmEditResp;
 
@@ -194,8 +197,15 @@ begin
 
     8:
     begin
-    //
-
+      frmCrescimento.edtData.Text := self.DBGrid1.Fields[1].Value;
+      frmCrescimento.edtPeso.Text := self.DBGrid1.Fields[2].Value;
+      frmCrescimento.edtAltura.Text := self.DBGrid1.Fields[3].Value;
+      frmCrescimento.edtImc.Text := self.DBGrid1.Fields[4].Value;
+      frmCrescimento.edtCircCabeca.Text := self.DBGrid1.Fields[5].Value;
+      frmCrescimento.edtCircBarriga.Text := self.DBGrid1.Fields[6].Value;
+      frmCrescimento.mmObservacoes.Lines.Text := self.DBGrid1.Fields[8].Value;
+      frmCrescimento.edtCodigo.Text := self.DBGrid1.Fields[0].Value;
+      frmCrescimento.cbCrianca.Text := IntToStr(self.DBGrid1.Fields[7].Value)+' - '+DataModule1.fSelectDadoEspecifico('select tcadcri.nomeCrianca from tcadcri where idCrianca = :pr;', self.DBGrid1.Fields[7].Value);
     end;
    end;
 
@@ -221,6 +231,10 @@ begin
 
   if (self.Tag = 6) then
      controller.pPopulaDBGrid('select * from TCONVACI where nomeVacina like "%'+self.edtBusca.Text+'%";');
+
+  if (self.Tag = 7) then
+     controller.pPopulaDBGrid('select * from TOCORRENCIA where dataOcorrencia like "%'+self.edtBusca.Text+'%";');
+
 end;
 
 end.
