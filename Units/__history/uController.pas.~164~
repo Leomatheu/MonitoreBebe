@@ -6,7 +6,7 @@ uses
   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage,
   uCrianca, formCadCrianca, Vcl.StdCtrls, Vcl.Forms, formAlimentacao, uAlimentacao,
   uConsultorio, formConsultorio, formCadMedico, uMedico, uVacina, formContVacina, formConsulta,
-  uConsulta, uOcorrencia, formOcorrencia;
+  uConsulta, uOcorrencia, formOcorrencia, uCrescimento, formCrescimento;
 
 type
   TController = class
@@ -21,6 +21,7 @@ type
     procedure pCadConsultorio;
     procedure pCadMedico;
     procedure pCadConsulta;
+    procedure pCadContCrescimento;
 
     {procedure de exclusão}
     procedure pExcluiResponsavel;
@@ -31,6 +32,7 @@ type
     procedure pExcluiConsultorio;
     procedure pExcluiConsulta;
     procedure pExcluiVacina;
+    procedure pExcluiCrescimento;
 
     {funções para tirar '.' de valores float e para retornar diretório onde se salva foto de cadastros}
     function fTiraPonto(prText: String): String;
@@ -48,6 +50,7 @@ type
     procedure pLimpaTelaVac;
     procedure pLimpaTelaOcocrrecia;
     procedure pLimpaTelaConsulta;
+    procedure pLimpaTelaCrescimento;
     procedure pCamposAlimEnabled(prEnabled : boolean);
     procedure pCamposConsultorioEnabled(prEnabled : Boolean);
   end;
@@ -185,11 +188,40 @@ begin
 
 end;
 
+procedure TController.pCadContCrescimento;
+var
+  objCrescimento : TCrescimento;
+begin
+  objCrescimento := TCrescimento.Create;
+
+  objCrescimento.setIdCrianca(TCrianca(frmCrescimento.cbCrianca.Items.Objects[frmCrescimento.cbCrianca.ItemIndex]).getIdCrianca);
+  objCrescimento.setDataCrescimento(frmCrescimento.edtData.Text);
+  objCrescimento.setPeso(frmCrescimento.edtPeso.Text);
+  objCrescimento.setAltura(frmCrescimento.edtAltura.Text);
+  objCrescimento.setImc(frmCrescimento.edtImc.Text);
+  objCrescimento.setCircCabeca(frmCrescimento.edtCircCabeca.Text);
+  objCrescimento.setCircBarriga(frmCrescimento.edtCircBarriga.Text);
+  objCrescimento.setObservacoes(frmCrescimento.mmObservacoes.Lines.Text);
+
+  if (DataModule1.fInsertCrescimento(objCrescimento)) then
+     begin
+      self.pMessage('INSERÇÃO DE DADOS DE CRESCIMENTO REALIZADA', $00FFCCE6, 'Inserção realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+      self.pLimpaTelaCrescimento;
+     end
+  else
+     begin
+      self.pMessage('FALHA NA INSERÇÃO DOS DADOS DE CRESCIMENTO', $009F9FFF, 'Falha na inserção, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+      self.pLimpaTelaCrescimento;
+     end;
+end;
+
 procedure TController.pCadCrianca;
 var
   Dao: TDataModule1;
   objCrianca: TCrianca;
 begin
+  frmCadCrianca.imgCadCri.Picture.SaveToFile(controller.fRetornaDirFoto);
+
   Dao := TDataModule1.Create(nil);
   objCrianca := TCrianca.Create;
 
@@ -503,6 +535,20 @@ begin
      end;
 end;
 
+procedure TController.pExcluiCrescimento;
+begin
+  if (DataModule1.fDelete('Delete from TCRESCIMENTO where idCrescimento = :prId;', StrToInt(frmCrescimento.edtCodigo.Text))) then
+     begin
+       self.pMessage('DADOS DE CRESCIMENTO EXCLUÍDO', $00FFCCE6, 'Exclusão de dados realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+       self.pLimpaTelaCrescimento;
+     end
+  else
+     begin
+       self.pMessage('FALHA NA EXCLUSÃO DOS DADOS', $009F9FFF, 'Falha na exclusão dos dados, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+       self.pLimpaTelaCrescimento;
+     end;
+end;
+
 procedure TController.pExcluiCrianca;
 begin
   if (DataModule1.fDelete('Delete from TCADCRI where idCrianca = :prId;', StrToInt(frmCadCrianca.edtCodigo.Text))) then
@@ -619,6 +665,19 @@ begin
   frmConsulta.cbConsultorio.Text := 'Selecione...';
   frmConsulta.edtProximaConsulta.Clear;
   frmConsulta.edtAcompanhante.SetFocus;
+end;
+
+procedure TController.pLimpaTelaCrescimento;
+begin
+  frmCrescimento.cbCrianca.Text := 'Selecione...';
+  frmCrescimento.edtData.Clear;
+  frmCrescimento.edtPeso.Clear;
+  frmCrescimento.edtAltura.Clear;
+  frmCrescimento.edtImc.Clear;
+  frmCrescimento.edtCodigo.Clear;
+  frmCrescimento.edtCircCabeca.Clear;
+  frmCrescimento.edtCircBarriga.Clear;
+  frmCrescimento.mmObservacoes.Lines.Clear;
 end;
 
 procedure TController.plimpaTelaCri;

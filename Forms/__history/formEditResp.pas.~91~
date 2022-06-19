@@ -14,7 +14,6 @@ type
     edtBusca: TLabeledEdit;
     procedure DBGrid1CellClick(Column: TColumn);
     procedure edtBuscaChange(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -43,7 +42,7 @@ var
   foto : TStream;
   controller : TController;
   Dao : TDataModule1;
-begin
+  begin
    controller := TController.Create;
    self.Close;
 
@@ -120,13 +119,14 @@ begin
     begin
       frmConsultorio.edtCodigo.Text := self.DBGrid1.Fields[0].Value;
       frmConsultorio.edtNomeConsultorio.Text := self.DBGrid1.Fields[1].Value;
-      frmConsultorio.edtTelefone.Text := self.DBGrid1.Fields[2].Value;
-      frmConsultorio.edtEmail.Text := self.DBGrid1.Fields[3].Value;
-      frmConsultorio.edtCEP.Text := self.DBGrid1.Fields[4].Value;
-      frmConsultorio.edtEstado.Text := self.DBGrid1.Fields[5].Value;
-      frmConsultorio.edtCidade.Text := self.DBGrid1.Fields[6].Value;
-      frmConsultorio.edtBairro.Text := self.DBGrid1.Fields[7].Value;
-      frmConsultorio.edtEndereco.Text := self.DBGrid1.Fields[8].Value;
+      frmConsultorio.edtCEP.Text := self.DBGrid1.Fields[2].Value;
+      frmConsultorio.edtEstado.Text := self.DBGrid1.Fields[3].Value;
+      frmConsultorio.edtCidade.Text := self.DBGrid1.Fields[4].Value;
+      frmConsultorio.edtBairro.Text := self.DBGrid1.Fields[5].Value;
+      frmConsultorio.edtEndereco.Text := self.DBGrid1.Fields[6].Value;
+      frmConsultorio.edtTelefone.Text := self.DBGrid1.Fields[7].Value;
+      frmConsultorio.edtEmail.Text := self.DBGrid1.Fields[8].Value;
+
       frmConsultorio.sbSalvar.Enabled := false;
       frmConsultorio.sbExcluir.Enabled := true;
 
@@ -209,7 +209,6 @@ begin
       frmCrescimento.cbCrianca.Text := IntToStr(self.DBGrid1.Fields[7].Value)+' - '+DataModule1.fSelectDadoEspecifico('select tcadcri.nomeCrianca from tcadcri where idCrianca = :pr;', self.DBGrid1.Fields[7].Value);
     end;
    end;
-
 end;
 
 procedure TfrmEditResp.edtBuscaChange(Sender: TObject);
@@ -232,11 +231,10 @@ begin
 
   if (self.Tag = 6) then
      controller.pPopulaDBGrid('select * from TCONVACI where nomeVacina like "%'+self.edtBusca.Text+'%";');
-end;
 
-procedure TfrmEditResp.FormActivate(Sender: TObject);
-begin
-  self.Panel1.Align := alTop;
+  if (self.Tag = 7) then
+     controller.pPopulaDBGrid('select * from TOCORRENCIA where dataOcorrencia like "%'+self.edtBusca.Text+'%";');
+
 end;
 
 end.

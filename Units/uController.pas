@@ -220,6 +220,8 @@ var
   Dao: TDataModule1;
   objCrianca: TCrianca;
 begin
+  //frmCadCrianca.imgCadCri.Picture.SaveToFile(controller.fRetornaDirFoto);
+
   Dao := TDataModule1.Create(nil);
   objCrianca := TCrianca.Create;
 
@@ -246,6 +248,10 @@ begin
        if (Dao.fInsertCrianca(objCrianca)) then
          begin
            self.pMessage('INSERÇÃO DA CRIANÇA REALIZADA', $00FEF9CB, 'Inserção de criança realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+
+           if (FileExists(ExtractFilePath(Application.Exename) + 'Foto.jpg')) then
+              DeleteFile(ExtractFilePath(Application.Exename) + 'Foto.jpg');
+
            self.plimpaTelaCri;
          end
        else
@@ -260,6 +266,10 @@ begin
        if (Dao.fAlteraCrianca(objCrianca)) then
          begin
            self.pMessage('ALTERAÇÃO DA CRIANÇA REALIZADA', $00FEF9CB, 'alteração da criança realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+
+           if (FileExists(ExtractFilePath(Application.Exename) + 'Foto.jpg')) then
+              DeleteFile(ExtractFilePath(Application.Exename) + 'Foto.jpg');
+
            self.plimpaTelaCri;
          end
        else

@@ -25,7 +25,6 @@ object frmEditResp: TfrmEditResp
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitHeight = 447
     object DBGrid1: TDBGrid
       Left = 1
       Top = 74

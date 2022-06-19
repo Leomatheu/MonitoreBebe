@@ -782,6 +782,8 @@ object frmCadCrianca: TfrmCadCrianca
       Width = 468
       Height = 83
       Caption = 'Panel3'
+      Color = 16710091
+      ParentBackground = False
       ShowCaption = False
       TabOrder = 3
       object ckMasculino: TCheckBox

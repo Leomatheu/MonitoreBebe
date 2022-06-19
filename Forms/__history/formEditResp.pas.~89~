@@ -14,7 +14,6 @@ type
     edtBusca: TLabeledEdit;
     procedure DBGrid1CellClick(Column: TColumn);
     procedure edtBuscaChange(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -232,12 +231,9 @@ begin
 
   if (self.Tag = 6) then
      controller.pPopulaDBGrid('select * from TCONVACI where nomeVacina like "%'+self.edtBusca.Text+'%";');
-end;
 
-procedure TfrmEditResp.FormActivate(Sender: TObject);
-begin
-  TDBGridPadrao(DBGrid1).DefaultRowHeight := 25;
-  TDBGridPadrao(DBGrid1).ClientHeight := (25 * TDBGridPadrao(DBGrid1).RowCount) + 25;
+  if (self.Tag = 7) then
+     controller.pPopulaDBGrid('select * from TOCORRENCIA where dataOcorrencia like "%'+self.edtBusca.Text+'%";');
 
 end;
 

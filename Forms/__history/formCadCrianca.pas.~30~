@@ -40,13 +40,14 @@ type
     sbConsultar: TSpeedButton;
     sbExcluir: TSpeedButton;
     sbSalvar: TSpeedButton;
-    LabeledEdit1: TLabeledEdit;
+    edtCodigo: TLabeledEdit;
     Panel8: TPanel;
     sbFoto: TSpeedButton;
     procedure sbFotoClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
-    procedure cbResp1Change(Sender: TObject);
     procedure sbSalvarClick(Sender: TObject);
+    procedure sbConsultarClick(Sender: TObject);
+    procedure sbExcluirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -58,30 +59,51 @@ var
 
 implementation
 uses
-   uController, uResponsavel;
+   uController, uResponsavel, formEditResp;
 
 {$R *.dfm}
-
-procedure TfrmCadCrianca.cbResp1Change(Sender: TObject);
-begin
-   self.cbResp2.Enabled := true;
-   Controller.pPopulaComboBox(self.cbResp2);
-
-end;
 
 procedure TfrmCadCrianca.FormActivate(Sender: TObject);
 begin
    self.sbExcluir.Enabled := false;
-   self.cbResp2.Enabled := false;
-   Controller.pPopulaComboBox(self.cbResp1);
+   self.edtNome.SetFocus;
+   Controller.pPopulaComboBox(self.cbResp2, 1);
+   Controller.pPopulaComboBox(self.cbResp1, 1);
+end;
+
+procedure TfrmCadCrianca.sbConsultarClick(Sender: TObject);
+begin
+  frmEditResp := TfrmEditResp.Create(nil);
+  controller := TController.Create;
+  controller.pPopulaDBGrid('select * from monitorebebe.TCADCRI;');
+
+  frmEditResp.Caption := 'EDIÇÃO DE CRIANÇAS';
+  frmEditResp.edtBusca.EditLabel.Caption := 'Busque pela criança';
+  frmEditResp.Tag := 2;
+  frmEditResp.ShowModal;
+
+  if (self.edtNome.Text <> '') then
+     self.sbExcluir.Enabled := true;
+end;
+
+procedure TfrmCadCrianca.sbExcluirClick(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pExcluiCrianca;
 end;
 
 procedure TfrmCadCrianca.sbFotoClick(Sender: TObject);
+var
+  controller : TController;
 begin
+  controller := TController.Create;
+
   if (OpenPictureDialog1.Execute) then
      begin
        imgCadCri.Picture.LoadFromFile(OpenPictureDialog1.FileName);
-       imgCadCri.Picture.SaveToFile('C:\Users\progvisual33\Documents\Pessoal\Exercícios Aula\PZIMexercicio\DELPHI\MonitoreBebe\Foto.Jpeg');
+       imgCadCri.Picture.SaveToFile(controller.fRetornaDirFoto);
      end;
 end;
 
