@@ -152,6 +152,8 @@ object frmCadResp: TfrmCadResp
       Top = 224
       Width = 489
       Height = 205
+      Color = 13828057
+      ParentBackground = False
       TabOrder = 6
       object edtCEP: TLabeledEdit
         Left = 8

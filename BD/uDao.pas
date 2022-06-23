@@ -58,6 +58,8 @@ var
   DataModule1: TDataModule1;
 
 implementation
+uses
+   uController;
 
 
 
@@ -336,7 +338,7 @@ begin
         objCri.setResponsavel2(query.Fields[11].AsInteger);
         stream := query.CreateBlobStream(query.Fields[12], bmRead);
         foto := Timage.Create(nil);
-        //foto.Picture.LoadFromStream(stream);
+        foto.Picture.LoadFromStream(stream);
         objCri.setFoto(foto);
 
         lista.Add(objCri);
@@ -528,7 +530,10 @@ begin
   query.Params[9].AsInteger := prObjCrianca.getResponsavel1;
   query.Params[10].AsInteger := prObjCrianca.getResponsavel2;
 
-  foto := TFileStream.Create(ExtractFilePath(Application.Exename) + 'Foto.jpg', fmOpenRead);
+  if (FileExists(ExtractFilePath(Application.Exename) + 'Foto.jpg')) then
+     foto := TFileStream.Create(ExtractFilePath(Application.Exename) + 'Foto.jpg', fmOpenRead)
+  else
+     foto := TFileStream.Create(ExtractFilePath(Application.Exename) + 'fotoPerfil.jpg', fmOpenRead);
 
   query.Params[11].LoadFromStream(foto, ftBlob);
 
@@ -542,6 +547,7 @@ begin
 
   query.Close;
   query.Free;
+  foto.Free;
 end;
 
 function TDataModule1.fInsertMedico(prObjMedico: TMedico): Boolean;
@@ -734,10 +740,12 @@ var
    query : TFDQuery;
    foto : TStream;
    data : TDataModule1;
+   controller : TController;
 begin
   query := TFDQuery.Create(nil);
   data := TDataModule1.Create(nil);
   query.Connection := data.Conexao;
+  controller := TController.create;
 
   query.SQL.Add('insert into TCADRESP values (0, :nomeResponsavel, :cpfResponsavel, :emailResponsavel, :dataNascimento, :telefoneResidencia,'+' :telefoneCelular, :rendaMensal, :observacoes, :cepResponsavel, :estadoResponsavel, :cidadeResponsavel, :bairroResponsavel, :endResponsavel, :foto);');
 
@@ -755,9 +763,13 @@ begin
   query.Params[11].AsString := prObjResponsavel.getBairroResponsavel;
   query.Params[12].AsString := prObjResponsavel.getEndereco;
 
-  foto := TFileStream.Create(ExtractFilePath(Application.Exename) + 'Foto.jpg', fmOpenRead);
+  if (FileExists(ExtractFilePath(Application.Exename) + 'Foto.jpg')) then
+     foto := TFileStream.Create(ExtractFilePath(Application.Exename) + 'Foto.jpg', fmOpenRead)
+  else
+     foto := TFileStream.Create(ExtractFilePath(Application.Exename) + 'fotoPerfil.jpg', fmOpenRead);
 
   query.Params[13].LoadFromStream(foto, ftBlob);
+
 
   try
      query.ExecSQL;
@@ -767,8 +779,10 @@ begin
       result := false;
   end;
 
+
     query.Close;
     query.Free;
+    foto.Free;
 end;
 
 end.

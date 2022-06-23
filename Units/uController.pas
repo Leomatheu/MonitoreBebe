@@ -65,11 +65,13 @@ implementation
 function TController.fRetornaDirFoto: String;
 var
   aux: String;
+  h,m,s,ms: word;
 begin
+  DecodeTime(Time,h,m,s,ms);
   aux := ExtractFilePath(Application.Exename) + 'Foto.jpg';
 
-  if (FileExists(aux)) then
-    DeleteFile(aux);
+ if (FileExists(aux)) then
+   DeleteFile(aux);
 
   result := aux;
 end;
@@ -220,7 +222,7 @@ var
   Dao: TDataModule1;
   objCrianca: TCrianca;
 begin
-  //frmCadCrianca.imgCadCri.Picture.SaveToFile(controller.fRetornaDirFoto);
+  frmCadCrianca.imgCadCri.Picture.SaveToFile(controller.fRetornaDirFoto);
 
   Dao := TDataModule1.Create(nil);
   objCrianca := TCrianca.Create;
@@ -248,10 +250,6 @@ begin
        if (Dao.fInsertCrianca(objCrianca)) then
          begin
            self.pMessage('INSERÇÃO DA CRIANÇA REALIZADA', $00FEF9CB, 'Inserção de criança realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
-
-           if (FileExists(ExtractFilePath(Application.Exename) + 'Foto.jpg')) then
-              DeleteFile(ExtractFilePath(Application.Exename) + 'Foto.jpg');
-
            self.plimpaTelaCri;
          end
        else
@@ -380,6 +378,7 @@ var
   objResp: TResponsavel;
   wValor: String;
 begin
+
   Dao := TDataModule1.Create(nil);
   objResp := TResponsavel.Create;
 
@@ -389,8 +388,7 @@ begin
   objResp.setDataNascimento(frmCadResp.edtDataNasc.Text);
   objResp.setTelefoneResidencia(frmCadResp.edtResidencial.Text);
   objResp.setTelefoneCelular(frmCadResp.edtCelular.Text);
-  wValor := Copy(self.fTiraPonto(frmCadResp.edtRendaMensal.Text), 3,
-    Length(frmCadResp.edtRendaMensal.Text));
+  wValor := Copy(self.fTiraPonto(frmCadResp.edtRendaMensal.Text), 3, Length(frmCadResp.edtRendaMensal.Text));
   objResp.setRendaMensal(StrToFloat(wValor));
   objResp.setObservacoes(frmCadResp.mmObservacao.Lines.Text);
   objResp.setCepResponsavel(frmCadResp.edtCEP.Text);
