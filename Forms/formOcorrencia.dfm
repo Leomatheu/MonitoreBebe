@@ -174,7 +174,7 @@ object frmOcorrencia: TfrmOcorrencia
     end
     object mmOcorrencia: TMemo
       Left = 24
-      Top = 260
+      Top = 261
       Width = 385
       Height = 71
       Font.Charset = ANSI_CHARSET
@@ -310,6 +310,7 @@ object frmOcorrencia: TfrmOcorrencia
     Color = 14211307
     ParentBackground = False
     TabOrder = 1
+    ExplicitLeft = 447
     object Image1: TImage
       Left = 32
       Top = 24

@@ -31,6 +31,8 @@ type
     sbExcluir: TSpeedButton;
     sbConsultar: TSpeedButton;
     edtCodigo: TEdit;
+    Tpanel: TPanel;
+    Tpanel01: TPanel;
     procedure FormActivate(Sender: TObject);
     procedure sbSalvarClick(Sender: TObject);
     procedure sbConsultarClick(Sender: TObject);

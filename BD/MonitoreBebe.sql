@@ -94,11 +94,9 @@ foreign key (idCrianca) references TCADCRI(idCrianca) on delete restrict
 create table TCOMPRAS(
 idCompra int not null auto_increment primary key,
 dataCompra varchar(10),
-localCompra varchar(50),
-descProduto varchar(50),
-marca varchar(50),
 quantidade int,
-valorUnitario double,
+valorTotal double,
+listaCompras varchar(800),
 responsavel varchar(50),
 idCrianca int,
 foreign key (idCrianca) references TCADCRI(idCrianca)
@@ -143,6 +141,13 @@ circBarriga varchar(10),
 idCrianca int,
 observacoes varchar(200),
 foreign key (idCrianca) references TCADCRI(idCrianca)
+);
+
+create table TITENS(
+idItem int not null auto_increment primary key,
+descItem varchar (100),
+unidadeMedia varchar(20),
+valorUnitario float
 );
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';

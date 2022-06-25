@@ -10,7 +10,8 @@ uses
   FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, uAlimentacao,
   Vcl.Forms, uConsultorio, uMedico, uConsulta, formContVacina, uVacina,
-  uOcorrencia, formOcorrencia, uCrescimento, formCrescimento;
+  uOcorrencia, formOcorrencia, uCrescimento, formCrescimento, formUtensilios,
+  uUtensilios;
 
 
 type
@@ -35,6 +36,7 @@ type
     function fInsertVacina(prObjVacina : TVacina):Boolean;
     function fInsertOcorrecia(prObjOcorrencia : TOcorrencia):Boolean;
     function fInsertCrescimento(prObjCrescimento : TCrescimento):Boolean;
+    function fInsertUtensilios(prUtensilios : TUtensilios):Boolean;
 
     {Funções de update de registros}
     function pAlteraResponsavel(prObjResponsavel : TResponsavel):Boolean;
@@ -606,6 +608,33 @@ begin
 
   query.Close;
   query.Free;
+end;
+
+function TDataModule1.fInsertUtensilios(prUtensilios: TUtensilios): Boolean;
+var
+  query : TFDQuery;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add('insert into TCOMPRAS values(0,:dataCompra,:quantidade,:valorTotal,:listaCompras,:responsavel,:idCrianca);');
+  query.Params[0].AsString := prUtensilios.getDataCompra;
+  query.Params[1].AsInteger := prUtensilios.getQuantidade;
+  query.Params[2].AsFloat := prUtensilios.getValorTotal;
+  query.Params[3].AsString := prUtensilios.getListaCompras;
+  query.Params[4].AsString := prUtensilios.getResponsavel;
+  query.Params[5].AsInteger := prUtensilios.getIdCrianca;
+
+  try
+    query.ExecSQL;
+    result := true;
+  Except
+    on e: Exception do
+       result := false;
+  end;
+
+  query.Free;
+  query.Close;
 end;
 
 function TDataModule1.fInsertVacina(prObjVacina: TVacina): Boolean;

@@ -1,0 +1,40 @@
+unit formUtensilios;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.DBCtrls,
+  Vcl.Buttons, Vcl.ComCtrls;
+
+type
+  TfrmUtensilios = class(TForm)
+    Panel1: TPanel;
+    Panel5: TPanel;
+    sbSalvar: TSpeedButton;
+    Panel6: TPanel;
+    sbExcluir: TSpeedButton;
+    Panel7: TPanel;
+    sbConsultar: TSpeedButton;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    SpeedButton1: TSpeedButton;
+    Panel4: TPanel;
+    SpeedButton2: TSpeedButton;
+    Panel8: TPanel;
+    SpeedButton3: TSpeedButton;
+    ComboBoxEx1: TComboBoxEx;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmUtensilios: TfrmUtensilios;
+
+implementation
+
+{$R *.dfm}
+
+end.

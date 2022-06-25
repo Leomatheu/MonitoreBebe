@@ -20,9 +20,10 @@ object DataModule1: TDataModule1
     Top = 56
   end
   object Query: TFDQuery
+    Active = True
     Connection = Conexao
     SQL.Strings = (
-      'Select * from TCADRESP;')
+      'Select * from TITENS;')
     Left = 296
     Top = 88
   end

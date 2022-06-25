@@ -1,0 +1,35 @@
+unit formCadItem;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.WinXPanels, Vcl.StdCtrls,
+  Vcl.ExtCtrls, Vcl.Buttons, Vcl.Mask;
+
+type
+  TfrmCadItem = class(TForm)
+    sbSalvar: TSpeedButton;
+    sbExcluir: TSpeedButton;
+    sbConsultar: TSpeedButton;
+    LabeledEdit1: TLabeledEdit;
+    LabeledEdit3: TLabeledEdit;
+    CardPanel1: TCardPanel;
+    SpeedButton1: TSpeedButton;
+    Card1: TCard;
+    MaskEdit1: TMaskEdit;
+    edtCrianca: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadItem: TfrmCadItem;
+
+implementation
+
+{$R *.dfm}
+
+end.

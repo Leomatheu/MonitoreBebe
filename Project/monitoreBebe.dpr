@@ -24,7 +24,10 @@ uses
   formCrescimento in '..\Forms\formCrescimento.pas' {frmCrescimento},
   formOcorrencia in '..\Forms\formOcorrencia.pas' {frmOcorrencia},
   uCrescimento in '..\Units\uCrescimento.pas',
-  uOcorrencia in '..\Units\uOcorrencia.pas';
+  uOcorrencia in '..\Units\uOcorrencia.pas',
+  formCadItem in '..\Forms\formCadItem.pas' {frmCadItem},
+  formUtensilios in '..\Forms\formUtensilios.pas' {frmUtensilios},
+  uUtensilios in '..\Units\uUtensilios.pas';
 
 begin
   Application.Initialize;
@@ -32,5 +35,8 @@ begin
   DataModule1 := TDataModule1.Create(nil);
   Controller := TController.Create;
   Application.CreateForm(TfrmMenu, frmMenu);
+  Application.CreateForm(TfrmCadItem, frmCadItem);
+  Application.CreateForm(TfrmUtensilios, frmUtensilios);
+  Application.CreateForm(TfrmUtensilios, frmUtensilios);
   Application.Run;
 end.

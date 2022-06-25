@@ -6,7 +6,7 @@ uses
   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage,
   uCrianca, formCadCrianca, Vcl.StdCtrls, Vcl.Forms, formAlimentacao, uAlimentacao,
   uConsultorio, formConsultorio, formCadMedico, uMedico, uVacina, formContVacina, formConsulta,
-  uConsulta, uOcorrencia, formOcorrencia, uCrescimento, formCrescimento;
+  uConsulta, uOcorrencia, formOcorrencia, uCrescimento, formCrescimento, uUtensilios, formUtensilios;
 
 type
   TController = class
@@ -22,6 +22,7 @@ type
     procedure pCadMedico;
     procedure pCadConsulta;
     procedure pCadContCrescimento;
+    procedure pCadUtensilios;
 
     {procedure de exclusão}
     procedure pExcluiResponsavel;
@@ -51,6 +52,7 @@ type
     procedure pLimpaTelaOcocrrecia;
     procedure pLimpaTelaConsulta;
     procedure pLimpaTelaCrescimento;
+    procedure pLimpaTelaUtensilios;
     procedure pCamposAlimEnabled(prEnabled : boolean);
     procedure pCamposConsultorioEnabled(prEnabled : Boolean);
   end;
@@ -430,6 +432,29 @@ begin
   end;
 end;
 
+procedure TController.pCadUtensilios;
+var
+  objUtensilios :  TUtensilios;
+begin
+  objUtensilios.setDataCompra(frmUtensilios.edDataCompra.Text);
+  objUtensilios.setQuantidade(StrToInt(frmUtensilios.edQuantidade.Text));
+  objUtensilios.setValorTotal(StrToFloat(frmUtensilios.edValorTotal.Text));
+  objUtensilios.setListaCompras(frmUtensilios.mmListaComprada.Lines.Text);
+  objUtensilios.setResponsavel(frmUtensilios.edResponsavelCompra.Text);
+  objUtensilios.setIdCrianca(TCrianca(frmUtensilios.cbCrianca.Items.Objects[frmUtensilios.cbCrianca.ItemIndex]).getIdCrianca);
+
+  if (DataModule1.fInsertUtensilios(objUtensilios)) then
+     begin
+       self.pMessage('INSERÇÃO DE COMPRA REALIZADA', $00C1D6FF, 'Inserção de compra realizada !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+       self.pLimpaTelaUtensilios;
+     end
+  else
+     begin
+       self.pMessage('FALHA NA INSERÇÃO DE COMPRA', $009F9FFF, 'Falha na inserção de compra verifique os dados !!',ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+       self.pLimpaTelaUtensilios;
+     end;
+end;
+
 procedure TController.pCadVacina;
 var
   objVacina : TVacina;
@@ -761,6 +786,17 @@ begin
   frmCadResp.imgCadResp.Picture.LoadFromFile
     (ExtractFilePath(Application.Exename) + 'Images\fotoPerfil.jpg');
   frmCadResp.sbExcluir.Enabled := false;
+end;
+
+procedure TController.pLimpaTelaUtensilios;
+begin
+  frmUtensilios.edResponsavelCompra.Clear;
+  frmUtensilios.edQuantidade.Clear;
+  frmUtensilios.edDataCompra.Clear;
+  frmUtensilios.edValorTotal.Clear;
+  frmUtensilios.mmListaComprada.Lines.Clear;
+  frmUtensilios.cbItem.Text := 'Selecione...';
+  frmUtensilios.cbCrianca.Text := 'Selecione...';
 end;
 
 procedure TController.pLimpaTelaVac;

@@ -645,8 +645,9 @@ object frmCadMedico: TfrmCadMedico
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFF}
         Stretch = True
-        ExplicitTop = 40
-        ExplicitHeight = 105
+        ExplicitLeft = 48
+        ExplicitTop = 0
+        ExplicitWidth = 88
       end
     end
     object Panel7: TPanel
@@ -673,7 +674,7 @@ object frmCadMedico: TfrmCadMedico
         ParentFont = False
         OnClick = sbConsultarClick
         ExplicitLeft = 32
-        ExplicitTop = 2
+        ExplicitTop = 3
         ExplicitWidth = 123
       end
     end

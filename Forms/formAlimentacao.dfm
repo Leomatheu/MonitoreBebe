@@ -29,16 +29,19 @@ object frmAlimentacao: TfrmAlimentacao
     Font.Style = []
     ParentFont = False
   end
-  object TPanel
+  object Tpanel: TPanel
     Left = 0
     Top = 0
     Width = 450
     Height = 699
     Align = alClient
+    Caption = 'Tpanel'
     Color = 16769023
     Enabled = False
     ParentBackground = False
+    ShowCaption = False
     TabOrder = 0
+    ExplicitLeft = -6
     object Label1: TLabel
       Left = 25
       Top = 28
@@ -306,8 +309,8 @@ object frmAlimentacao: TfrmAlimentacao
         8B48140B5C26FBFC079BE51D39B94F1D770000000049454E44AE426082}
     end
     object edtCrianca: TLabel
-      Left = 25
-      Top = 379
+      Left = 26
+      Top = 378
       Width = 56
       Height = 15
       Caption = 'Crian'#231'a'
@@ -457,14 +460,16 @@ object frmAlimentacao: TfrmAlimentacao
       TabOrder = 9
     end
   end
-  object TPanel
+  object Tpanel01: TPanel
     Left = 450
     Top = 0
     Width = 195
     Height = 699
     Align = alRight
+    Caption = 'Tpanel01'
     Color = 16769023
     ParentBackground = False
+    ShowCaption = False
     TabOrder = 1
     object Panel1: TPanel
       Left = 27
@@ -575,7 +580,7 @@ object frmAlimentacao: TfrmAlimentacao
     end
     object TPanel
       Left = 16
-      Top = 630
+      Top = 629
       Width = 159
       Height = 28
       Color = 317753
@@ -602,9 +607,9 @@ object frmAlimentacao: TfrmAlimentacao
         Font.Style = []
         ParentFont = False
         OnClick = sbSalvarClick
-        ExplicitLeft = 72
+        ExplicitLeft = 64
         ExplicitTop = 0
-        ExplicitWidth = 86
+        ExplicitWidth = 94
       end
     end
     object TPanel
