@@ -11,11 +11,7 @@ type
   TfrmUtensilios = class(TForm)
     Panel1: TPanel;
     Panel2: TPanel;
-    cbItem: TComboBoxEx;
     lbItem: TLabel;
-    Label1: TLabel;
-    cbCrianca: TComboBoxEx;
-    edResponsavelCompra: TLabeledEdit;
     edQuantidade: TLabeledEdit;
     edDataCompra: TMaskEdit;
     Label2: TLabel;
@@ -31,6 +27,13 @@ type
     sbExcluir: TSpeedButton;
     Panel3: TPanel;
     sbSalvar: TSpeedButton;
+    Panel4: TPanel;
+    SpeedButton1: TSpeedButton;
+    Label1: TLabel;
+    cbCrianca: TComboBox;
+    edtResponsavelCompra: TLabeledEdit;
+    cbItem: TComboBox;
+    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -41,7 +44,18 @@ var
   frmUtensilios: TfrmUtensilios;
 
 implementation
+uses
+  uController;
 
 {$R *.dfm}
+
+procedure TfrmUtensilios.FormActivate(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pPopulaComboBox(self.cbItem, 5);
+  controller.pPopulaComboBox(self.cbCrianca, 2);
+end;
 
 end.

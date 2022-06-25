@@ -27,7 +27,8 @@ uses
   uOcorrencia in '..\Units\uOcorrencia.pas',
   formCadItem in '..\Forms\formCadItem.pas' {frmCadItem},
   formUtensilios in '..\Forms\formUtensilios.pas' {frmUtensilios},
-  uUtensilios in '..\Units\uUtensilios.pas';
+  uUtensilios in '..\Units\uUtensilios.pas',
+  uItens in '..\Units\uItens.pas';
 
 begin
   Application.Initialize;
@@ -35,8 +36,6 @@ begin
   DataModule1 := TDataModule1.Create(nil);
   Controller := TController.Create;
   Application.CreateForm(TfrmMenu, frmMenu);
-  Application.CreateForm(TfrmCadItem, frmCadItem);
-  Application.CreateForm(TfrmUtensilios, frmUtensilios);
   Application.CreateForm(TfrmUtensilios, frmUtensilios);
   Application.Run;
 end.

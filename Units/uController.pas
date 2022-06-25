@@ -6,7 +6,8 @@ uses
   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage,
   uCrianca, formCadCrianca, Vcl.StdCtrls, Vcl.Forms, formAlimentacao, uAlimentacao,
   uConsultorio, formConsultorio, formCadMedico, uMedico, uVacina, formContVacina, formConsulta,
-  uConsulta, uOcorrencia, formOcorrencia, uCrescimento, formCrescimento, uUtensilios, formUtensilios;
+  uConsulta, uOcorrencia, formOcorrencia, uCrescimento, formCrescimento, uUtensilios, formUtensilios,
+  uItens;
 
 type
   TController = class
@@ -440,7 +441,7 @@ begin
   objUtensilios.setQuantidade(StrToInt(frmUtensilios.edQuantidade.Text));
   objUtensilios.setValorTotal(StrToFloat(frmUtensilios.edValorTotal.Text));
   objUtensilios.setListaCompras(frmUtensilios.mmListaComprada.Lines.Text);
-  objUtensilios.setResponsavel(frmUtensilios.edResponsavelCompra.Text);
+  objUtensilios.setResponsavel(frmUtensilios.edtResponsavelCompra.Text);
   objUtensilios.setIdCrianca(TCrianca(frmUtensilios.cbCrianca.Items.Objects[frmUtensilios.cbCrianca.ItemIndex]).getIdCrianca);
 
   if (DataModule1.fInsertUtensilios(objUtensilios)) then
@@ -790,7 +791,7 @@ end;
 
 procedure TController.pLimpaTelaUtensilios;
 begin
-  frmUtensilios.edResponsavelCompra.Clear;
+  frmUtensilios.edtResponsavelCompra.Clear;
   frmUtensilios.edQuantidade.Clear;
   frmUtensilios.edDataCompra.Clear;
   frmUtensilios.edValorTotal.Clear;
@@ -873,6 +874,15 @@ begin
       for i := 0 to lista.Count -1  do
           begin
             prComboBox.AddItem(IntToStr(TMedico(lista.Items[i]).getIdMedico) + ' - ' + TMedico(lista.Items[i]).getNome, lista[i]);
+          end;
+    end;
+
+  5:
+    begin
+      lista := DataModule1.fSelectItens;
+      for i := 0 to lista.Count -1  do
+          begin
+            prComboBox.AddItem(IntToStr(TItens(lista.Items[i]).getIdItem) + ' - ' + TItens(lista.Items[i]).getDescItem, lista[i]);
           end;
     end;
 

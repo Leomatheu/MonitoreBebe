@@ -3,7 +3,7 @@ object frmUtensilios: TfrmUtensilios
   Top = 0
   BorderStyle = bsDialog
   Caption = 'UTENSILIOS/REM'#201'DIOS'
-  ClientHeight = 784
+  ClientHeight = 773
   ClientWidth = 631
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -12,22 +12,24 @@ object frmUtensilios: TfrmUtensilios
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
     Top = 0
     Width = 432
-    Height = 784
+    Height = 773
     Align = alClient
     Caption = 'Panel1'
     Color = 12703487
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
+    ExplicitLeft = -6
     object lbItem: TLabel
-      Left = 24
-      Top = 32
+      Left = 23
+      Top = 88
       Width = 32
       Height = 15
       Caption = 'Item'
@@ -38,22 +40,9 @@ object frmUtensilios: TfrmUtensilios
       Font.Style = []
       ParentFont = False
     end
-    object Label1: TLabel
-      Left = 24
-      Top = 185
-      Width = 56
-      Height = 15
-      Caption = 'Crian'#231'a'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Fixedsys'
-      Font.Style = []
-      ParentFont = False
-    end
     object Label2: TLabel
-      Left = 287
-      Top = 102
+      Left = 22
+      Top = 23
       Width = 32
       Height = 15
       Caption = 'Data'
@@ -65,11 +54,11 @@ object frmUtensilios: TfrmUtensilios
       ParentFont = False
     end
     object Label3: TLabel
-      Left = 26
-      Top = 702
-      Width = 112
+      Left = 23
+      Top = 590
+      Width = 88
       Height = 15
-      Caption = 'Valor Unit'#225'rio'
+      Caption = 'Valor Total'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
@@ -79,7 +68,7 @@ object frmUtensilios: TfrmUtensilios
     end
     object Label4: TLabel
       Left = 22
-      Top = 331
+      Top = 219
       Width = 128
       Height = 15
       Caption = 'Lista de Compras'
@@ -90,61 +79,22 @@ object frmUtensilios: TfrmUtensilios
       Font.Style = []
       ParentFont = False
     end
-    object cbItem: TComboBoxEx
-      Left = 23
-      Top = 49
-      Width = 384
-      Height = 24
-      ItemsEx = <>
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Fixedsys'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-      Text = 'Selecione...'
-    end
-    object cbCrianca: TComboBoxEx
-      Left = 23
-      Top = 203
-      Width = 385
-      Height = 24
-      ItemsEx = <>
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Fixedsys'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 1
-      Text = 'Selecione...'
-    end
-    object edResponsavelCompra: TLabeledEdit
+    object Label1: TLabel
       Left = 22
-      Top = 282
-      Width = 385
-      Height = 23
-      EditLabel.Width = 184
-      EditLabel.Height = 15
-      EditLabel.Caption = 'Respons'#225'vel Pela Compra'
-      EditLabel.Font.Charset = DEFAULT_CHARSET
-      EditLabel.Font.Color = clWindowText
-      EditLabel.Font.Height = -11
-      EditLabel.Font.Name = 'Fixedsys'
-      EditLabel.Font.Style = []
-      EditLabel.ParentFont = False
+      Top = 657
+      Width = 56
+      Height = 15
+      Caption = 'Crian'#231'a'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
+      Font.Height = -12
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 2
     end
     object edQuantidade: TLabeledEdit
-      Left = 23
-      Top = 120
+      Left = 22
+      Top = 177
       Width = 141
       Height = 23
       EditLabel.Width = 80
@@ -162,11 +112,11 @@ object frmUtensilios: TfrmUtensilios
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 0
     end
     object edDataCompra: TMaskEdit
-      Left = 287
-      Top = 120
+      Left = 22
+      Top = 43
       Width = 120
       Height = 23
       EditMask = '!99/99/0000;1; '
@@ -177,28 +127,28 @@ object frmUtensilios: TfrmUtensilios
       Font.Style = []
       MaxLength = 10
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 1
       Text = '  /  /    '
     end
     object edValorTotal: TMaskEdit
-      Left = 24
-      Top = 721
-      Width = 137
+      Left = 22
+      Top = 609
+      Width = 133
       Height = 23
-      EditMask = 'R$!99999;1; '
+      EditMask = 'R$!###########;1; '
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'Fixedsys'
       Font.Style = []
-      MaxLength = 7
+      MaxLength = 13
       ParentFont = False
-      TabOrder = 5
-      Text = 'R$     '
+      TabOrder = 2
+      Text = 'R$           '
     end
     object mmListaComprada: TMemo
-      Left = 22
-      Top = 352
+      Left = 23
+      Top = 240
       Width = 385
       Height = 337
       Font.Charset = ANSI_CHARSET
@@ -209,25 +159,101 @@ object frmUtensilios: TfrmUtensilios
       Lines.Strings = (
         '')
       ParentFont = False
+      TabOrder = 3
+    end
+    object Panel4: TPanel
+      Left = 211
+      Top = 177
+      Width = 158
+      Height = 23
+      Color = 14869218
+      ParentBackground = False
+      TabOrder = 4
+      object SpeedButton1: TSpeedButton
+        Left = 1
+        Top = 1
+        Width = 156
+        Height = 21
+        Align = alClient
+        Caption = 'Adicionar '#224' Lista'
+        Flat = True
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Fixedsys'
+        Font.Style = []
+        ParentFont = False
+        ExplicitLeft = 56
+        ExplicitWidth = 100
+        ExplicitHeight = 26
+      end
+    end
+    object cbCrianca: TComboBox
+      Left = 23
+      Top = 675
+      Width = 385
+      Height = 23
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 5
+      Text = 'Selecione...'
+    end
+    object edtResponsavelCompra: TLabeledEdit
+      Left = 22
+      Top = 731
+      Width = 385
+      Height = 23
+      EditLabel.Width = 136
+      EditLabel.Height = 15
+      EditLabel.Caption = 'Repons'#225'vel Compra'
+      EditLabel.Font.Charset = ANSI_CHARSET
+      EditLabel.Font.Color = clWindowText
+      EditLabel.Font.Height = -12
+      EditLabel.Font.Name = 'Fixedsys'
+      EditLabel.Font.Style = []
+      EditLabel.ParentFont = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 6
+    end
+    object cbItem: TComboBox
+      Left = 22
+      Top = 109
+      Width = 385
+      Height = 23
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 7
+      Text = 'Selecione...'
     end
   end
   object Panel2: TPanel
     Left = 432
     Top = 0
     Width = 199
-    Height = 784
+    Height = 773
     Align = alRight
     Caption = 'Panel1'
     Color = 12703487
     ParentBackground = False
     ShowCaption = False
     TabOrder = 1
-    ExplicitLeft = 438
     object Panel7: TPanel
-      Left = 22
-      Top = 649
-      Width = 158
+      Left = 16
+      Top = 659
+      Width = 160
       Height = 28
       Color = 14869218
       ParentBackground = False
@@ -235,7 +261,7 @@ object frmUtensilios: TfrmUtensilios
       object sbConsultar: TSpeedButton
         Left = 1
         Top = 1
-        Width = 156
+        Width = 158
         Height = 26
         Align = alClient
         Caption = 'Consultar'
@@ -246,9 +272,9 @@ object frmUtensilios: TfrmUtensilios
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 32
-        ExplicitTop = 2
-        ExplicitWidth = 123
+        ExplicitLeft = 40
+        ExplicitTop = 3
+        ExplicitWidth = 119
       end
     end
     object Panel5: TPanel
@@ -658,9 +684,9 @@ object frmUtensilios: TfrmUtensilios
       end
     end
     object Panel6: TPanel
-      Left = 23
-      Top = 685
-      Width = 159
+      Left = 16
+      Top = 693
+      Width = 160
       Height = 28
       Color = clRed
       ParentBackground = False
@@ -668,7 +694,7 @@ object frmUtensilios: TfrmUtensilios
       object sbExcluir: TSpeedButton
         Left = 1
         Top = 1
-        Width = 157
+        Width = 158
         Height = 26
         Align = alClient
         Caption = 'Excluir'
@@ -679,14 +705,14 @@ object frmUtensilios: TfrmUtensilios
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 56
-        ExplicitWidth = 102
+        ExplicitLeft = 24
+        ExplicitWidth = 134
       end
     end
     object Panel3: TPanel
-      Left = 23
-      Top = 719
-      Width = 159
+      Left = 16
+      Top = 727
+      Width = 160
       Height = 28
       Color = 317753
       ParentBackground = False
@@ -694,7 +720,7 @@ object frmUtensilios: TfrmUtensilios
       object sbSalvar: TSpeedButton
         Left = 1
         Top = 1
-        Width = 157
+        Width = 158
         Height = 26
         Align = alClient
         Caption = 'Salvar'
@@ -705,9 +731,9 @@ object frmUtensilios: TfrmUtensilios
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 48
-        ExplicitTop = -1
-        ExplicitWidth = 110
+        ExplicitLeft = 16
+        ExplicitTop = 0
+        ExplicitWidth = 142
       end
     end
   end

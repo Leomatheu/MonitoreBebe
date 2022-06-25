@@ -11,7 +11,7 @@ uses
   FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, uAlimentacao,
   Vcl.Forms, uConsultorio, uMedico, uConsulta, formContVacina, uVacina,
   uOcorrencia, formOcorrencia, uCrescimento, formCrescimento, formUtensilios,
-  uUtensilios;
+  uUtensilios, uItens;
 
 
 type
@@ -48,6 +48,7 @@ type
     function fDelete(prSQL : String; prId : integer):Boolean;
 
     {Funções de seleção de registros}
+    function fSelectItens : TList;
     function fSelectMedico : TList;
     function fSelectResponsavel : Tlist;
     function fSelectCrianca : Tlist;
@@ -378,6 +379,46 @@ begin
 
   query.Close;
   query.Free;
+end;
+
+function TDataModule1.fSelectItens: TList;
+var
+  query :TFDQuery;
+  lista : TList;
+  item : TItens;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add('Select * from TITENS;');
+
+  try
+    query.Open;
+    query.First;
+    lista := TList.Create;
+
+    while not (query.Eof) do
+       begin
+         item := TItens.Create;
+
+         item.setIdItem(query.Fields[0].asInteger);
+         item.setDescItem(query.Fields[1].asString);
+         item.setUnidadeMedida(query.Fields[2].AsString);
+         item.setValorUnitario(query.Fields[3].AsFloat);
+
+         lista.Add(item);
+         query.Next;
+       end;
+    Result := lista;
+
+  Except
+     on e: EXception do
+       e.ToString;
+  end;
+
+  query.Close;
+  query.Free;
+
 end;
 
 function TDataModule1.fSelectMedico: TList;
