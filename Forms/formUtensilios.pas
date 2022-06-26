@@ -15,8 +15,6 @@ type
     edQuantidade: TLabeledEdit;
     edDataCompra: TMaskEdit;
     Label2: TLabel;
-    Label3: TLabel;
-    edValorTotal: TMaskEdit;
     Panel7: TPanel;
     sbConsultar: TSpeedButton;
     mmListaComprada: TMemo;
@@ -33,7 +31,10 @@ type
     cbCrianca: TComboBox;
     edtResponsavelCompra: TLabeledEdit;
     cbItem: TComboBox;
+    edValorTotal: TLabeledEdit;
     procedure FormActivate(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure sbSalvarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -45,7 +46,7 @@ var
 
 implementation
 uses
-  uController;
+  uController, uItens;
 
 {$R *.dfm}
 
@@ -56,6 +57,38 @@ begin
   controller := TController.Create;
   controller.pPopulaComboBox(self.cbItem, 5);
   controller.pPopulaComboBox(self.cbCrianca, 2);
+end;
+
+procedure TfrmUtensilios.sbSalvarClick(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pCadUtensilios;
+end;
+
+procedure TfrmUtensilios.SpeedButton1Click(Sender: TObject);
+var
+  controller : TController;
+  total : Double;
+begin
+  controller := TController.Create;
+
+  {incrementa a lista de compra}
+  if (self.edQuantidade.Text < '1') then
+     controller.pMessage('QUANTIDADE MENOR NÃO PODE SER ZERO', $009F9FFF, 'A quantidade não pode ser menor que 1 !!',ExtractFilePath(Application.Exename) + 'Images\negado.bmp')
+  else
+     self.mmListaComprada.Lines.Add(IntToStr(TItens(self.cbItem.Items.Objects[self.cbItem.ItemIndex]).getIdItem) +'. '+ TItens(self.cbItem.Items.Objects[self.cbItem.ItemIndex]).getDescItem+'  '+
+     self.edQuantidade.Text+' '+TItens(self.cbItem.Items.Objects[self.cbItem.ItemIndex]).getUnidadeMedida+'  '+FormatFloat('RS #,##0.00', StrToFloat(self.edQuantidade.Text) * TItens(self.cbItem.Items.Objects[self.cbItem.ItemIndex]).getValorUnitario));
+
+
+  {Soma o valor total da compra}
+  total := StrToFloat(controller.fTiraPonto(Copy(self.edValorTotal.Text, 4, Length(self.edValorTotal.Text)))) +  StrToFloat(self.edQuantidade.Text) * TItens(self.cbItem.Items.Objects[self.cbItem.ItemIndex]).getValorUnitario;
+  self.edValorTotal.Text := FormatFloat('R$ #,##0.00', total);
+
+  {volta os campos ao estado inicial}
+  self.cbItem.Text := 'Selecione...';
+  self.edQuantidade.Text := '1';
 end;
 
 end.

@@ -94,7 +94,6 @@ foreign key (idCrianca) references TCADCRI(idCrianca) on delete restrict
 create table TCOMPRAS(
 idCompra int not null auto_increment primary key,
 dataCompra varchar(10),
-quantidade int,
 valorTotal double,
 listaCompras varchar(800),
 responsavel varchar(50),

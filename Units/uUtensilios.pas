@@ -9,7 +9,6 @@ uses
     private
       idCompra : integer;
       dataCompra : String;
-      quantidade : integer;
       valorTotal : double;
       listaCompras : String;
       responsavel : String;
@@ -21,9 +20,6 @@ uses
 
       procedure setDataCompra(DataCompra:String);
       function getDataCompra:String;
-
-      procedure setQuantidade(Quantidade:integer);
-      function getQuantidade:integer;
 
       procedure setValorTotal(ValorTotal:Double);
       function getValorTotal:Double;
@@ -64,11 +60,6 @@ begin
   result := self.listaCompras;
 end;
 
-function TUtensilios.getQuantidade: integer;
-begin
-  result := self.quantidade;
-end;
-
 function TUtensilios.getResponsavel: String;
 begin
   result := self.responsavel;
@@ -97,11 +88,6 @@ end;
 procedure TUtensilios.setListaCompras(ListaCompras: String);
 begin
   self.listaCompras := ListaCompras;
-end;
-
-procedure TUtensilios.setQuantidade(Quantidade: integer);
-begin
-  self.quantidade := Quantidade;
 end;
 
 procedure TUtensilios.setResponsavel(Responsavel: String);

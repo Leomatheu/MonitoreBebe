@@ -12,6 +12,7 @@ object frmUtensilios: TfrmUtensilios
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
   OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
@@ -46,19 +47,6 @@ object frmUtensilios: TfrmUtensilios
       Width = 32
       Height = 15
       Caption = 'Data'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Fixedsys'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label3: TLabel
-      Left = 23
-      Top = 590
-      Width = 88
-      Height = 15
-      Caption = 'Valor Total'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
@@ -113,6 +101,7 @@ object frmUtensilios: TfrmUtensilios
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      Text = '1'
     end
     object edDataCompra: TMaskEdit
       Left = 22
@@ -130,24 +119,8 @@ object frmUtensilios: TfrmUtensilios
       TabOrder = 1
       Text = '  /  /    '
     end
-    object edValorTotal: TMaskEdit
-      Left = 22
-      Top = 609
-      Width = 133
-      Height = 23
-      EditMask = 'R$!###########;1; '
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Fixedsys'
-      Font.Style = []
-      MaxLength = 13
-      ParentFont = False
-      TabOrder = 2
-      Text = 'R$           '
-    end
     object mmListaComprada: TMemo
-      Left = 23
+      Left = 22
       Top = 240
       Width = 385
       Height = 337
@@ -156,10 +129,8 @@ object frmUtensilios: TfrmUtensilios
       Font.Height = -12
       Font.Name = 'Fixedsys'
       Font.Style = []
-      Lines.Strings = (
-        '')
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 2
     end
     object Panel4: TPanel
       Left = 211
@@ -168,7 +139,7 @@ object frmUtensilios: TfrmUtensilios
       Height = 23
       Color = 14869218
       ParentBackground = False
-      TabOrder = 4
+      TabOrder = 3
       object SpeedButton1: TSpeedButton
         Left = 1
         Top = 1
@@ -183,6 +154,7 @@ object frmUtensilios: TfrmUtensilios
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
+        OnClick = SpeedButton1Click
         ExplicitLeft = 56
         ExplicitWidth = 100
         ExplicitHeight = 26
@@ -199,7 +171,7 @@ object frmUtensilios: TfrmUtensilios
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 5
+      TabOrder = 4
       Text = 'Selecione...'
     end
     object edtResponsavelCompra: TLabeledEdit
@@ -222,7 +194,7 @@ object frmUtensilios: TfrmUtensilios
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 6
+      TabOrder = 5
     end
     object cbItem: TComboBox
       Left = 22
@@ -235,8 +207,32 @@ object frmUtensilios: TfrmUtensilios
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 7
+      TabOrder = 6
       Text = 'Selecione...'
+    end
+    object edValorTotal: TLabeledEdit
+      Left = 23
+      Top = 609
+      Width = 141
+      Height = 23
+      EditLabel.Width = 88
+      EditLabel.Height = 15
+      EditLabel.Caption = 'Valor Total'
+      EditLabel.Font.Charset = DEFAULT_CHARSET
+      EditLabel.Font.Color = clWindowText
+      EditLabel.Font.Height = -11
+      EditLabel.Font.Name = 'Fixedsys'
+      EditLabel.Font.Style = []
+      EditLabel.ParentFont = False
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 7
+      Text = 'R$ 0,00'
     end
   end
   object Panel2: TPanel
@@ -731,9 +727,8 @@ object frmUtensilios: TfrmUtensilios
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 16
+        OnClick = sbSalvarClick
         ExplicitTop = 0
-        ExplicitWidth = 142
       end
     end
   end

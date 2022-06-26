@@ -437,9 +437,10 @@ procedure TController.pCadUtensilios;
 var
   objUtensilios :  TUtensilios;
 begin
+  objUtensilios := TUtensilios.Create;
+
   objUtensilios.setDataCompra(frmUtensilios.edDataCompra.Text);
-  objUtensilios.setQuantidade(StrToInt(frmUtensilios.edQuantidade.Text));
-  objUtensilios.setValorTotal(StrToFloat(frmUtensilios.edValorTotal.Text));
+  objUtensilios.setValorTotal(StrToFloat(Copy(self.fTiraPonto(frmUtensilios.edValorTotal.Text),4, Length(frmUtensilios.edValorTotal.Text))));
   objUtensilios.setListaCompras(frmUtensilios.mmListaComprada.Lines.Text);
   objUtensilios.setResponsavel(frmUtensilios.edtResponsavelCompra.Text);
   objUtensilios.setIdCrianca(TCrianca(frmUtensilios.cbCrianca.Items.Objects[frmUtensilios.cbCrianca.ItemIndex]).getIdCrianca);

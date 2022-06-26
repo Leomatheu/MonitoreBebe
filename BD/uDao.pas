@@ -658,13 +658,12 @@ begin
   query := TFDQuery.Create(nil);
   query.Connection := DataModule1.Conexao;
 
-  query.SQL.Add('insert into TCOMPRAS values(0,:dataCompra,:quantidade,:valorTotal,:listaCompras,:responsavel,:idCrianca);');
+  query.SQL.Add('insert into TCOMPRAS values (0,:dataCompra,:valorTotal,:listaCompras,:responsavel,:idCrianca);');
   query.Params[0].AsString := prUtensilios.getDataCompra;
-  query.Params[1].AsInteger := prUtensilios.getQuantidade;
-  query.Params[2].AsFloat := prUtensilios.getValorTotal;
-  query.Params[3].AsString := prUtensilios.getListaCompras;
-  query.Params[4].AsString := prUtensilios.getResponsavel;
-  query.Params[5].AsInteger := prUtensilios.getIdCrianca;
+  query.Params[1].AsFloat := prUtensilios.getValorTotal;
+  query.Params[2].AsString := prUtensilios.getListaCompras;
+  query.Params[3].AsString := prUtensilios.getResponsavel;
+  query.Params[4].AsInteger := prUtensilios.getIdCrianca;
 
   try
     query.ExecSQL;
