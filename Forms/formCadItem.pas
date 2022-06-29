@@ -18,6 +18,8 @@ type
     edtCrianca: TLabel;
     SpeedButton1: TSpeedButton;
     panel01: TPanel;
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -28,7 +30,27 @@ var
   frmCadItem: TfrmCadItem;
 
 implementation
+uses
+  uController, formUtensilios;
 
 {$R *.dfm}
+
+procedure TfrmCadItem.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  controller : TController;
+begin
+  controller := TController.Create; 
+  frmUtensilios.cbItem.Clear;
+  frmUtensilios.cbItem.Text := 'Selecione...';
+  controller.pPopulaComboBox(frmUtensilios.cbItem, 5);  
+end;
+
+procedure TfrmCadItem.SpeedButton1Click(Sender: TObject);
+var
+  controller : TController;  
+begin
+  controller := TController.Create;
+  controller.pCadItem;
+end;
 
 end.

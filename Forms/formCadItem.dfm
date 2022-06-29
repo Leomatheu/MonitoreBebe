@@ -12,6 +12,8 @@ object frmCadItem: TfrmCadItem
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object panel01: TPanel
@@ -211,6 +213,7 @@ object frmCadItem: TfrmCadItem
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
+        OnClick = SpeedButton1Click
         ExplicitLeft = 9
       end
     end

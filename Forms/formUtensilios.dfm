@@ -133,14 +133,14 @@ object frmUtensilios: TfrmUtensilios
       TabOrder = 2
     end
     object Panel4: TPanel
-      Left = 211
-      Top = 177
+      Left = 249
+      Top = 176
       Width = 158
       Height = 23
       Color = 14869218
       ParentBackground = False
       TabOrder = 3
-      object SpeedButton1: TSpeedButton
+      object sbAdicionarLista: TSpeedButton
         Left = 1
         Top = 1
         Width = 156
@@ -154,7 +154,7 @@ object frmUtensilios: TfrmUtensilios
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        OnClick = SpeedButton1Click
+        OnClick = sbAdicionarListaClick
         ExplicitLeft = 56
         ExplicitWidth = 100
         ExplicitHeight = 26
@@ -197,9 +197,9 @@ object frmUtensilios: TfrmUtensilios
       TabOrder = 5
     end
     object cbItem: TComboBox
-      Left = 22
+      Left = 23
       Top = 109
-      Width = 385
+      Width = 259
       Height = 23
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -234,6 +234,58 @@ object frmUtensilios: TfrmUtensilios
       TabOrder = 7
       Text = 'R$ 0,00'
     end
+    object Panel8: TPanel
+      Left = 288
+      Top = 109
+      Width = 120
+      Height = 23
+      Color = 14869218
+      ParentBackground = False
+      TabOrder = 8
+      object sbCadItem: TSpeedButton
+        Left = 1
+        Top = 1
+        Width = 118
+        Height = 21
+        Align = alClient
+        Caption = 'Cadastrar'
+        Flat = True
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Fixedsys'
+        Font.Style = []
+        ParentFont = False
+        OnClick = sbCadItemClick
+        ExplicitLeft = 40
+        ExplicitTop = 2
+        ExplicitWidth = 119
+        ExplicitHeight = 26
+      end
+    end
+    object edCodigo: TLabeledEdit
+      Left = 265
+      Top = 43
+      Width = 141
+      Height = 23
+      EditLabel.Width = 104
+      EditLabel.Height = 15
+      EditLabel.Caption = 'C'#243'digo Compra'
+      EditLabel.Font.Charset = DEFAULT_CHARSET
+      EditLabel.Font.Color = clWindowText
+      EditLabel.Font.Height = -11
+      EditLabel.Font.Name = 'Fixedsys'
+      EditLabel.Font.Style = []
+      EditLabel.ParentFont = False
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 9
+    end
   end
   object Panel2: TPanel
     Left = 432
@@ -246,6 +298,7 @@ object frmUtensilios: TfrmUtensilios
     ParentBackground = False
     ShowCaption = False
     TabOrder = 1
+    ExplicitLeft = 438
     object Panel7: TPanel
       Left = 16
       Top = 659
@@ -268,8 +321,9 @@ object frmUtensilios: TfrmUtensilios
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
+        OnClick = sbConsultarClick
         ExplicitLeft = 40
-        ExplicitTop = 3
+        ExplicitTop = 2
         ExplicitWidth = 119
       end
     end
@@ -701,8 +755,8 @@ object frmUtensilios: TfrmUtensilios
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 24
-        ExplicitWidth = 134
+        OnClick = sbExcluirClick
+        ExplicitTop = 2
       end
     end
     object Panel3: TPanel

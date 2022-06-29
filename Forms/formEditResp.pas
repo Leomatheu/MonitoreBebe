@@ -33,7 +33,7 @@ implementation
 
 uses
   formCadResp, formCadCrianca, formAlimentacao, uDao, uController, formConsultorio, formCadMedico,
-  formContVacina, formOcorrencia, formCrescimento;
+  formContVacina, formOcorrencia, formCrescimento, formUtensilios;
 
 { TfrmEditResp }
 
@@ -209,6 +209,18 @@ var
       frmCrescimento.edtCodigo.Text := self.DBGrid1.Fields[0].Value;
       frmCrescimento.cbCrianca.Text := IntToStr(self.DBGrid1.Fields[7].Value)+' - '+DataModule1.fSelectDadoEspecifico('select tcadcri.nomeCrianca from tcadcri where idCrianca = :pr;', self.DBGrid1.Fields[7].Value);
     end;
+
+    9:
+    begin
+      frmUtensilios.edCodigo.Text := self.DBGrid1.Fields[0].Value;
+      frmUtensilios.edDataCompra.text := self.DBGrid1.Fields[1].Value;
+      frmUtensilios.edValorTotal.Text := FormatFloat('R$ #,###,##0.00', self.DBGrid1.Fields[2].Value);
+      frmUtensilios.mmListaComprada.Lines.Text := self.DBGrid1.Fields[3].Value;
+      frmUtensilios.edtResponsavelCompra.Text := self.DBGrid1.Fields[4].Value;
+      frmUtensilios.cbCrianca.Text := IntToStr(self.DBGrid1.Fields[5].Value)+' - '+DataModule1.fSelectDadoEspecifico('select tcadcri.nomeCrianca from tcadcri where idCrianca = :pr;', self.DBGrid1.Fields[5].Value);
+      frmUtensilios.sbSalvar.Enabled := false;
+      controller.pCamposUtensiliosEnabled(false);
+    end;
  end;
 end;
 
@@ -236,6 +248,9 @@ begin
   if (self.Tag = 7) then
      controller.pPopulaDBGrid('select * from TOCORRENCIA where dataOcorrencia like "%'+self.edtBusca.Text+'%";');
 
+  if (self.Tag = 9) then
+     controller.pPopulaDBGrid('select * from TCOMPRAS where dataCompra like "%'+self.edtBusca.Text+'%";');
 end;
+
 
 end.

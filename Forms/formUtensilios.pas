@@ -26,15 +26,21 @@ type
     Panel3: TPanel;
     sbSalvar: TSpeedButton;
     Panel4: TPanel;
-    SpeedButton1: TSpeedButton;
+    sbAdicionarLista: TSpeedButton;
     Label1: TLabel;
     cbCrianca: TComboBox;
     edtResponsavelCompra: TLabeledEdit;
     cbItem: TComboBox;
     edValorTotal: TLabeledEdit;
+    Panel8: TPanel;
+    sbCadItem: TSpeedButton;
+    edCodigo: TLabeledEdit;
     procedure FormActivate(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
+    procedure sbAdicionarListaClick(Sender: TObject);
     procedure sbSalvarClick(Sender: TObject);
+    procedure sbCadItemClick(Sender: TObject);
+    procedure sbConsultarClick(Sender: TObject);
+    procedure sbExcluirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -46,7 +52,7 @@ var
 
 implementation
 uses
-  uController, uItens;
+  uController, uItens, formCadItem, formEditResp;
 
 {$R *.dfm}
 
@@ -67,7 +73,7 @@ begin
   controller.pCadUtensilios;
 end;
 
-procedure TfrmUtensilios.SpeedButton1Click(Sender: TObject);
+procedure TfrmUtensilios.sbAdicionarListaClick(Sender: TObject);
 var
   controller : TController;
   total : Double;
@@ -89,6 +95,42 @@ begin
   {volta os campos ao estado inicial}
   self.cbItem.Text := 'Selecione...';
   self.edQuantidade.Text := '1';
+end;
+
+procedure TfrmUtensilios.sbCadItemClick(Sender: TObject);
+begin
+  frmCadItem := TfrmCadItem.Create(nil);
+  frmCadItem.ShowModal;
+end;
+
+procedure TfrmUtensilios.sbConsultarClick(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pLimpaTelaUtensilios;
+
+  frmEditResp := TfrmEditResp.Create(nil);
+  controller := TController.Create;
+  controller.pPopulaDBGrid('select * from TCOMPRAS');
+
+  frmEditResp.Panel1.Color := $00C1D6FF;
+  frmEditResp.DBGrid1.Color := $00C1D6FF;
+  frmEditResp.Caption := 'CONSULTA DE COMPRAS ';
+  frmEditResp.edtBusca.EditLabel.Caption := 'Busque pela data';
+  frmEditResp.Tag := 9;
+  frmEditResp.ShowModal;
+
+  if (self.edDataCompra.Text <> '') then
+    self.sbExcluir.Enabled := true;
+end;
+
+procedure TfrmUtensilios.sbExcluirClick(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pExcluiCompras;
 end;
 
 end.

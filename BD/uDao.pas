@@ -11,7 +11,7 @@ uses
   FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, uAlimentacao,
   Vcl.Forms, uConsultorio, uMedico, uConsulta, formContVacina, uVacina,
   uOcorrencia, formOcorrencia, uCrescimento, formCrescimento, formUtensilios,
-  uUtensilios, uItens;
+  uUtensilios, uItens, formCadItem;
 
 
 type
@@ -37,6 +37,7 @@ type
     function fInsertOcorrecia(prObjOcorrencia : TOcorrencia):Boolean;
     function fInsertCrescimento(prObjCrescimento : TCrescimento):Boolean;
     function fInsertUtensilios(prUtensilios : TUtensilios):Boolean;
+    function fInsertItem(prItem : TItens):Boolean;
 
     {Funções de update de registros}
     function pAlteraResponsavel(prObjResponsavel : TResponsavel):Boolean;
@@ -591,6 +592,31 @@ begin
   query.Close;
   query.Free;
   foto.Free;
+end;
+
+function TDataModule1.fInsertItem(prItem: TItens): Boolean;
+var
+  query : TFDQuery;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add('insert into titens values(0,:descItem,:unidadeMedia,:valorUnitario);');
+
+  query.Params[0].AsString := prItem.getDescItem;
+  query.Params[1].AsString := prItem.getUnidadeMedida;
+  query.Params[2].AsFloat := prItem.getValorUnitario;
+
+  try
+     query.ExecSQL;
+     result := true;
+  except
+     on e: Exception do
+       result := false;
+  end;
+
+  query.Close;
+  query.Free;
 end;
 
 function TDataModule1.fInsertMedico(prObjMedico: TMedico): Boolean;
