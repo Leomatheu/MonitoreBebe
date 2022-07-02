@@ -78,17 +78,16 @@ dataConsulta varchar(10),
 hora varchar(8),
 motivo varchar(100),
 acompanhante varchar(50),
-exame varchar(5),
 descExame varchar(100),
 proximaConsulta varchar(10),
-valor double,
+valor float,
 observacoes varchar(200),
 idMedico int,
 idConsultorio int,
 idCrianca int,
-foreign key (idMedico) references TCADMED(idMedico) on delete restrict,
-foreign key (idConsultorio) references TCADCON(idConsultorio) on delete restrict,
-foreign key (idCrianca) references TCADCRI(idCrianca) on delete restrict
+foreign key (idMedico) references TCADMED(idMedico),
+foreign key (idConsultorio) references TCADCON(idConsultorio),
+foreign key (idCrianca) references TCADCRI(idCrianca)
 );
 
 create table TCOMPRAS(

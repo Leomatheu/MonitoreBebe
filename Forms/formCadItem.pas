@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.WinXPanels, Vcl.StdCtrls,
-  Vcl.ExtCtrls, Vcl.Buttons, Vcl.Mask;
+  Vcl.ExtCtrls, Vcl.Buttons, Vcl.Mask,
+  Data.DB, Vcl.Grids, Vcl.DBGrids;
 
 type
   TfrmCadItem = class(TForm)
@@ -14,12 +15,13 @@ type
     sbConsultar: TSpeedButton;
     edDescItem: TLabeledEdit;
     edUnidadeMedida: TLabeledEdit;
-    edValorUnitario: TMaskEdit;
-    edtCrianca: TLabel;
     SpeedButton1: TSpeedButton;
     panel01: TPanel;
+    edValorUnitario: TLabeledEdit;
     procedure SpeedButton1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormActivate(Sender: TObject);
+    procedure edValorUnitarioExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,6 +36,17 @@ uses
   uController, formUtensilios;
 
 {$R *.dfm}
+
+
+procedure TfrmCadItem.edValorUnitarioExit(Sender: TObject);
+begin
+  self.edValorUnitario.Text :=  FormatFloat('R$ #,###,###,##0.00', StrToFloat(self.edValorUnitario.Text));
+end;
+
+procedure TfrmCadItem.FormActivate(Sender: TObject);
+begin
+  self.edDescItem.SetFocus;
+end;
 
 procedure TfrmCadItem.FormClose(Sender: TObject; var Action: TCloseAction);
 var

@@ -25,7 +25,7 @@ object frmConsultorio: TfrmConsultorio
     Color = 12895487
     ParentBackground = False
     TabOrder = 0
-    ExplicitHeight = 464
+    ExplicitLeft = -7
     object Label1: TLabel
       Left = 32
       Top = 393
@@ -41,9 +41,9 @@ object frmConsultorio: TfrmConsultorio
     end
     object edtNomeConsultorio: TLabeledEdit
       Left = 32
-      Top = 48
+      Top = 46
       Width = 425
-      Height = 22
+      Height = 23
       EditLabel.Width = 128
       EditLabel.Height = 15
       EditLabel.Caption = 'Nome Consult'#243'rio'
@@ -53,35 +53,35 @@ object frmConsultorio: TfrmConsultorio
       EditLabel.Font.Name = 'Fixedsys'
       EditLabel.Font.Style = []
       EditLabel.ParentFont = False
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
-      Font.Name = 'Tahoma'
+      Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
       TabOrder = 0
     end
     object edtTelefone: TMaskEdit
       Left = 32
-      Top = 415
+      Top = 414
       Width = 175
-      Height = 22
+      Height = 23
       EditMask = '!\(99\)0000-0000;1; '
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
-      Font.Name = 'Tahoma'
+      Font.Name = 'Fixedsys'
       Font.Style = []
       MaxLength = 13
       ParentFont = False
-      TabOrder = 1
+      TabOrder = 3
       Text = '(  )    -    '
     end
     object edtEmail: TLabeledEdit
       Left = 32
       Top = 344
       Width = 425
-      Height = 22
+      Height = 23
       EditLabel.Width = 48
       EditLabel.Height = 15
       EditLabel.Caption = 'E-mail'
@@ -91,19 +91,19 @@ object frmConsultorio: TfrmConsultorio
       EditLabel.Font.Name = 'Fixedsys'
       EditLabel.Font.Style = []
       EditLabel.ParentFont = False
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
-      Font.Name = 'Tahoma'
+      Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
       TabOrder = 2
     end
     object edtCodigo: TLabeledEdit
       Left = 336
-      Top = 416
+      Top = 415
       Width = 121
-      Height = 22
+      Height = 23
       EditLabel.Width = 48
       EditLabel.Height = 15
       EditLabel.Caption = 'C'#243'digo'
@@ -114,13 +114,13 @@ object frmConsultorio: TfrmConsultorio
       EditLabel.Font.Style = []
       EditLabel.ParentFont = False
       Enabled = False
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
-      Font.Name = 'Tahoma'
+      Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 4
     end
     object Panel3: TPanel
       Left = 32
@@ -129,12 +129,12 @@ object frmConsultorio: TfrmConsultorio
       Height = 209
       Color = 12895487
       ParentBackground = False
-      TabOrder = 4
+      TabOrder = 1
       object edtCEP: TLabeledEdit
         Left = 16
         Top = 32
         Width = 105
-        Height = 22
+        Height = 23
         EditLabel.Width = 24
         EditLabel.Height = 15
         EditLabel.Caption = 'CEP'
@@ -144,10 +144,10 @@ object frmConsultorio: TfrmConsultorio
         EditLabel.Font.Name = 'Fixedsys'
         EditLabel.Font.Style = []
         EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Tahoma'
+        Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
         TabOrder = 0
@@ -156,7 +156,7 @@ object frmConsultorio: TfrmConsultorio
         Left = 232
         Top = 32
         Width = 161
-        Height = 22
+        Height = 23
         EditLabel.Width = 48
         EditLabel.Height = 15
         EditLabel.Caption = 'Estado'
@@ -166,10 +166,10 @@ object frmConsultorio: TfrmConsultorio
         EditLabel.Font.Name = 'Fixedsys'
         EditLabel.Font.Style = []
         EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Tahoma'
+        Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
         TabOrder = 1
@@ -178,7 +178,7 @@ object frmConsultorio: TfrmConsultorio
         Left = 16
         Top = 94
         Width = 153
-        Height = 22
+        Height = 23
         EditLabel.Width = 48
         EditLabel.Height = 15
         EditLabel.Caption = 'Cidade'
@@ -188,10 +188,10 @@ object frmConsultorio: TfrmConsultorio
         EditLabel.Font.Name = 'Fixedsys'
         EditLabel.Font.Style = []
         EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Tahoma'
+        Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
         TabOrder = 2
@@ -200,7 +200,7 @@ object frmConsultorio: TfrmConsultorio
         Left = 232
         Top = 94
         Width = 161
-        Height = 22
+        Height = 23
         EditLabel.Width = 48
         EditLabel.Height = 15
         EditLabel.Caption = 'Bairro'
@@ -210,10 +210,10 @@ object frmConsultorio: TfrmConsultorio
         EditLabel.Font.Name = 'Fixedsys'
         EditLabel.Font.Style = []
         EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Tahoma'
+        Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
         TabOrder = 3
@@ -222,7 +222,7 @@ object frmConsultorio: TfrmConsultorio
         Left = 16
         Top = 160
         Width = 377
-        Height = 22
+        Height = 23
         EditLabel.Width = 64
         EditLabel.Height = 15
         EditLabel.Caption = 'Endere'#231'o'
@@ -232,10 +232,10 @@ object frmConsultorio: TfrmConsultorio
         EditLabel.Font.Name = 'Fixedsys'
         EditLabel.Font.Style = []
         EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Tahoma'
+        Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
         TabOrder = 4
@@ -251,11 +251,14 @@ object frmConsultorio: TfrmConsultorio
     Color = 12895487
     ParentBackground = False
     TabOrder = 1
+    ExplicitLeft = 503
     object Panel4: TPanel
       Left = 27
       Top = 22
       Width = 137
       Height = 147
+      Color = 12895487
+      ParentBackground = False
       TabOrder = 0
       object Image1: TImage
         Left = 16
@@ -498,7 +501,7 @@ object frmConsultorio: TfrmConsultorio
         Font.Style = []
         ParentFont = False
         OnClick = sbConsultarClick
-        ExplicitLeft = 2
+        ExplicitTop = 2
       end
     end
   end

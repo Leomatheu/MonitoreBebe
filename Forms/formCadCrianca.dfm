@@ -894,8 +894,14 @@ object frmCadCrianca: TfrmCadCrianca
       Top = 584
       Width = 468
       Height = 102
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Fixedsys'
+      Font.Style = []
       Lines.Strings = (
         '')
+      ParentFont = False
       TabOrder = 10
     end
     object cbResp1: TComboBox

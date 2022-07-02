@@ -63,6 +63,7 @@ begin
   controller := TController.Create;
   controller.pPopulaComboBox(self.cbItem, 5);
   controller.pPopulaComboBox(self.cbCrianca, 2);
+  self.sbExcluir.Enabled := false;
 end;
 
 procedure TfrmUtensilios.sbSalvarClick(Sender: TObject);

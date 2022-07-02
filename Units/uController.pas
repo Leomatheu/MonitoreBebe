@@ -60,6 +60,9 @@ type
     procedure pCamposAlimEnabled(prEnabled : boolean);
     procedure pCamposUtensiliosEnabled(prEnabled : boolean);
     procedure pCamposConsultorioEnabled(prEnabled : Boolean);
+    procedure pCamposVacinaEnabled(prEnabled : Boolean);
+    procedure pCamposConsultaEnabled(prEnabled : Boolean);
+    procedure pCamposCrescimentoEnabled(prEnabled : Boolean);
   end;
 
 var
@@ -147,7 +150,7 @@ begin
   objConsulta.setMotivo(frmConsulta.edtMotivo.Text);
   objConsulta.setDescExame(frmConsulta.mmExames.Text);
   objConsulta.setProximaConsulta(frmConsulta.edtProximaConsulta.Text);
-  objConsulta.setValor(StrToFloat(fTiraPonto(copy(frmConsulta.edtValor.Text, 3, Length(frmConsulta.edtValor.Text)))));
+  objConsulta.setValor(StrToFloat(Copy(self.fTiraPonto(frmConsulta.edtValor.Text), 3, length(frmConsulta.edtValor.Text))));
   objConsulta.setObservacoes(frmConsulta.mmObservacoes.Text);
   objConsulta.setIdCrianca(TCrianca(frmConsulta.cbCrianca.Items.Objects[frmConsulta.cbCrianca.ItemIndex]).getIdCrianca);
   objConsulta.setIdMedico(TMedico(frmConsulta.cbMedico.Items.Objects[frmConsulta.cbMedico.ItemIndex]).getIdMedico);
@@ -155,7 +158,7 @@ begin
 
   if (DataModule1.fInsertConsulta(objConsulta)) then
     begin
-      self.pMessage('INSERÇÃO DE CONSULTA REALIZADA', $00FFDFFF, 'Inserção de consulta realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+      self.pMessage('INSERÇÃO DE CONSULTA REALIZADA', $00FFD7D7, 'Inserção de consulta realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
       self.pLimpaTelaConsulta;
     end
   else
@@ -208,7 +211,7 @@ begin
   objCrescimento.setPeso(frmCrescimento.edtPeso.Text);
   objCrescimento.setAltura(frmCrescimento.edtAltura.Text);
   objCrescimento.setImc(frmCrescimento.edtImc.Text);
-  objCrescimento.setCircCabeca(frmCrescimento.edtCircCabeca.Text);
+  objCrescimento.setCircCabeca(frmCrescimento.edCircCabeca.Text);
   objCrescimento.setCircBarriga(frmCrescimento.edtCircBarriga.Text);
   objCrescimento.setObservacoes(frmCrescimento.mmObservacoes.Lines.Text);
 
@@ -536,6 +539,21 @@ begin
   frmAlimentacao.mmObservacoes.Enabled := prEnabled;
 end;
 
+procedure TController.pCamposConsultaEnabled(prEnabled: Boolean);
+begin
+  frmConsulta.edtAcompanhante.Enabled := prEnabled;
+  frmConsulta.edtData.Enabled := prEnabled;
+  frmConsulta.edtHora.Enabled := prEnabled;
+  frmConsulta.edtMotivo.Enabled := prEnabled;
+  frmConsulta.edtValor.Enabled := prEnabled;
+  frmConsulta.edtProximaConsulta.Enabled := prEnabled;
+  frmConsulta.mmExames.Enabled := prEnabled;
+  frmConsulta.mmObservacoes.Enabled := prEnabled;
+  frmConsulta.cbCrianca.Enabled := prEnabled;
+  frmConsulta.cbMedico.Enabled := prEnabled;
+  frmConsulta.cbConsultorio.Enabled := prEnabled;
+end;
+
 procedure TController.pCamposConsultorioEnabled(prEnabled: Boolean);
 begin
   frmConsultorio.edtNomeConsultorio.Enabled := prEnabled;
@@ -546,6 +564,18 @@ begin
   frmConsultorio.edtEndereco.Enabled := prEnabled;
   frmConsultorio.edtEmail.Enabled := prEnabled;
   frmConsultorio.edtTelefone.Enabled := prEnabled;
+end;
+
+procedure TController.pCamposCrescimentoEnabled(prEnabled: Boolean);
+begin
+  frmCrescimento.edtData.Enabled := prEnabled;
+  frmCrescimento.edtImc.Enabled := prEnabled;
+  frmCrescimento.edtPeso.Enabled := prEnabled;
+  frmCrescimento.edCircCabeca.Enabled := prEnabled;
+  frmCrescimento.edtAltura.Enabled := prEnabled;
+  frmCrescimento.edtCircBarriga.Enabled := prEnabled;
+  frmCrescimento.mmObservacoes.Enabled := prEnabled;
+  frmCrescimento.cbCrianca.Enabled := prEnabled;
 end;
 
 procedure TController.pCamposUtensiliosEnabled(prEnabled: boolean);
@@ -559,6 +589,22 @@ begin
   frmUtensilios.cbCrianca.Enabled := prEnabled;
   frmUtensilios.sbCadItem.Enabled := prEnabled;
   frmUtensilios.sbAdicionarLista.Enabled := prEnabled;
+end;
+
+procedure TController.pCamposVacinaEnabled(prEnabled: Boolean);
+begin
+  frmContVacina.edtData.Enabled := prEnabled;
+  frmContVacina.edtHora.Enabled := prEnabled;
+  frmContVacina.edtNomeVacina.Enabled := prEnabled;
+  frmContVacina.edtComplemento.Enabled := prEnabled;
+  frmContVacina.edtNomeProfissional.Enabled := prEnabled;
+  frmContVacina.edtProximaData.Enabled := prEnabled;
+  frmContVacina.edtAcompanhante.Enabled := prEnabled;
+  frmContVacina.cbCrianca.Enabled := prEnabled;
+  frmContVacina.rbPostoSaude.Enabled := prEnabled;
+  frmContVacina.rbConsultorio.Enabled := prEnabled;
+  frmContVacina.rbOutros.Enabled := prEnabled;
+  frmContVacina.rbHospital.Enabled := prEnabled;
 end;
 
 {procedures de exlusão de registros}
@@ -597,7 +643,8 @@ procedure TController.pExcluiConsulta;
 begin
   if (DataModule1.fDelete('Delete from TCONSULTA where idConsulta = :prId;', StrToInt(frmConsulta.edtCodigo.Text))) then
   begin
-    self.pMessage('CONSULTA EXCLUÍDA', $00D2FFD9, 'Exclusão de consulta realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+    self.pMessage('CONSULTA EXCLUÍDA', $00FFD7D7, 'Exclusão de consulta realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+    self.pCamposConsultaEnabled(true);
     self.pLimpaTelaConsulta;
   end
   else
@@ -628,6 +675,7 @@ begin
   if (DataModule1.fDelete('Delete from TCRESCIMENTO where idCrescimento = :prId;', StrToInt(frmCrescimento.edtCodigo.Text))) then
      begin
        self.pMessage('DADOS DE CRESCIMENTO EXCLUÍDO', $00FFCCE6, 'Exclusão de dados realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+       self.pCamposCrescimentoEnabled(true);
        self.pLimpaTelaCrescimento;
      end
   else
@@ -700,6 +748,7 @@ begin
      begin
        self.pMessage('VACINA EXCLUÍDA', $0080FFFF, 'Exclusão de vacina realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
        self.pLimpaTelaVac;
+       self.pCamposVacinaEnabled(true);
        frmContVacina.sbSalvar.Enabled := true;
      end
   else
@@ -741,6 +790,7 @@ end;
 
 procedure TController.pLimpaTelaConsulta;
 begin
+  frmConsulta.edtCodigo.Clear;
   frmConsulta.edtAcompanhante.Clear;
   frmConsulta.edtData.Clear;
   frmConsulta.edtHora.Clear;
@@ -753,6 +803,8 @@ begin
   frmConsulta.cbConsultorio.Text := 'Selecione...';
   frmConsulta.edtProximaConsulta.Clear;
   frmConsulta.edtAcompanhante.SetFocus;
+  frmConsulta.sbSalvar.Enabled := true;
+  frmConsulta.sbExcluir.Enabled := false;
 end;
 
 procedure TController.pLimpaTelaCrescimento;
@@ -763,7 +815,7 @@ begin
   frmCrescimento.edtAltura.Clear;
   frmCrescimento.edtImc.Clear;
   frmCrescimento.edtCodigo.Clear;
-  frmCrescimento.edtCircCabeca.Clear;
+  frmCrescimento.edCircCabeca.Clear;
   frmCrescimento.edtCircBarriga.Clear;
   frmCrescimento.mmObservacoes.Lines.Clear;
 end;
@@ -857,9 +909,9 @@ procedure TController.pLimpaTelaUtensilios;
 begin
   frmUtensilios.edCodigo.Clear;
   frmUtensilios.edtResponsavelCompra.Clear;
-  frmUtensilios.edQuantidade.Clear;
+  frmUtensilios.edQuantidade.Text := '1';
   frmUtensilios.edDataCompra.Clear;
-  frmUtensilios.edValorTotal.Clear;
+  frmUtensilios.edValorTotal.Text := 'R$ 0,00';
   frmUtensilios.mmListaComprada.Lines.Clear;
   frmUtensilios.cbItem.Text := 'Selecione...';
   frmUtensilios.cbCrianca.Text := 'Selecione...';

@@ -924,6 +924,7 @@ object frmConsulta: TfrmConsulta
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
+        OnClick = sbConsultarClick
         ExplicitLeft = 40
         ExplicitTop = 2
         ExplicitWidth = 118
@@ -1115,8 +1116,8 @@ object frmConsulta: TfrmConsulta
       ParentFont = False
     end
     object edtAcompanhante: TLabeledEdit
-      Left = 40
-      Top = 48
+      Left = 39
+      Top = 40
       Width = 521
       Height = 23
       EditLabel.Width = 96
@@ -1137,7 +1138,7 @@ object frmConsulta: TfrmConsulta
       TabOrder = 0
     end
     object edtData: TMaskEdit
-      Left = 40
+      Left = 41
       Top = 179
       Width = 120
       Height = 23
@@ -1149,7 +1150,7 @@ object frmConsulta: TfrmConsulta
       Font.Style = []
       MaxLength = 10
       ParentFont = False
-      TabOrder = 1
+      TabOrder = 2
       Text = '  /  /    '
     end
     object edtHora: TMaskEdit
@@ -1165,13 +1166,13 @@ object frmConsulta: TfrmConsulta
       Font.Style = []
       MaxLength = 5
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 3
       Text = '  :  '
     end
     object cbCrianca: TComboBox
-      Left = 40
-      Top = 114
-      Width = 521
+      Left = 39
+      Top = 118
+      Width = 522
       Height = 23
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -1179,7 +1180,7 @@ object frmConsulta: TfrmConsulta
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 1
       Text = 'Selecione...'
     end
     object edtMotivo: TLabeledEdit
@@ -1205,7 +1206,7 @@ object frmConsulta: TfrmConsulta
       TabOrder = 4
     end
     object cbMedico: TComboBox
-      Left = 40
+      Left = 39
       Top = 321
       Width = 233
       Height = 23
@@ -1219,7 +1220,7 @@ object frmConsulta: TfrmConsulta
       Text = 'Selecione...'
     end
     object cbConsultorio: TComboBox
-      Left = 326
+      Left = 327
       Top = 321
       Width = 235
       Height = 23
@@ -1234,7 +1235,7 @@ object frmConsulta: TfrmConsulta
     end
     object mmExames: TMemo
       Left = 41
-      Top = 394
+      Top = 396
       Width = 520
       Height = 71
       Font.Charset = ANSI_CHARSET
@@ -1242,8 +1243,6 @@ object frmConsulta: TfrmConsulta
       Font.Height = -12
       Font.Name = 'Fixedsys'
       Font.Style = []
-      Lines.Strings = (
-        '')
       ParentFont = False
       TabOrder = 7
     end
@@ -1265,7 +1264,7 @@ object frmConsulta: TfrmConsulta
     end
     object edtProximaConsulta: TMaskEdit
       Left = 232
-      Top = 517
+      Top = 518
       Width = 128
       Height = 23
       EditMask = '!99/99/0000;1; '

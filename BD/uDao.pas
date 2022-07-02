@@ -772,7 +772,7 @@ begin
   query := TFDQuery.Create(nil);
   query.Connection := DataModule1.Conexao;
 
-  query.SQL.Add('insert into TCONSULTA values (0, :dataConsulta, :hora, :motivo, :acompanhante, :descExame, :proximaConsulta, :valor, :observacoes, :idMedico, :idConsultorio, :idCrianca);');
+  query.SQL.Add('insert into TCONSULTA values (0,:dataConsulta,:hora,:motivo,:acompanhante,:descExame,:proximaConsulta,:valor,:observacoes,:idMedico,:idConsultorio,:idCrianca);');
 
   query.Params[0].AsString := prObjConsulta.getDataConsulta;
   query.Params[1].AsString := prObjConsulta.getHora;

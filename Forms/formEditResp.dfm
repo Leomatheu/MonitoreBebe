@@ -53,7 +53,7 @@ object frmEditResp: TfrmEditResp
       OnCellClick = DBGrid1CellClick
     end
     object edtBusca: TLabeledEdit
-      Left = 176
+      Left = 224
       Top = 24
       Width = 553
       Height = 23

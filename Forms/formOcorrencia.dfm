@@ -237,7 +237,7 @@ object frmOcorrencia: TfrmOcorrencia
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 7
+      TabOrder = 9
     end
     object edtHoraMedicacao: TMaskEdit
       Left = 24
@@ -275,7 +275,7 @@ object frmOcorrencia: TfrmOcorrencia
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 9
+      TabOrder = 7
     end
     object edtCodigo: TLabeledEdit
       Left = 22
@@ -310,7 +310,6 @@ object frmOcorrencia: TfrmOcorrencia
     Color = 14211307
     ParentBackground = False
     TabOrder = 1
-    ExplicitLeft = 447
     object Image1: TImage
       Left = 32
       Top = 24

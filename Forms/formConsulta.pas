@@ -42,6 +42,7 @@ type
     procedure FormActivate(Sender: TObject);
     procedure sbSalvarClick(Sender: TObject);
     procedure sbExcluirClick(Sender: TObject);
+    procedure sbConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -53,7 +54,7 @@ var
 
 implementation
 uses
-  uController;
+  uController, formEditResp;
 
 {$R *.dfm}
 
@@ -62,6 +63,23 @@ begin
   Controller.pPopulaComboBox(self.cbCrianca, 2);
   Controller.pPopulaComboBox(self.cbConsultorio, 3);
   Controller.pPopulaComboBox(self.cbMedico, 4);
+  self.sbExcluir.Enabled := false;
+end;
+
+procedure TfrmConsulta.sbConsultarClick(Sender: TObject);
+begin
+  frmEditResp := TfrmEditResp.Create(nil);
+  controller := TController.Create;
+  controller.pPopulaDBGrid('select * from TCONSULTA');
+
+  frmEditResp.Panel1.Color := $00FFD7D7;
+  frmEditResp.DBGrid1.Color := $00FFD7D7;
+  frmEditResp.Caption := 'CONSULTAS';
+  frmEditResp.Tag := 10;
+  frmEditResp.ShowModal;
+
+  if (self.edtAcompanhante.Text <> '') then
+     self.sbExcluir.Enabled := true;
 end;
 
 procedure TfrmConsulta.sbExcluirClick(Sender: TObject);

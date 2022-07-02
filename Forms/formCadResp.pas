@@ -91,6 +91,8 @@ begin
   controller := TController.Create;
   controller.pPopulaDBGrid('select * from monitorebebe.TCADRESP;');
 
+  frmEditResp.Panel1.Color := $00D2FFD9;
+  frmEditResp.DBGrid1.Color := $00D2FFD9;
   frmEditResp.Caption := 'EDIÇÃO DE RESPONSÁVEIS';
   frmEditResp.edtBusca.EditLabel.Caption := 'Busque pelo responsável';
   frmEditResp.Tag := 1;

@@ -13,6 +13,7 @@ object frmCadItem: TfrmCadItem
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnActivate = FormActivate
   OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
@@ -27,19 +28,6 @@ object frmCadItem: TfrmCadItem
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    object edtCrianca: TLabel
-      Left = 28
-      Top = 137
-      Width = 112
-      Height = 15
-      Caption = 'Valor Unit'#225'rio'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Fixedsys'
-      Font.Style = []
-      ParentFont = False
-    end
     object TPanel
       Left = 16
       Top = 630
@@ -53,7 +41,7 @@ object frmCadItem: TfrmCadItem
       Font.Style = []
       ParentBackground = False
       ParentFont = False
-      TabOrder = 1
+      TabOrder = 3
       object sbSalvar: TSpeedButton
         Left = 1
         Top = 1
@@ -80,7 +68,7 @@ object frmCadItem: TfrmCadItem
       Height = 28
       Color = clRed
       ParentBackground = False
-      TabOrder = 3
+      TabOrder = 4
       object sbExcluir: TSpeedButton
         Left = 1
         Top = 1
@@ -107,7 +95,7 @@ object frmCadItem: TfrmCadItem
       Height = 28
       Color = 14869218
       ParentBackground = False
-      TabOrder = 4
+      TabOrder = 5
       object sbConsultar: TSpeedButton
         Left = 1
         Top = 1
@@ -169,22 +157,6 @@ object frmCadItem: TfrmCadItem
       ParentFont = False
       TabOrder = 2
     end
-    object edValorUnitario: TMaskEdit
-      Left = 28
-      Top = 154
-      Width = 155
-      Height = 23
-      EditMask = 'R$ !999,99;1; '
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Fixedsys'
-      Font.Style = []
-      MaxLength = 9
-      ParentFont = False
-      TabOrder = 5
-      Text = 'R$    ,  '
-    end
     object TPanel
       Left = 168
       Top = 254
@@ -216,6 +188,30 @@ object frmCadItem: TfrmCadItem
         OnClick = SpeedButton1Click
         ExplicitLeft = 9
       end
+    end
+    object edValorUnitario: TLabeledEdit
+      Left = 28
+      Top = 154
+      Width = 161
+      Height = 23
+      EditLabel.Width = 112
+      EditLabel.Height = 15
+      EditLabel.Caption = 'Valor Unit'#225'rio'
+      EditLabel.Font.Charset = DEFAULT_CHARSET
+      EditLabel.Font.Color = clWindowText
+      EditLabel.Font.Height = -11
+      EditLabel.Font.Name = 'Fixedsys'
+      EditLabel.Font.Style = []
+      EditLabel.ParentFont = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Text = 'R$ 0,00'
+      OnExit = edValorUnitarioExit
     end
   end
 end

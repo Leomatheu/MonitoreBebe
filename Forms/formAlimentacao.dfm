@@ -37,11 +37,9 @@ object frmAlimentacao: TfrmAlimentacao
     Align = alClient
     Caption = 'Tpanel'
     Color = 16769023
-    Enabled = False
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitLeft = -6
     object Label1: TLabel
       Left = 25
       Top = 28
@@ -351,16 +349,28 @@ object frmAlimentacao: TfrmAlimentacao
       Left = 25
       Top = 44
       Width = 384
-      Height = 21
+      Height = 23
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 0
     end
     object edtData: TMaskEdit
-      Left = 25
+      Left = 26
       Top = 104
       Width = 86
-      Height = 21
+      Height = 23
       EditMask = '!99/99/0000;1; '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Fixedsys'
+      Font.Style = []
       MaxLength = 10
+      ParentFont = False
       TabOrder = 1
       Text = '  /  /    '
     end
@@ -368,9 +378,15 @@ object frmAlimentacao: TfrmAlimentacao
       Left = 313
       Top = 104
       Width = 96
-      Height = 21
+      Height = 23
       EditMask = '!90:00;1; '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Fixedsys'
+      Font.Style = []
       MaxLength = 5
+      ParentFont = False
       TabOrder = 2
       Text = '  :  '
     end
@@ -446,17 +462,29 @@ object frmAlimentacao: TfrmAlimentacao
     end
     object mmObservacoes: TMemo
       Left = 25
-      Top = 524
+      Top = 526
       Width = 384
       Height = 134
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 8
     end
     object edtCodigo: TEdit
-      Left = 25
-      Top = 461
+      Left = 26
+      Top = 462
       Width = 121
-      Height = 21
+      Height = 23
       Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Fixedsys'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 9
     end
   end

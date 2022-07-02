@@ -27,9 +27,8 @@ object frmUtensilios: TfrmUtensilios
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitLeft = -6
     object lbItem: TLabel
-      Left = 23
+      Left = 22
       Top = 88
       Width = 32
       Height = 15
@@ -81,8 +80,8 @@ object frmUtensilios: TfrmUtensilios
       ParentFont = False
     end
     object edQuantidade: TLabeledEdit
-      Left = 22
-      Top = 177
+      Left = 23
+      Top = 178
       Width = 141
       Height = 23
       EditLabel.Width = 80
@@ -100,11 +99,11 @@ object frmUtensilios: TfrmUtensilios
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 0
+      TabOrder = 2
       Text = '1'
     end
     object edDataCompra: TMaskEdit
-      Left = 22
+      Left = 24
       Top = 43
       Width = 120
       Height = 23
@@ -116,30 +115,31 @@ object frmUtensilios: TfrmUtensilios
       Font.Style = []
       MaxLength = 10
       ParentFont = False
-      TabOrder = 1
+      TabOrder = 0
       Text = '  /  /    '
     end
     object mmListaComprada: TMemo
-      Left = 22
+      Left = 23
       Top = 240
       Width = 385
       Height = 337
+      Enabled = False
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 6
     end
     object Panel4: TPanel
       Left = 249
-      Top = 176
+      Top = 177
       Width = 158
       Height = 23
       Color = 14869218
       ParentBackground = False
-      TabOrder = 3
+      TabOrder = 7
       object sbAdicionarLista: TSpeedButton
         Left = 1
         Top = 1
@@ -161,8 +161,8 @@ object frmUtensilios: TfrmUtensilios
       end
     end
     object cbCrianca: TComboBox
-      Left = 23
-      Top = 675
+      Left = 22
+      Top = 678
       Width = 385
       Height = 23
       Font.Charset = ANSI_CHARSET
@@ -198,7 +198,7 @@ object frmUtensilios: TfrmUtensilios
     end
     object cbItem: TComboBox
       Left = 23
-      Top = 109
+      Top = 106
       Width = 259
       Height = 23
       Font.Charset = ANSI_CHARSET
@@ -207,11 +207,11 @@ object frmUtensilios: TfrmUtensilios
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 6
+      TabOrder = 1
       Text = 'Selecione...'
     end
     object edValorTotal: TLabeledEdit
-      Left = 23
+      Left = 22
       Top = 609
       Width = 141
       Height = 23
@@ -231,12 +231,12 @@ object frmUtensilios: TfrmUtensilios
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 7
+      TabOrder = 3
       Text = 'R$ 0,00'
     end
     object Panel8: TPanel
       Left = 288
-      Top = 109
+      Top = 106
       Width = 120
       Height = 23
       Color = 14869218
@@ -298,7 +298,6 @@ object frmUtensilios: TfrmUtensilios
     ParentBackground = False
     ShowCaption = False
     TabOrder = 1
-    ExplicitLeft = 438
     object Panel7: TPanel
       Left = 16
       Top = 659

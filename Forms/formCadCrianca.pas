@@ -77,6 +77,8 @@ begin
   controller := TController.Create;
   controller.pPopulaDBGrid('select * from monitorebebe.TCADCRI;');
 
+  frmEditResp.Panel1.Color := $00FEF9CB;
+  frmEditResp.DBGrid1.Color := $00FEF9CB;
   frmEditResp.Caption := 'EDIÇÃO DE CRIANÇAS';
   frmEditResp.edtBusca.EditLabel.Caption := 'Busque pela criança';
   frmEditResp.Tag := 2;

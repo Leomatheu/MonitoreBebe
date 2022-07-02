@@ -36,6 +36,5 @@ begin
   DataModule1 := TDataModule1.Create(nil);
   Controller := TController.Create;
   Application.CreateForm(TfrmMenu, frmMenu);
-  Application.CreateForm(TfrmUtensilios, frmUtensilios);
   Application.Run;
 end.

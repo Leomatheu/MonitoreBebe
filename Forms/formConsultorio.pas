@@ -61,7 +61,8 @@ begin
   controller := TController.Create;
   controller.pPopulaDBGrid('select * from TCADCON');
 
-
+  frmEditResp.Panel1.Color := $00C4C4FF;
+  frmEditResp.DBGrid1.Color := $00C4C4FF;
   frmEditResp.Caption := 'CONSULTA DE CONSULTÓRIOS ';
   frmEditResp.Tag := 4;
   frmEditResp.ShowModal;
