@@ -77,7 +77,6 @@ var
   aux: String;
   h,m,s,ms: word;
 begin
-  DecodeTime(Time,h,m,s,ms);
   aux := ExtractFilePath(Application.Exename) + 'Foto.jpg';
 
  if (FileExists(aux)) then
@@ -689,7 +688,7 @@ procedure TController.pExcluiCrianca;
 begin
   if (DataModule1.fDelete('Delete from TCADCRI where idCrianca = :prId;', StrToInt(frmCadCrianca.edtCodigo.Text))) then
      begin
-       self.pMessage('CRIANÇA EXCLUÍDA', $00D2FFD9, 'Exclusão de criança realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+       self.pMessage('CRIANÇA EXCLUÍDA', $00FFCCE6, 'Exclusão de criança realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
        self.plimpaTelaCri;
      end
   else

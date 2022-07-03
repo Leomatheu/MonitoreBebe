@@ -22,7 +22,7 @@ object DataModule1: TDataModule1
   object Query: TFDQuery
     Connection = Conexao
     SQL.Strings = (
-      'Select * from TITENS;')
+      'Select descItem from TITENS;')
     Left = 296
     Top = 88
   end
@@ -36,6 +36,7 @@ object DataModule1: TDataModule1
     Top = 16
   end
   object Source: TDataSource
+    AutoEdit = False
     DataSet = Query
     Left = 296
     Top = 16

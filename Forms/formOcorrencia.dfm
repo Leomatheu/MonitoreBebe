@@ -128,7 +128,7 @@ object frmOcorrencia: TfrmOcorrencia
     end
     object cbCrianca: TComboBox
       Left = 24
-      Top = 118
+      Top = 120
       Width = 385
       Height = 23
       Font.Charset = ANSI_CHARSET

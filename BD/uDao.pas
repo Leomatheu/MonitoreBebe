@@ -56,6 +56,7 @@ type
     function fSelectConsultorio : TList;
     function fSelectDadoEspecifico(prSQL : String; prParametro : integer): String;
     function fRetornaQuery(prSQL : String) : TFDQuery;
+
   end;
 
 var
@@ -879,5 +880,6 @@ begin
     query.Free;
     foto.Free;
 end;
+
 
 end.

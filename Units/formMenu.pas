@@ -56,6 +56,7 @@ type
     procedure sbCadOcorreciasClick(Sender: TObject);
     procedure sbControleCrescimentoClick(Sender: TObject);
     procedure sbUtensiliosClick(Sender: TObject);
+    procedure sbRelatoriosClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -68,7 +69,7 @@ var
 implementation
 uses
    formCadResp, formCadCrianca, formAlimentacao, formConsultorio, formCadMedico, formContVacina,
-   formConsulta, formOcorrencia, formCrescimento, formUtensilios;
+   formConsulta, formOcorrencia, formCrescimento, formUtensilios, formSelecaoRelatorio;
 
 {$R *.dfm}
 
@@ -126,7 +127,12 @@ procedure TfrmMenu.sbControleVacinaClick(Sender: TObject);
 begin
   frmContVacina := TfrmContVacina.Create(nil);
   frmContVacina.ShowModal;
+end;
 
+procedure TfrmMenu.sbRelatoriosClick(Sender: TObject);
+begin
+  frmSelecaoRel := TfrmSelecaoRel.Create(nil);
+  frmSelecaoRel.ShowModal;
 end;
 
 procedure TfrmMenu.sbSairClick(Sender: TObject);
