@@ -27,7 +27,6 @@ object frmContVacina: TfrmContVacina
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitLeft = 526
     object Panel4: TPanel
       Left = 43
       Top = 39
@@ -739,7 +738,6 @@ object frmContVacina: TfrmContVacina
     ParentBackground = False
     ShowCaption = False
     TabOrder = 1
-    ExplicitLeft = -6
     object Label1: TLabel
       Left = 56
       Top = 39

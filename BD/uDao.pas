@@ -10,7 +10,8 @@ uses
   FireDAC.Phys.MySQLDef, FireDAC.Phys.MySQL, Data.DB, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, uResponsavel, Vcl.ExtCtrls,  uCrianca, uAlimentacao,
   Vcl.Forms, uConsultorio, uMedico, uConsulta, formContVacina, uVacina,
-  uOcorrencia, formOcorrencia, uCrescimento, formCrescimento;
+  uOcorrencia, formOcorrencia, uCrescimento, formCrescimento, formUtensilios,
+  uUtensilios, uItens, formCadItem;
 
 
 type
@@ -35,6 +36,8 @@ type
     function fInsertVacina(prObjVacina : TVacina):Boolean;
     function fInsertOcorrecia(prObjOcorrencia : TOcorrencia):Boolean;
     function fInsertCrescimento(prObjCrescimento : TCrescimento):Boolean;
+    function fInsertUtensilios(prUtensilios : TUtensilios):Boolean;
+    function fInsertItem(prItem : TItens):Boolean;
 
     {Funções de update de registros}
     function pAlteraResponsavel(prObjResponsavel : TResponsavel):Boolean;
@@ -46,18 +49,23 @@ type
     function fDelete(prSQL : String; prId : integer):Boolean;
 
     {Funções de seleção de registros}
+    function fSelectItens : TList;
     function fSelectMedico : TList;
     function fSelectResponsavel : Tlist;
     function fSelectCrianca : Tlist;
     function fSelectConsultorio : TList;
     function fSelectDadoEspecifico(prSQL : String; prParametro : integer): String;
     function fRetornaQuery(prSQL : String) : TFDQuery;
+    function fRetornaSomaTotais(prSQL : String) : Double;
+
   end;
 
 var
   DataModule1: TDataModule1;
 
 implementation
+uses
+   uController;
 
 
 
@@ -254,6 +262,25 @@ begin
    result.Open;
 end;
 
+function TDataModule1.fRetornaSomaTotais(prSQL: String): Double;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add(prSQL);
+
+  try
+    query.Open;
+    result := query.Fields[0].AsFloat;
+  except
+      on e: Exception do
+       e.ToString;
+  end;
+
+  query.Close;
+  query.Free;
+end;
+
 function TDataModule1.fSelectConsultorio: TList;
 var
   query : TFDQuery;
@@ -336,7 +363,7 @@ begin
         objCri.setResponsavel2(query.Fields[11].AsInteger);
         stream := query.CreateBlobStream(query.Fields[12], bmRead);
         foto := Timage.Create(nil);
-        //foto.Picture.LoadFromStream(stream);
+        foto.Picture.LoadFromStream(stream);
         objCri.setFoto(foto);
 
         lista.Add(objCri);
@@ -362,7 +389,9 @@ begin
   query.Connection := DataModule1.Conexao;
 
   query.SQL.Add(prSQL);
-  query.Params[0].AsInteger := prParametro;
+
+  if (prParametro <> 0) then
+     query.Params[0].AsInteger := prParametro;
 
   try
     query.Open;
@@ -374,6 +403,46 @@ begin
 
   query.Close;
   query.Free;
+end;
+
+function TDataModule1.fSelectItens: TList;
+var
+  query :TFDQuery;
+  lista : TList;
+  item : TItens;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add('Select * from TITENS;');
+
+  try
+    query.Open;
+    query.First;
+    lista := TList.Create;
+
+    while not (query.Eof) do
+       begin
+         item := TItens.Create;
+
+         item.setIdItem(query.Fields[0].asInteger);
+         item.setDescItem(query.Fields[1].asString);
+         item.setUnidadeMedida(query.Fields[2].AsString);
+         item.setValorUnitario(query.Fields[3].AsFloat);
+
+         lista.Add(item);
+         query.Next;
+       end;
+    Result := lista;
+
+  Except
+     on e: EXception do
+       e.ToString;
+  end;
+
+  query.Close;
+  query.Free;
+
 end;
 
 function TDataModule1.fSelectMedico: TList;
@@ -528,7 +597,10 @@ begin
   query.Params[9].AsInteger := prObjCrianca.getResponsavel1;
   query.Params[10].AsInteger := prObjCrianca.getResponsavel2;
 
-  foto := TFileStream.Create(ExtractFilePath(Application.Exename) + 'Foto.jpg', fmOpenRead);
+  if (FileExists(ExtractFilePath(Application.Exename) + 'Foto.jpg')) then
+     foto := TFileStream.Create(ExtractFilePath(Application.Exename) + 'Foto.jpg', fmOpenRead)
+  else
+     foto := TFileStream.Create(ExtractFilePath(Application.Exename) + 'fotoPerfil.jpg', fmOpenRead);
 
   query.Params[11].LoadFromStream(foto, ftBlob);
 
@@ -536,6 +608,32 @@ begin
      query.ExecSQL;
      result := true;
   Except
+     on e: Exception do
+       result := false;
+  end;
+
+  query.Close;
+  query.Free;
+  foto.Free;
+end;
+
+function TDataModule1.fInsertItem(prItem: TItens): Boolean;
+var
+  query : TFDQuery;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add('insert into titens values(0,:descItem,:unidadeMedia,:valorUnitario);');
+
+  query.Params[0].AsString := prItem.getDescItem;
+  query.Params[1].AsString := prItem.getUnidadeMedida;
+  query.Params[2].AsFloat := prItem.getValorUnitario;
+
+  try
+     query.ExecSQL;
+     result := true;
+  except
      on e: Exception do
        result := false;
   end;
@@ -600,6 +698,32 @@ begin
 
   query.Close;
   query.Free;
+end;
+
+function TDataModule1.fInsertUtensilios(prUtensilios: TUtensilios): Boolean;
+var
+  query : TFDQuery;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add('insert into TCOMPRAS values (0,:dataCompra,:valorTotal,:listaCompras,:responsavel,:idCrianca);');
+  query.Params[0].AsString := prUtensilios.getDataCompra;
+  query.Params[1].AsFloat := prUtensilios.getValorTotal;
+  query.Params[2].AsString := prUtensilios.getListaCompras;
+  query.Params[3].AsString := prUtensilios.getResponsavel;
+  query.Params[4].AsInteger := prUtensilios.getIdCrianca;
+
+  try
+    query.ExecSQL;
+    result := true;
+  Except
+    on e: Exception do
+       result := false;
+  end;
+
+  query.Free;
+  query.Close;
 end;
 
 function TDataModule1.fInsertVacina(prObjVacina: TVacina): Boolean;
@@ -671,7 +795,7 @@ begin
   query := TFDQuery.Create(nil);
   query.Connection := DataModule1.Conexao;
 
-  query.SQL.Add('insert into TCONSULTA values (0, :dataConsulta, :hora, :motivo, :acompanhante, :descExame, :proximaConsulta, :valor, :observacoes, :idMedico, :idConsultorio, :idCrianca);');
+  query.SQL.Add('insert into TCONSULTA values (0,:dataConsulta,:hora,:motivo,:acompanhante,:descExame,:proximaConsulta,:valor,:observacoes,:idMedico,:idConsultorio,:idCrianca);');
 
   query.Params[0].AsString := prObjConsulta.getDataConsulta;
   query.Params[1].AsString := prObjConsulta.getHora;
@@ -734,10 +858,12 @@ var
    query : TFDQuery;
    foto : TStream;
    data : TDataModule1;
+   controller : TController;
 begin
   query := TFDQuery.Create(nil);
   data := TDataModule1.Create(nil);
   query.Connection := data.Conexao;
+  controller := TController.create;
 
   query.SQL.Add('insert into TCADRESP values (0, :nomeResponsavel, :cpfResponsavel, :emailResponsavel, :dataNascimento, :telefoneResidencia,'+' :telefoneCelular, :rendaMensal, :observacoes, :cepResponsavel, :estadoResponsavel, :cidadeResponsavel, :bairroResponsavel, :endResponsavel, :foto);');
 
@@ -755,9 +881,13 @@ begin
   query.Params[11].AsString := prObjResponsavel.getBairroResponsavel;
   query.Params[12].AsString := prObjResponsavel.getEndereco;
 
-  foto := TFileStream.Create(ExtractFilePath(Application.Exename) + 'Foto.jpg', fmOpenRead);
+  if (FileExists(ExtractFilePath(Application.Exename) + 'Foto.jpg')) then
+     foto := TFileStream.Create(ExtractFilePath(Application.Exename) + 'Foto.jpg', fmOpenRead)
+  else
+     foto := TFileStream.Create(ExtractFilePath(Application.Exename) + 'fotoPerfil.jpg', fmOpenRead);
 
   query.Params[13].LoadFromStream(foto, ftBlob);
+
 
   try
      query.ExecSQL;
@@ -767,8 +897,11 @@ begin
       result := false;
   end;
 
+
     query.Close;
     query.Free;
+    foto.Free;
 end;
+
 
 end.

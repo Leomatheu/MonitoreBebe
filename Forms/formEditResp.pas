@@ -20,6 +20,9 @@ type
 
   end;
 
+type
+    TDBGridPadrao = class(TCustomGrid);
+
 var
   frmEditResp: TfrmEditResp;
 
@@ -30,7 +33,7 @@ implementation
 
 uses
   formCadResp, formCadCrianca, formAlimentacao, uDao, uController, formConsultorio, formCadMedico,
-  formContVacina, formOcorrencia, formCrescimento;
+  formContVacina, formOcorrencia, formCrescimento, formUtensilios, formConsulta;
 
 { TfrmEditResp }
 
@@ -39,13 +42,13 @@ var
   foto : TStream;
   controller : TController;
   Dao : TDataModule1;
-begin
+ begin
    controller := TController.Create;
    self.Close;
 
-   case self.Tag of
-    1:
-    begin
+ case self.Tag of
+ 1:
+  begin
       frmCadResp.edtNome.Text := self.DBGrid1.Fields[1].Value;
       frmCadResp.edtCPF.Text :=  self.DBGrid1.Fields[2].Value;
       frmCadResp.edtEmail.Text := self.DBGrid1.Fields[3].Value;
@@ -63,11 +66,10 @@ begin
       foto := self.DBGrid1.DataSource.DataSet.CreateBlobStream(self.DBGrid1.Fields[14], bmRead);
       frmCadResp.imgCadResp.Picture.LoadFromStream(foto);
       frmCadResp.Tag := 1;
-    end;
+  end;
 
-    2:
+   2:
     begin
-      Dao := TDataModule1.Create(nil);
       frmCadCrianca.edtNome.Text := self.DBGrid1.Fields[1].Value;
       frmCadCrianca.edtDataNasc.Text := self.DBGrid1.Fields[2].Value;
       frmCadCrianca.edtCPF.Text := self.DBGrid1.Fields[3].Value;
@@ -75,16 +77,18 @@ begin
 
       if (self.DBGrid1.Fields[5].Value = 'Masculino') then
          frmCadCrianca.ckMasculino.Checked := true
-      else
+     else
         frmCadCrianca.ckFeminino.Checked := true;
 
       frmCadCrianca.edtHospNasc.Text := self.DBGrid1.Fields[6].Value;
       frmCadCrianca.edtPeso.Text := self.DBGrid1.Fields[7].Value;
       frmCadCrianca.edtNomePai.Text := self.DBGrid1.Fields[8].Value;
       frmCadCrianca.edtNomeMae.Text := self.DBGrid1.Fields[9].Value;
-      frmCadCrianca.cbResp1.AddItem(IntToStr(self.DBGrid1.Fields[10].Value) + ' - ' + Dao.fSelectDadoEspecifico('select nomeResponsavel from tcadresp where idResponsavel = :id;', self.DBGrid1.Fields[10].Value), frmCadCrianca.cbResp1);
-      frmCadCrianca.cbResp2.AddItem(IntToStr(self.DBGrid1.Fields[11].Value) + ' - ' + Dao.fSelectDadoEspecifico('select nomeResponsavel from tcadresp where idResponsavel = :id;', self.DBGrid1.Fields[11].Value), frmCadCrianca.cbResp2);
+      frmCadCrianca.cbResp1.Text := IntToStr(self.DBGrid1.Fields[10].Value) + ' - ' + DataModule1.fSelectDadoEspecifico('select nomeResponsavel from tcadresp where idResponsavel = :id;', self.DBGrid1.Fields[10].Value);
+      frmCadCrianca.cbResp2.Text := IntToStr(self.DBGrid1.Fields[11].Value) + ' - ' + DataModule1.fSelectDadoEspecifico('select nomeResponsavel from tcadresp where idResponsavel = :id;', self.DBGrid1.Fields[11].Value);
       frmCadCrianca.edtCodigo.Text := self.DBGrid1.Fields[0].Value;
+      foto := self.DBGrid1.DataSource.DataSet.CreateBlobStream(self.DBGrid1.Fields[12], bmRead);
+      frmCadCrianca.imgCadCri.Picture.LoadFromStream(foto);
       frmCadCrianca.Tag := 1;
     end;
 
@@ -116,13 +120,14 @@ begin
     begin
       frmConsultorio.edtCodigo.Text := self.DBGrid1.Fields[0].Value;
       frmConsultorio.edtNomeConsultorio.Text := self.DBGrid1.Fields[1].Value;
-      frmConsultorio.edtTelefone.Text := self.DBGrid1.Fields[2].Value;
-      frmConsultorio.edtEmail.Text := self.DBGrid1.Fields[3].Value;
-      frmConsultorio.edtCEP.Text := self.DBGrid1.Fields[4].Value;
-      frmConsultorio.edtEstado.Text := self.DBGrid1.Fields[5].Value;
-      frmConsultorio.edtCidade.Text := self.DBGrid1.Fields[6].Value;
-      frmConsultorio.edtBairro.Text := self.DBGrid1.Fields[7].Value;
-      frmConsultorio.edtEndereco.Text := self.DBGrid1.Fields[8].Value;
+      frmConsultorio.edtCEP.Text := self.DBGrid1.Fields[2].Value;
+      frmConsultorio.edtEstado.Text := self.DBGrid1.Fields[3].Value;
+      frmConsultorio.edtCidade.Text := self.DBGrid1.Fields[4].Value;
+      frmConsultorio.edtBairro.Text := self.DBGrid1.Fields[5].Value;
+      frmConsultorio.edtEndereco.Text := self.DBGrid1.Fields[6].Value;
+      frmConsultorio.edtTelefone.Text := self.DBGrid1.Fields[7].Value;
+      frmConsultorio.edtEmail.Text := self.DBGrid1.Fields[8].Value;
+
       frmConsultorio.sbSalvar.Enabled := false;
       frmConsultorio.sbExcluir.Enabled := true;
 
@@ -137,7 +142,7 @@ begin
       frmCadMedico.edtEmail.Text := self.DBGrid1.Fields[3].Value;
       frmCadMedico.edtEspecialidade.Text := self.DBGrid1.Fields[4].Value;
       frmCadMedico.edtCRM.Text := self.DBGrid1.fields[5].Value;
-      frmCadMedico.cbConsultorio.Text := IntToStr(self.DBGrid1.Fields[0].Value)+' - '+self.DBGrid1.Fields[1].Value;
+      frmCadMedico.cbConsultorio.Text := IntToStr(self.DBGrid1.Fields[6].Value)+' - '+DataModule1.fSelectDadoEspecifico('select TCADCON.nomeConsultorio from TCADCON where idConsultorio = :pr;', self.DBGrid1.Fields[6].Value);
       frmCadMedico.Tag := 1;
       frmCadMedico.sbExcluir.Enabled := true;
     end;
@@ -167,6 +172,7 @@ begin
       frmContVacina.cbCrianca.Text := IntToStr(self.DBGrid1.Fields[9].Value)+' - '+DataModule1.fSelectDadoEspecifico('select tcadcri.nomeCrianca from tcadcri where idCrianca = :pr;', self.DBGrid1.Fields[9].Value);
       frmContVacina.sbExcluir.Enabled := true;
       frmContVacina.sbSalvar.Enabled := false;
+      controller.pCamposVacinaEnabled(false);
     end;
 
     7:
@@ -194,11 +200,50 @@ begin
 
     8:
     begin
-    //
-
+      frmCrescimento.edtData.Text := self.DBGrid1.Fields[1].Value;
+      frmCrescimento.edtPeso.Text := self.DBGrid1.Fields[2].Value;
+      frmCrescimento.edtAltura.Text := self.DBGrid1.Fields[3].Value;
+      frmCrescimento.edtImc.Text := self.DBGrid1.Fields[4].Value;
+      frmCrescimento.edCircCabeca.Text := self.DBGrid1.Fields[5].Value;
+      frmCrescimento.edtCircBarriga.Text := self.DBGrid1.Fields[6].Value;
+      frmCrescimento.mmObservacoes.Lines.Text := self.DBGrid1.Fields[8].Value;
+      frmCrescimento.edtCodigo.Text := self.DBGrid1.Fields[0].Value;
+      frmCrescimento.cbCrianca.Text := IntToStr(self.DBGrid1.Fields[7].Value)+' - '+DataModule1.fSelectDadoEspecifico('select tcadcri.nomeCrianca from tcadcri where idCrianca = :pr;', self.DBGrid1.Fields[7].Value);
+      controller.pCamposCrescimentoEnabled(false);
+      frmCrescimento.sbSalvar.Enabled := false;
     end;
-   end;
 
+    9:
+    begin
+      frmUtensilios.edCodigo.Text := self.DBGrid1.Fields[0].Value;
+      frmUtensilios.edDataCompra.text := self.DBGrid1.Fields[1].Value;
+      frmUtensilios.edValorTotal.Text := FormatFloat('R$ #,###,##0.00', self.DBGrid1.Fields[2].Value);
+      frmUtensilios.mmListaComprada.Lines.Text := self.DBGrid1.Fields[3].Value;
+      frmUtensilios.edtResponsavelCompra.Text := self.DBGrid1.Fields[4].Value;
+      frmUtensilios.cbCrianca.Text := IntToStr(self.DBGrid1.Fields[5].Value)+' - '+DataModule1.fSelectDadoEspecifico('select tcadcri.nomeCrianca from tcadcri where idCrianca = :pr;', self.DBGrid1.Fields[5].Value);
+      frmUtensilios.sbSalvar.Enabled := false;
+      controller.pCamposUtensiliosEnabled(false);
+    end;
+
+    10:
+    begin
+      frmConsulta.edtCodigo.Text := self.DBGrid1.Fields[0].Value;
+      frmConsulta.edtData.Text := self.DBGrid1.Fields[1].Value;
+      frmConsulta.edtHora.Text := self.DBGrid1.Fields[2].Value;
+      frmConsulta.edtMotivo.Text := self.DBGrid1.Fields[3].Value;
+      frmConsulta.edtAcompanhante.Text := self.DBGrid1.Fields[4].Value;
+      frmConsulta.mmExames.Lines.Text := self.DBGrid1.Fields[5].Value;
+      frmConsulta.edtProximaConsulta.Text := self.DBGrid1.Fields[6].Value;
+      frmConsulta.edtValor.Text := FormatFloat('R$ #,###,#0.00', self.DBGrid1.fields[7].Value);
+      frmConsulta.mmObservacoes.Lines.Text := self.DBGrid1.Fields[8].Value;
+      frmConsulta.cbMedico.Text := IntToStr(self.DBGrid1.Fields[9].Value)+' - '+DataModule1.fSelectDadoEspecifico('select nomeMedico from TCADMED where idMedico = :pr;', self.DBGrid1.Fields[9].Value);
+      frmConsulta.cbConsultorio.Text := IntToStr(Self.DBGrid1.Fields[10].Value)+' - '+DataModule1.fSelectDadoEspecifico('select nomeConsultorio from TCADCON where idConsultorio = :pr;', self.DBGrid1.Fields[10].Value);
+      frmConsulta.cbCrianca.Text := IntToStr(self.DBGrid1.Fields[11].Value)+' - '+DataModule1.fSelectDadoEspecifico('select tcadcri.nomeCrianca from tcadcri where idCrianca = :pr;', self.DBGrid1.Fields[11].Value);
+      controller.pCamposConsultaEnabled(false);
+      frmConsulta.sbSalvar.Enabled := false;
+      frmConsulta.sbExcluir.Enabled := true;
+    end;
+ end;
 end;
 
 procedure TfrmEditResp.edtBuscaChange(Sender: TObject);
@@ -221,6 +266,17 @@ begin
 
   if (self.Tag = 6) then
      controller.pPopulaDBGrid('select * from TCONVACI where nomeVacina like "%'+self.edtBusca.Text+'%";');
+
+  if (self.Tag = 7) then
+     controller.pPopulaDBGrid('select * from TOCORRENCIA where dataOcorrencia like "%'+self.edtBusca.Text+'%";');
+
+  if (self.Tag = 9) then
+     controller.pPopulaDBGrid('select * from TCOMPRAS where dataCompra like "%'+self.edtBusca.Text+'%";');
+
+  if (self.Tag = 10) then
+     controller.pPopulaDBGrid('select * from TCONSULTA where dataConsulta like "%'+self.edtBusca.Text+'%";');
+
 end;
+
 
 end.

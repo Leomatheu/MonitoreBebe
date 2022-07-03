@@ -12,7 +12,7 @@ interface
         acompanhante : String;
         descExame : String;
         proximaConsulta : String;
-        valor : double;
+        valor : Double;
         observacoes : String;
         idMedico : integer;
         idConsultorio : integer;

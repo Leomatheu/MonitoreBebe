@@ -25,7 +25,6 @@ object frmConsultorio: TfrmConsultorio
     Color = 12895487
     ParentBackground = False
     TabOrder = 0
-    ExplicitHeight = 464
     object Label1: TLabel
       Left = 32
       Top = 393
@@ -41,9 +40,9 @@ object frmConsultorio: TfrmConsultorio
     end
     object edtNomeConsultorio: TLabeledEdit
       Left = 32
-      Top = 48
+      Top = 46
       Width = 425
-      Height = 22
+      Height = 23
       EditLabel.Width = 128
       EditLabel.Height = 15
       EditLabel.Caption = 'Nome Consult'#243'rio'
@@ -53,35 +52,35 @@ object frmConsultorio: TfrmConsultorio
       EditLabel.Font.Name = 'Fixedsys'
       EditLabel.Font.Style = []
       EditLabel.ParentFont = False
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
-      Font.Name = 'Tahoma'
+      Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
       TabOrder = 0
     end
     object edtTelefone: TMaskEdit
       Left = 32
-      Top = 415
+      Top = 414
       Width = 175
-      Height = 22
+      Height = 23
       EditMask = '!\(99\)0000-0000;1; '
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
-      Font.Name = 'Tahoma'
+      Font.Name = 'Fixedsys'
       Font.Style = []
       MaxLength = 13
       ParentFont = False
-      TabOrder = 1
+      TabOrder = 3
       Text = '(  )    -    '
     end
     object edtEmail: TLabeledEdit
       Left = 32
       Top = 344
       Width = 425
-      Height = 22
+      Height = 23
       EditLabel.Width = 48
       EditLabel.Height = 15
       EditLabel.Caption = 'E-mail'
@@ -91,19 +90,19 @@ object frmConsultorio: TfrmConsultorio
       EditLabel.Font.Name = 'Fixedsys'
       EditLabel.Font.Style = []
       EditLabel.ParentFont = False
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
-      Font.Name = 'Tahoma'
+      Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
       TabOrder = 2
     end
     object edtCodigo: TLabeledEdit
       Left = 336
-      Top = 416
+      Top = 415
       Width = 121
-      Height = 22
+      Height = 23
       EditLabel.Width = 48
       EditLabel.Height = 15
       EditLabel.Caption = 'C'#243'digo'
@@ -114,13 +113,13 @@ object frmConsultorio: TfrmConsultorio
       EditLabel.Font.Style = []
       EditLabel.ParentFont = False
       Enabled = False
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
-      Font.Name = 'Tahoma'
+      Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 4
     end
     object Panel3: TPanel
       Left = 32
@@ -129,12 +128,12 @@ object frmConsultorio: TfrmConsultorio
       Height = 209
       Color = 12895487
       ParentBackground = False
-      TabOrder = 4
+      TabOrder = 1
       object edtCEP: TLabeledEdit
         Left = 16
         Top = 32
         Width = 105
-        Height = 22
+        Height = 23
         EditLabel.Width = 24
         EditLabel.Height = 15
         EditLabel.Caption = 'CEP'
@@ -144,10 +143,10 @@ object frmConsultorio: TfrmConsultorio
         EditLabel.Font.Name = 'Fixedsys'
         EditLabel.Font.Style = []
         EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Tahoma'
+        Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
         TabOrder = 0
@@ -156,7 +155,7 @@ object frmConsultorio: TfrmConsultorio
         Left = 232
         Top = 32
         Width = 161
-        Height = 22
+        Height = 23
         EditLabel.Width = 48
         EditLabel.Height = 15
         EditLabel.Caption = 'Estado'
@@ -166,10 +165,10 @@ object frmConsultorio: TfrmConsultorio
         EditLabel.Font.Name = 'Fixedsys'
         EditLabel.Font.Style = []
         EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Tahoma'
+        Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
         TabOrder = 1
@@ -178,7 +177,7 @@ object frmConsultorio: TfrmConsultorio
         Left = 16
         Top = 94
         Width = 153
-        Height = 22
+        Height = 23
         EditLabel.Width = 48
         EditLabel.Height = 15
         EditLabel.Caption = 'Cidade'
@@ -188,10 +187,10 @@ object frmConsultorio: TfrmConsultorio
         EditLabel.Font.Name = 'Fixedsys'
         EditLabel.Font.Style = []
         EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Tahoma'
+        Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
         TabOrder = 2
@@ -200,7 +199,7 @@ object frmConsultorio: TfrmConsultorio
         Left = 232
         Top = 94
         Width = 161
-        Height = 22
+        Height = 23
         EditLabel.Width = 48
         EditLabel.Height = 15
         EditLabel.Caption = 'Bairro'
@@ -210,10 +209,10 @@ object frmConsultorio: TfrmConsultorio
         EditLabel.Font.Name = 'Fixedsys'
         EditLabel.Font.Style = []
         EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Tahoma'
+        Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
         TabOrder = 3
@@ -222,7 +221,7 @@ object frmConsultorio: TfrmConsultorio
         Left = 16
         Top = 160
         Width = 377
-        Height = 22
+        Height = 23
         EditLabel.Width = 64
         EditLabel.Height = 15
         EditLabel.Caption = 'Endere'#231'o'
@@ -232,13 +231,132 @@ object frmConsultorio: TfrmConsultorio
         EditLabel.Font.Name = 'Fixedsys'
         EditLabel.Font.Style = []
         EditLabel.ParentFont = False
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Tahoma'
+        Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
         TabOrder = 4
+      end
+    end
+    object Panel8: TPanel
+      Left = 159
+      Top = 127
+      Width = 33
+      Height = 24
+      Color = 12895487
+      ParentBackground = False
+      TabOrder = 5
+      object Image2: TImage
+        Left = 1
+        Top = 1
+        Width = 31
+        Height = 22
+        Align = alClient
+        Picture.Data = {
+          07544269746D6170FE0A0000424DFE0A00000000000036000000280000001E00
+          00001E0000000100180000000000C80A00007412000074120000000000000000
+          0000E8E4DFAB9C8CA39482D4CCC4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000AA9C
+          8C9C8B799E8E7A9C8B78D0C8BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000A394829D8C79
+          BDAF9B9F8F7C9C8B78D5CDC5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000D3CCC39C8B789F8F7CB9
+          AA979E8E7B9C8B79D9D2CBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FFFFFFD1C9C09C8B789E8D7BB5A5
+          929E8D7B9D8C79DCD7D0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFF0000FFFFFFFFFFFFD6CFC79D8C799D8D7AB1A28F
+          9D8C799D8C7ADED8D2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFF0000FFFFFFFFFFFFFFFFFFDBD5CE9E8D7A9C8B79AD9D8B9C
+          8B799D8D7AE3DED8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFDDD7D19D8C7A9C8B79A797849C8B
+          79A0907DE7E2DEFFFFFFFFFFFFFFFFFFFFFFFFFDFCFCE7E3DEDBD4CDD2CAC1D5
+          CDC5E0DBD5F3F1EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE2DDD79F8F7B9C8B79A3927F9C8B78
+          A1917FEAE7E3FFFFFFEFEDEAC0B5A9A292809C8B789C8B789C8B789C8B789C8B
+          789C8B78AFA292D7D0C8FDFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE5E0DBA0907E9C8B789D8D799C8B78A4
+          9382C0B5A89E8D7A9C8B78A08F7BBBAA94CDBCA4D6C4ACD3C1AAC6B59EAC9B87
+          9C8B789C8B78AB9D8DE9E6E1FFFFFFFFFFFFFFFFFFFFFFFF0000FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E4DFA292809C8B789C8B789C8B789C8B
+          78A3937FD3C1AAFCEACEFFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1ECDAC0B7
+          A6909C8B789F8F7CDBD5CEFFFFFFFFFFFFFFFFFF0000FFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFECE8E5A494839C8B789C8B78AF9E89F4E2C7
+          FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1D7C6
+          AD9E8D7B9D8C79E1DCD7FFFFFFFFFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFBFB4A89C8B78B1A08BFCEACEFFEDD1FFEDD1FF
+          EDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1DECCB3
+          9C8B79A29280F3F1EFFFFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFEFECE99E8D7AA3937FF5E4C9FFEDD1FFEDD1FFEDD1FFEDD1FFED
+          D1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1CAB9A19C
+          8B78C0B5A9FFFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFBFB4A89C8B78D4C2AAFFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1
+          FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FAE9CDA594809D8C
+          79F1EFEC0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFCFCA191
+          7FA08F7CFCEACEFFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FF
+          EDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1CEBCA59C8B78D2CAC1
+          0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE6E2DD9C8B78BCAA94
+          FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFED
+          D1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1ECDAC19C8B78B6A99B0000FFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDAD3CC9C8B78CDBCA4FFEDD1FF
+          EDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1
+          FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FDEBD09D8C79A99A8A0000FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD0C8BF9C8B78D7C5ADFFEDD1FFEDD1FFED
+          D1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FF
+          EDD1FFEDD1FFEDD1FFEDD1FFEDD1A594819F8F7C0000FFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFD4CDC59C8B78D3C1AAFFEDD1FFEDD1FFEDD1FFEDD1
+          FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFED
+          D1FFEDD1FFEDD1FFEDD1A18F7CA494830000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFDFD9D39C8B78C7B69FFFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FF
+          EDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1
+          FFEDD1F8E6CA9C8B78AEA0900000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFF3F0EE9C8B78AD9C87FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFED
+          D1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1DE
+          CCB39C8B78C2B7AB0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFAEA0919C8B78EDDBC0FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1
+          FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1BBA9949C8B
+          78E0DBD50000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD5CE
+          C69C8B78B9A892FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FF
+          EDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1E9D8BD9C8B79A89988FCFBFB
+          0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFDFCAA9B8B
+          9C8B78D7C5ADFFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFED
+          D1FFEDD1FFEDD1FFEDD1FFEDD1FAE8CCAD9C879C8B78DBD4CDFFFFFF0000FFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E4DF9E8E7A9E
+          8E7AE0CFB5FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1
+          FFEDD1FFEDD1F9E7CCB5A48E9C8B78BBAFA2FEFEFEFFFFFF0000FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDAD4CD9D8C799D8C
+          78CDBBA3FBE9CEFFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1FFEDD1EA
+          D8BEAC9A869C8B78AFA192FAF9F8FFFFFFFFFFFF0000FFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE1DCD6A1917F9C8B78
+          A69682CFBEA5EEDCC1FEECD0FFEDD1FFEDD1F9E7CCDECCB3BBA9949C8B799C8B
+          78BAAEA1FAF9F8FFFFFFFFFFFFFFFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2F0EDBFB3A79C8B799C
+          8B789C8B789D8C79A69581A08F7C9C8B789C8B789C8B78A79887DAD3CCFEFEFE
+          FFFFFFFFFFFFFFFFFFFFFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0EDEAD0C8BFB4A8
+          99A899889F8E7CA49483AD9F8FC1B7ABE0DBD5FCFBFBFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFF0000}
+        Stretch = True
+        ExplicitLeft = 0
+        ExplicitWidth = 24
+      end
+      object sbBusca: TSpeedButton
+        Left = 1
+        Top = 1
+        Width = 31
+        Height = 22
+        Align = alClient
+        Flat = True
+        OnClick = sbBuscaClick
+        ExplicitLeft = 0
       end
     end
   end
@@ -256,6 +374,8 @@ object frmConsultorio: TfrmConsultorio
       Top = 22
       Width = 137
       Height = 147
+      Color = 12895487
+      ParentBackground = False
       TabOrder = 0
       object Image1: TImage
         Left = 16
@@ -498,8 +618,26 @@ object frmConsultorio: TfrmConsultorio
         Font.Style = []
         ParentFont = False
         OnClick = sbConsultarClick
-        ExplicitLeft = 2
+        ExplicitTop = 2
       end
     end
+  end
+  object RESTClient1: TRESTClient
+    BaseURL = 'https://viacep.com.br/ws/79013620/json'
+    Params = <>
+    Left = 616
+    Top = 48
+  end
+  object RESTRequest1: TRESTRequest
+    AssignedValues = [rvConnectTimeout, rvReadTimeout]
+    Client = RESTClient1
+    Params = <>
+    Response = RESTResponse1
+    Left = 616
+    Top = 136
+  end
+  object RESTResponse1: TRESTResponse
+    Left = 616
+    Top = 88
   end
 end

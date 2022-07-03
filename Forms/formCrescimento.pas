@@ -21,23 +21,24 @@ type
     Label3: TLabel;
     Label1: TLabel;
     edtData: TMaskEdit;
-    edtPeso: TMaskEdit;
-    Label4: TLabel;
-    Label2: TLabel;
-    edtAltura: TMaskEdit;
     edtImc: TLabeledEdit;
     edtCodigo: TLabeledEdit;
-    Label5: TLabel;
-    edtCircCabeca: TMaskEdit;
-    Label6: TLabel;
-    edtCircBarriga: TMaskEdit;
     mmObservacoes: TMemo;
-    Label7: TLabel;
+    edtCircCabeca: TLabel;
     Panel4: TPanel;
     imgCadCri: TImage;
+    edtPeso: TLabeledEdit;
+    edCircCabeca: TLabeledEdit;
+    edtAltura: TLabeledEdit;
+    edtCircBarriga: TLabeledEdit;
     procedure FormActivate(Sender: TObject);
     procedure sbSalvarClick(Sender: TObject);
     procedure sbConsultarClick(Sender: TObject);
+    procedure sbExcluirClick(Sender: TObject);
+    procedure edtPesoExit(Sender: TObject);
+    procedure edCircCabecaExit(Sender: TObject);
+    procedure edtAlturaExit(Sender: TObject);
+    procedure edtCircBarrigaExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -52,6 +53,26 @@ uses
   uController, formEditResp;
 
 {$R *.dfm}
+
+procedure TfrmCrescimento.edCircCabecaExit(Sender: TObject);
+begin
+  self.edCircCabeca.Text := FormatFloat('#00.00 CM', StrToFloat(self.edCircCabeca.Text));
+end;
+
+procedure TfrmCrescimento.edtAlturaExit(Sender: TObject);
+begin
+  self.edtAltura.Text := FormatFloat('0.00 M', StrToFloat(self.edtAltura.Text));
+end;
+
+procedure TfrmCrescimento.edtCircBarrigaExit(Sender: TObject);
+begin
+  self.edtCircBarriga.Text := FormatFloat('#00.0 CM', StrToFloat(self.edtCircBarriga.Text));
+end;
+
+procedure TfrmCrescimento.edtPesoExit(Sender: TObject);
+begin
+  self.edtPeso.Text := FormatFloat('#00.00 KG', StrToFloat(self.edtPeso.Text));
+end;
 
 procedure TfrmCrescimento.FormActivate(Sender: TObject);
 var
@@ -69,16 +90,37 @@ begin
   controller := TController.Create;
   controller.pPopulaDBGrid('select * from TCRESCIMENTO');
 
+
   frmEditResp.Panel1.Color := $00FFCCE6;
   frmEditResp.DBGrid1.Color := $00FFCCE6;
   frmEditResp.Caption := 'CONSULTA DE ACOMPANHAMENTO DE CRESCIMENTO ';
   frmEditResp.edtBusca.Visible := false;
   frmEditResp.DBGrid1.Align :=  alClient;
-  //frmEditResp.Tag := 7;
+  frmEditResp.Tag := 8;
+
+  if (Odd(frmEditResp.DBGrid1.DataSource.DataSet.RecNo)) then
+     frmEditResp.DBGrid1.Canvas.Brush.Color := $00FFCCE6
+  else
+     frmEditResp.DBGrid1.Canvas.Brush.Color := clWhite;
+
   frmEditResp.ShowModal;
 
   if (self.edtData.Text <> '') then
-    self.sbExcluir.Enabled := true;
+     begin
+       self.sbExcluir.Enabled := true;
+       self.sbSalvar.Enabled := false;
+     end;
+
+end;
+
+procedure TfrmCrescimento.sbExcluirClick(Sender: TObject);
+var
+  controller : TController;
+begin
+  controller := TController.Create;
+  controller.pExcluiCrescimento;
+  self.sbSalvar.Enabled := true;
+  self.cbCrianca.SetFocus;
 end;
 
 procedure TfrmCrescimento.sbSalvarClick(Sender: TObject);

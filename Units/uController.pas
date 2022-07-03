@@ -6,7 +6,8 @@ uses
   uResponsavel, uDao, formCadResp, System.Classes, System.SysUtils, formMessage,
   uCrianca, formCadCrianca, Vcl.StdCtrls, Vcl.Forms, formAlimentacao, uAlimentacao,
   uConsultorio, formConsultorio, formCadMedico, uMedico, uVacina, formContVacina, formConsulta,
-  uConsulta, uOcorrencia, formOcorrencia, uCrescimento, formCrescimento;
+  uConsulta, uOcorrencia, formOcorrencia, uCrescimento, formCrescimento, uUtensilios, formUtensilios,
+  uItens, formCadItem;
 
 type
   TController = class
@@ -22,6 +23,8 @@ type
     procedure pCadMedico;
     procedure pCadConsulta;
     procedure pCadContCrescimento;
+    procedure pCadUtensilios;
+    procedure pCadItem;
 
     {procedure de exclusão}
     procedure pExcluiResponsavel;
@@ -32,6 +35,8 @@ type
     procedure pExcluiConsultorio;
     procedure pExcluiConsulta;
     procedure pExcluiVacina;
+    procedure pExcluiCrescimento;
+    procedure pExcluiCompras;
 
     {funções para tirar '.' de valores float e para retornar diretório onde se salva foto de cadastros}
     function fTiraPonto(prText: String): String;
@@ -50,8 +55,14 @@ type
     procedure pLimpaTelaOcocrrecia;
     procedure pLimpaTelaConsulta;
     procedure pLimpaTelaCrescimento;
+    procedure pLimpaTelaUtensilios;
+    procedure pLimpaTelaItem;
     procedure pCamposAlimEnabled(prEnabled : boolean);
+    procedure pCamposUtensiliosEnabled(prEnabled : boolean);
     procedure pCamposConsultorioEnabled(prEnabled : Boolean);
+    procedure pCamposVacinaEnabled(prEnabled : Boolean);
+    procedure pCamposConsultaEnabled(prEnabled : Boolean);
+    procedure pCamposCrescimentoEnabled(prEnabled : Boolean);
   end;
 
 var
@@ -64,11 +75,12 @@ implementation
 function TController.fRetornaDirFoto: String;
 var
   aux: String;
+  h,m,s,ms: word;
 begin
   aux := ExtractFilePath(Application.Exename) + 'Foto.jpg';
 
-  if (FileExists(aux)) then
-    DeleteFile(aux);
+ if (FileExists(aux)) then
+   DeleteFile(aux);
 
   result := aux;
 end;
@@ -137,7 +149,7 @@ begin
   objConsulta.setMotivo(frmConsulta.edtMotivo.Text);
   objConsulta.setDescExame(frmConsulta.mmExames.Text);
   objConsulta.setProximaConsulta(frmConsulta.edtProximaConsulta.Text);
-  objConsulta.setValor(StrToFloat(fTiraPonto(copy(frmConsulta.edtValor.Text, 3, Length(frmConsulta.edtValor.Text)))));
+  objConsulta.setValor(StrToFloat(Copy(self.fTiraPonto(frmConsulta.edtValor.Text), 3, length(frmConsulta.edtValor.Text))));
   objConsulta.setObservacoes(frmConsulta.mmObservacoes.Text);
   objConsulta.setIdCrianca(TCrianca(frmConsulta.cbCrianca.Items.Objects[frmConsulta.cbCrianca.ItemIndex]).getIdCrianca);
   objConsulta.setIdMedico(TMedico(frmConsulta.cbMedico.Items.Objects[frmConsulta.cbMedico.ItemIndex]).getIdMedico);
@@ -145,7 +157,7 @@ begin
 
   if (DataModule1.fInsertConsulta(objConsulta)) then
     begin
-      self.pMessage('INSERÇÃO DE CONSULTA REALIZADA', $00FFDFFF, 'Inserção de consulta realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+      self.pMessage('INSERÇÃO DE CONSULTA REALIZADA', $00FFD7D7, 'Inserção de consulta realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
       self.pLimpaTelaConsulta;
     end
   else
@@ -198,7 +210,7 @@ begin
   objCrescimento.setPeso(frmCrescimento.edtPeso.Text);
   objCrescimento.setAltura(frmCrescimento.edtAltura.Text);
   objCrescimento.setImc(frmCrescimento.edtImc.Text);
-  objCrescimento.setCircCabeca(frmCrescimento.edtCircCabeca.Text);
+  objCrescimento.setCircCabeca(frmCrescimento.edCircCabeca.Text);
   objCrescimento.setCircBarriga(frmCrescimento.edtCircBarriga.Text);
   objCrescimento.setObservacoes(frmCrescimento.mmObservacoes.Lines.Text);
 
@@ -219,6 +231,8 @@ var
   Dao: TDataModule1;
   objCrianca: TCrianca;
 begin
+  frmCadCrianca.imgCadCri.Picture.SaveToFile(controller.fRetornaDirFoto);
+
   Dao := TDataModule1.Create(nil);
   objCrianca := TCrianca.Create;
 
@@ -259,6 +273,10 @@ begin
        if (Dao.fAlteraCrianca(objCrianca)) then
          begin
            self.pMessage('ALTERAÇÃO DA CRIANÇA REALIZADA', $00FEF9CB, 'alteração da criança realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+
+           if (FileExists(ExtractFilePath(Application.Exename) + 'Foto.jpg')) then
+              DeleteFile(ExtractFilePath(Application.Exename) + 'Foto.jpg');
+
            self.plimpaTelaCri;
          end
        else
@@ -268,6 +286,28 @@ begin
          end;
      end;
 
+end;
+
+procedure TController.pCadItem;
+var
+  objItem : TItens;
+begin
+  objItem := TItens.Create;
+
+  objItem.setDescItem(frmCadItem.edDescItem.Text);
+  objItem.setUnidadeMedida(frmCadItem.edUnidadeMedida.Text);
+  objItem.setValorUnitario(StrToFloat(Copy(self.fTiraPonto(frmCadItem.edValorUnitario.Text), 4, length(frmCadItem.edValorUnitario.Text))));
+
+  if DataModule1.fInsertItem(objItem) then
+     begin
+       self.pMessage('INSERÇÃO DE ITEM REALIZADA', $00C1D6FF, 'Inserção de item realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+       self.pLimpaTelaItem;
+     end
+  else
+     begin
+       self.pMessage('FALHA NA INSERÇÃO DE ITEM', $009F9FFF, 'Falha na inserção de item verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+       self.pLimpaTelaItem;
+     end;
 end;
 
 procedure TController.pCadMedico;
@@ -369,6 +409,7 @@ var
   objResp: TResponsavel;
   wValor: String;
 begin
+
   Dao := TDataModule1.Create(nil);
   objResp := TResponsavel.Create;
 
@@ -378,8 +419,7 @@ begin
   objResp.setDataNascimento(frmCadResp.edtDataNasc.Text);
   objResp.setTelefoneResidencia(frmCadResp.edtResidencial.Text);
   objResp.setTelefoneCelular(frmCadResp.edtCelular.Text);
-  wValor := Copy(self.fTiraPonto(frmCadResp.edtRendaMensal.Text), 3,
-    Length(frmCadResp.edtRendaMensal.Text));
+  wValor := Copy(self.fTiraPonto(frmCadResp.edtRendaMensal.Text), 3, Length(frmCadResp.edtRendaMensal.Text));
   objResp.setRendaMensal(StrToFloat(wValor));
   objResp.setObservacoes(frmCadResp.mmObservacao.Lines.Text);
   objResp.setCepResponsavel(frmCadResp.edtCEP.Text);
@@ -419,6 +459,30 @@ begin
     end;
 
   end;
+end;
+
+procedure TController.pCadUtensilios;
+var
+  objUtensilios :  TUtensilios;
+begin
+  objUtensilios := TUtensilios.Create;
+
+  objUtensilios.setDataCompra(frmUtensilios.edDataCompra.Text);
+  objUtensilios.setValorTotal(StrToFloat(Copy(self.fTiraPonto(frmUtensilios.edValorTotal.Text),4, Length(frmUtensilios.edValorTotal.Text))));
+  objUtensilios.setListaCompras(frmUtensilios.mmListaComprada.Lines.Text);
+  objUtensilios.setResponsavel(frmUtensilios.edtResponsavelCompra.Text);
+  objUtensilios.setIdCrianca(TCrianca(frmUtensilios.cbCrianca.Items.Objects[frmUtensilios.cbCrianca.ItemIndex]).getIdCrianca);
+
+  if (DataModule1.fInsertUtensilios(objUtensilios)) then
+     begin
+       self.pMessage('INSERÇÃO DE COMPRA REALIZADA', $00C1D6FF, 'Inserção de compra realizada !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+       self.pLimpaTelaUtensilios;
+     end
+  else
+     begin
+       self.pMessage('FALHA NA INSERÇÃO DE COMPRA', $009F9FFF, 'Falha na inserção de compra verifique os dados !!',ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+       self.pLimpaTelaUtensilios;
+     end;
 end;
 
 procedure TController.pCadVacina;
@@ -474,6 +538,21 @@ begin
   frmAlimentacao.mmObservacoes.Enabled := prEnabled;
 end;
 
+procedure TController.pCamposConsultaEnabled(prEnabled: Boolean);
+begin
+  frmConsulta.edtAcompanhante.Enabled := prEnabled;
+  frmConsulta.edtData.Enabled := prEnabled;
+  frmConsulta.edtHora.Enabled := prEnabled;
+  frmConsulta.edtMotivo.Enabled := prEnabled;
+  frmConsulta.edtValor.Enabled := prEnabled;
+  frmConsulta.edtProximaConsulta.Enabled := prEnabled;
+  frmConsulta.mmExames.Enabled := prEnabled;
+  frmConsulta.mmObservacoes.Enabled := prEnabled;
+  frmConsulta.cbCrianca.Enabled := prEnabled;
+  frmConsulta.cbMedico.Enabled := prEnabled;
+  frmConsulta.cbConsultorio.Enabled := prEnabled;
+end;
+
 procedure TController.pCamposConsultorioEnabled(prEnabled: Boolean);
 begin
   frmConsultorio.edtNomeConsultorio.Enabled := prEnabled;
@@ -484,6 +563,47 @@ begin
   frmConsultorio.edtEndereco.Enabled := prEnabled;
   frmConsultorio.edtEmail.Enabled := prEnabled;
   frmConsultorio.edtTelefone.Enabled := prEnabled;
+end;
+
+procedure TController.pCamposCrescimentoEnabled(prEnabled: Boolean);
+begin
+  frmCrescimento.edtData.Enabled := prEnabled;
+  frmCrescimento.edtImc.Enabled := prEnabled;
+  frmCrescimento.edtPeso.Enabled := prEnabled;
+  frmCrescimento.edCircCabeca.Enabled := prEnabled;
+  frmCrescimento.edtAltura.Enabled := prEnabled;
+  frmCrescimento.edtCircBarriga.Enabled := prEnabled;
+  frmCrescimento.mmObservacoes.Enabled := prEnabled;
+  frmCrescimento.cbCrianca.Enabled := prEnabled;
+end;
+
+procedure TController.pCamposUtensiliosEnabled(prEnabled: boolean);
+begin
+  frmUtensilios.edQuantidade.Enabled := prEnabled;
+  frmUtensilios.edDataCompra.Enabled := prEnabled;
+  frmUtensilios.edtResponsavelCompra.Enabled := prEnabled;
+  frmUtensilios.edValorTotal.Enabled := prEnabled;
+  frmUtensilios.mmListaComprada.Enabled := prEnabled;
+  frmUtensilios.cbItem.Enabled := prEnabled;
+  frmUtensilios.cbCrianca.Enabled := prEnabled;
+  frmUtensilios.sbCadItem.Enabled := prEnabled;
+  frmUtensilios.sbAdicionarLista.Enabled := prEnabled;
+end;
+
+procedure TController.pCamposVacinaEnabled(prEnabled: Boolean);
+begin
+  frmContVacina.edtData.Enabled := prEnabled;
+  frmContVacina.edtHora.Enabled := prEnabled;
+  frmContVacina.edtNomeVacina.Enabled := prEnabled;
+  frmContVacina.edtComplemento.Enabled := prEnabled;
+  frmContVacina.edtNomeProfissional.Enabled := prEnabled;
+  frmContVacina.edtProximaData.Enabled := prEnabled;
+  frmContVacina.edtAcompanhante.Enabled := prEnabled;
+  frmContVacina.cbCrianca.Enabled := prEnabled;
+  frmContVacina.rbPostoSaude.Enabled := prEnabled;
+  frmContVacina.rbConsultorio.Enabled := prEnabled;
+  frmContVacina.rbOutros.Enabled := prEnabled;
+  frmContVacina.rbHospital.Enabled := prEnabled;
 end;
 
 {procedures de exlusão de registros}
@@ -502,11 +622,28 @@ begin
     end;
 end;
 
+procedure TController.pExcluiCompras;
+begin
+  if (DataModule1.fDelete('Delete from TCOMPRAS where idCompra = :prId;', StrToInt(frmUtensilios.edCodigo.Text))) then
+     begin
+       self.pMessage('COMPRA EXCLUÍDA', $00C1D6FF, 'Exclusão de compra realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+       self.pLimpaTelaUtensilios;
+       controller.pCamposUtensiliosEnabled(true);
+       frmUtensilios.sbSalvar.Enabled := true;
+     end
+  else
+     begin
+       self.pMessage('FALHA NA EXCLUSÃO DA COMPRA', $009F9FFF, 'Falha na exclusão da compra, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+       self.pLimpaTelaUtensilios;
+     end;
+end;
+
 procedure TController.pExcluiConsulta;
 begin
-  if (DataModule1.fDelete('Delet from TCONSULTA where idConsulta = :prId;', StrToInt(frmConsulta.edtCodigo.Text))) then
+  if (DataModule1.fDelete('Delete from TCONSULTA where idConsulta = :prId;', StrToInt(frmConsulta.edtCodigo.Text))) then
   begin
-    self.pMessage('CONSULTA EXCLUÍDA', $00D2FFD9, 'Exclusão de consulta realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+    self.pMessage('CONSULTA EXCLUÍDA', $00FFD7D7, 'Exclusão de consulta realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+    self.pCamposConsultaEnabled(true);
     self.pLimpaTelaConsulta;
   end
   else
@@ -532,11 +669,26 @@ begin
      end;
 end;
 
+procedure TController.pExcluiCrescimento;
+begin
+  if (DataModule1.fDelete('Delete from TCRESCIMENTO where idCrescimento = :prId;', StrToInt(frmCrescimento.edtCodigo.Text))) then
+     begin
+       self.pMessage('DADOS DE CRESCIMENTO EXCLUÍDO', $00FFCCE6, 'Exclusão de dados realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+       self.pCamposCrescimentoEnabled(true);
+       self.pLimpaTelaCrescimento;
+     end
+  else
+     begin
+       self.pMessage('FALHA NA EXCLUSÃO DOS DADOS', $009F9FFF, 'Falha na exclusão dos dados, verifique os dados !!', ExtractFilePath(Application.Exename) + 'Images\negado.bmp');
+       self.pLimpaTelaCrescimento;
+     end;
+end;
+
 procedure TController.pExcluiCrianca;
 begin
   if (DataModule1.fDelete('Delete from TCADCRI where idCrianca = :prId;', StrToInt(frmCadCrianca.edtCodigo.Text))) then
      begin
-       self.pMessage('CRIANÇA EXCLUÍDA', $00D2FFD9, 'Exclusão de criança realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
+       self.pMessage('CRIANÇA EXCLUÍDA', $00FFCCE6, 'Exclusão de criança realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
        self.plimpaTelaCri;
      end
   else
@@ -595,6 +747,7 @@ begin
      begin
        self.pMessage('VACINA EXCLUÍDA', $0080FFFF, 'Exclusão de vacina realizada com sucesso !!', ExtractFilePath(Application.Exename) + 'Images\salvo.bmp');
        self.pLimpaTelaVac;
+       self.pCamposVacinaEnabled(true);
        frmContVacina.sbSalvar.Enabled := true;
      end
   else
@@ -636,6 +789,7 @@ end;
 
 procedure TController.pLimpaTelaConsulta;
 begin
+  frmConsulta.edtCodigo.Clear;
   frmConsulta.edtAcompanhante.Clear;
   frmConsulta.edtData.Clear;
   frmConsulta.edtHora.Clear;
@@ -648,6 +802,8 @@ begin
   frmConsulta.cbConsultorio.Text := 'Selecione...';
   frmConsulta.edtProximaConsulta.Clear;
   frmConsulta.edtAcompanhante.SetFocus;
+  frmConsulta.sbSalvar.Enabled := true;
+  frmConsulta.sbExcluir.Enabled := false;
 end;
 
 procedure TController.pLimpaTelaCrescimento;
@@ -658,7 +814,7 @@ begin
   frmCrescimento.edtAltura.Clear;
   frmCrescimento.edtImc.Clear;
   frmCrescimento.edtCodigo.Clear;
-  frmCrescimento.edtCircCabeca.Clear;
+  frmCrescimento.edCircCabeca.Clear;
   frmCrescimento.edtCircBarriga.Clear;
   frmCrescimento.mmObservacoes.Lines.Clear;
 end;
@@ -679,6 +835,14 @@ begin
   frmCadCrianca.edtCodigo.Clear;
   frmCadCrianca.mmObservacoes.Lines.Clear;
   frmCadCrianca.imgCadCri.Picture.LoadFromFile(ExtractFilePath(Application.Exename) + 'Images\fotoPerfil.jpg');
+end;
+
+procedure TController.pLimpaTelaItem;
+begin
+   frmCadItem.edDescItem.Clear;
+   frmCadItem.edUnidadeMedida.Clear;
+   frmCadItem.edValorUnitario.Clear;
+   frmCadItem.edDescItem.SetFocus;
 end;
 
 procedure TController.pLimpaTelaMed;
@@ -738,6 +902,18 @@ begin
   frmCadResp.imgCadResp.Picture.LoadFromFile
     (ExtractFilePath(Application.Exename) + 'Images\fotoPerfil.jpg');
   frmCadResp.sbExcluir.Enabled := false;
+end;
+
+procedure TController.pLimpaTelaUtensilios;
+begin
+  frmUtensilios.edCodigo.Clear;
+  frmUtensilios.edtResponsavelCompra.Clear;
+  frmUtensilios.edQuantidade.Text := '1';
+  frmUtensilios.edDataCompra.Clear;
+  frmUtensilios.edValorTotal.Text := 'R$ 0,00';
+  frmUtensilios.mmListaComprada.Lines.Clear;
+  frmUtensilios.cbItem.Text := 'Selecione...';
+  frmUtensilios.cbCrianca.Text := 'Selecione...';
 end;
 
 procedure TController.pLimpaTelaVac;
@@ -814,6 +990,15 @@ begin
       for i := 0 to lista.Count -1  do
           begin
             prComboBox.AddItem(IntToStr(TMedico(lista.Items[i]).getIdMedico) + ' - ' + TMedico(lista.Items[i]).getNome, lista[i]);
+          end;
+    end;
+
+  5:
+    begin
+      lista := DataModule1.fSelectItens;
+      for i := 0 to lista.Count -1  do
+          begin
+            prComboBox.AddItem(IntToStr(TItens(lista.Items[i]).getIdItem) + ' - ' + TItens(lista.Items[i]).getDescItem, lista[i]);
           end;
     end;
 

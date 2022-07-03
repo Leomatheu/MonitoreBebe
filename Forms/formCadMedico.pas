@@ -63,7 +63,8 @@ begin
   controller := TController.Create;
   controller.pPopulaDBGrid('select * from TCADMED');
 
-
+  frmEditResp.Panel1.Color := $00FF9D9D;
+  frmEditResp.DBGrid1.Color := $00FF9D9D;
   frmEditResp.Caption := 'CONSULTA DE MÉDICOS ';
   frmEditResp.Tag := 5;
   frmEditResp.ShowModal;

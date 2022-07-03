@@ -20,7 +20,19 @@ uses
   uVacina in '..\Units\uVacina.pas',
   formContVacina in '..\Forms\formContVacina.pas' {frmContVacina},
   formConsulta in '..\Forms\formConsulta.pas' {frmConsulta},
-  uConsulta in '..\Units\uConsulta.pas';
+  uConsulta in '..\Units\uConsulta.pas',
+  formCrescimento in '..\Forms\formCrescimento.pas' {frmCrescimento},
+  formOcorrencia in '..\Forms\formOcorrencia.pas' {frmOcorrencia},
+  uCrescimento in '..\Units\uCrescimento.pas',
+  uOcorrencia in '..\Units\uOcorrencia.pas',
+  formCadItem in '..\Forms\formCadItem.pas' {frmCadItem},
+  formUtensilios in '..\Forms\formUtensilios.pas' {frmUtensilios},
+  uUtensilios in '..\Units\uUtensilios.pas',
+  uItens in '..\Units\uItens.pas',
+  formFiltroRelatorios in '..\Forms\formFiltroRelatorios.pas' {frmFiltros},
+  formSelecaoRelatorio in '..\Forms\formSelecaoRelatorio.pas' {frmSelecaoRel},
+  formRelatorio in '..\Forms\formRelatorio.pas' {frmRelatorio},
+  formRelatorioConsultas in '..\Forms\formRelatorioConsultas.pas' {frmRelatorioConsultas};
 
 begin
   Application.Initialize;
@@ -28,7 +40,9 @@ begin
   DataModule1 := TDataModule1.Create(nil);
   Controller := TController.Create;
   Application.CreateForm(TfrmMenu, frmMenu);
-  Application.CreateForm(TfrmContVacina, frmContVacina);
-  Application.CreateForm(TfrmConsulta, frmConsulta);
+  Application.CreateForm(TfrmFiltros, frmFiltros);
+  Application.CreateForm(TfrmSelecaoRel, frmSelecaoRel);
+  Application.CreateForm(TfrmRelatorio, frmRelatorio);
+  Application.CreateForm(TfrmRelatorioConsultas, frmRelatorioConsultas);
   Application.Run;
 end.

@@ -13,6 +13,7 @@ object DataModule1: TDataModule1
       'DriverID=MySQL')
     UpdateOptions.AssignedValues = [uvAutoCommitUpdates]
     UpdateOptions.AutoCommitUpdates = True
+    Connected = True
     LoginPrompt = False
     Transaction = Transaction
     Left = 32
@@ -21,7 +22,7 @@ object DataModule1: TDataModule1
   object Query: TFDQuery
     Connection = Conexao
     SQL.Strings = (
-      'Select * from TCADRESP;')
+      'select * from TCONSULTA;')
     Left = 296
     Top = 88
   end
@@ -35,6 +36,7 @@ object DataModule1: TDataModule1
     Top = 16
   end
   object Source: TDataSource
+    AutoEdit = False
     DataSet = Query
     Left = 296
     Top = 16

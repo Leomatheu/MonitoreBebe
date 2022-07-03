@@ -26,7 +26,6 @@ object frmOcorrencia: TfrmOcorrencia
     Color = 14211307
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = -5
     object Label3: TLabel
       Left = 24
       Top = 101
@@ -129,7 +128,7 @@ object frmOcorrencia: TfrmOcorrencia
     end
     object cbCrianca: TComboBox
       Left = 24
-      Top = 118
+      Top = 120
       Width = 385
       Height = 23
       Font.Charset = ANSI_CHARSET
@@ -175,7 +174,7 @@ object frmOcorrencia: TfrmOcorrencia
     end
     object mmOcorrencia: TMemo
       Left = 24
-      Top = 260
+      Top = 261
       Width = 385
       Height = 71
       Font.Charset = ANSI_CHARSET
@@ -238,7 +237,7 @@ object frmOcorrencia: TfrmOcorrencia
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 7
+      TabOrder = 9
     end
     object edtHoraMedicacao: TMaskEdit
       Left = 24
@@ -276,7 +275,7 @@ object frmOcorrencia: TfrmOcorrencia
       Font.Name = 'Fixedsys'
       Font.Style = []
       ParentFont = False
-      TabOrder = 9
+      TabOrder = 7
     end
     object edtCodigo: TLabeledEdit
       Left = 22
@@ -311,7 +310,6 @@ object frmOcorrencia: TfrmOcorrencia
     Color = 14211307
     ParentBackground = False
     TabOrder = 1
-    ExplicitLeft = 447
     object Image1: TImage
       Left = 32
       Top = 24

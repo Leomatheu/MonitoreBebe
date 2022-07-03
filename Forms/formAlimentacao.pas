@@ -31,6 +31,8 @@ type
     sbExcluir: TSpeedButton;
     sbConsultar: TSpeedButton;
     edtCodigo: TEdit;
+    Tpanel: TPanel;
+    Tpanel01: TPanel;
     procedure FormActivate(Sender: TObject);
     procedure sbSalvarClick(Sender: TObject);
     procedure sbConsultarClick(Sender: TObject);
@@ -68,8 +70,9 @@ begin
   controller.pPopulaDBGrid('select tconalim.idCrianca,tcadcri.nomeCrianca,tconalim.acompanhante,tconalim.dataRefeicao,tconalim.hora,tconalim.quantidade,tconalim.observacoes,'+
                             'tconalim.idControle from tconalim,tcadcri where tconalim.idCrianca=tcadcri.idCrianca order by tcadcri.nomeCrianca;');
 
-
+  frmEditResp.DBGrid1.Color := $00FFDFFF;
   frmEditResp.Caption := 'CONSULTA DE ALIMENTAÇÕES ';
+  frmEditResp.DBGrid1.Align := alClient;
   frmEditResp.edtBusca.Visible := false;
   frmEditResp.Tag := 3;
   frmEditResp.ShowModal;

@@ -12,7 +12,7 @@ telefoneResidencia varchar(20),
 telefoneCelular varchar(20),
 rendaMensal float null,
 observacoes varchar(200),
-cepResponsavel varchar(8),
+cepResponsavel varchar(10),
 estadoResponsavel varchar(15),
 cidadeResponsavel varchar(20),
 bairroResponsavel varchar(50),
@@ -78,27 +78,23 @@ dataConsulta varchar(10),
 hora varchar(8),
 motivo varchar(100),
 acompanhante varchar(50),
-exame varchar(5),
 descExame varchar(100),
 proximaConsulta varchar(10),
-valor double,
+valor float,
 observacoes varchar(200),
 idMedico int,
 idConsultorio int,
 idCrianca int,
-foreign key (idMedico) references TCADMED(idMedico) on delete restrict,
-foreign key (idConsultorio) references TCADCON(idConsultorio) on delete restrict,
-foreign key (idCrianca) references TCADCRI(idCrianca) on delete restrict
+foreign key (idMedico) references TCADMED(idMedico),
+foreign key (idConsultorio) references TCADCON(idConsultorio),
+foreign key (idCrianca) references TCADCRI(idCrianca)
 );
 
 create table TCOMPRAS(
 idCompra int not null auto_increment primary key,
 dataCompra varchar(10),
-localCompra varchar(50),
-descProduto varchar(50),
-marca varchar(50),
-quantidade int,
-valorUnitario double,
+valorTotal double,
+listaCompras varchar(800),
 responsavel varchar(50),
 idCrianca int,
 foreign key (idCrianca) references TCADCRI(idCrianca)
@@ -143,6 +139,13 @@ circBarriga varchar(10),
 idCrianca int,
 observacoes varchar(200),
 foreign key (idCrianca) references TCADCRI(idCrianca)
+);
+
+create table TITENS(
+idItem int not null auto_increment primary key,
+descItem varchar (100),
+unidadeMedia varchar(20),
+valorUnitario float
 );
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';

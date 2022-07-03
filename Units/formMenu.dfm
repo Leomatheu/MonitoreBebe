@@ -28,7 +28,6 @@ object frmMenu: TfrmMenu
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitWidth = 565
     object Image1: TImage
       Left = 1
       Top = 1
@@ -39751,9 +39750,8 @@ object frmMenu: TfrmMenu
         F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6
         0000}
       Stretch = True
+      ExplicitLeft = 0
       ExplicitTop = 2
-      ExplicitWidth = 563
-      ExplicitHeight = 572
     end
   end
   object pnBotoes: TPanel
@@ -41982,10 +41980,8 @@ object frmMenu: TfrmMenu
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 88
-        ExplicitTop = 8
-        ExplicitWidth = 23
-        ExplicitHeight = 22
+        OnClick = sbUtensiliosClick
+        ExplicitTop = 2
       end
     end
     object Panel10: TPanel
@@ -42072,9 +42068,9 @@ object frmMenu: TfrmMenu
         Font.Name = 'Fixedsys'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 16
-        ExplicitTop = -3
-        ExplicitWidth = 183
+        OnClick = sbRelatoriosClick
+        ExplicitLeft = 0
+        ExplicitTop = 0
       end
     end
   end

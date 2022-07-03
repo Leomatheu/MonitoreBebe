@@ -72,7 +72,8 @@ begin
   controller := TController.Create;
   controller.pPopulaDBGrid('select * from TCONVACI');
 
-
+  frmEditResp.Panel1.Color := $0080FFFF;
+  frmEditResp.DBGrid1.Color := $0080FFFF;
   frmEditResp.Caption := 'CONSULTA DE VACINAS ';
   frmEditResp.edtBusca.EditLabel.Caption := 'Busque pela vacina';  
   frmEditResp.Tag := 6;
