@@ -310,8 +310,6 @@ object frmFiltros: TfrmFiltros
     Color = 16764671
     ParentBackground = False
     TabOrder = 1
-    ExplicitLeft = 559
-    ExplicitWidth = 162
     object Panel3: TPanel
       Left = 17
       Top = 599
@@ -394,5 +392,19 @@ object frmFiltros: TfrmFiltros
         ExplicitTop = 2
       end
     end
+  end
+  object FDQuery1: TFDQuery
+    Active = True
+    Connection = DataModule1.Conexao
+    Transaction = DataModule1.Transaction
+    SQL.Strings = (
+      'select * from Tcompras;')
+    Left = 609
+    Top = 120
+  end
+  object DataSource1: TDataSource
+    DataSet = FDQuery1
+    Left = 609
+    Top = 200
   end
 end

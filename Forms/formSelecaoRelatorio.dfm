@@ -336,7 +336,6 @@ object frmSelecaoRel: TfrmSelecaoRel
     Color = 16764671
     ParentBackground = False
     TabOrder = 1
-    ExplicitLeft = 527
     object Image1: TImage
       Left = 48
       Top = 31

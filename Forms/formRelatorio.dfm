@@ -29,7 +29,7 @@ object frmRelatorio: TfrmRelatorio
       Left = 38
       Top = 38
       Width = 718
-      Height = 186
+      Height = 187
       BandType = btTitle
       Borders.Sides = sdCustom
       Borders.DrawLeft = False
@@ -98,7 +98,7 @@ object frmRelatorio: TfrmRelatorio
       end
       object RLLabel4: TRLLabel
         Left = 16
-        Top = 152
+        Top = 151
         Width = 153
         Height = 15
         Caption = 'Filtros de data:'
@@ -111,13 +111,13 @@ object frmRelatorio: TfrmRelatorio
       end
       object RLLabel5: TRLLabel
         Left = 175
-        Top = 152
+        Top = 151
         Width = 72
         Height = 15
       end
       object RLLabel6: TRLLabel
         Left = 304
-        Top = 152
+        Top = 151
         Width = 72
         Height = 15
       end
@@ -136,7 +136,7 @@ object frmRelatorio: TfrmRelatorio
     end
     object RLBand2: TRLBand
       Left = 38
-      Top = 224
+      Top = 225
       Width = 718
       Height = 193
       object RLLabel8: TRLLabel
@@ -170,31 +170,61 @@ object frmRelatorio: TfrmRelatorio
       object RLDBText8: TRLDBText
         Left = 86
         Top = 38
-        Width = 72
+        Width = 81
         Height = 15
-        DataField = 'descItem'
+        DataField = 'idCompra'
         DataSource = DataModule1.Source
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Fixedsys'
+        Font.Style = [fsBold]
+        ParentFont = False
         Text = ''
       end
       object RLDBText4: TRLDBText
         Left = 70
         Top = 77
-        Width = 80
+        Width = 99
         Height = 15
+        DataField = 'dataCompra'
+        DataSource = DataModule1.Source
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Fixedsys'
+        Font.Style = [fsBold]
+        ParentFont = False
         Text = ''
       end
       object RLDBText5: TRLDBText
         Left = 126
         Top = 114
-        Width = 80
+        Width = 99
         Height = 15
+        DataField = 'valorTotal'
+        DataSource = DataModule1.Source
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Fixedsys'
+        Font.Style = [fsBold]
+        ParentFont = False
         Text = ''
       end
       object RLDBText6: TRLDBText
         Left = 222
         Top = 151
-        Width = 80
+        Width = 108
         Height = 15
+        DataField = 'responsavel'
+        DataSource = DataModule1.Source
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Fixedsys'
+        Font.Style = [fsBold]
+        ParentFont = False
         Text = ''
       end
     end

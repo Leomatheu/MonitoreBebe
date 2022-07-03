@@ -70,6 +70,7 @@ begin
    frmFiltros.Caption := 'TOTAL DE CONSULTAS POR CRIANÇA';
    frmFiltros.Panel1.Color := $00FF75BA;
    frmFiltros.Panel2.Color := $00FF75BA;
+   frmFiltros.Tag := 0;
    frmFiltros.ShowModal;
 end;
 

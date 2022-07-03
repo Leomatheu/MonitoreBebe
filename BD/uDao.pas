@@ -56,6 +56,7 @@ type
     function fSelectConsultorio : TList;
     function fSelectDadoEspecifico(prSQL : String; prParametro : integer): String;
     function fRetornaQuery(prSQL : String) : TFDQuery;
+    function fRetornaSomaTotais(prSQL : String) : Double;
 
   end;
 
@@ -261,6 +262,25 @@ begin
    result.Open;
 end;
 
+function TDataModule1.fRetornaSomaTotais(prSQL: String): Double;
+begin
+  query := TFDQuery.Create(nil);
+  query.Connection := DataModule1.Conexao;
+
+  query.SQL.Add(prSQL);
+
+  try
+    query.Open;
+    result := query.Fields[0].AsFloat;
+  except
+      on e: Exception do
+       e.ToString;
+  end;
+
+  query.Close;
+  query.Free;
+end;
+
 function TDataModule1.fSelectConsultorio: TList;
 var
   query : TFDQuery;
@@ -369,7 +389,9 @@ begin
   query.Connection := DataModule1.Conexao;
 
   query.SQL.Add(prSQL);
-  query.Params[0].AsInteger := prParametro;
+
+  if (prParametro <> 0) then
+     query.Params[0].AsInteger := prParametro;
 
   try
     query.Open;

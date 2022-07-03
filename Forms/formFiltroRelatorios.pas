@@ -5,7 +5,10 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.Mask;
+  Vcl.Mask, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TfrmFiltros = class(TForm)
@@ -37,6 +40,8 @@ type
     Panel12: TPanel;
     SpeedButton6: TSpeedButton;
     SpeedButton7: TSpeedButton;
+    FDQuery1: TFDQuery;
+    DataSource1: TDataSource;
     procedure FormActivate(Sender: TObject);
     procedure SpeedButton7Click(Sender: TObject);
   private
@@ -50,7 +55,7 @@ var
 
 implementation
 uses
-  uController, formRelatorio, uCrianca, uDao;
+  uController, formRelatorio, uCrianca, uDao, formRelatorioConsultas;
 
 {$R *.dfm}
 
@@ -60,21 +65,47 @@ begin
 end;
 
 procedure TfrmFiltros.SpeedButton7Click(Sender: TObject);
+var
+  total : double;
 begin
    if (self.Tag = 1) then
      begin
-       frmRelatorio.RLLabel7.Caption := 'RELATÓRIO DE TOTAL DE COMPRAS';
+       frmRelatorio.RLLabel7.Caption := 'RELATÓRIO DE COMPRAS';
        frmRelatorio.RLDBText1.Text := TCrianca(self.cbCrianca.Items.Objects[self.cbCrianca.ItemIndex]).getNomeCrianca;
        frmRelatorio.RLDBText2.Text := TCrianca(self.cbCrianca.Items.Objects[self.cbCrianca.ItemIndex]).getNomeMae;
        frmRelatorio.RLDBText3.Text := TCrianca(self.cbCrianca.Items.Objects[self.cbCrianca.ItemIndex]).getNomePai;
        frmRelatorio.RLLabel5.Caption := self.edtData.Text;
        frmRelatorio.RLLabel6.Caption := self.edDataFim.Text;
-       frmRelatorio.RLReport1.DataSource := DataModule1.Source;
-       frmRelatorio.RLReport1.DataSource.DataSet := DataModule1.fRetornaQuery('select * from TCOMPRAS where dataCompra between '+self.edtData.text+' and '+self.edDataFim.text+';');
+
+       DataModule1.Query.Close;
+       DataModule1.Query.sql.Clear;
+       DataModule1.Query.SQL.Add('select * from TCOMPRAS where dataCompra between :prData and :prData1;');
+       DataModule1.Query.Params[0].AsString := self.edtData.Text;
+       DataModule1.Query.Params[1].AsString := self.edDataFim.Text;
+       DataModule1.Query.Open;
+
+       frmRelatorio.RLReport1.Preview;
+     end
+   else
+     begin
+       frmRelatorioConsultas.RLLabel7.Caption := 'RELATÓRIO DE CONSULTAS';
+       frmRelatorioConsultas.RLDBText1.Text := TCrianca(self.cbCrianca.Items.Objects[self.cbCrianca.ItemIndex]).getNomeCrianca;
+       frmRelatorioConsultas.RLDBText2.Text := TCrianca(self.cbCrianca.Items.Objects[self.cbCrianca.ItemIndex]).getNomeMae;
+       frmRelatorioConsultas.RLDBText3.Text := TCrianca(self.cbCrianca.Items.Objects[self.cbCrianca.ItemIndex]).getNomePai;
+       frmRelatorioConsultas.RLLabel5.Caption := self.edtData.Text;
+       frmRelatorioConsultas.RLLabel6.Caption := self.edDataFim.Text;
+
+
+       DataModule1.Query.Close;
+       DataModule1.Query.sql.Clear;
+       DataModule1.Query.SQL.Add('select * from TCONSULTA where dataConsulta between :prData and :prData1;');
+       DataModule1.Query.Params[0].AsString := self.edtData.Text;
+       DataModule1.Query.Params[1].AsString := self.edDataFim.Text;
+       DataModule1.Query.Open;
+
+       frmRelatorioConsultas.RLReport1.preview;
      end;
 
-
-   frmRelatorio.RLReport1.Preview;
 end;
 
 end.
